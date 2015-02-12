@@ -1,0 +1,6 @@
+FactoryGirl.define do
+  factory :event do
+    event     "say"
+    type    "=="
+  end
+end
