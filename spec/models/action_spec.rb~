@@ -19,8 +19,4 @@ describe Action do
         it { should_not be_valid }
       end
 
-      describe "when action is not present" do
-        before { @action.action = nil }
-        it { should_not be_valid }
-      end
 end
