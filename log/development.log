@@ -1027,3 +1027,53 @@ Processing by EventsController#index as JSON
   [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events"[0m
   [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 1]]
 Completed 200 OK in 47ms (Views: 0.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-02-13 17:31:48 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (32.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+Completed 200 OK in 331ms (Views: 0.0ms | ActiveRecord: 36.0ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-02-13 17:51:14 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (49.0ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+Completed 200 OK in 56ms (Views: 1.0ms | ActiveRecord: 49.0ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-02-13 17:55:47 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+Completed 200 OK in 7ms (Views: 1.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-02-13 17:55:51 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+Completed 200 OK in 6ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-02-13 17:55:55 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+Completed 200 OK in 5ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-02-13 17:56:27 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+Completed 200 OK in 7ms (Views: 1.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-02-13 17:56:42 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+Completed 200 OK in 12ms (Views: 0.0ms | ActiveRecord: 1.0ms)

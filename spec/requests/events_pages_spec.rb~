@@ -25,12 +25,12 @@ describe "EventsPages" do
   end
 
 
-  describe "GET /events/?" do
+  describe "GET /events.json" do
 
 
-    it "/events/1" do
+    it "/events.json" do
 
-      get "/events/2", {}, { "Accept" => "application/json" }
+      get "/events.json", {}, { "Accept" => "application/json" }
 
       expect(response.status).to eq 200
 
