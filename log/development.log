@@ -1372,3 +1372,75 @@ Processing by EventsController#index as JSON
   [1m[35mEvent Load (0.4ms)[0m  SELECT "events".* FROM "events"
   [1m[36mAction Load (0.3ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
 Completed 200 OK in 9ms (Views: 0.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-14 16:49:17 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-14 16:49:18 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-14 16:49:18 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-14 16:49:46 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-14 16:49:46 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-14 16:49:46 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-14 16:49:53 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-14 16:49:53 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-14 16:49:53 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-14 16:50:07 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-14 16:50:07 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-14 16:50:07 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-14 16:51:51 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-14 16:51:51 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-14 16:51:51 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-14 16:52:46 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-14 16:52:47 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-14 16:52:47 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-14 16:53:24 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-14 16:53:24 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-14 16:53:24 +0900
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-02-14 16:53:43 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.5ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (3.8ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+Completed 200 OK in 139ms (Views: 0.3ms | ActiveRecord: 6.2ms)
