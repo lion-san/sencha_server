@@ -3,8 +3,19 @@
 <ul>
   <% @events.each do |event| %>
     <li>
-      <%= event.event %>
-      <%= event.operator %>
+      [<%= event.event %>
+      <%= event.operator %>]
+
+      <% event.actions.each do |action| %>
+
+        <br>
+        ACTION:
+        <%= action.action  %>
+        /
+        <%= action.param  %>
+      <% end %>
+      <br>
+      <br>
     </li>
   <% end %>
 </ul>

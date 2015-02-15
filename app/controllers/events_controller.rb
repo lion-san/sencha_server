@@ -21,13 +21,26 @@ class EventsController < ApplicationController
   end
 
   def create
+
+    #パラメタの取得
+    events = event_params
+
+    logger.debug("=============destroy=================");
+
+    #Delete -> Insert
+    dels = Event.all
+    dels.each do |del|
+      logger.debug( del )
+      del.destroy
+    end
+
     logger.debug("=============hoge=================");
-    #@event = Event.new( event_params )  
+    logger.debug( events )
 
-    hoge = event_params
-
-    logger.debug( hoge )
-    
+    logger.debug("=============piyo=================");
+    events.each do |event|
+      event.save
+    end
 
     redirect_to events_url 
   end
@@ -48,36 +61,35 @@ class EventsController < ApplicationController
 
   private
   def event_params
+
     json = params[ :_json ]
 
     logger.debug("=============params=================");
-    #hoges = JSON.parse( json )
     events = ActiveSupport::JSON.decode json 
 
+    @events = Array.new
 
-    logger.debug( events )
-    logger.debug( '+++++++++++++++++++' )
+    #要素の取り出し
+    events.each do | e |
 
-    events.each do | event |
-      #logger.debug( event )
-      logger.debug( event["event"] )
-      logger.debug( event["operator"] )
+#      e.require(:event).permit(:event, :operator,
+#                              {:actions => [:action, :params]})
 
-      @event = Event.new( event: event["event"],
-                          operator: event["operator"] )
+      event = Event.new( id: e["event_id"],
+                        event: e["event"],
+                        operator: e["operator"] )
 
-      event[ "actions" ].each do | action |
-        #logger.debug( action )
-        logger.debug( '  ' + action["action"] )
-        logger.debug( '  ' + action["param"] )
+      e[ "actions" ].each do | a |
 
-        @action = Action.new( action: action["action"],
-                             param: action["param"] )
+        action = Action.new( event_id: e["event_id"],
+                             action: a["action"],
+                             param: a["param"] )
 
         #イベントがもつactionsをPush
+        event.actions << action
+        logger.debug( event.actions.length )
       end
-
-    
+      @events.push( event )
     end
 
 
@@ -85,6 +97,7 @@ class EventsController < ApplicationController
 
     logger.debug("=============params=================");
     #params.require(:event).permit( :event, :operator )
+    return @events
   end
 
 end
