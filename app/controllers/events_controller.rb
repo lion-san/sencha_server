@@ -9,7 +9,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: @events.to_json(
-        :only => ['event', 'operator'],
+        :only => ['event', 'operator', 'param'],
         :include => [ :actions => { :only => ['action', 'param'] } ] 
       ) }
       format.xml { render :xml => @events }
@@ -77,7 +77,8 @@ class EventsController < ApplicationController
 
       event = Event.new( id: e["event_id"],
                         event: e["event"],
-                        operator: e["operator"] )
+                        operator: e["operator"],
+                        param: e["param"] )
 
       e[ "actions" ].each do | a |
 

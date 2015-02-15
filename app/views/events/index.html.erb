@@ -4,7 +4,8 @@
   <% @events.each do |event| %>
     <li>
       [<%= event.event %>
-      <%= event.operator %>]
+      /<%= event.operator %>
+      /<%= event.param %>]
 
       <% event.actions.each do |action| %>
 

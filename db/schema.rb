@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150213041404) do
+ActiveRecord::Schema.define(version: 20150215133509) do
 
   create_table "actions", force: true do |t|
     t.string   "action"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 20150213041404) do
     t.string   "operator"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "params"
+    t.string   "param"
   end
 
 end
