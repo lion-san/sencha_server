@@ -22,7 +22,14 @@ class EventsController < ApplicationController
 
   def create
     logger.debug("=============hoge=================");
-    @event = Event.new( event_params )  
+    #@event = Event.new( event_params )  
+
+    hoge = event_params
+
+    logger.debug( hoge )
+    
+
+    redirect_to events_url 
   end
 
 
@@ -41,7 +48,43 @@ class EventsController < ApplicationController
 
   private
   def event_params
-    params.require(:event).permit( :event, :operator )
+    json = params[ :_json ]
+
+    logger.debug("=============params=================");
+    #hoges = JSON.parse( json )
+    events = ActiveSupport::JSON.decode json 
+
+
+    logger.debug( events )
+    logger.debug( '+++++++++++++++++++' )
+
+    events.each do | event |
+      #logger.debug( event )
+      logger.debug( event["event"] )
+      logger.debug( event["operator"] )
+
+      @event = Event.new( event: event["event"],
+                          operator: event["operator"] )
+
+      event[ "actions" ].each do | action |
+        #logger.debug( action )
+        logger.debug( '  ' + action["action"] )
+        logger.debug( '  ' + action["param"] )
+
+        @action = Action.new( action: action["action"],
+                             param: action["param"] )
+
+        #イベントがもつactionsをPush
+      end
+
+    
+    end
+
+
+    #logger.debug( events );
+
+    logger.debug("=============params=================");
+    #params.require(:event).permit( :event, :operator )
   end
 
 end
