@@ -5695,3 +5695,124 @@ Processing by EventsController#index as JSON
   [1m[36mAction Load (0.2ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
   [1m[35mAction Load (0.1ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
 Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-15 19:37:51 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-15 19:37:52 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-15 19:37:52 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-15 19:38:14 +0900
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-02-15 19:39:10 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.5ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (5.4ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+  [1m[35mAction Load (0.2ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
+Completed 200 OK in 103ms (Views: 0.3ms | ActiveRecord: 7.9ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-02-15 19:39:21 +0900
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (0.5ms)[0m  [1mSELECT "events".* FROM "events"[0m
+  [1m[35mAction Load (0.3ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 1]]
+  [1m[36mAction Load (0.3ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 2]]
+Completed 200 OK in 11ms (Views: 0.2ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-15 19:39:43 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-15 19:39:43 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-15 19:39:43 +0900
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-02-15 19:39:50 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.5ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (0.4ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+  [1m[35mAction Load (0.3ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
+Completed 200 OK in 14ms (Views: 0.2ms | ActiveRecord: 1.2ms)
+
+
+Started POST "/events" for 127.0.0.1 at 2015-02-15 19:40:30 +0900
+Processing by EventsController#create as JSON
+  Parameters: {"_json"=>"[{\"event\":\"say\",\"operator\":\"=\",\"event_id\":\"1\",\"actions\": [{\"action\":\"light\",\"param\":\"\"}]}]", "event"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+  [1m[36mAction Load (0.3ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+2
+=============params=================
+=============destroy=================
+  [1m[35mEvent Load (0.4ms)[0m  SELECT "events".* FROM "events"
+#<Event:0x007f8faa0942f0>
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mCACHE (0.1ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 1]]
+  [1m[36mSQL (8.3ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 24]]
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 1]]
+  [1m[36m (122.0ms)[0m  [1mcommit transaction[0m
+#<Event:0x007f8faa09bed8>
+  [1m[35m (0.4ms)[0m  begin transaction
+  [1m[36mAction Load (0.4ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[35mSQL (6.9ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 25]]
+  [1m[36mSQL (0.3ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 2]]
+  [1m[35m (46.6ms)[0m  commit transaction
+=============hoge=================
+[#<Event id: 1, event: "say", operator: "=", created_at: nil, updated_at: nil>]
+=============piyo=================
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (11.8ms)[0m  INSERT INTO "events" ("created_at", "event", "id", "operator", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Sun, 15 Feb 2015 10:40:31 UTC +00:00], ["event", "say"], ["id", 1], ["operator", "="], ["updated_at", Sun, 15 Feb 2015 10:40:31 UTC +00:00]]
+  [1m[36mSQL (0.6ms)[0m  [1mUPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 24[0m  [["event_id", 1], ["updated_at", Sun, 15 Feb 2015 10:40:31 UTC +00:00]]
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "light"], ["created_at", Sun, 15 Feb 2015 10:40:31 UTC +00:00], ["event_id", 1], ["param", ""], ["updated_at", Sun, 15 Feb 2015 10:40:31 UTC +00:00]]
+  [1m[36m (47.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/events
+Completed 302 Found in 395ms (ActiveRecord: 246.7ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2015-02-15 19:40:31 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.3ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (0.2ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-02-15 19:40:37 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.4ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (0.3ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+Completed 200 OK in 15ms (Views: 0.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-15 19:43:10 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-15 19:43:10 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-15 19:43:11 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-15 19:43:27 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-15 19:43:28 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-15 19:43:28 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-15 19:43:53 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-15 19:43:53 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-15 19:43:53 +0900
