@@ -7314,3 +7314,283 @@ Processing by EventsController#index as JSON
   [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
   [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 3]]
 Completed 200 OK in 13ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-16 09:34:42 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-16 09:34:44 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-16 09:34:44 +0900
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-02-16 09:34:53 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (13.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 3]]
+Completed 200 OK in 208ms (Views: 0.0ms | ActiveRecord: 16.0ms)
+
+
+Started POST "/events" for 127.0.0.1 at 2015-02-16 09:34:59 +0900
+Processing by EventsController#create as JSON
+  Parameters: {"_json"=>"[{\"event\":\"say\",\"operator\":\"=\",\"param\":\"2\",\"event_id\":\"1\",\"actions\": [{\"action\":\"light\",\"param\":\"\"},\n{\"action\":\"camera\",\"param\":\"\"}]},\n{\"event\":\"say\",\"operator\":\"==\",\"param\":\"1\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"},\n{\"action\":\"light\",\"param\":\"\"}]},\n{\"event\":\"say\",\"operator\":\"==\",\"param\":\"いいよ\",\"event_id\":\"3\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"},\n{\"action\":\"wait\",\"param\":\"30\"}]}]", "event"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 1]]
+3
+4
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 2]]
+3
+4
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 3]]
+3
+4
+=============params=================
+=============destroy=================
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events"[0m
+#<Event:0x570acb0>
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+  [1m[35mSQL (2.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 14]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 15]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 1]]
+  [1m[36m (84.0ms)[0m  [1mcommit transaction[0m
+#<Event:0x570aa10>
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[35mSQL (2.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 16]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 17]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 2]]
+  [1m[36m (73.0ms)[0m  [1mcommit transaction[0m
+#<Event:0x570a770>
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[35mSQL (2.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 18]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 19]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 3]]
+  [1m[36m (70.0ms)[0m  [1mcommit transaction[0m
+=============hoge=================
+[#<Event id: 1, event: "say", operator: "=", created_at: nil, updated_at: nil, params: nil, param: "2">, #<Event id: 2, event: "say", operator: "==", created_at: nil, updated_at: nil, params: nil, param: "1">, #<Event id: 3, event: "say", operator: "==", created_at: nil, updated_at: nil, params: nil, param: "いいよ">]
+=============piyo=================
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (22.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "id", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00], ["event", "say"], ["id", 1], ["operator", "="], ["param", "2"], ["updated_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00]]
+  [1m[35mSQL (24.0ms)[0m  UPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 14  [["event_id", 1], ["updated_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mUPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 15[0m  [["event_id", 1], ["updated_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "light"], ["created_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00], ["event_id", 1], ["param", ""], ["updated_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00], ["event_id", 1], ["param", ""], ["updated_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00]]
+  [1m[35m (82.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "id", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00], ["event", "say"], ["id", 2], ["operator", "=="], ["param", "1"], ["updated_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mUPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 16[0m  [["event_id", 2], ["updated_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  UPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 17  [["event_id", 2], ["updated_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00], ["event_id", 2], ["param", ""], ["updated_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "light"], ["created_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00], ["event_id", 2], ["param", ""], ["updated_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00]]
+  [1m[36m (79.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "id", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00], ["event", "say"], ["id", 3], ["operator", "=="], ["param", "いいよ"], ["updated_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  UPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 18  [["event_id", 3], ["updated_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mUPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 19[0m  [["event_id", 3], ["updated_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00], ["event_id", 3], ["param", ""], ["updated_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "wait"], ["created_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00], ["event_id", 3], ["param", "30"], ["updated_at", Mon, 16 Feb 2015 00:35:00 UTC +00:00]]
+  [1m[35m (85.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/events
+Completed 302 Found in 728ms (ActiveRecord: 533.0ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2015-02-16 09:35:00 +0900
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events"[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 1]]
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 3]]
+Completed 200 OK in 15ms (Views: 1.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/events" for 127.0.0.1 at 2015-02-16 09:35:04 +0900
+Processing by EventsController#create as JSON
+  Parameters: {"_json"=>"[{\"event\":\"say\",\"operator\":\"=\",\"param\":\"2\",\"event_id\":\"1\",\"actions\": [{\"action\":\"light\",\"param\":\"\"},\n{\"action\":\"camera\",\"param\":\"\"}]},\n{\"event\":\"say\",\"operator\":\"==\",\"param\":\"1\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"},\n{\"action\":\"light\",\"param\":\"\"}]},\n{\"event\":\"say\",\"operator\":\"==\",\"param\":\"いいよ\",\"event_id\":\"3\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"},\n{\"action\":\"wait\",\"param\":\"30\"}]}]", "event"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+3
+4
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
+3
+4
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 3]]
+3
+4
+=============params=================
+=============destroy=================
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events"
+#<Event:0x496c6f8>
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 1]]
+  [1m[36mSQL (2.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 20]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 21]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 1]]
+  [1m[35m (58.0ms)[0m  commit transaction
+#<Event:0x496c2c0>
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
+  [1m[36mSQL (1.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 22]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 23]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 2]]
+  [1m[35m (90.0ms)[0m  commit transaction
+#<Event:0x4978c20>
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 3]]
+  [1m[36mSQL (1.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 24]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 25]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 3]]
+  [1m[35m (70.0ms)[0m  commit transaction
+=============hoge=================
+[#<Event id: 1, event: "say", operator: "=", created_at: nil, updated_at: nil, params: nil, param: "2">, #<Event id: 2, event: "say", operator: "==", created_at: nil, updated_at: nil, params: nil, param: "1">, #<Event id: 3, event: "say", operator: "==", created_at: nil, updated_at: nil, params: nil, param: "いいよ">]
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "events" ("created_at", "event", "id", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00], ["event", "say"], ["id", 1], ["operator", "="], ["param", "2"], ["updated_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mUPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 20[0m  [["event_id", 1], ["updated_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  UPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 21  [["event_id", 1], ["updated_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "light"], ["created_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00], ["event_id", 1], ["param", ""], ["updated_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00], ["event_id", 1], ["param", ""], ["updated_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00]]
+  [1m[36m (67.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "id", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00], ["event", "say"], ["id", 2], ["operator", "=="], ["param", "1"], ["updated_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  UPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 22  [["event_id", 2], ["updated_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mUPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 23[0m  [["event_id", 2], ["updated_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00], ["event_id", 2], ["param", ""], ["updated_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "light"], ["created_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00], ["event_id", 2], ["param", ""], ["updated_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00]]
+  [1m[35m (79.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "id", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00], ["event", "say"], ["id", 3], ["operator", "=="], ["param", "いいよ"], ["updated_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mUPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 24[0m  [["event_id", 3], ["updated_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  UPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 25  [["event_id", 3], ["updated_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00], ["event_id", 3], ["param", ""], ["updated_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "wait"], ["created_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00], ["event_id", 3], ["param", "30"], ["updated_at", Mon, 16 Feb 2015 00:35:05 UTC +00:00]]
+  [1m[36m (81.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/events
+Completed 302 Found in 573ms (ActiveRecord: 461.0ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2015-02-16 09:35:05 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 3]]
+Completed 200 OK in 12ms (Views: 0.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-16 09:54:44 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-16 09:54:44 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-16 09:54:44 +0900
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-02-16 09:54:50 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 3]]
+Completed 200 OK in 20ms (Views: 0.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-16 09:59:24 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-16 09:59:24 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-16 09:59:24 +0900
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-02-16 09:59:29 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 3]]
+Completed 200 OK in 16ms (Views: 0.0ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/events" for 127.0.0.1 at 2015-02-16 09:59:35 +0900
+Processing by EventsController#create as JSON
+  Parameters: {"_json"=>"[{\"event\":\"say\",\"operator\":\"=\",\"param\":\"2\",\"event_id\":\"1\",\"actions\": [{\"action\":\"light\",\"param\":\"\"},\n{\"action\":\"camera\",\"param\":\"\"}]},\n{\"event\":\"say\",\"operator\":\"==\",\"param\":\"1\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"},\n{\"action\":\"light\",\"param\":\"\"}]},\n{\"event\":\"say\",\"operator\":\"==\",\"param\":\"いいよ\",\"event_id\":\"3\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"},\n{\"action\":\"wait\",\"param\":\"30\"}]}]", "event"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 1]]
+3
+4
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 2]]
+3
+4
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 3]]
+3
+4
+=============params=================
+=============destroy=================
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events"[0m
+#<Event:0x4450230>
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+  [1m[35mSQL (1.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 26]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 27]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 1]]
+  [1m[36m (80.0ms)[0m  [1mcommit transaction[0m
+#<Event:0x445bd80>
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[35mSQL (2.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 28]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 29]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 2]]
+  [1m[36m (140.0ms)[0m  [1mcommit transaction[0m
+#<Event:0x445b4b0>
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[35mSQL (2.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 30]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 31]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 3]]
+  [1m[36m (120.0ms)[0m  [1mcommit transaction[0m
+=============hoge=================
+[#<Event id: 1, event: "say", operator: "=", created_at: nil, updated_at: nil, params: nil, param: "2">, #<Event id: 2, event: "say", operator: "==", created_at: nil, updated_at: nil, params: nil, param: "1">, #<Event id: 3, event: "say", operator: "==", created_at: nil, updated_at: nil, params: nil, param: "いいよ">]
+=============piyo=================
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "id", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00], ["event", "say"], ["id", 1], ["operator", "="], ["param", "2"], ["updated_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  UPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 26  [["event_id", 1], ["updated_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mUPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 27[0m  [["event_id", 1], ["updated_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "light"], ["created_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00], ["event_id", 1], ["param", ""], ["updated_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00], ["event_id", 1], ["param", ""], ["updated_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00]]
+  [1m[35m (158.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (3.0ms)[0m  INSERT INTO "events" ("created_at", "event", "id", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00], ["event", "say"], ["id", 2], ["operator", "=="], ["param", "1"], ["updated_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00]]
+  [1m[36mSQL (2.0ms)[0m  [1mUPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 28[0m  [["event_id", 2], ["updated_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  UPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 29  [["event_id", 2], ["updated_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00], ["event_id", 2], ["param", ""], ["updated_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "light"], ["created_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00], ["event_id", 2], ["param", ""], ["updated_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00]]
+  [1m[36m (95.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "id", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00], ["event", "say"], ["id", 3], ["operator", "=="], ["param", "いいよ"], ["updated_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  UPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 30  [["event_id", 3], ["updated_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mUPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 31[0m  [["event_id", 3], ["updated_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00], ["event_id", 3], ["param", ""], ["updated_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "wait"], ["created_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00], ["event_id", 3], ["param", "30"], ["updated_at", Mon, 16 Feb 2015 00:59:36 UTC +00:00]]
+  [1m[35m (123.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/events
+Completed 302 Found in 846ms (ActiveRecord: 734.1ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2015-02-16 09:59:36 +0900
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events"[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 1]]
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 3]]
+Completed 200 OK in 14ms (Views: 0.0ms | ActiveRecord: 3.0ms)
