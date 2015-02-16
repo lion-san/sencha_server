@@ -896,7 +896,7 @@ var refreshAll = function( events ){
   for(i = 0; i < actionPanels.length; i++){
     actionPanels[i].destroy();
   }
-  actionPanels = new Array();//Indexがずれるので
+  actionPanels = new Array();
 
 
 
