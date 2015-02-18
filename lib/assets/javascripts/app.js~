@@ -292,7 +292,7 @@ var eventAddBtnTapped = function( value ){
       break;
 
     case "saw":
-      eventSaw(eventId, events.saw, "FACE");
+      eventSaw(eventId, events.saw, "saw");
       break;
 
     default:
@@ -310,7 +310,7 @@ var eventSaid = function(eventId, btnName, eventType){
 
   //Refresh
   if( refresh ){
-    createEventBtn(eventId, btnName, eventForRefresh.operator, eventForRefresh.param );
+    createEventBtn(eventId, btnName, eventForRefresh.operator, eventForRefresh.param, eventType );
     return;
   }
 
@@ -358,12 +358,12 @@ var eventSaw = function(eventId, btnName, eventType){
 
   //Refresh
   if( refresh ){
-    createEventBtn(eventId, btnName, eventForRefresh.operator, eventForRefresh.param );
+    createEventBtn(eventId, btnName, eventForRefresh.operator, eventForRefresh.param, eventType);
     return;
   }
 
   //JSONにオブジェクトを追加
-  createEventBtn(eventId, btnName, "==", "", eventType);
+  createEventBtn(eventId, btnName, "==", "FACE", eventType);
 
 }
 
@@ -817,7 +817,7 @@ var saveProject = function(){
       
       json += "\"actions\": [";
       for(j = 0; j < actions[i].length; j++){
-        if(actions[i][j] != null){
+        if(actions[i][j].length != null){
           flg2 = true;
           actionList.push( actions[i][j] );
 
