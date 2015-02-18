@@ -9526,3 +9526,99 @@ Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-02-18 14:57:2
 
 
 Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-02-18 14:57:29 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-02-18 21:26:30 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-18 21:26:30 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-18 21:26:30 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-18 21:26:31 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-18 21:26:39 +0900
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-02-18 21:26:52 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.4ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (6.2ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+  [1m[35mAction Load (0.3ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
+Completed 200 OK in 97ms (Views: 0.3ms | ActiveRecord: 8.6ms)
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-18 21:27:01 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-18 21:27:01 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-18 21:27:01 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-02-18 21:27:01 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-18 21:38:26 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-02-18 21:38:26 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-18 21:38:26 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-18 21:38:26 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-18 21:45:34 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-18 21:45:34 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-02-18 21:45:34 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-18 21:45:34 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-18 21:47:18 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-02-18 21:47:18 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-18 21:47:18 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-18 21:47:18 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-18 21:51:24 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-18 21:51:24 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-18 21:51:24 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-02-18 21:51:24 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-18 21:54:09 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-18 21:54:09 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-02-18 21:54:09 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-18 21:54:09 +0900
