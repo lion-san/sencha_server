@@ -7706,3 +7706,634 @@ Processing by EventsController#index as JSON
   [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 2]]
   [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 3]]
 Completed 200 OK in 22ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-18 12:51:02 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-18 12:51:04 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-18 12:51:04 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-02-18 12:51:05 +0900
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-02-18 12:51:09 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (18.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 3]]
+Completed 200 OK in 229ms (Views: 0.0ms | ActiveRecord: 21.0ms)
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-18 12:52:15 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-02-18 12:52:15 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-18 12:52:15 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-18 12:52:15 +0900
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-02-18 12:52:19 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 3]]
+Completed 200 OK in 19ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/events" for 127.0.0.1 at 2015-02-18 12:52:42 +0900
+Processing by EventsController#create as JSON
+  Parameters: {"_json"=>"[{\"event\":\"undefined\",\"operator\":\"=\",\"param\":\"2\",\"event_id\":\"1\",\"actions\": [{\"action\":\"light\",\"param\":\"\"},\n{\"action\":\"camera\",\"param\":\"\"}]},\n{\"event\":\"undefined\",\"operator\":\"==\",\"param\":\"1\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"},\n{\"action\":\"light\",\"param\":\"\"}]},\n{\"event\":\"undefined\",\"operator\":\"==\",\"param\":\"いいよ\",\"event_id\":\"3\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"},\n{\"action\":\"wait\",\"param\":\"30\"}]},\n{\"event\":\"FACE\",\"operator\":\"==\",\"param\":\"\",\"event_id\":\"4\",\"actions\": [{\"action\":\"light\",\"param\":\"\"}]}]", "event"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 1]]
+3
+4
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 2]]
+3
+4
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 3]]
+3
+4
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 4]]
+1
+=============params=================
+=============destroy=================
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events"
+#<Event:0x3f7cfe0>
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 1]]
+  [1m[36mSQL (1.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 38]]
+  [1m[35mSQL (1.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 39]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 1]]
+  [1m[35m (114.0ms)[0m  commit transaction
+#<Event:0x3f8b350>
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
+  [1m[36mSQL (2.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 40]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 41]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 2]]
+  [1m[35m (74.0ms)[0m  commit transaction
+#<Event:0x3f89370>
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 3]]
+  [1m[36mSQL (2.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 42]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 43]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 3]]
+  [1m[35m (76.0ms)[0m  commit transaction
+=============hoge=================
+[#<Event id: 1, event: "undefined", operator: "=", created_at: nil, updated_at: nil, params: nil, param: "2">, #<Event id: 2, event: "undefined", operator: "==", created_at: nil, updated_at: nil, params: nil, param: "1">, #<Event id: 3, event: "undefined", operator: "==", created_at: nil, updated_at: nil, params: nil, param: "いいよ">, #<Event id: 4, event: "FACE", operator: "==", created_at: nil, updated_at: nil, params: nil, param: "">]
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (24.0ms)[0m  INSERT INTO "events" ("created_at", "event", "id", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00], ["event", "undefined"], ["id", 1], ["operator", "="], ["param", "2"], ["updated_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mUPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 38[0m  [["event_id", 1], ["updated_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  UPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 39  [["event_id", 1], ["updated_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "light"], ["created_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00], ["event_id", 1], ["param", ""], ["updated_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00], ["event_id", 1], ["param", ""], ["updated_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00]]
+  [1m[36m (93.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "id", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00], ["event", "undefined"], ["id", 2], ["operator", "=="], ["param", "1"], ["updated_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  UPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 40  [["event_id", 2], ["updated_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mUPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 41[0m  [["event_id", 2], ["updated_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00], ["event_id", 2], ["param", ""], ["updated_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "light"], ["created_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00], ["event_id", 2], ["param", ""], ["updated_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00]]
+  [1m[35m (73.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "id", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00], ["event", "undefined"], ["id", 3], ["operator", "=="], ["param", "いいよ"], ["updated_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mUPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 42[0m  [["event_id", 3], ["updated_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  UPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 43  [["event_id", 3], ["updated_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00], ["event_id", 3], ["param", ""], ["updated_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "wait"], ["created_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00], ["event_id", 3], ["param", "30"], ["updated_at", Wed, 18 Feb 2015 03:52:43 UTC +00:00]]
+  [1m[36m (99.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/events
+Completed 302 Found in 903ms (ActiveRecord: 576.1ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2015-02-18 12:52:44 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (3.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 3]]
+Completed 200 OK in 34ms (Views: 1.0ms | ActiveRecord: 6.0ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2015-02-18 12:52:52 +0900
+Processing by EventsController#index as HTML
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 3]]
+  Rendered events/index.html.erb within layouts/application (35.0ms)
+Completed 200 OK in 392ms (Views: 387.1ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-02-18 12:52:53 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-02-18 12:52:53 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-02-18 12:52:53 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-02-18 12:52:53 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-02-18 12:52:53 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-02-18 12:52:53 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-02-18 12:52:53 +0900
+
+
+Started GET "/events" for 127.0.0.1 at 2015-02-18 12:55:08 +0900
+Processing by EventsController#index as HTML
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 3]]
+  Rendered events/index.html.erb within layouts/application (13.0ms)
+Completed 200 OK in 33ms (Views: 32.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-02-18 12:55:08 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-02-18 12:55:08 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-02-18 12:55:08 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-02-18 12:55:08 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-02-18 12:55:08 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-02-18 12:55:08 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-02-18 12:55:08 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-18 12:55:16 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-18 12:55:16 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-02-18 12:55:16 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-18 12:55:16 +0900
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-02-18 12:55:20 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 3]]
+Completed 200 OK in 20ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-18 12:55:28 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-18 12:55:28 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-18 12:55:28 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-02-18 12:55:28 +0900
+
+
+Started POST "/events" for 127.0.0.1 at 2015-02-18 12:56:13 +0900
+Processing by EventsController#create as JSON
+  Parameters: {"_json"=>"[{\"event\":\"FACE\",\"operator\":\"==\",\"param\":\"\",\"event_id\":\"1\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"},\n{\"action\":\"light\",\"param\":\"\"}]},\n{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]},\n{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"3\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]},\n{\"event\":\"say\",\"operator\":\"=\",\"param\":\"2\",\"event_id\":\"4\",\"actions\":]}]", "event"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+Completed 500 Internal Server Error in 2ms
+
+MultiJson::ParseError (399: unexpected token at '{"event":"say","operator":"=","param":"2","event_id":"4","actions":]}]'):
+  app/controllers/events_controller.rb:68:in `event_params'
+  app/controllers/events_controller.rb:26:in `create'
+
+
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (97.0ms)
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-02-18 12:58:29 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-18 12:58:29 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-18 12:58:29 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-18 12:58:29 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-18 13:00:03 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-18 13:00:03 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-02-18 13:00:03 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-18 13:00:03 +0900
+
+
+Started POST "/events" for 127.0.0.1 at 2015-02-18 13:00:18 +0900
+Processing by EventsController#create as JSON
+  Parameters: {"_json"=>"[{\"event\":\"FACE\",\"operator\":\"==\",\"param\":\"\",\"event_id\":\"1\",\"actions\": [{\"action\":\"light\",\"param\":\"\"}]}]", "event"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 1]]
+3
+=============params=================
+=============destroy=================
+  [1m[36mEvent Load (3.0ms)[0m  [1mSELECT "events".* FROM "events"[0m
+#<Event:0x3b97660>
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+  [1m[35mSQL (2.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 44]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 45]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 1]]
+  [1m[36m (73.0ms)[0m  [1mcommit transaction[0m
+#<Event:0x3b96eb0>
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[35mSQL (2.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 46]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 47]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 2]]
+  [1m[36m (72.0ms)[0m  [1mcommit transaction[0m
+#<Event:0x3b95500>
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[35mSQL (3.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 48]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 49]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 3]]
+  [1m[36m (87.0ms)[0m  [1mcommit transaction[0m
+=============hoge=================
+[#<Event id: 1, event: "FACE", operator: "==", created_at: nil, updated_at: nil, params: nil, param: "">]
+=============piyo=================
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/events
+Completed 302 Found in 302ms (ActiveRecord: 243.0ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2015-02-18 13:00:18 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 3ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2015-02-18 13:00:21 +0900
+Processing by EventsController#index as HTML
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events"[0m
+  Rendered events/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 18ms (Views: 17.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-02-18 13:00:22 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-02-18 13:00:22 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-02-18 13:00:22 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-02-18 13:00:22 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-02-18 13:00:22 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-02-18 13:00:22 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-02-18 13:00:22 +0900
+
+
+Started GET "/events" for 127.0.0.1 at 2015-02-18 13:00:25 +0900
+Processing by EventsController#index as HTML
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events"
+  Rendered events/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 19ms (Views: 17.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-02-18 13:00:25 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-02-18 13:00:25 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-02-18 13:00:25 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-02-18 13:00:25 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-02-18 13:00:25 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-02-18 13:00:25 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-02-18 13:00:25 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-18 13:00:51 +0900
+
+
+Started POST "/events" for 127.0.0.1 at 2015-02-18 13:03:25 +0900
+Processing by EventsController#create as JSON
+  Parameters: {"_json"=>"[{\"event\":\"FACE\",\"operator\":\"==\",\"param\":\"\",\"event_id\":\"1\",\"actions\": [{\"action\":\"light\",\"param\":\"\"}]}]", "event"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+1
+=============params=================
+=============destroy=================
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events"
+=============hoge=================
+[#<Event id: 1, event: "FACE", operator: "==", created_at: nil, updated_at: nil, params: nil, param: "">]
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+Redirected to http://localhost:3000/events
+Completed 302 Found in 18ms (ActiveRecord: 1.0ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2015-02-18 13:03:25 +0900
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 3ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2015-02-18 13:03:35 +0900
+Processing by EventsController#index as HTML
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events"
+  Rendered events/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 20ms (Views: 20.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-02-18 13:03:35 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-02-18 13:03:35 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-02-18 13:03:35 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-02-18 13:03:35 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-02-18 13:03:35 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-02-18 13:03:35 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-02-18 13:03:35 +0900
+
+
+Started POST "/events" for 127.0.0.1 at 2015-02-18 13:06:26 +0900
+Processing by EventsController#create as JSON
+  Parameters: {"_json"=>"[{\"event\":\"FACE\",\"operator\":\"==\",\"param\":\"\",\"event_id\":\"1\",\"actions\": [{\"action\":\"light\",\"param\":\"\"}]}]", "event"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+1
+=============params=================
+=============destroy=================
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events"
+=============hoge=================
+[#<Event id: 1, event: "FACE", operator: "==", created_at: nil, updated_at: nil, params: nil, param: "">]
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+Redirected to http://localhost:3000/events
+Completed 302 Found in 16ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2015-02-18 13:06:26 +0900
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 3ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+  [1m[36m (76.0ms)[0m  [1mCREATE TABLE "actions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "action" varchar(255), "param" varchar(255), "created_at" datetime, "updated_at" datetime, "event_id" varchar(255)) [0m
+  [1m[35m (85.0ms)[0m  CREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "event" varchar(255), "operator" varchar(255), "created_at" datetime, "updated_at" datetime, "params" varchar(255), "param" varchar(255)) 
+  [1m[36m (88.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (99.0ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (1.0ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (82.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150215133509')
+  [1m[36m (79.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150212085756')[0m
+  [1m[35m (87.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150212154358')
+  [1m[36m (83.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150213041404')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-02-18 13:07:56 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-18 13:07:57 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-18 13:07:57 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-18 13:07:57 +0900
+
+
+Started POST "/events" for 127.0.0.1 at 2015-02-18 13:08:37 +0900
+Processing by EventsController#create as JSON
+  Parameters: {"_json"=>"[{\"event\":\"FACE\",\"operator\":\"==\",\"param\":\"\",\"event_id\":\"1\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]},\n{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]", "event"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+  [1m[35mAction Load (9.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 1]]
+1
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 2]]
+1
+=============params=================
+=============destroy=================
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events"
+=============hoge=================
+[#<Event id: 1, event: "FACE", operator: "==", created_at: nil, updated_at: nil, params: nil, param: "">, #<Event id: 2, event: "say", operator: "=", created_at: nil, updated_at: nil, params: nil, param: "1">]
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (8.0ms)[0m  INSERT INTO "events" ("created_at", "event", "id", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Wed, 18 Feb 2015 04:08:38 UTC +00:00], ["event", "say"], ["id", 2], ["operator", "="], ["param", "1"], ["updated_at", Wed, 18 Feb 2015 04:08:38 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Wed, 18 Feb 2015 04:08:38 UTC +00:00], ["event_id", 2], ["param", ""], ["updated_at", Wed, 18 Feb 2015 04:08:38 UTC +00:00]]
+  [1m[35m (85.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/events
+Completed 302 Found in 303ms (ActiveRecord: 105.0ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2015-02-18 13:08:38 +0900
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events"[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
+Completed 200 OK in 9ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2015-02-18 13:08:59 +0900
+Processing by EventsController#index as HTML
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events"[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
+  Rendered events/index.html.erb within layouts/application (13.0ms)
+Completed 200 OK in 119ms (Views: 117.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-02-18 13:08:59 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-02-18 13:08:59 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-02-18 13:08:59 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-02-18 13:08:59 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-02-18 13:08:59 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-02-18 13:08:59 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-02-18 13:08:59 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-18 13:12:38 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-18 13:12:38 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-18 13:12:38 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-02-18 13:12:38 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-18 13:12:39 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-18 13:12:39 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-02-18 13:12:39 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-02-18 13:12:56 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-02-18 13:12:56 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-02-18 13:12:56 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-02-18 13:12:56 +0900
+
+
+Started POST "/events" for 127.0.0.1 at 2015-02-18 13:13:25 +0900
+Processing by EventsController#create as JSON
+  Parameters: {"_json"=>"[{\"event\":\"FACE\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"1\",\"actions\": [{\"action\":\"light\",\"param\":\"\"}]},\n{\"event\":\"say\",\"operator\":\"=\",\"param\":\"中谷\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]", "event"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+1
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
+2
+=============params=================
+=============destroy=================
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events"[0m
+#<Event:0x3d97970>
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[35mSQL (1.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 1]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 2]]
+  [1m[35m (72.0ms)[0m  commit transaction
+=============hoge=================
+[#<Event id: 1, event: "FACE", operator: "==", created_at: nil, updated_at: nil, params: nil, param: "FACE">, #<Event id: 2, event: "say", operator: "=", created_at: nil, updated_at: nil, params: nil, param: "中谷">]
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (3.0ms)[0m  INSERT INTO "events" ("created_at", "event", "id", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Wed, 18 Feb 2015 04:13:26 UTC +00:00], ["event", "FACE"], ["id", 1], ["operator", "=="], ["param", "FACE"], ["updated_at", Wed, 18 Feb 2015 04:13:26 UTC +00:00]]
+  [1m[36mSQL (3.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "light"], ["created_at", Wed, 18 Feb 2015 04:13:26 UTC +00:00], ["event_id", 1], ["param", ""], ["updated_at", Wed, 18 Feb 2015 04:13:26 UTC +00:00]]
+  [1m[35m (82.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "events" ("created_at", "event", "id", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Wed, 18 Feb 2015 04:13:26 UTC +00:00], ["event", "say"], ["id", 2], ["operator", "="], ["param", "中谷"], ["updated_at", Wed, 18 Feb 2015 04:13:26 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mUPDATE "actions" SET "event_id" = ?, "updated_at" = ? WHERE "actions"."id" = 1[0m  [["event_id", 2], ["updated_at", Wed, 18 Feb 2015 04:13:26 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Wed, 18 Feb 2015 04:13:26 UTC +00:00], ["event_id", 2], ["param", ""], ["updated_at", Wed, 18 Feb 2015 04:13:26 UTC +00:00]]
+  [1m[36m (74.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/events
+Completed 302 Found in 305ms (ActiveRecord: 242.0ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2015-02-18 13:13:26 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 2]]
+Completed 200 OK in 11ms (Views: 0.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2015-02-18 13:13:29 +0900
+Processing by EventsController#index as HTML
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events"[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?  [["event_id", 1]]
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 2]]
+  Rendered events/index.html.erb within layouts/application (9.0ms)
+Completed 200 OK in 31ms (Views: 29.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-02-18 13:13:29 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-02-18 13:13:29 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-02-18 13:13:29 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-02-18 13:13:29 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-02-18 13:13:29 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-02-18 13:13:29 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-02-18 13:13:29 +0900

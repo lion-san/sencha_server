@@ -288,7 +288,11 @@ var eventAddBtnTapped = function( value ){
   //Action Mode
   switch (value.action){
     case "say":
-      eventSaid(eventId, events.say);
+      eventSaid(eventId, events.say, "say");
+      break;
+
+    case "saw":
+      eventSaw(eventId, events.saw, "FACE");
       break;
 
     default:
@@ -302,7 +306,7 @@ var eventAddBtnTapped = function( value ){
 }
 
 //Sub Function
-var eventSaid = function(eventId, btnName){
+var eventSaid = function(eventId, btnName, eventType){
 
   //Refresh
   if( refresh ){
@@ -338,7 +342,7 @@ var eventSaid = function(eventId, btnName){
           if(nullCheck(input2, "条件を入力してね")){
             //選択したボタンの描画
             //createEventBtn(eventId, btnName + "["+ input1 + ":" + input2 +"]");
-            createEventBtn(eventId, btnName, input1, input2);
+            createEventBtn(eventId, btnName, input1, input2, eventType);
             naviView.pop();
           }
         }
@@ -350,8 +354,23 @@ var eventSaid = function(eventId, btnName){
 }
 
 //Sub Function
+var eventSaw = function(eventId, btnName, eventType){
+
+  //Refresh
+  if( refresh ){
+    createEventBtn(eventId, btnName, eventForRefresh.operator, eventForRefresh.param );
+    return;
+  }
+
+  //JSONにオブジェクトを追加
+  createEventBtn(eventId, btnName, "==", "", eventType);
+
+}
+
+
+//Sub Function
 //イベント（条件）ボタンの生成
-var createEventBtn = function(eventId, btnName, input1, input2){
+var createEventBtn = function(eventId, btnName, input1, input2, eventType){
 
   var out;
   var json;
@@ -360,11 +379,11 @@ var createEventBtn = function(eventId, btnName, input1, input2){
     out = "完全";
 
     //JSONのPush
-    json = {"event": "say", "type" : "==", "param": input2};
+    json = {"event": eventType, "type" : "==", "param": input2};
   }
   else{
     out = "部分";
-    json = {"event": "say", "type" : "=", "param": input2};
+    json = {"event": eventType, "type" : "=", "param": input2};
   }
 
   allEvents.push( json );
@@ -768,7 +787,7 @@ var deleteEvent = function ( btn ){
  * プロジェクトの保存
  */
 var saveProject = function(){
-  waitingAnimation("Saving..");
+  waitingAnimation("Saving..", true);
 
   var eventList = new Array();
   var actionList;
@@ -838,6 +857,7 @@ var saveProject = function(){
     dataType : 'JSON',
     scriptCharset: 'utf-8',
     success : function(data) {
+      waitingAnimation("", false);
       Ext.Msg.alert("保存しました！");
     },
     error : function(data) {
@@ -863,7 +883,7 @@ var loadProject = function( btn ) {
   if( btn == "no" )
     return;
   
-  waitingAnimation("Loading..");
+  waitingAnimation("Loading..", true);
 
 
   var request = new XMLHttpRequest();
@@ -951,6 +971,7 @@ var refreshAll = function( events ){
   refresh = false;
   currentActionPanel.show();
 
+  waitingAnimation("", false);
 }
 
 //--- event end ----------------------------------------------
