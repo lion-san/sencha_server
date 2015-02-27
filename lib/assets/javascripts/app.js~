@@ -4,7 +4,7 @@ var naviView;
 var mainPanel;
 var actionFloatPanel;
 
-var eventPanel;
+var eventPanel = null;
 var currentActionPanel;
 var actionPanels = new Array();//イベント毎のアクションスタック
 var allEvents = new Array();//全イベントJSONリスト
@@ -17,6 +17,7 @@ var eventForRefresh;//Refresh用イベント格納変数1
 
 var projectDefault = "[Project] : ";
 var projectName;//プロジェクト一意名
+var pjLabel;//プロジェクトラベルオブジェクト
 
 //-------------------------------------
 //Main layout
@@ -79,14 +80,13 @@ Ext.application({
 
   mainPanel = getObjectById(panels, 'mainPanel');
 
-  //EventPanelの生成
-  mainPanel.add( createEventPanel() );
-  //EventAddButtonの生成
-  eventPanel.add(createEventAddBtn());
-
   //ActionFloatPanelの生成
   createActionFloatPanel();
   Ext.Viewport.add(actionFloatPanel);
+
+  //プロジェクト名の表示
+  var labels  = Ext.ComponentQuery.query('label');
+  pjLabel = getObjectById(labels, 'projectName');
 
   //--------------------------------
   }
@@ -882,6 +882,13 @@ var deleteEvent = function ( btn ){
  * プロジェクトの保存
  */
 var saveProject = function(){
+
+
+  //Project名のチェック
+  if( !nullCheck( projectName, "プロジェクト名を入力してください。\"+\" Button" ) )
+    return;
+  
+
   waitingAnimation("Saving..", true);
 
   var eventList = new Array();
@@ -1005,32 +1012,14 @@ var refreshAll = function( events ){
   //refreshフラグをオン
   refresh = true;
 
+
+  //画面初期化処理
+  clearAll(); 
+
+
   //1つめのActionPanelの生成
   var i = 0;
   var j = 0;
- 
-  //初期化
-  for(i = 0; i < actionPanels.length; i++){
-    actionPanels[i].destroy();
-  }
-  actionPanels = new Array();//Indexがずれるので
-
-
-
-  allEvents = new Array();
-  actions = new Array();
-  eventPanel.destroy();
-  //EventPanelの生成
-  mainPanel.add( createEventPanel() );
-  //EventAddButtonの生成
-  eventPanel.add(createEventAddBtn());
-
-  if( currentActionPanel != null )
-    currentActionPanel.destroy();
-
-  eventCount = 0;
-
-
  
 
   for(i = 0; i < events.length; i++){
@@ -1056,6 +1045,7 @@ var refreshAll = function( events ){
       //ダミーObj
       var obj = {"id": null};
       obj.id = action.action;
+
       //(2)Actionボタンの追加
       actionBtnTapped(obj, action);
 
@@ -1069,9 +1059,47 @@ var refreshAll = function( events ){
   waitingAnimation("", false);
 }
 
+
+/****************************************
+ * clearAll
+ ***************************************/
+var clearAll = function(){
+  var i = 0;
+
+  //初期化
+  for(i = 0; i < actionPanels.length; i++){
+    actionPanels[i].destroy();
+  }
+  actionPanels = new Array();//Indexがずれるので
+
+
+
+  allEvents = new Array();
+  actions = new Array();
+  if( eventPanel != null ) eventPanel.destroy();
+  //EventPanelの生成
+  mainPanel.add( createEventPanel() );
+  //EventAddButtonの生成
+  eventPanel.add(createEventAddBtn());
+
+  if( currentActionPanel != null )
+    currentActionPanel.destroy();
+
+  eventCount = 0;
+
+  //プロジェクト名の初期化
+  projectName = "";
+  pjLabel.setHtml( projectDefault + projectName );
+
+}
+
+
+
+
+
 /****************************************
  * createProject
- *}**************************************/
+ ***************************************/
 var createProject = function(){
 
   Ext.Msg.prompt('New project', 'Please enter project name:', function(text, value) {
@@ -1082,11 +1110,15 @@ var createProject = function(){
 
         projectName = value;
 
-        //プロジェクト名の表示
-        var labels  = Ext.ComponentQuery.query('label');
-        var pjLabel = getObjectById(labels, 'projectName');
 
         pjLabel.setHtml( projectDefault + projectName );
+
+
+        //##### プログラム開発パネルの生成 #####
+        //EventPanelの生成
+        mainPanel.add( createEventPanel() );
+        //EventAddButtonの生成
+        eventPanel.add(createEventAddBtn());
 
       }
 
@@ -1098,6 +1130,8 @@ var createProject = function(){
 
   });
 }
+
+
 
 //--- event end ----------------------------------------------
 
@@ -1126,7 +1160,7 @@ var getEventId = function ( EventId ){
  * nullCheck
  */
 var nullCheck = function(input, msg){
-  if (input.length == 0){
+  if( ( input == null ) || (input.length == 0 )){
     Ext.Msg.alert(msg);
     return false;
   }
