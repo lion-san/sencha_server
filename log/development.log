@@ -10285,3 +10285,152 @@ Processing by EventsController#index as JSON
   [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events"
   [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
 Completed 200 OK in 6ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-05 12:15:11 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-05 12:15:13 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-05 12:15:13 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-05 12:15:13 +0900
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-03-05 12:15:20 +0900
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mAction Load (43.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = ?[0m  [["event_id", 1]]
+Completed 200 OK in 630ms (Views: 0.0ms | ActiveRecord: 45.0ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-05 12:15:24 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-05 12:15:57 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-05 12:15:57 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-05 12:15:57 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-05 12:15:57 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-05 12:19:06 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-05 12:19:06 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-05 12:19:06 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-05 12:19:06 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-05 12:23:43 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-05 12:23:43 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-05 12:23:43 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-05 12:23:43 +0900
+
+
+Started POST "/events" for 127.0.0.1 at 2015-03-05 12:24:43 +0900
+Processing by EventsController#create as JSON
+  Parameters: {"_json"=>"[\"project\":\"d\"]", "event"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+Completed 500 Internal Server Error in 91ms
+
+MultiJson::ParseError (399: unexpected token at ':"d"]'):
+  app/controllers/events_controller.rb:68:in `event_params'
+  app/controllers/events_controller.rb:26:in `create'
+
+
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (105.0ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-05 12:24:44 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-05 12:24:44 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-05 12:24:44 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-05 12:24:44 +0900
+
+
+Started POST "/events" for 127.0.0.1 at 2015-03-05 12:32:13 +0900
+Processing by EventsController#create as JSON
+  Parameters: {"_json"=>"[\"project\":\"a\"{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"1\",\"actions\": [{\"action\":\"light\",\"param\":\"\"}]}]", "event"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+Completed 500 Internal Server Error in 6ms
+
+MultiJson::ParseError (399: unexpected token at ':"a"{"event":"saw","operator":"==","param":"FACE","event_id":"1","actions": [{"action":"light","param":""}]}]'):
+  app/controllers/events_controller.rb:68:in `event_params'
+  app/controllers/events_controller.rb:26:in `create'
+
+
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (82.0ms)
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-05 12:32:13 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-05 12:32:13 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-05 12:32:13 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-05 12:32:13 +0900
+
+
+Started POST "/events" for 127.0.0.1 at 2015-03-05 12:34:46 +0900
+Processing by EventsController#create as JSON
+  Parameters: {"_json"=>"[\"project\":\"d\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"t\",\"event_id\":\"1\",\"actions\": [{\"action\":\"light\",\"param\":\"\"}]}]]", "event"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+Completed 500 Internal Server Error in 5ms
+
+MultiJson::ParseError (399: unexpected token at ':"d","events": [{"event":"say","operator":"=","param":"t","event_id":"1","actions": [{"action":"light","param":""}]}]]'):
+  app/controllers/events_controller.rb:68:in `event_params'
+  app/controllers/events_controller.rb:26:in `create'
+
+
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (5.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (82.0ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-05 12:34:46 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-05 12:34:46 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-05 12:34:46 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-05 12:34:46 +0900
