@@ -23,24 +23,32 @@ class EventsController < ApplicationController
   def create
 
     #パラメタの取得
-    events = event_params
+    #events = event_params
+    project = event_params
 
     logger.debug("=============destroy=================");
 
+    del = Project.find_by( pjname: project.pjname )
+    logger.debug( del )
+    del.destroy
+
     #Delete -> Insert
-    dels = Event.all
-    dels.each do |del|
-      logger.debug( del )
-      del.destroy
-    end
+    #dels = Event.all
+    #dels = Event.find_all_by_project_id( project.id )
+    #dels.each do |del|
+    #  logger.debug( del )
+    #  del.destroy
+    #end
 
     logger.debug("=============hoge=================");
-    logger.debug( events )
+    logger.debug( project )
 
     logger.debug("=============piyo=================");
-    events.each do |event|
-      event.save
-    end
+    #events.each do |event|
+    #events.each do |event|
+    #  event.save
+    #end
+    project.save
 
     redirect_to events_url 
   end
@@ -72,6 +80,7 @@ class EventsController < ApplicationController
     logger.debug( project["events"] )
     events = project["events"]
 
+    @project = Project.new( user_id: "test", pjname: project["project"] )
     @events = Array.new
 
     #要素の取り出し
@@ -98,12 +107,15 @@ class EventsController < ApplicationController
       @events.push( event )
     end
 
+    @project.events << @events
+
 
     #logger.debug( events );
 
     logger.debug("=============params=================");
     #params.require(:event).permit( :event, :operator )
-    return @events
+    #return @events
+    return @project
   end
 
 end

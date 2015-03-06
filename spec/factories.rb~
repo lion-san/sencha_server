@@ -1,6 +1,0 @@
-FactoryGirl.define do
-  factory :e do
-    event     "say"
-    operand    "="
-  end
-end
