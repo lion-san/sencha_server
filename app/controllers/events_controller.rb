@@ -65,7 +65,12 @@ class EventsController < ApplicationController
     json = params[ :_json ]
 
     logger.debug("=============params=================");
-    events = ActiveSupport::JSON.decode json 
+    project = ActiveSupport::JSON.decode json 
+    #events = ActiveSupport::JSON.decode json 
+    
+
+    logger.debug( project["events"] )
+    events = project["events"]
 
     @events = Array.new
 
