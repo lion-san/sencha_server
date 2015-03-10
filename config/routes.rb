@@ -1,4 +1,7 @@
 SenchaServer::Application.routes.draw do
-#  get "events/new"
-  resources :events
+  resources :projects do
+    resources :events
+  end
+  #get "events/new"
+  #resources :events
 end

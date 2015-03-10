@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150306043253) do
+ActiveRecord::Schema.define(version: 20150310070105) do
 
   create_table "actions", force: true do |t|
     t.string   "action"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 20150306043253) do
     t.string   "param"
     t.string   "project_id"
   end
+
+  add_index "events", ["project_id", "id"], name: "index_events_on_project_id_and_id", unique: true
 
   create_table "projects", force: true do |t|
     t.string   "user_id"

@@ -973,7 +973,7 @@ var saveProject = function(){
   //Send JSON
   $.ajax({
     type : 'post',
-    url : "/projects",
+    url : "/projects/" + projectName + "/events",
     data : JSON.stringify(json),
     contentType: 'application/JSON',
     dataType : 'JSON',
