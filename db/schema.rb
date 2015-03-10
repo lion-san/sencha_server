@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20150310070105) do
     t.string   "param"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "event_id"
+    t.integer  "event_id"
   end
 
   create_table "events", force: true do |t|
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20150310070105) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "param"
-    t.string   "project_id"
+    t.integer  "project_id"
   end
 
   add_index "events", ["project_id", "id"], name: "index_events_on_project_id_and_id", unique: true

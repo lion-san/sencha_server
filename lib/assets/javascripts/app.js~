@@ -14,6 +14,7 @@ var eventCount = 0;
 
 var refresh = false;//Refreshかどうか
 var eventForRefresh;//Refresh用イベント格納変数1
+var refreshBtn;
 
 var projectDefault = "[Project] : ";
 var projectName;//プロジェクト一意名
@@ -59,6 +60,7 @@ Ext.application({
                 },
                 {
                   iconCls: 'refresh',
+                  id: 'refresh',
                   iconMask: true,
                   handler: function(){
                     reloadConfirm();
@@ -85,6 +87,12 @@ Ext.application({
   naviView = getObjectById(navis, 'naviView');
 
   mainPanel = getObjectById(panels, 'mainPanel');
+
+  //refreshボタンの制御用
+  var refs  = Ext.ComponentQuery.query('button');
+  refreshBtn = getObjectById(refs, 'refresh');
+  refreshBtn.disable();
+
 
   //ActionFloatPanelの生成
   createActionFloatPanel();
@@ -973,7 +981,7 @@ var saveProject = function(){
   //Send JSON
   $.ajax({
     type : 'post',
-    url : "/projects/" + projectName + "/events",
+    url : "/projects",
     data : JSON.stringify(json),
     contentType: 'application/JSON',
     dataType : 'JSON',
@@ -1078,6 +1086,9 @@ var refreshAll = function( events ){
       //(2)Actionボタンの追加
       actionBtnTapped(obj, action);
 
+      //Refreshボタンが押せるようになる
+      refreshBtn.enable();
+
     }
   }
 
@@ -1141,6 +1152,10 @@ var createProject = function(){
         clearAll();
 
         setProject( value );
+
+        //Refreshボタンが押せなくなる
+        refreshBtn.disable();
+
       }
 
     }
