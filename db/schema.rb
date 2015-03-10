@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20150310070105) do
     t.string   "operator"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "params"
     t.string   "param"
     t.string   "project_id"
   end
