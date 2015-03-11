@@ -27,6 +27,13 @@ class ProjectsController < ApplicationController
     project = event_params
 
     logger.debug("=============hoge=================");
+    logger.debug( project.attributes )
+    project.events.each do |e|
+      logger.debug( e.attributes )
+      e.actions.each do |p|
+        logger.debug( p.attributes )
+      end
+    end
 
     before_project = Project.find_by( user_id: project.user_id,
                                      pjname: project.pjname )
@@ -74,7 +81,7 @@ class ProjectsController < ApplicationController
 
       e[ "actions" ].each do | a |
 
-        action = Action.new( event_id: e["event_id"],
+        action = Action.new( #event_id: e["event_id"],
                              action: a["action"],
                              param: a["param"] )
 
