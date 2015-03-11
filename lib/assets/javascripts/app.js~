@@ -1224,7 +1224,7 @@ var loadProjectList = function(){
         },
         centered:true,
         width: Ext.os.deviceType == 'Phone' ? 260 : 400,
-        height: Ext.os.deviceType == 'Phone' ? 220 : 400,
+        height: Ext.os.deviceType == 'Phone' ? 270 : 400,
         styleHtmlContent: true,
         items:[
           {
@@ -1233,8 +1233,8 @@ var loadProjectList = function(){
             title: 'Project list'
           },
           {
-            width: Ext.os.deviceType == 'Phone' ? null : 350,
-            height: Ext.os.deviceType == 'Phone' ? null : 300,
+            width: Ext.os.deviceType == 'Phone' ? 210 : 350,
+            height: Ext.os.deviceType == 'Phone' ? 180 : 300,
             xtype: 'list',
             store: 'Projects',
             itemTpl: '<div class="project"><strong>{pjname}</strong></div>',
