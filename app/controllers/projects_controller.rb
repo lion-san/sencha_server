@@ -67,14 +67,14 @@ class ProjectsController < ApplicationController
 
     events.each do | e |
 
-      event = Event.new( id: e["event_id"],
+      event = Event.new( #id: e["event_id"],
                         event: e["event"],
                         operator: e["operator"],
                         param: e["param"] )
 
       e[ "actions" ].each do | a |
 
-        action = Action.new( event_id: e["event_id"],
+        action = Action.new( #event_id: e["event_id"],
                              action: a["action"],
                              param: a["param"] )
 

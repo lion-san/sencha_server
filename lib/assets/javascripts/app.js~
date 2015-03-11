@@ -1086,14 +1086,15 @@ var refreshAll = function( events ){
       //(2)Actionボタンの追加
       actionBtnTapped(obj, action);
 
-      //Refreshボタンが押せるようになる
-      refreshBtn.enable();
 
     }
   }
 
   //refreshフラグを戻す
   refresh = false;
+
+  //Refreshボタンが押せるようになる
+  refreshBtn.enable();
 
   if(flg)
     currentActionPanel.show();
