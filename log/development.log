@@ -19112,3 +19112,33 @@ Processing by EventsController#index as JSON
   [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 18
   [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 17[0m
 Completed 200 OK in 19ms (Views: 0.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-12 08:04:47 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-12 08:04:47 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-12 08:04:48 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-12 08:04:49 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-12 08:05:09 +0900
+Processing by ProjectsController#index as JSON
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 66ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-12 08:05:27 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-12 08:05:52 +0900
+Processing by ProjectsController#index as JSON
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 8ms (Views: 0.0ms | ActiveRecord: 1.0ms)

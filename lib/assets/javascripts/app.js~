@@ -945,6 +945,9 @@ var saveProject = function(){
       eventId += 1;
       
       json += "\"actions\": [";
+
+      flg2 = false;//1イベント毎に初期化
+
       for(j = 0; j < actions[i].length; j++){
         if(actions[i][j] != null){
           flg2 = true;
