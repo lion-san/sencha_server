@@ -20,7 +20,14 @@ class ProjectsController < ApplicationController
     @project = Project.find_by( pjname: project_params )
 
   end
+
   
+  def destroy
+    @project = Project.find_by( params[:id] ).destroy
+    flash[:success] = "Project destroyed."
+    redirect_to projects_url
+  end
+
 
   def create
 

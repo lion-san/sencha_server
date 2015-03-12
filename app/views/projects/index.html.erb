@@ -6,6 +6,8 @@
 
   <li>
     <%= p.pjname %>
+  | <%= link_to "delete", p, method: :delete,
+                   data: { confirm: "You sure?" } %>
   </li>
 
 

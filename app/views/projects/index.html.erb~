@@ -1,5 +1,4 @@
-<h1>Projects#index</h1>
-<p>Find me in app/views/projects/index.html.erb</p>
+<h1>Projects belong "test" user</h1>
 
 <ui>
 
@@ -7,6 +6,8 @@
 
   <li>
     <%= p.pjname %>
+  | <%= link_to "delete", user, method: :delete,
+                   data: { confirm: "You sure?" } %>
   </li>
 
 

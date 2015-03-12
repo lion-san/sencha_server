@@ -59,6 +59,12 @@ Ext.application({
                   }
                 },
                 {
+                  text: 'list',
+                  handler: function(){
+                    showProjectList();
+                  }
+                },
+                {
                   iconCls: 'refresh',
                   id: 'refresh',
                   iconMask: true,
@@ -1012,6 +1018,14 @@ var reloadConfirm = function(){
 
 
 /*************************************
+ * showProjectList
+ *************************************/
+var showProjectList = function(){
+  window.open('/projects');
+}
+
+
+/*************************************
  * loadProject
  *************************************/
 var loadProject = function( btn ) {
@@ -1233,7 +1247,7 @@ var loadProjectList = function(){
             title: 'Project list'
           },
           {
-            width: Ext.os.deviceType == 'Phone' ? 210 : 350,
+            width: Ext.os.deviceType == 'Phone' ? 220 : 350,
             height: Ext.os.deviceType == 'Phone' ? 180 : 300,
             xtype: 'list',
             store: 'Projects',
