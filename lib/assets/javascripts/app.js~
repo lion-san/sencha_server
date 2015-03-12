@@ -18,6 +18,7 @@ var refreshBtn;
 
 var projectDefault = "[Project] : ";
 var projectName;//プロジェクト一意名
+var projectID;//プロジェクトキー（ＤＢ）
 var pjLabel;//プロジェクトラベルオブジェクト
 
 //-------------------------------------
@@ -1207,7 +1208,7 @@ var loadProjectList = function(){
       Ext.define('Project', {
         extend: 'Ext.data.Model',
         config: {
-          fields: ['pjname']
+          fields: ['pjname', 'id']
         }
       });
       //Data
@@ -1262,6 +1263,7 @@ var loadProjectList = function(){
 
               //loadProject
               setProject( json[index].pjname );
+              projectID = json[index].id;
               loadProject("yes");
             }
           }

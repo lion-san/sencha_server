@@ -21107,3 +21107,1668 @@ Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 10:21:07 +0
 
 
 Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 10:21:07 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-12 12:14:07 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-12 12:14:07 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-12 12:14:07 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-12 12:14:08 +0900
+
+
+Started GET "/projects/hoge/events" for 127.0.0.1 at 2015-03-12 12:14:10 +0900
+Processing by EventsController#index as HTML
+  Parameters: {"project_id"=>"hoge"}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."pjname" = 'hoge' LIMIT 1
+Completed 500 Internal Server Error in 53ms
+
+NoMethodError (undefined method `events' for nil:NilClass):
+  app/controllers/events_controller.rb:9:in `index'
+
+
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (54.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (149.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-12 12:14:10 +0900
+Processing by ProjectsController#index as HTML
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+  Rendered projects/index.html.erb within layouts/application (2.0ms)
+Completed 500 Internal Server Error in 56ms
+
+SyntaxError (C:/Sites/rails_projects/sencha_server/app/views/projects/index.html.erb:9: syntax error, unexpected tSYMBEG, expecting keyword_do or '{' or '('
+...( link_to p.pjname, p, medhod :show );@output_buffer.safe_ap...
+...                               ^):
+  app/controllers/projects_controller.rb:8:in `index'
+
+
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (66.0ms)
+
+
+Started GET "/projects/" for 127.0.0.1 at 2015-03-12 12:14:14 +0900
+Processing by ProjectsController#index as HTML
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+Completed 500 Internal Server Error in 13ms
+
+SyntaxError (C:/Sites/rails_projects/sencha_server/app/views/projects/index.html.erb:9: syntax error, unexpected tSYMBEG, expecting keyword_do or '{' or '('
+...( link_to p.pjname, p, medhod :show );@output_buffer.safe_ap...
+...                               ^):
+  app/controllers/projects_controller.rb:8:in `index'
+
+
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (71.0ms)
+
+
+Started GET "/projects/" for 127.0.0.1 at 2015-03-12 12:14:59 +0900
+Processing by ProjectsController#index as HTML
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 543ms (Views: 536.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:15:00 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:15:00 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:15:00 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:15:00 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:15:00 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:15:00 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:15:00 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:15:00 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:15:00 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:15:00 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-12 12:15:10 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-12 12:15:10 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-12 12:15:10 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-12 12:15:10 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-12 12:15:13 +0900
+Processing by ProjectsController#index as JSON
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 11ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-03-12 12:15:36 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"きたよ\",\"event_id\":\"1\",\"actions\": [{\"action\":\"light\",\"param\":\"\"},\n{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"きたよ", "event_id"=>"1", "actions"=>[{"action"=>"light", "param"=>""}, {"action"=>"camera", "param"=>""}]}]
+1
+2
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"きたよ", "project_id"=>nil}
+{"id"=>nil, "action"=>"light", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+=============piyo=================
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36mSQL (71.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 12 Mar 2015 03:15:36 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 12 Mar 2015 03:15:36 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 12 Mar 2015 03:15:36 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "きたよ"], ["project_id", 28], ["updated_at", Thu, 12 Mar 2015 03:15:36 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "light"], ["created_at", Thu, 12 Mar 2015 03:15:36 UTC +00:00], ["event_id", 22], ["param", ""], ["updated_at", Thu, 12 Mar 2015 03:15:36 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Thu, 12 Mar 2015 03:15:36 UTC +00:00], ["event_id", 22], ["param", ""], ["updated_at", Thu, 12 Mar 2015 03:15:36 UTC +00:00]]
+  [1m[36m (80.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 299ms (ActiveRecord: 157.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-12 12:15:36 +0900
+Processing by ProjectsController#index as JSON
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 6ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-12 12:15:39 +0900
+Processing by ProjectsController#index as HTML
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+  Rendered projects/index.html.erb within layouts/application (6.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 149ms (Views: 140.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:15:40 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:15:40 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:15:40 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:15:40 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:15:40 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:15:40 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:15:40 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:15:40 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:15:40 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:15:40 +0900
+
+
+Started GET "/projects/28" for 127.0.0.1 at 2015-03-12 12:15:44 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."pjname" = '28' LIMIT 1
+  Rendered projects/show.html.erb within layouts/application (4.0ms)
+Completed 500 Internal Server Error in 17ms
+
+ActionView::Template::Error (undefined method `pjname' for nil:NilClass):
+    1: <h1>Project detail</h1>
+    2: 
+    3: <%= @project.pjname %>
+    4: 
+    5: <ui>
+    6: 
+  app/views/projects/show.html.erb:3:in `_app_views_projects_show_html_erb___325912443_32597712'
+
+
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (52.0ms)
+
+
+Started GET "/projects/28" for 127.0.0.1 at 2015-03-12 12:15:45 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."pjname" = '28' LIMIT 1[0m
+  Rendered projects/show.html.erb within layouts/application (4.0ms)
+Completed 500 Internal Server Error in 16ms
+
+ActionView::Template::Error (undefined method `pjname' for nil:NilClass):
+    1: <h1>Project detail</h1>
+    2: 
+    3: <%= @project.pjname %>
+    4: 
+    5: <ui>
+    6: 
+  app/views/projects/show.html.erb:3:in `_app_views_projects_show_html_erb___325912443_43998840'
+
+
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (45.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-12 12:18:51 +0900
+Processing by ProjectsController#index as HTML
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 75ms (Views: 54.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:18:51 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:18:51 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:18:51 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:18:51 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:18:51 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:18:51 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:18:51 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:18:51 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:18:51 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:18:51 +0900
+
+
+Started GET "/projects/28" for 127.0.0.1 at 2015-03-12 12:18:53 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "28"]]
+  Rendered projects/show.html.erb within layouts/application (0.0ms)
+  Rendered layouts/_shim.html.erb (1.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 52ms (Views: 49.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects/28" for 127.0.0.1 at 2015-03-12 12:18:53 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "28"]]
+  Rendered projects/show.html.erb within layouts/application (0.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 51ms (Views: 48.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:18:53 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:18:53 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:18:53 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:18:53 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:18:53 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:18:53 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:18:53 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:18:53 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:18:53 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:18:53 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-12 12:19:55 +0900
+Processing by ProjectsController#index as JSON
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 6ms (Views: 1.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects/28/events" for 127.0.0.1 at 2015-03-12 12:20:43 +0900
+Processing by EventsController#index as HTML
+  Parameters: {"project_id"=>"28"}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."pjname" = '28' LIMIT 1
+Completed 500 Internal Server Error in 4ms
+
+NoMethodError (undefined method `events' for nil:NilClass):
+  app/controllers/events_controller.rb:9:in `index'
+
+
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.0ms)
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (66.0ms)
+
+
+Started GET "/projects/28/events" for 127.0.0.1 at 2015-03-12 12:23:45 +0900
+Processing by EventsController#index as HTML
+  Parameters: {"project_id"=>"28"}
+  [1m[36mProject Load (2.0ms)[0m  [1mSELECT "projects".* FROM "projects" LIMIT 1[0m
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 28
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 22[0m
+  Rendered events/index.html.erb within layouts/application (34.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 123ms (Views: 91.0ms | ActiveRecord: 8.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:23:45 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:23:45 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:23:45 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:23:45 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:23:45 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:23:45 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:23:45 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:23:45 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:23:45 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:23:45 +0900
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-12 12:23:52 +0900
+Processing by ProjectsController#index as HTML
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 51ms (Views: 46.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-12 12:23:53 +0900
+Processing by ProjectsController#index as HTML
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 56ms (Views: 51.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:23:53 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:23:53 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:23:53 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:23:53 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:23:53 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:23:53 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:23:53 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:23:53 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:23:53 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:23:53 +0900
+
+
+Started GET "/projects/28" for 127.0.0.1 at 2015-03-12 12:23:54 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "28"]]
+  Rendered projects/show.html.erb within layouts/application (0.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 51ms (Views: 48.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects/28" for 127.0.0.1 at 2015-03-12 12:23:54 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "28"]]
+  Rendered projects/show.html.erb within layouts/application (0.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 52ms (Views: 48.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:23:54 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:23:54 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:23:54 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:23:54 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:23:54 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:23:54 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:23:54 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:23:54 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:23:54 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:23:54 +0900
+
+
+Started GET "/projects/28/events" for 127.0.0.1 at 2015-03-12 12:24:02 +0900
+Processing by EventsController#index as HTML
+  Parameters: {"project_id"=>"28"}
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" LIMIT 1
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 28[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 22
+  Rendered events/index.html.erb within layouts/application (7.0ms)
+  Rendered layouts/_shim.html.erb (1.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 85ms (Views: 78.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:24:02 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:24:02 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:24:02 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:24:02 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:24:02 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:24:02 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:24:02 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:24:02 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:24:02 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:24:02 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-12 12:27:36 +0900
+Processing by ProjectsController#index as JSON
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 6ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-12 12:29:57 +0900
+Processing by ProjectsController#index as JSON
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 27ms (Views: 0.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-12 12:30:04 +0900
+Processing by ProjectsController#index as HTML
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 54ms (Views: 49.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:30:04 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:30:04 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:30:04 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:30:04 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:30:04 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:30:04 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:30:04 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:30:04 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:30:04 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:30:04 +0900
+
+
+Started GET "/projects/28" for 127.0.0.1 at 2015-03-12 12:30:06 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "28"]]
+  Rendered projects/show.html.erb within layouts/application (1.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 53ms (Views: 49.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects/28" for 127.0.0.1 at 2015-03-12 12:30:06 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "28"]]
+  Rendered projects/show.html.erb within layouts/application (1.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 52ms (Views: 48.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:30:06 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:30:06 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:30:06 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:30:06 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:30:06 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:30:06 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:30:06 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:30:06 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:30:06 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:30:06 +0900
+
+
+Started GET "/projects/28/events" for 127.0.0.1 at 2015-03-12 12:30:12 +0900
+Processing by EventsController#index as HTML
+  Parameters: {"project_id"=>"28"}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" LIMIT 1
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 28[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 22
+  Rendered events/index.html.erb within layouts/application (36.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 98ms (Views: 78.0ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:30:13 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:30:13 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:30:13 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:30:13 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:30:13 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:30:13 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:30:13 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:30:13 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:30:13 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:30:13 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-12 12:31:19 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-12 12:31:19 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-12 12:31:19 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-12 12:31:19 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-12 12:31:21 +0900
+Processing by ProjectsController#index as JSON
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 11ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects/28/events.json" for 127.0.0.1 at 2015-03-12 12:31:23 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"28"}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" LIMIT 1
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 28[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 22
+Completed 200 OK in 19ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects/28/events.json" for 127.0.0.1 at 2015-03-12 12:31:31 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"28"}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" LIMIT 1[0m
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 28
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 22[0m
+Completed 200 OK in 14ms (Views: 0.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-12 12:32:22 +0900
+Processing by ProjectsController#index as HTML
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+  Rendered projects/index.html.erb within layouts/application (2.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 57ms (Views: 52.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:32:22 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:32:22 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:32:22 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:32:22 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:22 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:22 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:22 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:22 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:22 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:22 +0900
+
+
+Started GET "/projects/28" for 127.0.0.1 at 2015-03-12 12:32:25 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "28"]]
+  Rendered projects/show.html.erb within layouts/application (0.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 50ms (Views: 47.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects/28" for 127.0.0.1 at 2015-03-12 12:32:25 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "28"]]
+  Rendered projects/show.html.erb within layouts/application (0.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 58ms (Views: 55.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:32:25 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:32:25 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:32:25 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:32:25 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:25 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:25 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:25 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:25 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:25 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:25 +0900
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-12 12:32:27 +0900
+Processing by ProjectsController#index as HTML
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 52ms (Views: 46.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-12 12:32:27 +0900
+Processing by ProjectsController#index as HTML
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+  Rendered layouts/_shim.html.erb (1.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 84ms (Views: 79.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:32:27 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:32:27 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:27 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:27 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:32:27 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:32:27 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:27 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:27 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:27 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:27 +0900
+
+
+Started GET "/projects/28" for 127.0.0.1 at 2015-03-12 12:32:33 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "28"]]
+  Rendered projects/show.html.erb within layouts/application (0.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 51ms (Views: 47.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects/28" for 127.0.0.1 at 2015-03-12 12:32:34 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "28"]]
+  Rendered projects/show.html.erb within layouts/application (0.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 49ms (Views: 45.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:32:34 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:32:34 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:34 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:32:34 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:34 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:32:34 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:34 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:34 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:34 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:32:34 +0900
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-12 12:33:13 +0900
+Processing by ProjectsController#index as HTML
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+  Rendered projects/index.html.erb within layouts/application (2.0ms)
+  Rendered layouts/_shim.html.erb (1.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 71ms (Views: 66.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-12 12:33:13 +0900
+Processing by ProjectsController#index as HTML
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+  Rendered projects/index.html.erb within layouts/application (2.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 59ms (Views: 52.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:33:13 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:33:13 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:33:13 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:33:13 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:33:13 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:33:13 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:33:13 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:33:13 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:33:13 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:33:13 +0900
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-12 12:33:14 +0900
+Processing by ProjectsController#index as HTML
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 55ms (Views: 50.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:33:14 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:33:14 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:33:14 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:33:14 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:33:14 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:33:14 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:33:14 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:33:14 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:33:14 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:33:14 +0900
+
+
+Started GET "/projects/28" for 127.0.0.1 at 2015-03-12 12:33:22 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "28"]]
+  Rendered projects/show.html.erb within layouts/application (0.0ms)
+  Rendered layouts/_shim.html.erb (1.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 75ms (Views: 72.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects/28" for 127.0.0.1 at 2015-03-12 12:33:22 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "28"]]
+  Rendered projects/show.html.erb within layouts/application (0.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 51ms (Views: 46.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:33:23 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:33:23 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:33:23 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:33:23 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:33:23 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:33:23 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:33:23 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:33:23 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:33:23 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:33:23 +0900
+
+
+Started GET "/projects/28" for 127.0.0.1 at 2015-03-12 12:35:39 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "28"]]
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 28[0m
+  Rendered projects/show.html.erb within layouts/application (5.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 56ms (Views: 52.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:35:39 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:35:39 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:35:39 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:35:39 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:35:39 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:35:39 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:35:39 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:35:39 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:35:39 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:35:39 +0900
+
+
+Started GET "/projects/28" for 127.0.0.1 at 2015-03-12 12:36:32 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "28"]]
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 28[0m
+  Rendered projects/show.html.erb within layouts/application (4.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 81ms (Views: 77.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:36:32 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:36:32 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:36:32 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:36:32 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:36:32 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:36:32 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:36:32 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:36:32 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:36:32 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:36:32 +0900
+
+
+Started GET "/projects/28" for 127.0.0.1 at 2015-03-12 12:36:43 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "28"]]
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 28[0m
+  Rendered projects/show.html.erb within layouts/application (7.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 57ms (Views: 53.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:36:43 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:36:43 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:36:43 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:36:43 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:36:43 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:36:43 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:36:43 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:36:43 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:36:43 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:36:43 +0900
+
+
+Started GET "/projects/28" for 127.0.0.1 at 2015-03-12 12:36:57 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "28"]]
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 28[0m
+  Rendered projects/show.html.erb within layouts/application (5.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 54ms (Views: 50.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:36:57 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:36:57 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:36:57 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:36:57 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:36:57 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:36:57 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:36:57 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:36:57 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:36:57 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:36:57 +0900
+
+
+Started GET "/projects/28" for 127.0.0.1 at 2015-03-12 12:37:08 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "28"]]
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 28[0m
+  Rendered projects/show.html.erb within layouts/application (5.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 57ms (Views: 53.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:37:08 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:37:08 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:37:08 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:37:08 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:37:08 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:37:08 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:37:08 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:37:08 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:37:08 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:37:08 +0900
+
+
+Started GET "/projects/28" for 127.0.0.1 at 2015-03-12 12:37:19 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "28"]]
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 28[0m
+  Rendered projects/show.html.erb within layouts/application (5.0ms)
+  Rendered layouts/_shim.html.erb (1.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 53ms (Views: 50.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:37:19 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:37:19 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:37:19 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:37:19 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:37:19 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:37:19 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:37:19 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:37:19 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:37:19 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:37:19 +0900
+
+
+Started GET "/projects/28/events" for 127.0.0.1 at 2015-03-12 12:37:34 +0900
+Processing by EventsController#index as HTML
+  Parameters: {"project_id"=>"28"}
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" LIMIT 1
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 28[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 22
+  Rendered events/index.html.erb within layouts/application (7.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 63ms (Views: 57.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:37:34 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:37:34 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:37:34 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:37:34 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:37:34 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:37:34 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:37:34 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:37:34 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:37:34 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:37:34 +0900
+
+
+Started GET "/projects/28/events" for 127.0.0.1 at 2015-03-12 12:39:28 +0900
+Processing by EventsController#index as HTML
+  Parameters: {"project_id"=>"28"}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" LIMIT 1[0m
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 28
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 22[0m
+  Rendered events/index.html.erb within layouts/application (7.0ms)
+  Rendered layouts/_shim.html.erb (1.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 79ms (Views: 73.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:39:28 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:39:28 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:39:28 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:39:28 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:39:28 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:39:28 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:39:28 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:39:28 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:39:28 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:39:28 +0900
+
+
+Started GET "/projects/28/" for 127.0.0.1 at 2015-03-12 12:39:33 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "28"]]
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 28[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 22
+  Rendered projects/show.html.erb within layouts/application (9.0ms)
+  Rendered layouts/_shim.html.erb (1.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 60ms (Views: 55.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:39:33 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:39:33 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:39:33 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:39:33 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:39:33 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:39:33 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:39:33 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:39:33 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:39:33 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:39:33 +0900
+
+
+Started GET "/projects/28/" for 127.0.0.1 at 2015-03-12 12:39:55 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "28"]]
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 28
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 22[0m
+  Rendered projects/show.html.erb within layouts/application (9.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 64ms (Views: 56.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:39:55 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:39:55 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:39:55 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:39:55 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:39:55 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:39:55 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:39:55 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:39:55 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:39:55 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:39:55 +0900
+
+
+Started GET "/projects/" for 127.0.0.1 at 2015-03-12 12:40:14 +0900
+Processing by ProjectsController#index as HTML
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 55ms (Views: 48.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:40:14 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:40:14 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:40:14 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:40:15 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:40:15 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:40:15 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:40:15 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:40:15 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:40:15 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:40:15 +0900
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-03-12 12:40:25 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test2\",\"events\": []}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[]
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test2", "created_at"=>nil, "updated_at"=>nil}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test2' LIMIT 1[0m
+=============piyo=================
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (4.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 12 Mar 2015 03:40:25 UTC +00:00], ["pjname", "test2"], ["updated_at", Thu, 12 Mar 2015 03:40:25 UTC +00:00], ["user_id", "test"]]
+  [1m[35m (83.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 109ms (ActiveRecord: 88.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-12 12:40:25 +0900
+Processing by ProjectsController#index as JSON
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 6ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-12 12:40:30 +0900
+Processing by ProjectsController#index as HTML
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.where(...).all instead. (called from index at C:/Sites/rails_projects/sencha_server/app/controllers/projects_controller.rb:6)
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+  Rendered projects/index.html.erb within layouts/application (2.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 60ms (Views: 55.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:40:30 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:40:30 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:40:30 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:40:30 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:40:30 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:40:30 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:40:30 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:40:30 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:40:30 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:40:30 +0900
+
+
+Started GET "/projects/29" for 127.0.0.1 at 2015-03-12 12:40:32 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"29"}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "29"]]
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 29
+  Rendered projects/show.html.erb within layouts/application (4.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 53ms (Views: 50.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects/29" for 127.0.0.1 at 2015-03-12 12:40:32 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"29"}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "29"]]
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 29
+  Rendered projects/show.html.erb within layouts/application (4.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 54ms (Views: 50.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-12 12:40:32 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-12 12:40:32 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-12 12:40:32 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-12 12:40:32 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-12 12:40:32 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-12 12:40:32 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-12 12:40:32 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-12 12:40:32 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-12 12:40:32 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-12 12:40:32 +0900

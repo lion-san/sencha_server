@@ -8,7 +8,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: @projects.to_json(
-        :only => ['pjname']
+        :only => ['pjname', 'id']
       ) }
       format.xml { render :xml => @events }
     end
@@ -17,7 +17,8 @@ class ProjectsController < ApplicationController
   
   def show
 
-    @project = Project.find_by( pjname: project_params )
+    #@project = Project.find_by( pjname: project_params )
+    @project = Project.find( params[:id] )
 
   end
 

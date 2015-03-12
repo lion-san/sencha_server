@@ -5,7 +5,8 @@ class EventsController < ApplicationController
   def index
 
     #@events = Event.all
-    project = Project.find_by(pjname: project_params)
+    #project = Project.find_by(pjname: project_params)
+    project = Project.find_by( params[:id])
     @events = project.events
 
     respond_to do |format|
@@ -20,39 +21,6 @@ class EventsController < ApplicationController
 
 
   def new
-  end
-
-  def create
-
-    #パラメタの取得
-    #events = event_params
-    project = event_params
-
-    logger.debug("=============destroy=================");
-
-    #del = Project.find_by( pjname: project.pjname )
-    #logger.debug( del )
-    #del.destroy
-
-    #Delete -> Insert
-    #dels = Event.all
-    #dels = Event.find_all_by_project_id( project.id )
-    #dels.each do |del|
-    #  logger.debug( del )
-    #  del.destroy
-    #end
-
-    logger.debug("=============hoge=================");
-    logger.debug( project )
-
-    logger.debug("=============piyo=================");
-    #events.each do |event|
-    #events.each do |event|
-    #  event.save
-    #end
-    project.save
-
-    redirect_to events_url 
   end
 
 
