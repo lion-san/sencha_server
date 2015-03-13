@@ -6,7 +6,10 @@ class EventsController < ApplicationController
 
     #@events = Event.all
     #project = Project.find_by(pjname: project_params)
-    project = Project.find_by( params[:id])
+    logger.debug("###")
+    logger.debug( params[:project_id] )
+    project = Project.find( params[:project_id] )
+    logger.debug("###")
     @events = project.events
 
     respond_to do |format|
