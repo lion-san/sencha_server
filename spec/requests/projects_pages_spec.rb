@@ -5,29 +5,20 @@ describe "ProjectsPages" do
   subject { page }
 
 
-  describe "events/show" do
-    let( :e ) { FactoryGirl.create( :event ) }
+  describe "projects" do
 
-    before { visit event_path( e ) }
+    before { visit projects_path }
 
-    it { should have_content( e.event ) }
-    it { should have_content( e.operator ) }
+    it { should have_content( "Projects belong" ) }
+    it { should have_title( full_title('Project list')) }
   end
 
 
-  describe "events/new" do
+  describe "GET /projects.json" do
 
-    before { visit new_event_path }
+    it "/projects.json" do
 
-    it { should have_content('Events') }
-  end
-
-
-  describe "GET /events.json" do
-
-    it "/events.json" do
-
-      get "/events.json", {}, { "Accept" => "application/json" }
+      get "/projects.json", {}, { "Accept" => "application/json" }
 
       expect(response.status).to eq 200
     end

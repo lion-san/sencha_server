@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
 
   def index
-    @projects = Project.find_all_by_user_id( 'test' )
+    @projects = Project.where( user_id: 'test' )
 
     respond_to do |format|
       format.html
