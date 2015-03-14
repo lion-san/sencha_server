@@ -23701,3 +23701,131 @@ Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-14 14:05:12 +0
 
 
 Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-14 14:05:12 +0900
+  [1m[36m (459.1ms)[0m  [1mCREATE TABLE "actions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "action" varchar(255), "param" varchar(255), "created_at" datetime, "updated_at" datetime, "event_id" integer) [0m
+  [1m[35m (59.9ms)[0m  CREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "event" varchar(255), "operator" varchar(255), "created_at" datetime, "updated_at" datetime, "param" varchar(255), "project_id" integer) 
+  [1m[36m (88.0ms)[0m  [1mCREATE UNIQUE INDEX "index_events_on_project_id_and_id" ON "events" ("project_id", "id")[0m
+  [1m[35m (61.8ms)[0m  CREATE TABLE "projects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" varchar(255), "pjname" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (254.5ms)[0m  [1mCREATE UNIQUE INDEX "index_projects_on_user_id_and_pjname" ON "projects" ("user_id", "pjname")[0m
+  [1m[35m (72.6ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (82.5ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (79.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150310070105')[0m
+  [1m[35m (75.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150306035025')
+  [1m[36m (93.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150212085756')[0m
+  [1m[35m (67.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150212154358')
+  [1m[36m (83.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150310070104')[0m
+  [1m[35m (69.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150213041404')
+  [1m[36m (375.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150306034357')[0m
+  [1m[35m (89.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150215133509')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-14 17:36:50 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-14 17:36:50 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-14 17:36:50 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-14 17:36:50 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-14 17:36:53 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (0.3ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 18ms (Views: 0.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-14 17:36:56 +0900
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.3ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+  Rendered projects/index.html.erb within layouts/application (5.8ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (0.5ms)
+  Rendered layouts/_footer.html.erb (0.4ms)
+Completed 200 OK in 114ms (Views: 111.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-14 17:36:56 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-14 17:36:56 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-14 17:36:57 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-14 17:36:57 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-14 17:36:57 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-14 17:36:57 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-14 17:36:57 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-14 17:36:57 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-14 17:36:57 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-14 17:36:57 +0900
+
+
+Started DELETE "/projects/29" for 127.0.0.1 at 2015-03-14 17:37:01 +0900
+Processing by ProjectsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"cJFER14aXT9b9+Ycz07dvPrdiBmv9ZLt2o++L8RsH/g=", "id"=>"29"}
+  [1m[35mProject Load (0.4ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "29"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mEvent Load (0.3ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 29
+  [1m[36mSQL (2.5ms)[0m  [1mDELETE FROM "projects" WHERE "projects"."id" = ?[0m  [["id", 29]]
+  [1m[35m (380.7ms)[0m  commit transaction
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 404ms (ActiveRecord: 384.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-14 17:37:01 +0900
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.3ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+  Rendered projects/index.html.erb within layouts/application (2.6ms)
+  Rendered layouts/_shim.html.erb (0.1ms)
+  Rendered layouts/_header.html.erb (0.2ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 13ms (Views: 11.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-14 17:37:01 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-14 17:37:01 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-14 17:37:01 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-14 17:37:01 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-14 17:37:01 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-14 17:37:01 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-14 17:37:01 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-14 17:37:01 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-14 17:37:01 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-14 17:37:01 +0900

@@ -33,19 +33,19 @@ class ProjectsController < ApplicationController
 
   def create
 
-    project = event_params
+    @project = event_params
 
     logger.debug("=============hoge=================");
-    logger.debug( project.attributes )
-    project.events.each do |e|
+    logger.debug( @project.attributes )
+    @project.events.each do |e|
       logger.debug( e.attributes )
       e.actions.each do |p|
         logger.debug( p.attributes )
       end
     end
 
-    before_project = Project.find_by( user_id: project.user_id,
-                                     pjname: project.pjname )
+    before_project = Project.find_by( user_id: @project.user_id,
+                                     pjname: @project.pjname )
     if !before_project.nil?
       before_project.destroy
       logger.debug("=============destory=================");
@@ -53,9 +53,11 @@ class ProjectsController < ApplicationController
 
     logger.debug("=============piyo=================");
 
-    project.save
+    @project.save
 
-    redirect_to projects_url
+    flash[:success] = "Project saved."
+
+    redirect_to @project
 
   end
   

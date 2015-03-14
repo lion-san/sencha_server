@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :project do
-    user_id "MyString"
-    pjname "MyString"
+    user_id "test"
+    sequence (:pjname) { |n| "test#{n}" }
   end
 end
