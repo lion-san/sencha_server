@@ -39,26 +39,22 @@ describe "ProjectsPages" do
 
 
   describe "GET /projects.json" do
-
     it "/projects.json" do
-
       get "/projects.json", {}, { "Accept" => "application/json" }
-
       expect(response.status).to eq 200
     end
   end
 
-  describe "delete links" do
 
+  describe "with delete links" do
     before { visit projects_path }
 
     it { should_not have_link('delete') }
 
     describe "there are delete projects" do
-
       before(:all) { 10.times { FactoryGirl.create(:project) } }
       after(:all)  { Project.delete_all }
-    
+
       it { should have_link('delete', href: project_path(Project.first)) }
 
       it "should be able to delete another project" do
@@ -67,6 +63,18 @@ describe "ProjectsPages" do
         end.to change(Project, :count).by(-1)
       end
     end
+  end
+
+
+  describe "Project details page" do
+    let(:pj) { FactoryGirl.create(:project) }
+    before { visit project_path( pj ) }
+
+    it { should have_content("Project detail") }
+    it { should have_title(full_title("Project: " + pj.pjname)) }
+    it { should have_content(pj.events.first.event) }
+    it { should have_content(pj.events.first.operator) }
+    it { should have_content(pj.events.first.param) }
   end
 
 end

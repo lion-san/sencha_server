@@ -2,7 +2,8 @@
 
 FactoryGirl.define do
   factory :event do
-    event "MyString"
-    operator "MyString"
+    event "say"
+    operator "="
+    param "piyo"
   end
 end

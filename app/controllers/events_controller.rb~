@@ -4,11 +4,9 @@ class EventsController < ApplicationController
 
   def index
 
-    #@events = Event.all
-    #project = Project.find_by(pjname: project_params)
     logger.debug("###")
     logger.debug( params[:project_id] )
-    #project = Project.find( params[:id] )
+    project = Project.find( params[:project_id] )
     logger.debug("###")
     @events = project.events
 

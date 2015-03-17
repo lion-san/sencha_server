@@ -23829,3 +23829,5 @@ Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-14 17:37:01 +0
 
 
 Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-14 17:37:01 +0900
+  [1m[36mEvent Load (6.0ms)[0m  [1mSELECT "events".* FROM "events"[0m
+  [1m[36mProject Load (8.0ms)[0m  [1mSELECT "projects".* FROM "projects"[0m

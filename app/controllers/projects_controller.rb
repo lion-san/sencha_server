@@ -17,7 +17,6 @@ class ProjectsController < ApplicationController
   
   def show
 
-    #@project = Project.find_by( pjname: project_params )
     logger.debug("########Show######")
     @project = Project.find( params[:id] )
 
@@ -63,12 +62,6 @@ class ProjectsController < ApplicationController
   
 
   private
-
-    def project_params
-      pjname = params[:id]
-      return pjname
-    end
-    
 
     def event_params
 
