@@ -23831,3 +23831,12 @@ Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-14 17:37:01 +0
 Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-14 17:37:01 +0900
   [1m[36mEvent Load (6.0ms)[0m  [1mSELECT "events".* FROM "events"[0m
   [1m[36mProject Load (8.0ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  [1m[36mAction Load (7.0ms)[0m  [1mSELECT "actions".* FROM "actions"[0m
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" ORDER BY "events"."id" ASC LIMIT 1
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 22[0m
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" ORDER BY "events"."id" ASC LIMIT 1
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 22 ORDER BY "actions"."id" ASC LIMIT 1[0m
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" ORDER BY "events"."id" ASC LIMIT 1
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 22[0m
+  [1m[36mProject Load (8.0ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."pjname" = 'test'

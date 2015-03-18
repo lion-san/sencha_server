@@ -1,3 +1,4 @@
+<% provide(:title, @project.pjname) %>
 <h1>Project detail</h1>
 
 
