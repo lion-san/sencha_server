@@ -17,7 +17,6 @@ class ProjectsController < ApplicationController
   
   def show
 
-    #@project = Project.find_by( pjname: project_params )
     logger.debug("########Show######")
     @project = Project.find( params[:id] )
 
@@ -55,7 +54,7 @@ class ProjectsController < ApplicationController
 
     @project.save
 
-    flash[:success] = "Project saved."
+    #flash[:success] = "Project saved."
 
     redirect_to @project
 

@@ -54,9 +54,10 @@ class ProjectsController < ApplicationController
 
     @project.save
 
-    flash[:success] = "Project saved."
+    #flash[:success] = "Project saved."
 
-    redirect_to @project
+    #redirect_to @project
+    redirect_to projects_url
 
   end
   

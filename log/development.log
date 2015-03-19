@@ -25205,3 +25205,998 @@ Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-19 20:27:57 +0
 
 
 Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-19 20:27:57 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-19 20:42:30 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-19 20:42:31 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-19 20:42:31 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-19 20:42:31 +0900
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-19 20:42:42 +0900
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+  Rendered projects/index.html.erb within layouts/application (32.0ms)
+  Rendered layouts/_shim.html.erb (1.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 655ms (Views: 621.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-19 20:42:43 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-19 20:42:43 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-19 20:42:43 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-19 20:42:43 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-19 20:42:43 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-19 20:42:43 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-19 20:42:43 +0900
+
+
+Started GET "/assets/bootstrap-affix.js?body=1" for 127.0.0.1 at 2015-03-19 20:42:43 +0900
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2015-03-19 20:42:43 +0900
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2015-03-19 20:42:43 +0900
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2015-03-19 20:42:43 +0900
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2015-03-19 20:42:43 +0900
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2015-03-19 20:42:43 +0900
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2015-03-19 20:42:43 +0900
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2015-03-19 20:42:43 +0900
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2015-03-19 20:42:44 +0900
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2015-03-19 20:42:44 +0900
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2015-03-19 20:42:44 +0900
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2015-03-19 20:42:44 +0900
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2015-03-19 20:42:44 +0900
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2015-03-19 20:42:44 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-19 20:42:44 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-19 20:42:44 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-19 20:42:44 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-19 21:00:05 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-19 21:00:05 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-19 21:00:05 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-19 21:00:05 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-19 21:00:10 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 16ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects/28/events.json" for 127.0.0.1 at 2015-03-19 21:00:11 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"28"}
+###
+28
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "28"]]
+###
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 28[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 22
+Completed 200 OK in 142ms (Views: 0.0ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-03-19 21:00:14 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"きたよ\",\"event_id\":\"1\",\"actions\": [{\"action\":\"light\",\"param\":\"\"},\n{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"きたよ", "event_id"=>"1", "actions"=>[{"action"=>"light", "param"=>""}, {"action"=>"camera", "param"=>""}]}]
+1
+2
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"きたよ", "project_id"=>nil}
+{"id"=>nil, "action"=>"light", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 28[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 22
+  [1m[36mSQL (63.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 8]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 9]]
+  [1m[36mSQL (1.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 22]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "projects" WHERE "projects"."id" = ?  [["id", 28]]
+  [1m[36m (227.0ms)[0m  [1mcommit transaction[0m
+=============destory=================
+=============piyo=================
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (29.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 19 Mar 2015 12:00:15 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 19 Mar 2015 12:00:15 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 19 Mar 2015 12:00:15 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "きたよ"], ["project_id", 30], ["updated_at", Thu, 19 Mar 2015 12:00:15 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "light"], ["created_at", Thu, 19 Mar 2015 12:00:15 UTC +00:00], ["event_id", 23], ["param", ""], ["updated_at", Thu, 19 Mar 2015 12:00:15 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Thu, 19 Mar 2015 12:00:15 UTC +00:00], ["event_id", 23], ["param", ""], ["updated_at", Thu, 19 Mar 2015 12:00:15 UTC +00:00]]
+  [1m[36m (91.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/projects/30
+Completed 302 Found in 509ms (ActiveRecord: 415.0ms)
+
+
+Started GET "/projects/30" for 127.0.0.1 at 2015-03-19 21:00:15 +0900
+Processing by ProjectsController#show as JSON
+  Parameters: {"id"=>"30"}
+########Show######
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "30"]]
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 30[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 23
+  Rendered projects/show.html.erb within layouts/application (12.0ms)
+  Rendered layouts/_shim.html.erb (1.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 163ms (Views: 156.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-19 21:00:21 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-19 21:00:28 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-19 21:00:28 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-19 21:00:28 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-19 21:00:28 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-19 21:00:40 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-19 21:00:40 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-19 21:00:40 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-19 21:00:40 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-19 21:00:44 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 5ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects/30/events.json" for 127.0.0.1 at 2015-03-19 21:00:46 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"30"}
+###
+30
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "30"]]
+###
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 30[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 23
+Completed 200 OK in 48ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-03-19 21:01:01 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"きたよ\",\"event_id\":\"1\",\"actions\": [{\"action\":\"light\",\"param\":\"\"},\n{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"きたよ", "event_id"=>"1", "actions"=>[{"action"=>"light", "param"=>""}, {"action"=>"camera", "param"=>""}]}]
+1
+2
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"きたよ", "project_id"=>nil}
+{"id"=>nil, "action"=>"light", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 30[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 23
+  [1m[36mSQL (2.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 10]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 11]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 23]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "projects" WHERE "projects"."id" = ?  [["id", 30]]
+  [1m[36m (85.0ms)[0m  [1mcommit transaction[0m
+=============destory=================
+=============piyo=================
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 19 Mar 2015 12:01:01 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 19 Mar 2015 12:01:01 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 19 Mar 2015 12:01:01 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "きたよ"], ["project_id", 31], ["updated_at", Thu, 19 Mar 2015 12:01:01 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "light"], ["created_at", Thu, 19 Mar 2015 12:01:01 UTC +00:00], ["event_id", 24], ["param", ""], ["updated_at", Thu, 19 Mar 2015 12:01:01 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Thu, 19 Mar 2015 12:01:01 UTC +00:00], ["event_id", 24], ["param", ""], ["updated_at", Thu, 19 Mar 2015 12:01:01 UTC +00:00]]
+  [1m[36m (75.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/projects/31
+Completed 302 Found in 227ms (ActiveRecord: 170.0ms)
+
+
+Started GET "/projects/31" for 127.0.0.1 at 2015-03-19 21:01:02 +0900
+Processing by ProjectsController#show as JSON
+  Parameters: {"id"=>"31"}
+########Show######
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "31"]]
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 31[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 24
+  Rendered projects/show.html.erb within layouts/application (7.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 154ms (Views: 148.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-19 21:02:23 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-19 21:02:23 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-19 21:02:23 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-19 21:02:23 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-19 21:02:28 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 7ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects/31/events.json" for 127.0.0.1 at 2015-03-19 21:02:29 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"31"}
+###
+31
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "31"]]
+###
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 31[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 24
+Completed 200 OK in 17ms (Views: 0.0ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-03-19 21:02:35 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"きたよ\",\"event_id\":\"1\",\"actions\": [{\"action\":\"light\",\"param\":\"\"},\n{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"きたよ", "event_id"=>"1", "actions"=>[{"action"=>"light", "param"=>""}, {"action"=>"camera", "param"=>""}]}]
+1
+2
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"きたよ", "project_id"=>nil}
+{"id"=>nil, "action"=>"light", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 31[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 24
+  [1m[36mSQL (2.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 12]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 13]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 24]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "projects" WHERE "projects"."id" = ?  [["id", 31]]
+  [1m[36m (111.0ms)[0m  [1mcommit transaction[0m
+=============destory=================
+=============piyo=================
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 19 Mar 2015 12:02:36 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 19 Mar 2015 12:02:36 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 19 Mar 2015 12:02:36 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "きたよ"], ["project_id", 32], ["updated_at", Thu, 19 Mar 2015 12:02:36 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "light"], ["created_at", Thu, 19 Mar 2015 12:02:36 UTC +00:00], ["event_id", 25], ["param", ""], ["updated_at", Thu, 19 Mar 2015 12:02:36 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Thu, 19 Mar 2015 12:02:36 UTC +00:00], ["event_id", 25], ["param", ""], ["updated_at", Thu, 19 Mar 2015 12:02:36 UTC +00:00]]
+  [1m[36m (87.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/projects/32
+Completed 302 Found in 286ms (ActiveRecord: 205.0ms)
+
+
+Started GET "/projects/32" for 127.0.0.1 at 2015-03-19 21:02:39 +0900
+Processing by ProjectsController#show as JSON
+  Parameters: {"id"=>"32"}
+########Show######
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "32"]]
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 32[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 25
+  Rendered projects/show.html.erb within layouts/application (8.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 168ms (Views: 160.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-19 21:03:26 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-19 21:03:26 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-19 21:03:26 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-19 21:03:26 +0900
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+  Rendered projects/index.html.erb within layouts/application (20.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 85ms (Views: 75.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/bootstrap-affix.js?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-19 21:03:33 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-19 21:03:35 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 6ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects/32/events.json" for 127.0.0.1 at 2015-03-19 21:03:36 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"32"}
+###
+32
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "32"]]
+###
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 32
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 25[0m
+Completed 200 OK in 59ms (Views: 0.0ms | ActiveRecord: 4.0ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-03-19 21:03:39 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"きたよ\",\"event_id\":\"1\",\"actions\": [{\"action\":\"light\",\"param\":\"\"},\n{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"きたよ", "event_id"=>"1", "actions"=>[{"action"=>"light", "param"=>""}, {"action"=>"camera", "param"=>""}]}]
+1
+2
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"きたよ", "project_id"=>nil}
+{"id"=>nil, "action"=>"light", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 32
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 25[0m
+  [1m[35mSQL (2.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 14]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 15]]
+  [1m[35mSQL (1.0ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 25]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "projects" WHERE "projects"."id" = ?[0m  [["id", 32]]
+  [1m[35m (72.0ms)[0m  commit transaction
+=============destory=================
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Thu, 19 Mar 2015 12:03:39 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 19 Mar 2015 12:03:39 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 19 Mar 2015 12:03:39 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "きたよ"], ["project_id", 33], ["updated_at", Thu, 19 Mar 2015 12:03:39 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "light"], ["created_at", Thu, 19 Mar 2015 12:03:39 UTC +00:00], ["event_id", 26], ["param", ""], ["updated_at", Thu, 19 Mar 2015 12:03:39 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Thu, 19 Mar 2015 12:03:39 UTC +00:00], ["event_id", 26], ["param", ""], ["updated_at", Thu, 19 Mar 2015 12:03:39 UTC +00:00]]
+  [1m[35m (88.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/projects/33
+Completed 302 Found in 372ms (ActiveRecord: 168.0ms)
+
+
+Started GET "/projects/33" for 127.0.0.1 at 2015-03-19 21:03:40 +0900
+Processing by ProjectsController#show as JSON
+  Parameters: {"id"=>"33"}
+########Show######
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "33"]]
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 33
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 26[0m
+  Rendered projects/show.html.erb within layouts/application (8.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 129ms (Views: 124.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-19 21:04:08 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-19 21:04:08 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-19 21:04:09 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-19 21:04:09 +0900
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-19 21:04:24 +0900
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+  Rendered projects/index.html.erb within layouts/application (21.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 141ms (Views: 116.0ms | ActiveRecord: 6.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/bootstrap-affix.js?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2015-03-19 21:04:25 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-19 21:04:28 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 11ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects/33/events.json" for 127.0.0.1 at 2015-03-19 21:04:29 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"33"}
+###
+33
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "33"]]
+###
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 33[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 26
+Completed 200 OK in 73ms (Views: 0.0ms | ActiveRecord: 6.0ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-03-19 21:04:32 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"きたよ\",\"event_id\":\"1\",\"actions\": [{\"action\":\"light\",\"param\":\"\"},\n{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"きたよ", "event_id"=>"1", "actions"=>[{"action"=>"light", "param"=>""}, {"action"=>"camera", "param"=>""}]}]
+1
+2
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"きたよ", "project_id"=>nil}
+{"id"=>nil, "action"=>"light", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 33[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 26
+  [1m[36mSQL (2.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 16]]
+  [1m[35mSQL (1.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 17]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 26]]
+  [1m[35mSQL (3.0ms)[0m  DELETE FROM "projects" WHERE "projects"."id" = ?  [["id", 33]]
+  [1m[36m (95.0ms)[0m  [1mcommit transaction[0m
+=============destory=================
+=============piyo=================
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (3.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 19 Mar 2015 12:04:32 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 19 Mar 2015 12:04:32 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 19 Mar 2015 12:04:32 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "きたよ"], ["project_id", 34], ["updated_at", Thu, 19 Mar 2015 12:04:32 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "light"], ["created_at", Thu, 19 Mar 2015 12:04:32 UTC +00:00], ["event_id", 27], ["param", ""], ["updated_at", Thu, 19 Mar 2015 12:04:32 UTC +00:00]]
+  [1m[35mSQL (4.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Thu, 19 Mar 2015 12:04:32 UTC +00:00], ["event_id", 27], ["param", ""], ["updated_at", Thu, 19 Mar 2015 12:04:32 UTC +00:00]]
+  [1m[36m (75.0ms)[0m  [1mcommit transaction[0m
+Completed 500 Internal Server Error in 376ms
+
+ActionView::MissingTemplate (Missing template projects/create, application/create with {:locale=>[:en], :formats=>[:json, :js, :html, :text, :js, :css, :ics, :csv, :png, :jpeg, :gif, :bmp, :tiff, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+  * "C:/Sites/rails_projects/sencha_server/app/views"
+):
+  actionpack (4.0.5) lib/action_view/path_set.rb:46:in `find'
+  actionpack (4.0.5) lib/action_view/lookup_context.rb:122:in `find'
+  C:in `find_template'
+  actionpack (4.0.5) lib/action_view/renderer/template_renderer.rb:35:in `determine_template'
+  actionpack (4.0.5) lib/action_view/renderer/template_renderer.rb:8:in `render'
+  actionpack (4.0.5) lib/action_view/renderer/renderer.rb:42:in `render_template'
+  actionpack (4.0.5) lib/action_view/renderer/renderer.rb:23:in `render'
+  actionpack (4.0.5) lib/abstract_controller/rendering.rb:127:in `_render_template'
+  actionpack (4.0.5) lib/action_controller/metal/streaming.rb:219:in `_render_template'
+  actionpack (4.0.5) lib/abstract_controller/rendering.rb:120:in `render_to_body'
+  actionpack (4.0.5) lib/action_controller/metal/rendering.rb:33:in `render_to_body'
+  actionpack (4.0.5) lib/action_controller/metal/renderers.rb:26:in `render_to_body'
+  actionpack (4.0.5) lib/abstract_controller/rendering.rb:97:in `render'
+  actionpack (4.0.5) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.0.5) lib/action_controller/metal/instrumentation.rb:41:in `block (2 levels) in render'
+  activesupport (4.0.5) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  C:/RailsInstaller/Ruby200/lib/ruby/2.0.0/benchmark.rb:296:in `realtime'
+  activesupport (4.0.5) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.0.5) lib/action_controller/metal/instrumentation.rb:41:in `block in render'
+  actionpack (4.0.5) lib/action_controller/metal/instrumentation.rb:84:in `cleanup_view_runtime'
+  activerecord (4.0.5) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.0.5) lib/action_controller/metal/instrumentation.rb:40:in `render'
+  actionpack (4.0.5) lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+  actionpack (4.0.5) lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+  actionpack (4.0.5) lib/abstract_controller/base.rb:189:in `process_action'
+  actionpack (4.0.5) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.0.5) lib/abstract_controller/callbacks.rb:18:in `block in process_action'
+  activesupport (4.0.5) lib/active_support/callbacks.rb:403:in `_run__248707442__process_action__callbacks'
+  activesupport (4.0.5) lib/active_support/callbacks.rb:80:in `run_callbacks'
+  actionpack (4.0.5) lib/abstract_controller/callbacks.rb:17:in `process_action'
+  actionpack (4.0.5) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.0.5) lib/action_controller/metal/instrumentation.rb:31:in `block in process_action'
+  activesupport (4.0.5) lib/active_support/notifications.rb:159:in `block in instrument'
+  activesupport (4.0.5) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.0.5) lib/active_support/notifications.rb:159:in `instrument'
+  actionpack (4.0.5) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.0.5) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.0.5) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.0.5) lib/abstract_controller/base.rb:136:in `process'
+  actionpack (4.0.5) lib/abstract_controller/rendering.rb:44:in `process'
+  actionpack (4.0.5) lib/action_controller/metal.rb:195:in `dispatch'
+  actionpack (4.0.5) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.0.5) lib/action_controller/metal.rb:231:in `block in action'
+  actionpack (4.0.5) lib/action_dispatch/routing/route_set.rb:80:in `call'
+  actionpack (4.0.5) lib/action_dispatch/routing/route_set.rb:80:in `dispatch'
+  actionpack (4.0.5) lib/action_dispatch/routing/route_set.rb:48:in `call'
+  actionpack (4.0.5) lib/action_dispatch/journey/router.rb:71:in `block in call'
+  actionpack (4.0.5) lib/action_dispatch/journey/router.rb:59:in `each'
+  actionpack (4.0.5) lib/action_dispatch/journey/router.rb:59:in `call'
+  actionpack (4.0.5) lib/action_dispatch/routing/route_set.rb:674:in `call'
+  rack (1.5.2) lib/rack/etag.rb:23:in `call'
+  rack (1.5.2) lib/rack/conditionalget.rb:35:in `call'
+  rack (1.5.2) lib/rack/head.rb:11:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/flash.rb:241:in `call'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/cookies.rb:486:in `call'
+  activerecord (4.0.5) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.0.5) lib/active_record/connection_adapters/abstract/connection_pool.rb:626:in `call'
+  activerecord (4.0.5) lib/active_record/migration.rb:373:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.0.5) lib/active_support/callbacks.rb:373:in `_run__335718195__call__callbacks'
+  activesupport (4.0.5) lib/active_support/callbacks.rb:80:in `run_callbacks'
+  actionpack (4.0.5) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/reloader.rb:64:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.5) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.5) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.5) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.0.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.0.5) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.0.5) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.5) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.5) lib/rails/engine.rb:511:in `call'
+  railties (4.0.5) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  C:/RailsInstaller/Ruby200/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  C:/RailsInstaller/Ruby200/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  C:/RailsInstaller/Ruby200/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered C:/RailsInstaller/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/missing_template.erb within rescues/layout (0.0ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-19 21:05:05 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-19 21:05:05 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-19 21:05:05 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-19 21:05:06 +0900
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-19 21:05:09 +0900
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+  Rendered projects/index.html.erb within layouts/application (31.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 162ms (Views: 144.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-19 21:05:09 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-19 21:05:09 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-19 21:05:09 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-19 21:05:09 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-19 21:05:09 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-19 21:05:09 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-19 21:05:09 +0900
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2015-03-19 21:05:09 +0900
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2015-03-19 21:05:09 +0900
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2015-03-19 21:05:09 +0900
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2015-03-19 21:05:09 +0900
+
+
+Started GET "/assets/bootstrap-affix.js?body=1" for 127.0.0.1 at 2015-03-19 21:05:09 +0900
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2015-03-19 21:05:09 +0900
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2015-03-19 21:05:09 +0900
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2015-03-19 21:05:09 +0900
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2015-03-19 21:05:09 +0900
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2015-03-19 21:05:09 +0900
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2015-03-19 21:05:09 +0900
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2015-03-19 21:05:09 +0900
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2015-03-19 21:05:10 +0900
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2015-03-19 21:05:10 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-19 21:05:10 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-19 21:05:10 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-19 21:05:10 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-19 21:05:11 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 16ms (Views: 12.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects/34/events.json" for 127.0.0.1 at 2015-03-19 21:05:13 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"34"}
+###
+34
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "34"]]
+###
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 34[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 27
+Completed 200 OK in 64ms (Views: 0.0ms | ActiveRecord: 7.0ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-03-19 21:05:16 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"きたよ\",\"event_id\":\"1\",\"actions\": [{\"action\":\"light\",\"param\":\"\"},\n{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"きたよ", "event_id"=>"1", "actions"=>[{"action"=>"light", "param"=>""}, {"action"=>"camera", "param"=>""}]}]
+1
+2
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"きたよ", "project_id"=>nil}
+{"id"=>nil, "action"=>"light", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 34[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 27
+  [1m[36mSQL (2.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 18]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 19]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 27]]
+  [1m[35mSQL (1.0ms)[0m  DELETE FROM "projects" WHERE "projects"."id" = ?  [["id", 34]]
+  [1m[36m (113.0ms)[0m  [1mcommit transaction[0m
+=============destory=================
+=============piyo=================
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (3.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 19 Mar 2015 12:05:16 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 19 Mar 2015 12:05:16 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 19 Mar 2015 12:05:16 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "きたよ"], ["project_id", 35], ["updated_at", Thu, 19 Mar 2015 12:05:16 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "light"], ["created_at", Thu, 19 Mar 2015 12:05:16 UTC +00:00], ["event_id", 28], ["param", ""], ["updated_at", Thu, 19 Mar 2015 12:05:16 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Thu, 19 Mar 2015 12:05:16 UTC +00:00], ["event_id", 28], ["param", ""], ["updated_at", Thu, 19 Mar 2015 12:05:16 UTC +00:00]]
+  [1m[36m (93.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/projects/35
+Completed 302 Found in 340ms (ActiveRecord: 217.0ms)
+
+
+Started GET "/projects/35" for 127.0.0.1 at 2015-03-19 21:05:20 +0900
+Processing by ProjectsController#show as JSON
+  Parameters: {"id"=>"35"}
+########Show######
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "35"]]
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 35[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 28
+  Rendered projects/show.html.erb within layouts/application (10.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 126ms (Views: 121.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-19 21:06:17 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-19 21:06:17 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-19 21:06:17 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-19 21:06:17 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-19 21:06:53 +0900
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-19 21:06:53 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-19 21:06:53 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-19 21:06:53 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-19 21:06:55 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 18ms (Views: 0.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/projects/35/events.json" for 127.0.0.1 at 2015-03-19 21:06:56 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"35"}
+###
+35
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "35"]]
+###
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 35[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 28
+Completed 200 OK in 90ms (Views: 0.0ms | ActiveRecord: 19.0ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-03-19 21:06:59 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"きたよ\",\"event_id\":\"1\",\"actions\": [{\"action\":\"light\",\"param\":\"\"},\n{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"きたよ", "event_id"=>"1", "actions"=>[{"action"=>"light", "param"=>""}, {"action"=>"camera", "param"=>""}]}]
+1
+2
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"きたよ", "project_id"=>nil}
+{"id"=>nil, "action"=>"light", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 35[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 28
+  [1m[36mSQL (2.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 20]]
+  [1m[35mSQL (1.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 21]]
+  [1m[36mSQL (1.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 28]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "projects" WHERE "projects"."id" = ?  [["id", 35]]
+  [1m[36m (149.0ms)[0m  [1mcommit transaction[0m
+=============destory=================
+=============piyo=================
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (3.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 19 Mar 2015 12:06:59 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 19 Mar 2015 12:06:59 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 19 Mar 2015 12:06:59 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "きたよ"], ["project_id", 36], ["updated_at", Thu, 19 Mar 2015 12:06:59 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "light"], ["created_at", Thu, 19 Mar 2015 12:06:59 UTC +00:00], ["event_id", 29], ["param", ""], ["updated_at", Thu, 19 Mar 2015 12:06:59 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Thu, 19 Mar 2015 12:06:59 UTC +00:00], ["event_id", 29], ["param", ""], ["updated_at", Thu, 19 Mar 2015 12:06:59 UTC +00:00]]
+  [1m[36m (81.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 294ms (ActiveRecord: 240.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-19 21:06:59 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 6ms (Views: 0.0ms | ActiveRecord: 0.0ms)
