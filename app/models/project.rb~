@@ -3,5 +3,4 @@ class Project < ActiveRecord::Base
   #self.primary_key = :user_id, :pjname
 
   accepts_nested_attributes_for :events
-  accepts_nested_attributes_for :actions
 end
