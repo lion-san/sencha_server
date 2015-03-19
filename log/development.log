@@ -24305,3 +24305,5 @@ Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-18 13:35:35 +0
 
 
 Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-18 13:35:35 +0900
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1[0m
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1
