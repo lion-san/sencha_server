@@ -113,4 +113,12 @@ describe "ProjectsPages" do
     it { should_not have_content('weight') }
   end
 
+
+  describe "Client app download" do
+
+    before { visit projects_path }
+
+    it { should have_content( "Download Garaco(V3.3.3)" ) }
+
+  end
 end

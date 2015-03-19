@@ -1,3 +1,4 @@
+<% provide(:title, 'Project list') %>
 <h1>Projects belong "test" user</h1>
 
 <ui>
@@ -5,13 +6,18 @@
 <% @projects.each do |p| %>
 
   <li>
-    <%= p.pjname %>
+    <strong>
     <%= link_to p.pjname, p, medhod: :show %>
+    </strong>
   | <%= link_to "delete", p, method: :delete,
                    data: { confirm: "You sure?" } %>
   </li>
 
-
 <% end %>
+<br>
+--<br>
+<a class="btn btn-danger" href="/release-app.apk">
+  Download Garaco(V3.3.3)
+</a>
 
 </ui>
