@@ -1038,8 +1038,6 @@ var loadProject = function( btn ) {
 
   var request = new XMLHttpRequest();
 
-  Ext.Msg.alert("PJID:" + projectID)
-  
   request.open("GET", "/projects/" + projectID + "/events.json");
   request.onreadystatechange = function() {
     if (request.readyState == 4 && request.status == 200) {
@@ -1269,8 +1267,6 @@ var loadProjectList = function(){
               //loadProject
               setProject(record.get("pjname"));
               projectID  = record.get("id");
-
-              alert("PJID:" + projectID + ":index:" + index)
 
               loadProject("yes");
             }
