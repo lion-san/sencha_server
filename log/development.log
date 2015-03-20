@@ -26200,3 +26200,1032 @@ Started GET "/projects" for 127.0.0.1 at 2015-03-19 21:06:59 +0900
 Processing by ProjectsController#index as JSON
   [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
 Completed 200 OK in 6ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-20 10:11:55 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-20 10:11:55 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-20 10:11:55 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-20 10:11:55 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-20 10:12:02 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 34ms (Views: 0.0ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-03-20 10:12:17 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test2\",\"events\": []}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[]
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test2", "created_at"=>nil, "updated_at"=>nil}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test2' LIMIT 1[0m
+=============piyo=================
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (19.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Fri, 20 Mar 2015 01:12:17 UTC +00:00], ["pjname", "test2"], ["updated_at", Fri, 20 Mar 2015 01:12:17 UTC +00:00], ["user_id", "test"]]
+  [1m[35m (169.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 289ms (ActiveRecord: 189.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-20 10:12:17 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-03-20 10:12:24 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test5\",\"events\": []}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[]
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test5", "created_at"=>nil, "updated_at"=>nil}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test5' LIMIT 1
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (3.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Fri, 20 Mar 2015 01:12:24 UTC +00:00], ["pjname", "test5"], ["updated_at", Fri, 20 Mar 2015 01:12:24 UTC +00:00], ["user_id", "test"]]
+  [1m[36m (105.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 134ms (ActiveRecord: 108.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-20 10:12:24 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-20 10:12:26 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 6ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-20 10:12:39 +0900
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+  Rendered projects/index.html.erb within layouts/application (13.0ms)
+  Rendered layouts/_shim.html.erb (1.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 598ms (Views: 596.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects/38/events.json" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"38"}
+###
+38
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "38"]]
+###
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 38
+Completed 200 OK in 12ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/bootstrap-affix.js?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-20 10:12:40 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-20 10:12:52 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 7ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects/37/events.json" for 127.0.0.1 at 2015-03-20 10:13:01 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"37"}
+###
+37
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "37"]]
+###
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 37[0m
+Completed 200 OK in 24ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-20 10:20:06 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-20 10:20:06 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-20 10:20:06 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-20 10:20:06 +0900
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-20 10:20:11 +0900
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+  Rendered projects/index.html.erb within layouts/application (5.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 121ms (Views: 119.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-20 10:20:11 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-20 10:20:11 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-20 10:20:11 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:11 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-20 10:20:11 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:11 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:11 +0900
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:11 +0900
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:11 +0900
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:11 +0900
+
+
+Started GET "/assets/bootstrap-affix.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:11 +0900
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:11 +0900
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:11 +0900
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:12 +0900
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:12 +0900
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:12 +0900
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:12 +0900
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:12 +0900
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:12 +0900
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:12 +0900
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:12 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:12 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:12 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:12 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-20 10:20:14 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 6ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started DELETE "/projects/37" for 127.0.0.1 at 2015-03-20 10:20:34 +0900
+Processing by ProjectsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"JE9fzZjB1jbRfUDBkxeKHxjtYT+Hebd5gTCn3X1oklY=", "id"=>"37"}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "37"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 37
+  [1m[36mSQL (1.0ms)[0m  [1mDELETE FROM "projects" WHERE "projects"."id" = ?[0m  [["id", 37]]
+  [1m[35m (73.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 85ms (ActiveRecord: 74.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-20 10:20:34 +0900
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+  Rendered projects/index.html.erb within layouts/application (5.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 64ms (Views: 63.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-20 10:20:34 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-20 10:20:34 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-20 10:20:34 +0900
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:34 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-20 10:20:34 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:34 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:34 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:34 +0900
+
+
+Started GET "/assets/bootstrap-affix.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:34 +0900
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:34 +0900
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:34 +0900
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:34 +0900
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:35 +0900
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:35 +0900
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:35 +0900
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:35 +0900
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:35 +0900
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:35 +0900
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:35 +0900
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:35 +0900
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:35 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:35 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:35 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:35 +0900
+
+
+Started GET "/projects/38" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"38"}
+########Show######
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "38"]]
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 38[0m
+  Rendered projects/show.html.erb within layouts/application (5.0ms)
+  Rendered layouts/_shim.html.erb (1.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 73ms (Views: 66.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects/38" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"38"}
+########Show######
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "38"]]
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 38[0m
+  Rendered projects/show.html.erb within layouts/application (5.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 67ms (Views: 63.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/bootstrap-affix.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:36 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-20 10:20:38 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 6ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+  Rendered projects/index.html.erb within layouts/application (4.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 61ms (Views: 59.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+  Rendered projects/index.html.erb within layouts/application (4.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 67ms (Views: 67.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/bootstrap-affix.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:44 +0900
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-20 10:20:45 +0900
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+  Rendered projects/index.html.erb within layouts/application (5.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 64ms (Views: 63.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-20 10:20:45 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-20 10:20:45 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-20 10:20:45 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:45 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-20 10:20:45 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:45 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:45 +0900
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:45 +0900
+
+
+Started GET "/assets/bootstrap-affix.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:45 +0900
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:45 +0900
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:45 +0900
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:45 +0900
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:45 +0900
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:46 +0900
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:46 +0900
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:46 +0900
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:46 +0900
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:46 +0900
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:46 +0900
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:46 +0900
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:46 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:46 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:46 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-20 10:20:46 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-20 10:20:54 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 7ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects/38/events.json" for 127.0.0.1 at 2015-03-20 10:20:57 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"38"}
+###
+38
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "38"]]
+###
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 38
+Completed 200 OK in 27ms (Views: 1.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-03-20 10:20:59 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test5\",\"events\": []}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[]
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test5", "created_at"=>nil, "updated_at"=>nil}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test5' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 38[0m
+  [1m[35mSQL (2.0ms)[0m  DELETE FROM "projects" WHERE "projects"."id" = ?  [["id", 38]]
+  [1m[36m (71.0ms)[0m  [1mcommit transaction[0m
+=============destory=================
+=============piyo=================
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Fri, 20 Mar 2015 01:20:59 UTC +00:00], ["pjname", "test5"], ["updated_at", Fri, 20 Mar 2015 01:20:59 UTC +00:00], ["user_id", "test"]]
+  [1m[35m (60.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 179ms (ActiveRecord: 135.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-20 10:20:59 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+  Rendered projects/index.html.erb within layouts/application (3.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 92ms (Views: 90.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/bootstrap-affix.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:03 +0900
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+  Rendered projects/index.html.erb within layouts/application (22.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 108ms (Views: 106.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/bootstrap-affix.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:17 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-20 10:21:24 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 5ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-03-20 10:21:35 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test5\",\"events\": []}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[]
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test5", "created_at"=>nil, "updated_at"=>nil}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test5' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 39[0m
+  [1m[35mSQL (1.0ms)[0m  DELETE FROM "projects" WHERE "projects"."id" = ?  [["id", 39]]
+  [1m[36m (80.0ms)[0m  [1mcommit transaction[0m
+=============destory=================
+=============piyo=================
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Fri, 20 Mar 2015 01:21:35 UTC +00:00], ["pjname", "test5"], ["updated_at", Fri, 20 Mar 2015 01:21:35 UTC +00:00], ["user_id", "test"]]
+  [1m[35m (80.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 245ms (ActiveRecord: 165.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-20 10:21:35 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-03-20 10:21:37 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test5\",\"events\": []}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[]
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test5", "created_at"=>nil, "updated_at"=>nil}
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test5' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 40
+  [1m[36mSQL (1.0ms)[0m  [1mDELETE FROM "projects" WHERE "projects"."id" = ?[0m  [["id", 40]]
+  [1m[35m (86.0ms)[0m  commit transaction
+=============destory=================
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Fri, 20 Mar 2015 01:21:37 UTC +00:00], ["pjname", "test5"], ["updated_at", Fri, 20 Mar 2015 01:21:37 UTC +00:00], ["user_id", "test"]]
+  [1m[36m (118.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 234ms (ActiveRecord: 208.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-20 10:21:37 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/lib/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-03-20 10:21:41 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-03-20 10:21:41 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-03-20 10:21:41 +0900
+
+
+Started GET "/assets/lib/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-03-20 10:21:41 +0900
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-03-20 10:21:43 +0900
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+  Rendered projects/index.html.erb within layouts/application (50.0ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 157ms (Views: 155.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/projects.css?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/bootstrap-affix.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/projects.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-20 10:21:44 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-03-20 10:21:49 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 12ms (Views: 0.0ms | ActiveRecord: 0.0ms)

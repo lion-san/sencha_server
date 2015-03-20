@@ -1037,7 +1037,7 @@ var loadProject = function( btn ) {
   waitingAnimation("Loading..", true);
 
   var request = new XMLHttpRequest();
-  request.open("GET", "/projects/" + projectName + "/events.json");
+  request.open("GET", "/projects/" + projectID + "/events.json");
   request.onreadystatechange = function() {
     if (request.readyState == 4 && request.status == 200) {
       //受信完了時の処理
