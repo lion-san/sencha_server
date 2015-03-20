@@ -1037,6 +1037,9 @@ var loadProject = function( btn ) {
   waitingAnimation("Loading..", true);
 
   var request = new XMLHttpRequest();
+
+  Ext.msg.alert("PJID:" + projectID)
+  
   request.open("GET", "/projects/" + projectID + "/events.json");
   request.onreadystatechange = function() {
     if (request.readyState == 4 && request.status == 200) {
