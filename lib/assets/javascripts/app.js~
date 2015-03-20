@@ -1267,8 +1267,8 @@ var loadProjectList = function(){
               this.parent.hide();
 
               //loadProject
-              setProject = record.get("pjname");
-              projectID = record.get("id");
+              setProject(record.get("pjname"));
+              projectID  = record.get("id");
 
               alert("PJID:" + projectID + ":index:" + index)
 
