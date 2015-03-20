@@ -1263,12 +1263,15 @@ var loadProjectList = function(){
             //indexBar: true
             onItemDisclosure: function(record, btn, index){
 
+              alert("PJID:" + projectID + ":index:" + index)
+
               //hide Panel
               this.parent.hide();
 
               //loadProject
               setProject( json[index].pjname );
               projectID = json[index].id;
+
               loadProject("yes");
             }
           }
