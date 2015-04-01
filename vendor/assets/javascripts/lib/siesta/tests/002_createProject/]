@@ -21,8 +21,6 @@ var projectName;//プロジェクト一意名
 var projectID;//プロジェクトキー（ＤＢ）
 var pjLabel;//プロジェクトラベルオブジェクト
 
-var picker;//共通picker
-
 //-------------------------------------
 //Main layout
 //-------------------------------------
@@ -111,22 +109,6 @@ Ext.application({
   createActionFloatPanel();
   Ext.Viewport.add(actionFloatPanel);
 
-  //Pickerの生成
-  picker = Ext.Viewport.add({
-                       xtype: 'picker',
-                       slots: {
-                         name: 'action',
-                         title: 'Function',
-                         data: makeList()
-                       },
-                       listeners : {
-                         change : function (picker, value) {
-                           eventAddBtnTapped( value );
-                         }
-                       }
-                     });
-  picker.hide();
- 
   //--------------------------------
   }
 });
@@ -167,7 +149,23 @@ var createEventAddBtn = function(){
       
                  // ボタンにイベントをtextfield設定
                  handler: function() {
-                   picker.show();
+                   //addBtn = this;
+                   if( !this.picker) {
+                     this.picker = Ext.Viewport.add({
+                       xtype: 'picker',
+                       slots: {
+                         name: 'action',
+                         title: 'Function',
+                         data: makeList()
+                       },
+                       listeners : {
+                         change : function (picker, value) {
+                           eventAddBtnTapped( value );
+                         }
+                       }
+                     });
+                   }
+                   this.picker.show();
                  }
   });
 

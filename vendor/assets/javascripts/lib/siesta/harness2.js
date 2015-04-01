@@ -9,12 +9,23 @@ Harness.configure({
     ]
 });
  
-Harness.start({
+Harness.start(
+{
   group       : 'Init',
   hostPageUrl : '/',
   performSetup: false,
   items: [
     'assets/lib/siesta/tests/001_init/001_init.t.js'
   ]
-});
+},
+{
+  group       : 'Create Project',
+  hostPageUrl : '/',
+  performSetup: false,
+  items: [
+    'assets/lib/siesta/tests/002_createProject/001_not_create.t.js',
+    'assets/lib/siesta/tests/002_createProject/002_create.t.js'
+  ]
+}
+);
 

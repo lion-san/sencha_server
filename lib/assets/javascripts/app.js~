@@ -21,6 +21,9 @@ var projectName;//プロジェクト一意名
 var projectID;//プロジェクトキー（ＤＢ）
 var pjLabel;//プロジェクトラベルオブジェクト
 
+var picker;//共通picker
+var projectPrompt;//共通prompt
+
 //-------------------------------------
 //Main layout
 //-------------------------------------
@@ -78,6 +81,7 @@ Ext.application({
                 },
                 {
                   text: 'Save',
+                  id: 'save',
                   handler: function(){
                     saveProject();
                   }
@@ -108,6 +112,47 @@ Ext.application({
   createActionFloatPanel();
   Ext.Viewport.add(actionFloatPanel);
 
+  //Pickerの生成
+  picker = Ext.Viewport.add({
+                       xtype: 'picker',
+                       slots: {
+                         name: 'action',
+                         title: 'Function',
+                         data: makeList()
+                       },
+                       listeners : {
+                         change : function (picker, value) {
+                           eventAddBtnTapped( value );
+                         }
+                       }
+                     });
+  picker.hide();
+
+  //Promptの生成
+  projectPrompt = Ext.Msg.prompt('New project', 'Please enter project name:', function(text, value) {
+
+    if( text == "ok" ){//OK
+      
+      if( nullCheck( value, "プロジェクト名を入力してください" ) ){
+
+
+        clearProject( value );
+
+        clearAll();
+
+        setProject( value );
+
+        //Refreshボタンが押せなくなる
+        refreshBtn.disable();
+
+      }
+
+    }
+    else{//cancel
+      return;
+    }
+  });
+  projectPrompt.hide();
   //--------------------------------
   }
 });
@@ -137,6 +182,7 @@ var createEventPanel = function(){
  */
 var createEventAddBtn = function(){
   var btn = Ext.create('Ext.Button', {
+                 id: 'plusAdd',
                  text: 'Add',
                  iconCls: 'add',
                  iconMask: true,
@@ -147,23 +193,7 @@ var createEventAddBtn = function(){
       
                  // ボタンにイベントをtextfield設定
                  handler: function() {
-                   //addBtn = this;
-                   if( !this.picker) {
-                     this.picker = Ext.Viewport.add({
-                       xtype: 'picker',
-                       slots: {
-                         name: 'action',
-                         title: 'Function',
-                         data: makeList()
-                       },
-                       listeners : {
-                         change : function (picker, value) {
-                           eventAddBtnTapped( value );
-                         }
-                       }
-                     });
-                   }
-                   this.picker.show();
+                   picker.show();
                  }
   });
 
@@ -359,7 +389,7 @@ var eventSaid = function(eventId, btnName, eventType){
       },
       {xtype: 'label', html: '条件を入力してね'},
       {xtype: 'textfield', id:'whatsay'},
-      {xtype: 'button', text: '登録', ui: 'action',
+      {xtype: 'button', text: 'ENTER', ui: 'action',
         handler: function() {//登録ボタンを押したら
           //入力値の取得
           var objs  = Ext.ComponentQuery.query('textfield');
@@ -541,7 +571,7 @@ var programingTalk = function( json ){
     items: [
       {xtype: 'label', html: 'ここにメッセージを入力してね。'},
       {xtype: 'textfield', id:'talktext', value: json.param },
-      {xtype: 'button', text: '登録', ui: 'action',
+      {xtype: 'button', text: 'ENTER', ui: 'action',
         handler: function() {//登録ボタンを押したら
           //入力値の取得
           var objs  = Ext.ComponentQuery.query('textfield');
@@ -574,7 +604,7 @@ var programingTalk = function( json ){
     items: [
       {xtype: 'label', html: 'ここにメッセージを入力してね。'},
       {xtype: 'textfield', id:'talktext'},
-      {xtype: 'button', text: '登録', ui: 'action',
+      {xtype: 'button', text: 'ENTER', ui: 'action',
         handler: function() {//登録ボタンを押したら
           //入力値の取得
           var objs  = Ext.ComponentQuery.query('textfield');
@@ -628,7 +658,7 @@ var programingWait = function( json ){
     items: [
       {xtype: 'label', html: '何秒待てばいい？'},
       {xtype: 'textfield', id:'waittime', value: json.param },
-      {xtype: 'button', text: '登録', ui: 'action',
+      {xtype: 'button', text: 'ENTER', ui: 'action',
         handler: function() {//登録ボタンを押したら
           //入力値の取得
           var objs  = Ext.ComponentQuery.query('textfield');
@@ -663,7 +693,7 @@ var programingWait = function( json ){
     items: [
       {xtype: 'label', html: '何秒待てばいい？'},
       {xtype: 'textfield', id:'waittime'},
-      {xtype: 'button', text: '登録', ui: 'action',
+      {xtype: 'button', text: 'ENTER', ui: 'action',
         handler: function() {//登録ボタンを押したら
           //入力値の取得
           var objs  = Ext.ComponentQuery.query('textfield');
@@ -740,7 +770,7 @@ var programingApplication = function( json ){
     items: [
       {xtype: 'label', html: '何アプリを起動しますか？'},
       {xtype: 'textfield', id:'applicationName', value: json.param },
-      {xtype: 'button', text: '登録', ui: 'action',
+      {xtype: 'button', text: 'ENTER', ui: 'action',
         handler: function() {//登録ボタンを押したら
           //入力値の取得
           var objs  = Ext.ComponentQuery.query('textfield');
@@ -774,7 +804,7 @@ var programingApplication = function( json ){
     items: [
       {xtype: 'label', html: '何アプリを起動しますか？'},
       {xtype: 'textfield', id:'applicationName'},
-      {xtype: 'button', text: '登録', ui: 'action',
+      {xtype: 'button', text: 'ENTER', ui: 'action',
         handler: function() {//登録ボタンを押したら
           //入力値の取得
           var objs  = Ext.ComponentQuery.query('textfield');
@@ -1163,9 +1193,9 @@ var clearAll = function(){
  ***************************************/
 var createProject = function(){
 
-  Ext.Msg.prompt('New project', 'Please enter project name:', function(text, value) {
+  projectPrompt.visible();
 
-    Ext.msg.alert("PJID:" + projectID)
+  /*Ext.Msg.prompt('New project', 'Please enter project name:', function(text, value) {
 
     if( text == "ok" ){//OK
       
@@ -1189,7 +1219,7 @@ var createProject = function(){
     }
 
 
-  });
+  });*/
 }
 
 
