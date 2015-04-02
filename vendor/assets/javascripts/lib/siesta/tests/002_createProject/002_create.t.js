@@ -208,6 +208,25 @@ StartTest(function(t) {
         }
       },
       {  click: '>> #event0'  },
-      {  waitFor : 500 }
+      {  waitFor : 500 },
+      {  click: '>> #event1'  },
+      {  click: '>> #save'  },
+      {  waitFor : 3000 },
+      function(next){
+        t.messageBoxIsVisible();
+        next();
+      },
+      {  click: '>> button[text=OK]'  },
+      {  waitFor : 500 },
+      {  click: '>> #load'  },
+      {  waitFor : 1000 },
+      {  click: "list => .project:nth-child(1)"},
+      function(next){
+        //var hoge =  t.cq("list => .project:nth-child(1)");
+        var list =  t.cq1('list');
+        //t.fail('items', list.items[got]);
+        t.is(list.items.items[0], '002_create');
+        next();
+      }
   );
 });
