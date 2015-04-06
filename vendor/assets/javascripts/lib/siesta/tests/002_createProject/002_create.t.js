@@ -223,6 +223,10 @@ StartTest(function(t) {
       {  click: "list => .project:nth-child(1)"},
       function(next) {
         t.pass('Should see a project list after tapping a load button');
+        next();
+      },
+      function(next) {
+        t.done();
       }
   );
 });

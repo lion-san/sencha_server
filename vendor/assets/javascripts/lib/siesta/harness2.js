@@ -26,6 +26,14 @@ Harness.start(
     'assets/lib/siesta/tests/002_createProject/001_not_create.t.js',
     'assets/lib/siesta/tests/002_createProject/002_create.t.js'
   ]
+},
+{
+  group       : 'Load Project',
+  hostPageUrl : '/',
+  performSetup: false,
+  items: [
+    'assets/lib/siesta/tests/003_LoadProject_reLoadProject/003_load_reload.t.js',
+  ]
 }
 );
 

@@ -42318,3 +42318,535 @@ Started GET "/projects.json" for 127.0.0.1 at 2015-04-02 22:05:36 +0900
 Processing by ProjectsController#index as JSON
   [1m[36mProject Load (0.2ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
 Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/siesta/resources/css/siesta-all.css" for 127.0.0.1 at 2015-04-06 07:57:01 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/lib/siesta/siesta-all.js" for 127.0.0.1 at 2015-04-06 07:57:01 +0900
+
+
+Started GET "/assets/lib/siesta/harness2.js" for 127.0.0.1 at 2015-04-06 07:57:03 +0900
+
+
+Started GET "/assets/siesta/resources/css/fonts/sourcesanspro/v5/ODelI1aHBYDBqgeIAH2zlNHq-FFgoDNV3GTKpHwuvtI.woff" for 127.0.0.1 at 2015-04-06 07:57:09 +0900
+
+
+Started GET "/assets/siesta/resources/css/fonts/icomoon.ttf" for 127.0.0.1 at 2015-04-06 07:57:11 +0900
+
+
+Started GET "/assets/siesta/resources/images/domcontainer-bg.png" for 127.0.0.1 at 2015-04-06 07:57:11 +0900
+
+
+Started GET "/assets/siesta/resources/images/expand.png" for 127.0.0.1 at 2015-04-06 07:57:12 +0900
+
+
+Started GET "/assets/siesta/resources/images/checked.gif" for 127.0.0.1 at 2015-04-06 07:57:12 +0900
+
+
+Started GET "/assets/siesta/resources/images/prompt.png" for 127.0.0.1 at 2015-04-06 07:57:12 +0900
+
+
+Started GET "/assets/siesta/resources/images/loading2.gif" for 127.0.0.1 at 2015-04-06 07:57:14 +0900
+
+
+Started GET "/assets/siesta/resources/images/logo_small2.png" for 127.0.0.1 at 2015-04-06 07:57:14 +0900
+
+
+Started GET "/assets/siesta/resources/images/logo.png" for 127.0.0.1 at 2015-04-06 07:57:14 +0900
+
+
+Started GET "/assets/lib/siesta/tests/001_init/001_init.t.js" for 127.0.0.1 at 2015-04-06 07:58:59 +0900
+
+
+Started GET "/assets/lib/siesta/tests/002_createProject/001_not_create.t.js" for 127.0.0.1 at 2015-04-06 07:59:00 +0900
+
+
+Started GET "/assets/lib/siesta/tests/002_createProject/002_create.t.js" for 127.0.0.1 at 2015-04-06 07:59:00 +0900
+
+
+Started GET "/assets/lib/sencha-touch/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-04-06 07:59:02 +0900
+
+
+Started GET "/assets/lib/sencha-touch/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-04-06 07:59:03 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-04-06 07:59:07 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-04-06 07:59:07 +0900
+
+
+Started GET "/assets/lib/siesta/tests/001_init/001_init.t.js" for 127.0.0.1 at 2015-04-06 07:59:11 +0900
+
+
+Started GET "/assets/lib/sencha-touch/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-04-06 07:59:12 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-04-06 07:59:12 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-04-06 07:59:12 +0900
+
+
+Started GET "/assets/lib/sencha-touch/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-04-06 07:59:12 +0900
+
+
+Started GET "/assets/lib/siesta/tests/002_createProject/001_not_create.t.js" for 127.0.0.1 at 2015-04-06 07:59:13 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-04-06 07:59:17 +0900
+
+
+Started GET "/assets/lib/sencha-touch/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-04-06 07:59:17 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-04-06 07:59:17 +0900
+
+
+Started GET "/assets/lib/sencha-touch/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-04-06 07:59:17 +0900
+
+
+Started GET "/assets/lib/siesta/tests/002_createProject/002_create.t.js" for 127.0.0.1 at 2015-04-06 07:59:17 +0900
+
+
+Started GET "/assets/siesta/resources/images/spinner.gif" for 127.0.0.1 at 2015-04-06 07:59:17 +0900
+
+
+Started GET "/assets/siesta/resources/images/ok.png" for 127.0.0.1 at 2015-04-06 07:59:18 +0900
+
+
+Started GET "/assets/siesta/resources/images/clock_check.png" for 127.0.0.1 at 2015-04-06 07:59:18 +0900
+
+
+Started GET "/assets/siesta/resources/images/cursor-hand.png" for 127.0.0.1 at 2015-04-06 07:59:18 +0900
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-04-06 07:59:46 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"002_create\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"First\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"正常テストケース\"},\n{\"action\":\"light\",\"param\":\"\"}]},\n{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"},\n{\"action\":\"wait\",\"param\":\"5\"},\n{\"action\":\"application\",\"param\":\"com.test.app\"}]}]}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"First", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"正常テストケース"}, {"action"=>"light", "param"=>""}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}, {"action"=>"wait", "param"=>"5"}, {"action"=>"application", "param"=>"com.test.app"}]}]
+1
+2
+1
+2
+3
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"002_create", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"First", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"正常テストケース", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "action"=>"light", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+{"id"=>nil, "action"=>"wait", "param"=>"5", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+{"id"=>nil, "action"=>"application", "param"=>"com.test.app", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = '002_create' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 102
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 150[0m
+  [1m[35mSQL (7.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 322]]
+  [1m[36mSQL (1.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 323]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 150]]
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 151[0m
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 324]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 325]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 326]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 151]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "projects" WHERE "projects"."id" = ?  [["id", 102]]
+  [1m[36m (232.0ms)[0m  [1mcommit transaction[0m
+=============destory=================
+=============piyo=================
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (10.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Sun, 05 Apr 2015 22:59:47 UTC +00:00], ["pjname", "002_create"], ["updated_at", Sun, 05 Apr 2015 22:59:47 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Sun, 05 Apr 2015 22:59:47 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "First"], ["project_id", 103], ["updated_at", Sun, 05 Apr 2015 22:59:47 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "talk"], ["created_at", Sun, 05 Apr 2015 22:59:47 UTC +00:00], ["event_id", 152], ["param", "正常テストケース"], ["updated_at", Sun, 05 Apr 2015 22:59:47 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "light"], ["created_at", Sun, 05 Apr 2015 22:59:47 UTC +00:00], ["event_id", 152], ["param", ""], ["updated_at", Sun, 05 Apr 2015 22:59:47 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Sun, 05 Apr 2015 22:59:47 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 103], ["updated_at", Sun, 05 Apr 2015 22:59:47 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Sun, 05 Apr 2015 22:59:47 UTC +00:00], ["event_id", 153], ["param", ""], ["updated_at", Sun, 05 Apr 2015 22:59:47 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "wait"], ["created_at", Sun, 05 Apr 2015 22:59:47 UTC +00:00], ["event_id", 153], ["param", "5"], ["updated_at", Sun, 05 Apr 2015 22:59:47 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "application"], ["created_at", Sun, 05 Apr 2015 22:59:47 UTC +00:00], ["event_id", 153], ["param", "com.test.app"], ["updated_at", Sun, 05 Apr 2015 22:59:47 UTC +00:00]]
+  [1m[36m (266.9ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 680ms (ActiveRecord: 524.9ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-04-06 07:59:47 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 3ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/siesta/resources/images/bug.png" for 127.0.0.1 at 2015-04-06 07:59:54 +0900
+
+
+Started GET "/assets/lib/siesta/tests/002_createProject/002_create.t.js" for 127.0.0.1 at 2015-04-06 08:00:55 +0900
+
+
+Started GET "/assets/lib/sencha-touch/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-04-06 08:00:55 +0900
+
+
+Started GET "/assets/lib/sencha-touch/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-04-06 08:00:55 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-04-06 08:00:55 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-04-06 08:00:55 +0900
+
+
+Started GET "/assets/lib/siesta/tests/002_createProject/002_create.t.js" for 127.0.0.1 at 2015-04-06 08:00:56 +0900
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-04-06 08:01:15 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"002_create\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"First\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"正常テストケース\"},\n{\"action\":\"light\",\"param\":\"\"}]},\n{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"},\n{\"action\":\"wait\",\"param\":\"5\"},\n{\"action\":\"application\",\"param\":\"com.test.app\"}]}]}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"First", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"正常テストケース"}, {"action"=>"light", "param"=>""}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}, {"action"=>"wait", "param"=>"5"}, {"action"=>"application", "param"=>"com.test.app"}]}]
+1
+2
+1
+2
+3
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"002_create", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"First", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"正常テストケース", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "action"=>"light", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+{"id"=>nil, "action"=>"wait", "param"=>"5", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+{"id"=>nil, "action"=>"application", "param"=>"com.test.app", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = '002_create' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 103[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 152
+  [1m[36mSQL (28.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 327]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 328]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 152]]
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 153
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 329]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 330]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 331]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 153]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "projects" WHERE "projects"."id" = ?[0m  [["id", 103]]
+  [1m[35m (193.0ms)[0m  commit transaction
+=============destory=================
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Sun, 05 Apr 2015 23:01:16 UTC +00:00], ["pjname", "002_create"], ["updated_at", Sun, 05 Apr 2015 23:01:16 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Sun, 05 Apr 2015 23:01:16 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "First"], ["project_id", 104], ["updated_at", Sun, 05 Apr 2015 23:01:16 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "talk"], ["created_at", Sun, 05 Apr 2015 23:01:16 UTC +00:00], ["event_id", 154], ["param", "正常テストケース"], ["updated_at", Sun, 05 Apr 2015 23:01:16 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "light"], ["created_at", Sun, 05 Apr 2015 23:01:16 UTC +00:00], ["event_id", 154], ["param", ""], ["updated_at", Sun, 05 Apr 2015 23:01:16 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Sun, 05 Apr 2015 23:01:16 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 104], ["updated_at", Sun, 05 Apr 2015 23:01:16 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Sun, 05 Apr 2015 23:01:16 UTC +00:00], ["event_id", 155], ["param", ""], ["updated_at", Sun, 05 Apr 2015 23:01:16 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "wait"], ["created_at", Sun, 05 Apr 2015 23:01:16 UTC +00:00], ["event_id", 155], ["param", "5"], ["updated_at", Sun, 05 Apr 2015 23:01:16 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "application"], ["created_at", Sun, 05 Apr 2015 23:01:16 UTC +00:00], ["event_id", 155], ["param", "com.test.app"], ["updated_at", Sun, 05 Apr 2015 23:01:16 UTC +00:00]]
+  [1m[35m (204.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 478ms (ActiveRecord: 430.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-04-06 08:01:16 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 3ms (Views: 1.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-04-06 08:01:19 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 7ms (Views: 1.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/lib/siesta/tests/002_createProject/002_create.t.js" for 127.0.0.1 at 2015-04-06 08:01:47 +0900
+
+
+Started GET "/assets/lib/sencha-touch/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-04-06 08:01:47 +0900
+
+
+Started GET "/assets/lib/sencha-touch/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-04-06 08:01:47 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-04-06 08:01:47 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-04-06 08:01:47 +0900
+
+
+Started GET "/assets/lib/siesta/tests/002_createProject/002_create.t.js" for 127.0.0.1 at 2015-04-06 08:01:48 +0900
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-04-06 08:02:08 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"002_create\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"First\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"正常テストケース\"},\n{\"action\":\"light\",\"param\":\"\"}]},\n{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"},\n{\"action\":\"wait\",\"param\":\"5\"},\n{\"action\":\"application\",\"param\":\"com.test.app\"}]}]}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"First", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"正常テストケース"}, {"action"=>"light", "param"=>""}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}, {"action"=>"wait", "param"=>"5"}, {"action"=>"application", "param"=>"com.test.app"}]}]
+1
+2
+1
+2
+3
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"002_create", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"First", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"正常テストケース", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "action"=>"light", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+{"id"=>nil, "action"=>"wait", "param"=>"5", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+{"id"=>nil, "action"=>"application", "param"=>"com.test.app", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = '002_create' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 104[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 154
+  [1m[36mSQL (1.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 332]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 333]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 154]]
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 155
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 334]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 335]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 336]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 155]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "projects" WHERE "projects"."id" = ?[0m  [["id", 104]]
+  [1m[35m (277.0ms)[0m  commit transaction
+=============destory=================
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Sun, 05 Apr 2015 23:02:08 UTC +00:00], ["pjname", "002_create"], ["updated_at", Sun, 05 Apr 2015 23:02:08 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Sun, 05 Apr 2015 23:02:08 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "First"], ["project_id", 105], ["updated_at", Sun, 05 Apr 2015 23:02:08 UTC +00:00]]
+  [1m[35mSQL (4.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "talk"], ["created_at", Sun, 05 Apr 2015 23:02:08 UTC +00:00], ["event_id", 156], ["param", "正常テストケース"], ["updated_at", Sun, 05 Apr 2015 23:02:08 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "light"], ["created_at", Sun, 05 Apr 2015 23:02:08 UTC +00:00], ["event_id", 156], ["param", ""], ["updated_at", Sun, 05 Apr 2015 23:02:08 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Sun, 05 Apr 2015 23:02:08 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 105], ["updated_at", Sun, 05 Apr 2015 23:02:08 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Sun, 05 Apr 2015 23:02:08 UTC +00:00], ["event_id", 157], ["param", ""], ["updated_at", Sun, 05 Apr 2015 23:02:08 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "wait"], ["created_at", Sun, 05 Apr 2015 23:02:08 UTC +00:00], ["event_id", 157], ["param", "5"], ["updated_at", Sun, 05 Apr 2015 23:02:08 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "application"], ["created_at", Sun, 05 Apr 2015 23:02:08 UTC +00:00], ["event_id", 157], ["param", "com.test.app"], ["updated_at", Sun, 05 Apr 2015 23:02:08 UTC +00:00]]
+  [1m[35m (230.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 596ms (ActiveRecord: 515.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-04-06 08:02:09 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 4ms (Views: 1.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-04-06 08:02:12 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 3ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/siesta/resources/css/siesta-all.css" for 127.0.0.1 at 2015-04-06 09:05:33 +0900
+
+
+Started GET "/assets/lib/siesta/siesta-all.js" for 127.0.0.1 at 2015-04-06 09:05:34 +0900
+
+
+Started GET "/assets/lib/siesta/harness2.js" for 127.0.0.1 at 2015-04-06 09:05:34 +0900
+
+
+Started GET "/assets/siesta/resources/css/fonts/sourcesanspro/v5/ODelI1aHBYDBqgeIAH2zlNHq-FFgoDNV3GTKpHwuvtI.woff" for 127.0.0.1 at 2015-04-06 09:05:36 +0900
+
+
+Started GET "/assets/siesta/resources/css/fonts/icomoon.ttf" for 127.0.0.1 at 2015-04-06 09:05:37 +0900
+
+
+Started GET "/assets/siesta/resources/images/domcontainer-bg.png" for 127.0.0.1 at 2015-04-06 09:05:37 +0900
+
+
+Started GET "/assets/siesta/resources/images/prompt.png" for 127.0.0.1 at 2015-04-06 09:05:37 +0900
+
+
+Started GET "/assets/siesta/resources/images/expand.png" for 127.0.0.1 at 2015-04-06 09:05:37 +0900
+
+
+Started GET "/assets/siesta/resources/images/checked.gif" for 127.0.0.1 at 2015-04-06 09:05:37 +0900
+
+
+Started GET "/assets/siesta/resources/images/logo.png" for 127.0.0.1 at 2015-04-06 09:05:37 +0900
+
+
+Started GET "/assets/siesta/resources/images/logo_small2.png" for 127.0.0.1 at 2015-04-06 09:05:37 +0900
+
+
+Started GET "/assets/siesta/resources/images/loading2.gif" for 127.0.0.1 at 2015-04-06 09:05:37 +0900
+
+
+Started GET "/assets/lib/siesta/tests/003_LoadProject_reLoadProject/003_load_reload.t.js" for 127.0.0.1 at 2015-04-06 09:05:45 +0900
+
+
+Started GET "/assets/lib/siesta/tests/002_createProject/002_create.t.js" for 127.0.0.1 at 2015-04-06 09:05:45 +0900
+
+
+Started GET "/assets/lib/sencha-touch/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-04-06 09:05:46 +0900
+
+
+Started GET "/assets/lib/sencha-touch/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-04-06 09:05:46 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-04-06 09:05:47 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-04-06 09:05:47 +0900
+
+
+Started GET "/assets/lib/siesta/tests/002_createProject/002_create.t.js" for 127.0.0.1 at 2015-04-06 09:05:48 +0900
+
+
+Started GET "/assets/siesta/resources/images/clock_check.png" for 127.0.0.1 at 2015-04-06 09:05:49 +0900
+
+
+Started GET "/assets/siesta/resources/images/ok.png" for 127.0.0.1 at 2015-04-06 09:05:49 +0900
+
+
+Started GET "/assets/siesta/resources/images/spinner.gif" for 127.0.0.1 at 2015-04-06 09:05:49 +0900
+
+
+Started GET "/assets/siesta/resources/images/cursor-hand.png" for 127.0.0.1 at 2015-04-06 09:05:50 +0900
+
+
+Started GET "/assets/siesta/resources/images/bug.png" for 127.0.0.1 at 2015-04-06 09:05:52 +0900
+
+
+Started GET "/assets/siesta/resources/images/flag-red.png" for 127.0.0.1 at 2015-04-06 09:05:52 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-04-06 09:05:53 +0900
+
+
+Started GET "/assets/lib/sencha-touch/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-04-06 09:05:53 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-04-06 09:05:53 +0900
+
+
+Started GET "/assets/lib/sencha-touch/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-04-06 09:05:53 +0900
+
+
+Started GET "/assets/lib/siesta/tests/003_LoadProject_reLoadProject/003_load_reload.t.js" for 127.0.0.1 at 2015-04-06 09:05:54 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-04-06 09:05:54 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (40.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 42ms (Views: 0.0ms | ActiveRecord: 40.0ms)
+
+
+Started GET "/assets/lib/siesta/tests/003_LoadProject_reLoadProject/003_load_reload.t.js" for 127.0.0.1 at 2015-04-06 09:06:00 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-04-06 09:06:00 +0900
+
+
+Started GET "/assets/lib/sencha-touch/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-04-06 09:06:00 +0900
+
+
+Started GET "/assets/lib/sencha-touch/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-04-06 09:06:00 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-04-06 09:06:00 +0900
+
+
+Started GET "/assets/lib/siesta/tests/003_LoadProject_reLoadProject/003_load_reload.t.js" for 127.0.0.1 at 2015-04-06 09:06:01 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-04-06 09:06:02 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 3ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/lib/siesta/tests/002_createProject/002_create.t.js" for 127.0.0.1 at 2015-04-06 09:06:05 +0900
+
+
+Started GET "/assets/lib/sencha-touch/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-04-06 09:06:05 +0900
+
+
+Started GET "/assets/lib/sencha-touch/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-04-06 09:06:05 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-04-06 09:06:05 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-04-06 09:06:05 +0900
+
+
+Started GET "/assets/lib/siesta/tests/002_createProject/002_create.t.js" for 127.0.0.1 at 2015-04-06 09:06:06 +0900
+
+
+Started GET "/assets/lib/siesta/siesta-all.js" for 127.0.0.1 at 2015-04-06 09:06:17 +0900
+
+
+Started GET "/assets/lib/siesta/harness2.js" for 127.0.0.1 at 2015-04-06 09:06:17 +0900
+
+
+Started GET "/assets/siesta/resources/css/siesta-all.css" for 127.0.0.1 at 2015-04-06 09:06:17 +0900
+
+
+Started GET "/assets/siesta/resources/css/fonts/sourcesanspro/v5/ODelI1aHBYDBqgeIAH2zlNHq-FFgoDNV3GTKpHwuvtI.woff" for 127.0.0.1 at 2015-04-06 09:06:19 +0900
+
+
+Started GET "/assets/siesta/resources/css/fonts/icomoon.ttf" for 127.0.0.1 at 2015-04-06 09:06:19 +0900
+
+
+Started GET "/assets/siesta/resources/images/domcontainer-bg.png" for 127.0.0.1 at 2015-04-06 09:06:19 +0900
+
+
+Started GET "/assets/siesta/resources/images/checked.gif" for 127.0.0.1 at 2015-04-06 09:06:19 +0900
+
+
+Started GET "/assets/siesta/resources/images/prompt.png" for 127.0.0.1 at 2015-04-06 09:06:19 +0900
+
+
+Started GET "/assets/siesta/resources/images/expand.png" for 127.0.0.1 at 2015-04-06 09:06:19 +0900
+
+
+Started GET "/assets/siesta/resources/images/loading2.gif" for 127.0.0.1 at 2015-04-06 09:06:19 +0900
+
+
+Started GET "/assets/siesta/resources/images/logo.png" for 127.0.0.1 at 2015-04-06 09:06:19 +0900
+
+
+Started GET "/assets/siesta/resources/images/logo_small2.png" for 127.0.0.1 at 2015-04-06 09:06:19 +0900
+
+
+Started GET "/assets/lib/siesta/tests/003_LoadProject_reLoadProject/003_load_reload.t.js" for 127.0.0.1 at 2015-04-06 09:06:22 +0900
+
+
+Started GET "/assets/lib/sencha-touch/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-04-06 09:06:22 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-04-06 09:06:22 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-04-06 09:06:22 +0900
+
+
+Started GET "/assets/lib/sencha-touch/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-04-06 09:06:22 +0900
+
+
+Started GET "/assets/lib/siesta/tests/003_LoadProject_reLoadProject/003_load_reload.t.js" for 127.0.0.1 at 2015-04-06 09:06:23 +0900
+
+
+Started GET "/assets/siesta/resources/images/spinner.gif" for 127.0.0.1 at 2015-04-06 09:06:24 +0900
+
+
+Started GET "/assets/siesta/resources/images/ok.png" for 127.0.0.1 at 2015-04-06 09:06:24 +0900
+
+
+Started GET "/assets/siesta/resources/images/clock_check.png" for 127.0.0.1 at 2015-04-06 09:06:24 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-04-06 09:06:24 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 4ms (Views: 1.0ms | ActiveRecord: 0.0ms)
