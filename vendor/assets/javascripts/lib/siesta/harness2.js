@@ -32,7 +32,16 @@ Harness.start(
   hostPageUrl : '/',
   performSetup: false,
   items: [
-    'assets/lib/siesta/tests/003_LoadProject_reLoadProject/003_load_reload.t.js',
+    'assets/lib/siesta/tests/003_LoadProject_reLoadProject/001_load_reload.t.js'
+  ]
+},
+{
+  group       : 'Event',
+  hostPageUrl : '/',
+  performSetup: false,
+  items: [
+    'assets/lib/siesta/tests/004_event/001_event.t.js',
+    'assets/lib/siesta/tests/004_event/002_delete_event.t.js'
   ]
 }
 );

@@ -22,7 +22,6 @@ var projectID;//プロジェクトキー（ＤＢ）
 var pjLabel;//プロジェクトラベルオブジェクト
 
 var picker;//共通picker
-var projectPrompt;//共通prompt
 
 //-------------------------------------
 //Main layout
@@ -127,32 +126,7 @@ Ext.application({
                        }
                      });
   picker.hide();
-
-  //Promptの生成
-  projectPrompt = Ext.Msg.prompt('New project', 'Please enter project name:', function(text, value) {
-
-    if( text == "ok" ){//OK
-      
-      if( nullCheck( value, "プロジェクト名を入力してください" ) ){
-
-
-        clearProject( value );
-
-        clearAll();
-
-        setProject( value );
-
-        //Refreshボタンが押せなくなる
-        refreshBtn.disable();
-
-      }
-
-    }
-    else{//cancel
-      return;
-    }
-  });
-  projectPrompt.hide();
+ 
   //--------------------------------
   }
 });
@@ -899,6 +873,7 @@ var deleteConfirm = function( btn, btnType ){
 
           //Hide actionSheet
           actionSheet.hide();
+          actionSheet.destroy();
         }
       },
       {
@@ -921,6 +896,9 @@ var deleteAction = function ( actionBtn ){
 
   //Delete Button
   actionBtn.destroy(); 
+
+  //Return
+  naviView.pop();
 
 }
 
@@ -1193,9 +1171,7 @@ var clearAll = function(){
  ***************************************/
 var createProject = function(){
 
-  projectPrompt.visible();
-
-  /*Ext.Msg.prompt('New project', 'Please enter project name:', function(text, value) {
+  Ext.Msg.prompt('New project', 'Please enter project name:', function(text, value) {
 
     if( text == "ok" ){//OK
       
@@ -1219,7 +1195,7 @@ var createProject = function(){
     }
 
 
-  });*/
+  });
 }
 
 
