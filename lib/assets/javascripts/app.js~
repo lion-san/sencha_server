@@ -880,6 +880,7 @@ var deleteConfirm = function( btn, btnType ){
         text: 'Cancel', ui: 'normal',
         handler: function(){
           actionSheet.hide();
+          actionSheet.destroy();
         }
       }
     ]
@@ -1001,15 +1002,14 @@ var saveProject = function(){
 
   //Send JSON
   $.ajax({
-    type : 'post',
-    url : "/projects",
-    data : JSON.stringify(json),
+    type : 'get',
+    url : "https://peaceful-tundra-2847.herokuapp.com/channels/20150425.json",
+    //data : JSON.stringify(json),
     contentType: 'application/JSON',
     dataType : 'JSON',
     scriptCharset: 'utf-8',
     success : function(data) {
-      waitingAnimation("", false);
-      Ext.Msg.alert("保存しました！");
+
     },
     error : function(data) {
       alert("error:" + data);

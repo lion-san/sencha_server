@@ -20730,3 +20730,1319 @@ Completed 200 OK in 10ms (Views: 7.0ms | ActiveRecord: 1.0ms)
   [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
   [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
   [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (3.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (1.0ms)[0m  [1mbegin transaction[0m
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:14 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (65.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:14 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:14 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:14 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:14 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:14 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:14 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:14 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:14 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:14 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:14 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects
+Completed 302 Found in 232ms (ActiveRecord: 70.0ms)
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1
+Started GET "/projects/949/events.json" for 127.0.0.1 at 2015-06-11 21:38:14 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"949"}
+###
+949
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "949"]]
+###
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 949
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312
+Completed 200 OK in 12ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 949[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312[0m
+  [1m[35m (1.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (3.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:14 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "piyo"], ["updated_at", Thu, 11 Jun 2015 12:38:14 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (2.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:14 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "piyo"], ["updated_at", Thu, 11 Jun 2015 12:38:14 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (2.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:14 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "piyo"], ["updated_at", Thu, 11 Jun 2015 12:38:14 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (2.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:14 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "piyo"], ["updated_at", Thu, 11 Jun 2015 12:38:14 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (4.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:14 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "piyo"], ["updated_at", Thu, 11 Jun 2015 12:38:14 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (2.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:15 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "piyo"], ["updated_at", Thu, 11 Jun 2015 12:38:15 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (1.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (1.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (1.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:15 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:15 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:15 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:15 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:15 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:15 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:15 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:15 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:15 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:15 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:15 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects
+Completed 302 Found in 27ms (ActiveRecord: 5.0ms)
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:15 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "949"]]
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 949
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312
+  Rendered layouts/_shim.html.erb (1.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 1054ms (Views: 1051.0ms | ActiveRecord: 1.0ms)
+  [1m[36m (2.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (1.0ms)[0m  begin transaction
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:16 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+=============piyo=================
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (4.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[35m (1.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects
+Completed 302 Found in 25ms (ActiveRecord: 9.0ms)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1[0m
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:16 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "949"]]
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 949[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312[0m
+  Rendered layouts/_shim.html.erb (1.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (3.0ms)
+Completed 200 OK in 24ms (Views: 22.0ms | ActiveRecord: 1.0ms)
+  [1m[35m (2.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:16 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1
+=============piyo=================
+  [1m[36m (1.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (3.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects
+Completed 302 Found in 28ms (ActiveRecord: 8.0ms)
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:16 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "949"]]
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 949
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 29ms (Views: 25.0ms | ActiveRecord: 1.0ms)
+  [1m[36m (1.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:16 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+=============piyo=================
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects
+Completed 302 Found in 27ms (ActiveRecord: 6.0ms)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1[0m
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:16 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "949"]]
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 949[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312[0m
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 21ms (Views: 20.0ms | ActiveRecord: 0.0ms)
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 949
+  [1m[36m (3.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:16 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+=============piyo=================
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects
+Completed 302 Found in 25ms (ActiveRecord: 5.0ms)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1[0m
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:16 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "949"]]
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 949[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312[0m
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 22ms (Views: 20.0ms | ActiveRecord: 0.0ms)
+  [1m[35m (2.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:16 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[36mSQL (4.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects
+Completed 302 Found in 30ms (ActiveRecord: 10.0ms)
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:16 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "949"]]
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 949
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 24ms (Views: 22.0ms | ActiveRecord: 0.0ms)
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 949[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312
+  [1m[36m (2.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:16 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+=============piyo=================
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[36mSQL (4.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects
+Completed 302 Found in 30ms (ActiveRecord: 9.0ms)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1[0m
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:16 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "949"]]
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 949[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312[0m
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 21ms (Views: 18.0ms | ActiveRecord: 2.0ms)
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 949
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311[0m
+  [1m[35m (1.0ms)[0m  rollback transaction
+  [1m[36m (1.0ms)[0m  [1mbegin transaction[0m
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:16 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects
+Completed 302 Found in 24ms (ActiveRecord: 4.0ms)
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:16 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "949"]]
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 949
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 20ms (Views: 16.0ms | ActiveRecord: 2.0ms)
+  [1m[36m (1.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:16 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+=============piyo=================
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:16 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects
+Completed 302 Found in 24ms (ActiveRecord: 3.0ms)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1[0m
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:16 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "949"]]
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 949[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312[0m
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 20ms (Views: 17.0ms | ActiveRecord: 1.0ms)
+  [1m[35m (1.0ms)[0m  rollback transaction
+  [1m[36m (1.0ms)[0m  [1mbegin transaction[0m
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects
+Completed 302 Found in 22ms (ActiveRecord: 3.0ms)
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "949"]]
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 949
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 20ms (Views: 17.0ms | ActiveRecord: 0.0ms)
+  [1m[36m (1.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+=============piyo=================
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (3.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35m (1.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects
+Completed 302 Found in 26ms (ActiveRecord: 6.0ms)
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1[0m
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "949"]]
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 949[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312[0m
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 25ms (Views: 21.0ms | ActiveRecord: 2.0ms)
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 949
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311[0m
+  [1m[35m (2.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36m (1.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects
+Completed 302 Found in 22ms (ActiveRecord: 7.0ms)
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "949"]]
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 949
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 64ms (Views: 61.0ms | ActiveRecord: 1.0ms)
+  [1m[36m (2.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+=============piyo=================
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (4.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects
+Completed 302 Found in 25ms (ActiveRecord: 8.0ms)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1[0m
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "949"]]
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 949[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312[0m
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 20ms (Views: 18.0ms | ActiveRecord: 0.0ms)
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 949
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312[0m
+  [1m[35m (1.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects
+Completed 302 Found in 25ms (ActiveRecord: 7.0ms)
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "949"]]
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 949
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 22ms (Views: 19.0ms | ActiveRecord: 1.0ms)
+  [1m[36m (1.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+=============piyo=================
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects
+Completed 302 Found in 22ms (ActiveRecord: 6.0ms)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1[0m
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "949"]]
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 949[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312[0m
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 20ms (Views: 18.0ms | ActiveRecord: 0.0ms)
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 949
+  [1m[36m (1.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+=============piyo=================
+  [1m[35m (1.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35mSQL (3.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35m (1.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects
+Completed 302 Found in 25ms (ActiveRecord: 9.0ms)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1[0m
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "949"]]
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 949[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312[0m
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 20ms (Views: 17.0ms | ActiveRecord: 2.0ms)
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 949
+  [1m[36m (1.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+=============piyo=================
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35m (1.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects
+Completed 302 Found in 22ms (ActiveRecord: 5.0ms)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1[0m
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "949"]]
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 949[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312[0m
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 20ms (Views: 17.0ms | ActiveRecord: 2.0ms)
+  [1m[35m (1.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects
+Completed 302 Found in 23ms (ActiveRecord: 4.0ms)
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "949"]]
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 949
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 21ms (Views: 18.0ms | ActiveRecord: 1.0ms)
+  [1m[36m (2.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+=============piyo=================
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects
+Completed 302 Found in 24ms (ActiveRecord: 3.0ms)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1[0m
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "949"]]
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 949[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312[0m
+  Rendered layouts/_shim.html.erb (1.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 20ms (Views: 18.0ms | ActiveRecord: 1.0ms)
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 949
+  [1m[36m (2.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+=============piyo=================
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (3.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36mSQL (3.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects
+Completed 302 Found in 28ms (ActiveRecord: 9.0ms)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1[0m
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "949"]]
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 949[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312[0m
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 21ms (Views: 19.0ms | ActiveRecord: 0.0ms)
+  [1m[35m (2.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects
+Completed 302 Found in 21ms (ActiveRecord: 5.0ms)
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "949"]]
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 949
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 19ms (Views: 15.0ms | ActiveRecord: 2.0ms)
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 949[0m
+  [1m[35m (1.0ms)[0m  rollback transaction
+  [1m[36m (1.0ms)[0m  [1mbegin transaction[0m
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:17 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1
+=============piyo=================
+  [1m[36m (1.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:17 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[36m (1.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects
+Completed 302 Found in 24ms (ActiveRecord: 8.0ms)
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:18 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "949"]]
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 949
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 19ms (Views: 17.0ms | ActiveRecord: 1.0ms)
+  [1m[36m (1.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:18 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+=============piyo=================
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects
+Completed 302 Found in 27ms (ActiveRecord: 4.0ms)
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1[0m
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:18 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "949"]]
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 949[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312[0m
+  Rendered layouts/_shim.html.erb (1.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 21ms (Views: 20.0ms | ActiveRecord: 0.0ms)
+  [1m[35m (2.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:18 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[35mSQL (5.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[36m (1.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects
+Completed 302 Found in 28ms (ActiveRecord: 11.0ms)
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1
+Started GET "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:18 +0900
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"949"}
+########Show######
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "949"]]
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 949
+  [1m[36mAction Load (2.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 312
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 23ms (Views: 19.0ms | ActiveRecord: 2.0ms)
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 949[0m
+  [1m[35m (1.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "projects"
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:18 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+=============piyo=================
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects
+Completed 302 Found in 23ms (ActiveRecord: 5.0ms)
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "projects"[0m
+  [1m[35m (2.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM "events"
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:18 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+=============piyo=================
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (7.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects
+Completed 302 Found in 30ms (ActiveRecord: 9.0ms)
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "events"[0m
+  [1m[35m (2.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM "actions"
+Started POST "/projects" for 127.0.0.1 at 2015-06-11 21:38:18 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"test\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"1\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"2\"}]},{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"}]}]}", "project"=>{}}
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"1", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"2"}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}]}]
+1
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"test", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"1", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"2", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = 'test' LIMIT 1[0m
+=============piyo=================
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["pjname", "test"], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "1"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "talk"], ["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event_id", 311], ["param", "2"], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event_id", 312], ["param", ""], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects
+Completed 302 Found in 23ms (ActiveRecord: 5.0ms)
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "actions"[0m
+  [1m[35m (1.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started GET "/projects.json" for 127.0.0.1 at 2015-06-11 21:38:18 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 2ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Started GET "/projects" for 127.0.0.1 at 2015-06-11 21:38:18 +0900
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 38ms (Views: 36.0ms | ActiveRecord: 1.0ms)
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started GET "/projects" for 127.0.0.1 at 2015-06-11 21:38:18 +0900
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 18ms (Views: 16.0ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Started GET "/projects" for 127.0.0.1 at 2015-06-11 21:38:18 +0900
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 14ms (Views: 13.0ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "piyo"], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[36m (112.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (3.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["pjname", "test1"], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  UPDATE "events" SET "project_id" = ?, "updated_at" = ? WHERE "events"."id" = 311  [["project_id", 949], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[36m (90.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (3.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "piyo"], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[35m (80.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (4.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["pjname", "test2"], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (0.0ms)[0m  [1mUPDATE "events" SET "project_id" = ?, "updated_at" = ? WHERE "events"."id" = 312[0m  [["project_id", 950], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[35m (90.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (4.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "piyo"], ["updated_at", Thu, 11 Jun 2015 12:38:18 UTC +00:00]]
+  [1m[36m (88.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00], ["pjname", "test3"], ["updated_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (0.0ms)[0m  UPDATE "events" SET "project_id" = ?, "updated_at" = ? WHERE "events"."id" = 313  [["project_id", 951], ["updated_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00]]
+  [1m[36m (102.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36mSQL (3.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "piyo"], ["updated_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00]]
+  [1m[35m (85.0ms)[0m  commit transaction
+  [1m[36m (1.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00], ["pjname", "test4"], ["updated_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (1.0ms)[0m  [1mUPDATE "events" SET "project_id" = ?, "updated_at" = ? WHERE "events"."id" = 314[0m  [["project_id", 952], ["updated_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00]]
+  [1m[35m (89.0ms)[0m  commit transaction
+  [1m[36m (1.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "piyo"], ["updated_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00]]
+  [1m[36m (71.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (3.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00], ["pjname", "test5"], ["updated_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  UPDATE "events" SET "project_id" = ?, "updated_at" = ? WHERE "events"."id" = 315  [["project_id", 953], ["updated_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00]]
+  [1m[36m (117.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "piyo"], ["updated_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00]]
+  [1m[35m (82.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (7.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00], ["pjname", "test6"], ["updated_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (1.0ms)[0m  [1mUPDATE "events" SET "project_id" = ?, "updated_at" = ? WHERE "events"."id" = 316[0m  [["project_id", 954], ["updated_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00]]
+  [1m[35m (62.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "piyo"], ["updated_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00]]
+  [1m[36m (65.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (10.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00], ["pjname", "test7"], ["updated_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (0.0ms)[0m  UPDATE "events" SET "project_id" = ?, "updated_at" = ? WHERE "events"."id" = 317  [["project_id", 955], ["updated_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00]]
+  [1m[36m (78.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "piyo"], ["updated_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00]]
+  [1m[35m (82.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (7.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00], ["pjname", "test8"], ["updated_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (1.0ms)[0m  [1mUPDATE "events" SET "project_id" = ?, "updated_at" = ? WHERE "events"."id" = 318[0m  [["project_id", 956], ["updated_at", Thu, 11 Jun 2015 12:38:19 UTC +00:00]]
+  [1m[35m (63.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:20 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "piyo"], ["updated_at", Thu, 11 Jun 2015 12:38:20 UTC +00:00]]
+  [1m[36m (87.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (3.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:20 UTC +00:00], ["pjname", "test9"], ["updated_at", Thu, 11 Jun 2015 12:38:20 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (2.0ms)[0m  UPDATE "events" SET "project_id" = ?, "updated_at" = ? WHERE "events"."id" = 319  [["project_id", 957], ["updated_at", Thu, 11 Jun 2015 12:38:20 UTC +00:00]]
+  [1m[36m (76.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (3.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Thu, 11 Jun 2015 12:38:20 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "piyo"], ["updated_at", Thu, 11 Jun 2015 12:38:20 UTC +00:00]]
+  [1m[35m (77.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (3.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Thu, 11 Jun 2015 12:38:20 UTC +00:00], ["pjname", "test10"], ["updated_at", Thu, 11 Jun 2015 12:38:20 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (1.0ms)[0m  [1mUPDATE "events" SET "project_id" = ?, "updated_at" = ? WHERE "events"."id" = 320[0m  [["project_id", 958], ["updated_at", Thu, 11 Jun 2015 12:38:20 UTC +00:00]]
+  [1m[35m (116.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started GET "/projects" for 127.0.0.1 at 2015-06-11 21:38:20 +0900
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 22ms (Views: 20.0ms | ActiveRecord: 1.0ms)
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "projects"[0m
+Started DELETE "/projects/949" for 127.0.0.1 at 2015-06-11 21:38:20 +0900
+Processing by ProjectsController#destroy as HTML
+  Parameters: {"id"=>"949"}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "949"]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 949
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 311[0m
+  [1m[35mSQL (2.0ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 311]]
+  [1m[36mSQL (1.0ms)[0m  [1mDELETE FROM "projects" WHERE "projects"."id" = ?[0m  [["id", 949]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects
+Completed 302 Found in 12ms (ActiveRecord: 3.0ms)
+Started GET "/projects" for 127.0.0.1 at 2015-06-11 21:38:20 +0900
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 28ms (Views: 20.0ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "projects"
+  [1m[36m (1.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Started GET "/projects" for 127.0.0.1 at 2015-06-11 21:38:20 +0900
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+  Rendered layouts/_shim.html.erb (1.0ms)
+  Rendered layouts/_header.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 22ms (Views: 21.0ms | ActiveRecord: 0.0ms)
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35mSQL (92.0ms)[0m  DELETE FROM "projects"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started GET "/projects" for 127.0.0.1 at 2015-06-11 21:38:20 +0900
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 17ms (Views: 16.0ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m

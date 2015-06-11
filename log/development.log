@@ -50861,3 +50861,753 @@ Processing by EventsController#index as JSON
   [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 152
   [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 248[0m
 Completed 200 OK in 23ms (Views: 1.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/lib/sencha-touch/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-05-13 14:28:16 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/lib/sencha-touch/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-05-13 14:28:16 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-05-13 14:28:17 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-05-13 14:28:17 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-05-13 14:28:56 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 72ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects/152/events.json" for 127.0.0.1 at 2015-05-13 14:28:57 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"152"}
+###
+152
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "152"]]
+###
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 152
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 248[0m
+Completed 200 OK in 113ms (Views: 0.0ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/assets/lib/siesta/harness2.js" for 127.0.0.1 at 2015-05-13 14:30:02 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/lib/siesta/siesta-all.js" for 127.0.0.1 at 2015-05-13 14:30:02 +0900
+
+
+Started GET "/assets/siesta/resources/css/siesta-all.css" for 127.0.0.1 at 2015-05-13 14:30:03 +0900
+
+
+Started GET "/assets/siesta/resources/css/fonts/sourcesanspro/v5/ODelI1aHBYDBqgeIAH2zlNHq-FFgoDNV3GTKpHwuvtI.woff" for 127.0.0.1 at 2015-05-13 14:30:08 +0900
+
+
+Started GET "/assets/siesta/resources/images/expand.png" for 127.0.0.1 at 2015-05-13 14:30:08 +0900
+
+
+Started GET "/assets/siesta/resources/images/domcontainer-bg.png" for 127.0.0.1 at 2015-05-13 14:30:08 +0900
+
+
+Started GET "/assets/siesta/resources/css/fonts/icomoon.ttf" for 127.0.0.1 at 2015-05-13 14:30:09 +0900
+
+
+Started GET "/assets/siesta/resources/images/checked.gif" for 127.0.0.1 at 2015-05-13 14:30:09 +0900
+
+
+Started GET "/assets/siesta/resources/images/prompt.png" for 127.0.0.1 at 2015-05-13 14:30:09 +0900
+
+
+Started GET "/assets/siesta/resources/images/logo_small2.png" for 127.0.0.1 at 2015-05-13 14:30:09 +0900
+
+
+Started GET "/assets/siesta/resources/images/logo.png" for 127.0.0.1 at 2015-05-13 14:30:09 +0900
+
+
+Started GET "/assets/siesta/resources/images/loading2.gif" for 127.0.0.1 at 2015-05-13 14:30:09 +0900
+
+
+Started GET "/assets/lib/siesta/tests/001_init/001_init.t.js" for 127.0.0.1 at 2015-05-13 14:31:07 +0900
+
+
+Started GET "/assets/lib/siesta/tests/002_createProject/001_not_create.t.js" for 127.0.0.1 at 2015-05-13 14:31:08 +0900
+
+
+Started GET "/assets/lib/siesta/tests/002_createProject/002_create.t.js" for 127.0.0.1 at 2015-05-13 14:31:08 +0900
+
+
+Started GET "/assets/lib/siesta/tests/003_LoadProject_reLoadProject/001_load_reload.t.js" for 127.0.0.1 at 2015-05-13 14:31:08 +0900
+
+
+Started GET "/assets/lib/siesta/tests/004_event/001_event.t.js" for 127.0.0.1 at 2015-05-13 14:31:08 +0900
+
+
+Started GET "/assets/lib/siesta/tests/004_event/002_delete_event.t.js" for 127.0.0.1 at 2015-05-13 14:31:08 +0900
+
+
+Started GET "/assets/lib/sencha-touch/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-05-13 14:31:08 +0900
+
+
+Started GET "/assets/lib/siesta/tests/001_init/001_init.t.js" for 127.0.0.1 at 2015-05-13 14:31:10 +0900
+
+
+Started GET "/assets/lib/sencha-touch/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-05-13 14:31:10 +0900
+
+
+Started GET "/assets/lib/siesta/tests/002_createProject/001_not_create.t.js" for 127.0.0.1 at 2015-05-13 14:31:11 +0900
+
+
+Started GET "/assets/siesta/resources/images/clock_check.png" for 127.0.0.1 at 2015-05-13 14:31:12 +0900
+
+
+Started GET "/assets/siesta/resources/images/ok.png" for 127.0.0.1 at 2015-05-13 14:31:12 +0900
+
+
+Started GET "/assets/siesta/resources/images/spinner.gif" for 127.0.0.1 at 2015-05-13 14:31:14 +0900
+
+
+Started GET "/assets/lib/sencha-touch/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-05-13 14:31:15 +0900
+
+
+Started GET "/assets/lib/siesta/tests/002_createProject/002_create.t.js" for 127.0.0.1 at 2015-05-13 14:31:16 +0900
+
+
+Started GET "/assets/siesta/resources/images/cursor-hand.png" for 127.0.0.1 at 2015-05-13 14:31:23 +0900
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-05-13 14:31:36 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"002_create\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"First\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"正常テストケース\"},\n{\"action\":\"light\",\"param\":\"\"}]},\n{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"},\n{\"action\":\"wait\",\"param\":\"5\"},\n{\"action\":\"application\",\"param\":\"com.test.app\"}]}]}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"First", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"正常テストケース"}, {"action"=>"light", "param"=>""}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}, {"action"=>"wait", "param"=>"5"}, {"action"=>"application", "param"=>"com.test.app"}]}]
+1
+2
+1
+2
+3
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"002_create", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"First", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"正常テストケース", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "action"=>"light", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+{"id"=>nil, "action"=>"wait", "param"=>"5", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+{"id"=>nil, "action"=>"application", "param"=>"com.test.app", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = '002_create' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 152
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 248[0m
+  [1m[35mSQL (24.0ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 248]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "projects" WHERE "projects"."id" = ?[0m  [["id", 152]]
+  [1m[35m (112.0ms)[0m  commit transaction
+=============destory=================
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (87.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Wed, 13 May 2015 05:31:37 UTC +00:00], ["pjname", "002_create"], ["updated_at", Wed, 13 May 2015 05:31:37 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Wed, 13 May 2015 05:31:37 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "First"], ["project_id", 153], ["updated_at", Wed, 13 May 2015 05:31:37 UTC +00:00]]
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "talk"], ["created_at", Wed, 13 May 2015 05:31:37 UTC +00:00], ["event_id", 249], ["param", "正常テストケース"], ["updated_at", Wed, 13 May 2015 05:31:37 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "light"], ["created_at", Wed, 13 May 2015 05:31:37 UTC +00:00], ["event_id", 249], ["param", ""], ["updated_at", Wed, 13 May 2015 05:31:37 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Wed, 13 May 2015 05:31:37 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 153], ["updated_at", Wed, 13 May 2015 05:31:37 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Wed, 13 May 2015 05:31:37 UTC +00:00], ["event_id", 250], ["param", ""], ["updated_at", Wed, 13 May 2015 05:31:37 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "wait"], ["created_at", Wed, 13 May 2015 05:31:37 UTC +00:00], ["event_id", 250], ["param", "5"], ["updated_at", Wed, 13 May 2015 05:31:37 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "application"], ["created_at", Wed, 13 May 2015 05:31:37 UTC +00:00], ["event_id", 250], ["param", "com.test.app"], ["updated_at", Wed, 13 May 2015 05:31:37 UTC +00:00]]
+  [1m[35m (67.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 601ms (ActiveRecord: 301.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-05-13 14:31:37 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 5ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-05-13 14:31:40 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 8ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/lib/sencha-touch/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-05-13 14:31:42 +0900
+
+
+Started GET "/assets/lib/siesta/tests/003_LoadProject_reLoadProject/001_load_reload.t.js" for 127.0.0.1 at 2015-05-13 14:31:43 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-05-13 14:31:43 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 18ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects/153/events.json" for 127.0.0.1 at 2015-05-13 14:31:44 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"153"}
+###
+153
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "153"]]
+###
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 153[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 249
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 250[0m
+Completed 200 OK in 35ms (Views: 0.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/projects/153/events.json" for 127.0.0.1 at 2015-05-13 14:31:51 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"153"}
+###
+153
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "153"]]
+###
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 153[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 249
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 250[0m
+Completed 200 OK in 24ms (Views: 0.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/assets/lib/sencha-touch/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-05-13 14:31:54 +0900
+
+
+Started GET "/assets/lib/siesta/tests/004_event/001_event.t.js" for 127.0.0.1 at 2015-05-13 14:31:55 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-05-13 14:31:56 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 5ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects/153/events.json" for 127.0.0.1 at 2015-05-13 14:31:57 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"153"}
+###
+153
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "153"]]
+###
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 153
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 249[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 250
+Completed 200 OK in 24ms (Views: 0.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/assets/siesta/resources/images/cursor-hand-press.png" for 127.0.0.1 at 2015-05-13 14:31:58 +0900
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-05-13 14:32:06 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"002_create\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"First\",\"event_id\":\"1\",\"actions\": [{\"action\":\"talk\",\"param\":\"変更しました\"},\n{\"action\":\"light\",\"param\":\"\"}]},\n{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"},\n{\"action\":\"wait\",\"param\":\"777\"},\n{\"action\":\"application\",\"param\":\"jp.test\"}]}]}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"First", "event_id"=>"1", "actions"=>[{"action"=>"talk", "param"=>"変更しました"}, {"action"=>"light", "param"=>""}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}, {"action"=>"wait", "param"=>"777"}, {"action"=>"application", "param"=>"jp.test"}]}]
+1
+2
+1
+2
+3
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"002_create", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"First", "project_id"=>nil}
+{"id"=>nil, "action"=>"talk", "param"=>"変更しました", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "action"=>"light", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+{"id"=>nil, "action"=>"wait", "param"=>"777", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+{"id"=>nil, "action"=>"application", "param"=>"jp.test", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = '002_create' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 153[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 249
+  [1m[36mSQL (2.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 489]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 490]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 249]]
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 250
+  [1m[36mSQL (1.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 491]]
+  [1m[35mSQL (1.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 492]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 493]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 250]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "projects" WHERE "projects"."id" = ?[0m  [["id", 153]]
+  [1m[35m (272.0ms)[0m  commit transaction
+=============destory=================
+=============piyo=================
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", Wed, 13 May 2015 05:32:07 UTC +00:00], ["pjname", "002_create"], ["updated_at", Wed, 13 May 2015 05:32:07 UTC +00:00], ["user_id", "test"]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Wed, 13 May 2015 05:32:07 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "First"], ["project_id", 154], ["updated_at", Wed, 13 May 2015 05:32:07 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "talk"], ["created_at", Wed, 13 May 2015 05:32:07 UTC +00:00], ["event_id", 251], ["param", "変更しました"], ["updated_at", Wed, 13 May 2015 05:32:07 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "light"], ["created_at", Wed, 13 May 2015 05:32:07 UTC +00:00], ["event_id", 251], ["param", ""], ["updated_at", Wed, 13 May 2015 05:32:07 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Wed, 13 May 2015 05:32:07 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 154], ["updated_at", Wed, 13 May 2015 05:32:07 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Wed, 13 May 2015 05:32:07 UTC +00:00], ["event_id", 252], ["param", ""], ["updated_at", Wed, 13 May 2015 05:32:07 UTC +00:00]]
+  [1m[35mSQL (13.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "wait"], ["created_at", Wed, 13 May 2015 05:32:07 UTC +00:00], ["event_id", 252], ["param", "777"], ["updated_at", Wed, 13 May 2015 05:32:07 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "application"], ["created_at", Wed, 13 May 2015 05:32:07 UTC +00:00], ["event_id", 252], ["param", "jp.test"], ["updated_at", Wed, 13 May 2015 05:32:07 UTC +00:00]]
+  [1m[35m (89.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 514ms (ActiveRecord: 386.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-05-13 14:32:07 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 5ms (Views: 1.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-05-13 14:32:10 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects/154/events.json" for 127.0.0.1 at 2015-05-13 14:32:11 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"154"}
+###
+154
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "154"]]
+###
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 154
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 251[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 252
+Completed 200 OK in 43ms (Views: 0.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/assets/lib/sencha-touch/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-05-13 14:32:13 +0900
+
+
+Started GET "/assets/lib/siesta/tests/004_event/002_delete_event.t.js" for 127.0.0.1 at 2015-05-13 14:32:13 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-05-13 14:32:14 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 5ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects/154/events.json" for 127.0.0.1 at 2015-05-13 14:32:15 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"154"}
+###
+154
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "154"]]
+###
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 154[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 251
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 252[0m
+Completed 200 OK in 22ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-05-13 14:32:19 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"002_create\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"First\",\"event_id\":\"1\",\"actions\": [{\"action\":\"light\",\"param\":\"\"}]},\n{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"},\n{\"action\":\"wait\",\"param\":\"777\"},\n{\"action\":\"application\",\"param\":\"jp.test\"}]}]}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"First", "event_id"=>"1", "actions"=>[{"action"=>"light", "param"=>""}]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}, {"action"=>"wait", "param"=>"777"}, {"action"=>"application", "param"=>"jp.test"}]}]
+1
+1
+2
+3
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"002_create", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"First", "project_id"=>nil}
+{"id"=>nil, "action"=>"light", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>1}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+{"id"=>nil, "action"=>"wait", "param"=>"777", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+{"id"=>nil, "action"=>"application", "param"=>"jp.test", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = '002_create' LIMIT 1
+  [1m[36m (1.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mEvent Load (0.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 154
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 251[0m
+  [1m[35mSQL (1.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 494]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 495]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 251]]
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 252[0m
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 496]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 497]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 498]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 252]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "projects" WHERE "projects"."id" = ?  [["id", 154]]
+  [1m[36m (74.0ms)[0m  [1mcommit transaction[0m
+=============destory=================
+=============piyo=================
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Wed, 13 May 2015 05:32:20 UTC +00:00], ["pjname", "002_create"], ["updated_at", Wed, 13 May 2015 05:32:20 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (33.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Wed, 13 May 2015 05:32:20 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "First"], ["project_id", 155], ["updated_at", Wed, 13 May 2015 05:32:20 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "light"], ["created_at", Wed, 13 May 2015 05:32:20 UTC +00:00], ["event_id", 253], ["param", ""], ["updated_at", Wed, 13 May 2015 05:32:20 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Wed, 13 May 2015 05:32:20 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 155], ["updated_at", Wed, 13 May 2015 05:32:20 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "camera"], ["created_at", Wed, 13 May 2015 05:32:20 UTC +00:00], ["event_id", 254], ["param", ""], ["updated_at", Wed, 13 May 2015 05:32:20 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "wait"], ["created_at", Wed, 13 May 2015 05:32:20 UTC +00:00], ["event_id", 254], ["param", "777"], ["updated_at", Wed, 13 May 2015 05:32:20 UTC +00:00]]
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "application"], ["created_at", Wed, 13 May 2015 05:32:20 UTC +00:00], ["event_id", 254], ["param", "jp.test"], ["updated_at", Wed, 13 May 2015 05:32:20 UTC +00:00]]
+  [1m[35m (76.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 262ms (ActiveRecord: 190.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-05-13 14:32:20 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-05-13 14:32:23 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 4ms (Views: 1.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects/155/events.json" for 127.0.0.1 at 2015-05-13 14:32:24 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"155"}
+###
+155
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "155"]]
+###
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 155
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 253[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 254
+Completed 200 OK in 19ms (Views: 0.0ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-05-13 14:32:29 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"002_create\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"First\",\"event_id\":\"1\",\"actions\": []},\n{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"camera\",\"param\":\"\"},\n{\"action\":\"wait\",\"param\":\"777\"},\n{\"action\":\"application\",\"param\":\"jp.test\"}]}]}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"First", "event_id"=>"1", "actions"=>[]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"camera", "param"=>""}, {"action"=>"wait", "param"=>"777"}, {"action"=>"application", "param"=>"jp.test"}]}]
+1
+2
+3
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"002_create", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"First", "project_id"=>nil}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"camera", "param"=>"", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+{"id"=>nil, "action"=>"wait", "param"=>"777", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+{"id"=>nil, "action"=>"application", "param"=>"jp.test", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = '002_create' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 155[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 253
+  [1m[36mSQL (1.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 499]]
+  [1m[35mSQL (1.0ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 253]]
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 254[0m
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 500]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 501]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 502]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 254]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "projects" WHERE "projects"."id" = ?  [["id", 155]]
+  [1m[36m (91.0ms)[0m  [1mcommit transaction[0m
+=============destory=================
+=============piyo=================
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36mSQL (4.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Wed, 13 May 2015 05:32:29 UTC +00:00], ["pjname", "002_create"], ["updated_at", Wed, 13 May 2015 05:32:29 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Wed, 13 May 2015 05:32:29 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "First"], ["project_id", 156], ["updated_at", Wed, 13 May 2015 05:32:29 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Wed, 13 May 2015 05:32:29 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 156], ["updated_at", Wed, 13 May 2015 05:32:29 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "camera"], ["created_at", Wed, 13 May 2015 05:32:29 UTC +00:00], ["event_id", 256], ["param", ""], ["updated_at", Wed, 13 May 2015 05:32:29 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "wait"], ["created_at", Wed, 13 May 2015 05:32:29 UTC +00:00], ["event_id", 256], ["param", "777"], ["updated_at", Wed, 13 May 2015 05:32:29 UTC +00:00]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "application"], ["created_at", Wed, 13 May 2015 05:32:29 UTC +00:00], ["event_id", 256], ["param", "jp.test"], ["updated_at", Wed, 13 May 2015 05:32:29 UTC +00:00]]
+  [1m[36m (72.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 259ms (ActiveRecord: 174.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-05-13 14:32:29 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 7ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-05-13 14:32:33 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 16ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects/156/events.json" for 127.0.0.1 at 2015-05-13 14:32:34 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"156"}
+###
+156
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "156"]]
+###
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 156[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 255
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 256[0m
+Completed 200 OK in 24ms (Views: 0.0ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-05-13 14:32:39 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"002_create\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"First\",\"event_id\":\"1\",\"actions\": []},\n{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"wait\",\"param\":\"777\"},\n{\"action\":\"application\",\"param\":\"jp.test\"}]}]}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"First", "event_id"=>"1", "actions"=>[]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"wait", "param"=>"777"}, {"action"=>"application", "param"=>"jp.test"}]}]
+1
+2
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"002_create", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"First", "project_id"=>nil}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"wait", "param"=>"777", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+{"id"=>nil, "action"=>"application", "param"=>"jp.test", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = '002_create' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 156
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 255[0m
+  [1m[35mSQL (1.0ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 255]]
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 256[0m
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 503]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 504]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 505]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 256]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "projects" WHERE "projects"."id" = ?  [["id", 156]]
+  [1m[36m (77.0ms)[0m  [1mcommit transaction[0m
+=============destory=================
+=============piyo=================
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Wed, 13 May 2015 05:32:39 UTC +00:00], ["pjname", "002_create"], ["updated_at", Wed, 13 May 2015 05:32:39 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Wed, 13 May 2015 05:32:39 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "First"], ["project_id", 157], ["updated_at", Wed, 13 May 2015 05:32:39 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Wed, 13 May 2015 05:32:39 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 157], ["updated_at", Wed, 13 May 2015 05:32:39 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "wait"], ["created_at", Wed, 13 May 2015 05:32:39 UTC +00:00], ["event_id", 258], ["param", "777"], ["updated_at", Wed, 13 May 2015 05:32:39 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["action", "application"], ["created_at", Wed, 13 May 2015 05:32:39 UTC +00:00], ["event_id", 258], ["param", "jp.test"], ["updated_at", Wed, 13 May 2015 05:32:39 UTC +00:00]]
+  [1m[35m (77.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 239ms (ActiveRecord: 161.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-05-13 14:32:39 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-05-13 14:32:43 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects/157/events.json" for 127.0.0.1 at 2015-05-13 14:32:44 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"157"}
+###
+157
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "157"]]
+###
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 157
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 257[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 258
+Completed 200 OK in 26ms (Views: 0.0ms | ActiveRecord: 3.0ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-05-13 14:32:48 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"002_create\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"First\",\"event_id\":\"1\",\"actions\": []},\n{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": [{\"action\":\"application\",\"param\":\"jp.test\"}]}]}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"First", "event_id"=>"1", "actions"=>[]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[{"action"=>"application", "param"=>"jp.test"}]}]
+1
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"002_create", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"First", "project_id"=>nil}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+{"id"=>nil, "action"=>"application", "param"=>"jp.test", "created_at"=>nil, "updated_at"=>nil, "event_id"=>2}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = '002_create' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mEvent Load (0.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 157[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 257
+  [1m[36mSQL (1.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 257]]
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 258
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "actions" WHERE "actions"."id" = ?[0m  [["id", 506]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 507]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 258]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "projects" WHERE "projects"."id" = ?  [["id", 157]]
+  [1m[36m (67.0ms)[0m  [1mcommit transaction[0m
+=============destory=================
+=============piyo=================
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (4.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Wed, 13 May 2015 05:32:49 UTC +00:00], ["pjname", "002_create"], ["updated_at", Wed, 13 May 2015 05:32:49 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Wed, 13 May 2015 05:32:49 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "First"], ["project_id", 158], ["updated_at", Wed, 13 May 2015 05:32:49 UTC +00:00]]
+  [1m[36mSQL (3.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Wed, 13 May 2015 05:32:49 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 158], ["updated_at", Wed, 13 May 2015 05:32:49 UTC +00:00]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "actions" ("action", "created_at", "event_id", "param", "updated_at") VALUES (?, ?, ?, ?, ?)  [["action", "application"], ["created_at", Wed, 13 May 2015 05:32:49 UTC +00:00], ["event_id", 260], ["param", "jp.test"], ["updated_at", Wed, 13 May 2015 05:32:49 UTC +00:00]]
+  [1m[36m (61.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 226ms (ActiveRecord: 138.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-05-13 14:32:49 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-05-13 14:32:52 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 43ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects/158/events.json" for 127.0.0.1 at 2015-05-13 14:32:53 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"158"}
+###
+158
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "158"]]
+###
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 158[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 259
+  [1m[36mAction Load (1.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 260[0m
+Completed 200 OK in 27ms (Views: 0.0ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-05-13 14:32:58 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"002_create\",\"events\": [{\"event\":\"say\",\"operator\":\"=\",\"param\":\"First\",\"event_id\":\"1\",\"actions\": []},\n{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"2\",\"actions\": []}]}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[{"event"=>"say", "operator"=>"=", "param"=>"First", "event_id"=>"1", "actions"=>[]}, {"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"2", "actions"=>[]}]
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"002_create", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"say", "operator"=>"=", "created_at"=>nil, "updated_at"=>nil, "param"=>"First", "project_id"=>nil}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = '002_create' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 158
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 259[0m
+  [1m[35mSQL (1.0ms)[0m  DELETE FROM "events" WHERE "events"."id" = ?  [["id", 259]]
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 260[0m
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "actions" WHERE "actions"."id" = ?  [["id", 508]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 260]]
+  [1m[35mSQL (1.0ms)[0m  DELETE FROM "projects" WHERE "projects"."id" = ?  [["id", 158]]
+  [1m[36m (60.0ms)[0m  [1mcommit transaction[0m
+=============destory=================
+=============piyo=================
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Wed, 13 May 2015 05:32:58 UTC +00:00], ["pjname", "002_create"], ["updated_at", Wed, 13 May 2015 05:32:58 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Wed, 13 May 2015 05:32:58 UTC +00:00], ["event", "say"], ["operator", "="], ["param", "First"], ["project_id", 159], ["updated_at", Wed, 13 May 2015 05:32:58 UTC +00:00]]
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Wed, 13 May 2015 05:32:58 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 159], ["updated_at", Wed, 13 May 2015 05:32:58 UTC +00:00]]
+  [1m[35m (75.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 204ms (ActiveRecord: 141.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-05-13 14:32:58 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 5ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-05-13 14:33:02 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (2.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 13ms (Views: 0.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/projects/159/events.json" for 127.0.0.1 at 2015-05-13 14:33:03 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"159"}
+###
+159
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1[0m  [["id", "159"]]
+###
+  [1m[35mEvent Load (1.0ms)[0m  SELECT "events".* FROM "events" WHERE "events"."project_id" = 159
+  [1m[36mAction Load (0.0ms)[0m  [1mSELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 261[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 262
+Completed 200 OK in 37ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2015-05-13 14:33:06 +0900
+Processing by ProjectsController#create as JSON
+  Parameters: {"_json"=>"{\"project\":\"002_create\",\"events\": [{\"event\":\"saw\",\"operator\":\"==\",\"param\":\"FACE\",\"event_id\":\"1\",\"actions\": []}]}", "project"=>{}}
+Can't verify CSRF token authenticity
+=============params=================
+[{"event"=>"saw", "operator"=>"==", "param"=>"FACE", "event_id"=>"1", "actions"=>[]}]
+=============params=================
+=============hoge=================
+{"id"=>nil, "user_id"=>"test", "pjname"=>"002_create", "created_at"=>nil, "updated_at"=>nil}
+{"id"=>nil, "event"=>"saw", "operator"=>"==", "created_at"=>nil, "updated_at"=>nil, "param"=>"FACE", "project_id"=>nil}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test' AND "projects"."pjname" = '002_create' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 159[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 261
+  [1m[36mSQL (1.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 261]]
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 262
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "events" WHERE "events"."id" = ?[0m  [["id", 262]]
+  [1m[35mSQL (1.0ms)[0m  DELETE FROM "projects" WHERE "projects"."id" = ?  [["id", 159]]
+  [1m[36m (164.0ms)[0m  [1mcommit transaction[0m
+=============destory=================
+=============piyo=================
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "projects" ("created_at", "pjname", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Wed, 13 May 2015 05:33:06 UTC +00:00], ["pjname", "002_create"], ["updated_at", Wed, 13 May 2015 05:33:06 UTC +00:00], ["user_id", "test"]]
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "events" ("created_at", "event", "operator", "param", "project_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Wed, 13 May 2015 05:33:06 UTC +00:00], ["event", "saw"], ["operator", "=="], ["param", "FACE"], ["project_id", 160], ["updated_at", Wed, 13 May 2015 05:33:06 UTC +00:00]]
+  [1m[36m (66.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/projects
+Completed 302 Found in 309ms (ActiveRecord: 237.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-05-13 14:33:06 +0900
+Processing by ProjectsController#index as JSON
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'
+Completed 200 OK in 5ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-05-13 14:33:10 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 5ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects/160/events.json" for 127.0.0.1 at 2015-05-13 14:33:11 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"160"}
+###
+160
+  [1m[35mProject Load (0.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "160"]]
+###
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 160[0m
+  [1m[35mAction Load (0.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 263
+Completed 200 OK in 23ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/lib/sencha-touch/resources/css/sencha-touch.css" for 127.0.0.1 at 2015-05-13 14:34:02 +0900
+
+
+Started GET "/assets/lib/sencha-touch/sencha-touch-all-debug.js" for 127.0.0.1 at 2015-05-13 14:34:02 +0900
+
+
+Started GET "/assets/app.js" for 127.0.0.1 at 2015-05-13 14:34:02 +0900
+
+
+Started GET "/assets/lib/jquery-2.1.3.min.js" for 127.0.0.1 at 2015-05-13 14:34:02 +0900
+
+
+Started GET "/projects.json" for 127.0.0.1 at 2015-05-13 14:34:07 +0900
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = 'test'[0m
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects/160/events.json" for 127.0.0.1 at 2015-05-13 14:34:08 +0900
+Processing by EventsController#index as JSON
+  Parameters: {"project_id"=>"160"}
+###
+160
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT 1  [["id", "160"]]
+###
+  [1m[36mEvent Load (1.0ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."project_id" = 160[0m
+  [1m[35mAction Load (1.0ms)[0m  SELECT "actions".* FROM "actions" WHERE "actions"."event_id" = 263
+Completed 200 OK in 20ms (Views: 0.0ms | ActiveRecord: 3.0ms)
+  [1m[36mProject Load (112.0ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  [1m[35mProject Load (1.0ms)[0m  SELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT 1
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
