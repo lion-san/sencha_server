@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -15,6 +15,7 @@ Singleton('Siesta.Harness.Browser.FeatureSupport', {
         
         tests       : {
             init        : [
+                // "fn"s are called as methods of the "Siesta.Harness.Browser.FeatureSupport" singleton
                 {
                     id : "mouseEnterLeave",
                     fn : function() {
@@ -133,6 +134,24 @@ Singleton('Siesta.Harness.Browser.FeatureSupport', {
                         
                         return hasImgId;
                     }
+                },
+                {
+                    id  : 'TouchEvents',
+                    fn  : function() {
+                        return this.isEventSupported('touchend', window);
+                    }
+                },
+                {
+                    id  : 'PointerEvents',
+                    fn  : function() {
+                        return this.isEventSupported('pointerdown')
+                    }
+                },
+                {
+                    id  : 'MSPointerEvents',
+                    fn  : function() {
+                        return this.isEventSupported('mspointerdown')
+                    }
                 }
             ]
         }
@@ -145,6 +164,7 @@ Singleton('Siesta.Harness.Browser.FeatureSupport', {
             var emptyFn = function() {},
                 foo = Class({
                     does    : [
+                        Siesta.Util.Role.CanGetType,
                         Siesta.Test.Simulate.Event,
                         Siesta.Test.Simulate.Mouse,
                         Siesta.Test.Simulate.Keyboard
@@ -176,6 +196,42 @@ Singleton('Siesta.Harness.Browser.FeatureSupport', {
                 // where we copy the feature testing results from the outer scope to inner
                 this.supports[ testId ] = detectorFn.call(this);
             }
+        },
+        
+        
+        // from Modernizr
+        isEventSupported: function (eventName, element) {
+            var isSupported;
+            
+            if (!eventName) return false
+            if (!element || typeof element === 'string') element = document.createElement(element || 'div');
+    
+            // Testing via the `in` operator is sufficient for modern browsers and IE.
+            // When using `setAttribute`, IE skips "unload", WebKit skips "unload" and
+            // "resize", whereas `in` "catches" those.
+            eventName       = 'on' + eventName;
+            isSupported     = eventName in element;
+    
+            // Fallback technique for old Firefox - bit.ly/event-detection
+            if (!isSupported) {
+                if (!element.setAttribute) {
+                    // Switch to generic element if it lacks `setAttribute`.
+                    // It could be the `document`, `window`, or something else.
+                    element = document.createElement('div');
+                }
+    
+                element.setAttribute(eventName, '');
+                isSupported = typeof element[ eventName ] === 'function';
+        
+                if (element[ eventName ] !== undefined ) {
+                    // If property was created, "remove it" by setting value to `undefined`.
+                    element[ eventName ] = undefined;
+                }
+                element.removeAttribute(eventName);
+            }
+    
+            return isSupported;            
         }
+        
     }
 })

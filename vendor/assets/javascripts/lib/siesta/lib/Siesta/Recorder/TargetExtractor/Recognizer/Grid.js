@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -17,8 +17,9 @@ Role('Siesta.Recorder.TargetExtractor.Recognizer.Grid', {
 
     override : {
         getCssQuerySegmentForElement : function (node, isTarget, maxNumberOfCssClasses, lookUpUntil) {
-            var Ext             = this.Ext;
-            var itemSelector    = Ext && Ext.grid && Ext.grid.View && Ext.grid.View.prototype.itemSelector;
+            var Ext             = this.Ext
+            var viewProto       = Ext && Ext.grid && Ext.grid.View && Ext.grid.View.prototype
+            var itemSelector    = viewProto && (viewProto.rowSelector || viewProto.itemSelector)
 
             // Ext or Grid package may not be loaded in the page!
             if (!itemSelector) return this.SUPERARG(arguments);
@@ -51,8 +52,12 @@ Role('Siesta.Recorder.TargetExtractor.Recognizer.Grid', {
                 if (rowCss) {
                     rowSelector     = '.' + rowCss;
                 } else {
-                    var rowIndex    = this.getNthPosition(rowEl, itemSelector.indexOf('item') >= 0 ? 'x-grid-item' : 'x-grid-row');
-                    rowSelector     = itemSelector + ':nth-child(' + (rowIndex + 1) + ')';
+                    // in Ext5 rows (.x-grid-row) are wrapped in <table> containers (.x-grid-item)
+                    // we are interested in the position of container in this case
+                    var rowContainerSelector    = viewProto.itemSelector || itemSelector
+                    
+                    var rowIndex    = this.getNthPosition(rowEl, rowContainerSelector);
+                    rowSelector     = rowContainerSelector + ':nth-child(' + (rowIndex + 1) + ')';
                 }
             }
 
@@ -64,7 +69,7 @@ Role('Siesta.Recorder.TargetExtractor.Recognizer.Grid', {
             if (cellCss) {
                 cellSelector    = '.' + cellCss;
             } else {
-                var cellIndex   = this.getNthPosition(cellEl, 'x-grid-cell');
+                var cellIndex   = this.getNthPosition(cellEl, '.x-grid-cell');
                 cellSelector    = '.x-grid-cell:nth-child(' + (cellIndex + 1) + ')';
             }
 

@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -19,65 +19,75 @@ Role('Siesta.Test.ExtJS.Component', {
     methods: {
 
         /**
-        * Waits until the main element of the passed component is the 'top' element in the DOM. The callback will receive the passed component instance.
-        * 
-        * @param {Ext.Component/String} component An Ext.Component instance or a ComponentQuery 
-        * @param {Function} callback The callback to call after the component becomes visible
-        * @param {Object} scope The scope for the callback
-        * @param {Int} timeout The maximum amount of time to wait for the condition to be fulfilled. Defaults to the {@link Siesta.Test.ExtJS#waitForTimeout} value. 
-        */
+         * Waits until the main element of the passed component is the 'top' element in the DOM. The callback will receive the passed component instance.
+         * 
+         * @param {Ext.Component/String} component An Ext.Component instance or a ComponentQuery string. In the latter case, 
+         * this method will also wait until the component query find some component (meaning the component does not have to
+         * be already created when waiting starts) 
+         * @param {Function} callback The callback to call after the component becomes visible
+         * @param {Object} scope The scope for the callback
+         * @param {Int} timeout The maximum amount of time to wait for the condition to be fulfilled. Defaults to the {@link Siesta.Test.ExtJS#waitForTimeout} value. 
+         */
         waitForComponentVisible: function (component, callback, scope, timeout) {
-            var R = Siesta.Resource('Siesta.Test.ExtJS.Component');
-            var me = this;
+            var R       = Siesta.Resource('Siesta.Test.ExtJS.Component');
+            var me      = this;
 
-            component = this.normalizeComponent(component);
-            
-            if (!this.isExtJSComponent(component)) {
+            if (this.typeOf(component) != 'String' && !this.isExtJSComponent(component)) {
                 throw R.get('badInputText') + ': ' + component;
             }
 
             return this.waitFor({
-                method          : function () { var el = me.compToEl(component); return el && me.elementIsTop(el, true) && component; },
+                method          : function () { 
+                    var comp    = me.normalizeComponent(component, true)
+                    
+                    if (!comp) return false
+                    
+                    var el      = me.compToEl(comp); 
+                    
+                    return el && me.elementIsTop(el, true) && comp; 
+                },
                 callback        : callback,
                 scope           : scope,
                 timeout         : timeout,
                 assertionName   : 'waitForComponentVisible',
-                description     : ' ' + R.get('component') + ' ' + component.id + ' ' + R.get('toBeVisible')
+                description     : ' ' + R.get('component') + ' "' + (me.typeOf(component) == 'String' ? component : component.id) + '" ' + R.get('toBeVisible')
             });
         },
 
 
         /**
-        * Waits until the main element of the passed component is not visible. The callback will receive the passed component instance.
-        * 
-        * @param {Ext.Component/String} component An Ext.Component instance or a ComponentQuery 
-        * @param {Function} callback The callback to call after the component becomes not visible
-        * @param {Object} scope The scope for the callback
-        * @param {Int} timeout The maximum amount of time to wait for the condition to be fulfilled. Defaults to the {@link Siesta.Test.ExtJS#waitForTimeout} value. 
-        */
+         * Waits until the main element of the passed component is not visible. The callback will receive the passed component instance.
+         * 
+         * @param {Ext.Component/String} component An Ext.Component instance or a ComponentQuery string. In the latter case, 
+         * this method will also wait until the component query find some component (meaning the component does not have to
+         * be already created when waiting starts) 
+         * @param {Function} callback The callback to call after the component becomes not visible
+         * @param {Object} scope The scope for the callback
+         * @param {Int} timeout The maximum amount of time to wait for the condition to be fulfilled. Defaults to the {@link Siesta.Test.ExtJS#waitForTimeout} value. 
+         */
         waitForComponentNotVisible: function (component, callback, scope, timeout) {
-            var R = Siesta.Resource('Siesta.Test.ExtJS.Component');
+            var R       = Siesta.Resource('Siesta.Test.ExtJS.Component');
+            var me      = this;
 
-            component = this.normalizeComponent(component);
-
-            if (!this.isExtJSComponent(component)) {
+            if (this.typeOf(component) != 'String' && !this.isExtJSComponent(component)) {
                 throw R.get('badInputText') + ': ' + component;
             }
 
-            var me = this;
-
             return this.waitFor({
                 method          : function () {
-                    // Ext vs Touch normalization
-                    var el = component.el || component.element;
+                    var comp    = me.normalizeComponent(component, true)
+                    
+                    if (!comp) return false
+                    
+                    var el      = me.compToEl(comp);
 
-                    return (component.isHidden() || (el && !me.isElementVisible(el))) && component;
+                    return (comp.isHidden() || (el && !me.isElementVisible(el))) && comp;
                 },
                 callback        : callback,
                 scope           : scope,
                 timeout         : timeout,
                 assertionName   : 'waitForComponentNotVisible',
-                description     : ' ' + R.get('component') + ' ' + component.id + ' ' + R.get('toNotBeVisible')
+                description     : ' ' + R.get('component') + ' "' + (me.typeOf(component) == 'String' ? component : component.id) + '" ' + R.get('toNotBeVisible')
             });
         },
 

@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -67,6 +67,11 @@ Role('Siesta.Harness.Browser.ExtJSCore', {
     
     methods : {
         
+        createViewport       : function(config) {
+           return Ext.create("Siesta.Harness.Browser.UI.Viewport", config);
+        },
+        
+            
         generateLoaderPathHook : function () {
             // Such tedious check to allow setting the paths without crash for Ext JS versions < 4
             // (which may have own "Ext.Loader" object)

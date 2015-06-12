@@ -1,11 +1,14 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
 
 */
+.siesta-domcontainer {
+}
+
 /*=======================================================================================================================================================================================================================
     Panel with test iframe
 */
@@ -15,7 +18,6 @@ http://bryntum.com/products/siesta/license
 	width          : 100%;
 	height         : 100%;
 	z-index        : 90000;
-	background-color   : white;
 	left           : 0;
 	top            : 0;
 }
@@ -49,11 +51,6 @@ td.tr-td-vertical-align {
 .tr-iframe-forced {
     z-index               : 100000 !important;
     border                : 5px solid;
-    border-color          : #d5e7f0;
-    -moz-border-radius    : 14px;
-    -webkit-border-radius : 14px;
-    border-radius         : 14px;
-    background-color      : white;
 }
 
 .tr-iframe-forced-screenshot {
@@ -71,11 +68,6 @@ td.tr-td-vertical-align {
     top  : -10000px !important;
 }
 
-.siesta-domcontainer {
-    background    : #fff url(../images/domcontainer-bg.png) repeat;
-    box-shadow    : inset 3px 3px 4px #dfdfdf;
-}
-
 .siesta-domcontainer .x-panel-body {
     background : transparent;
     border     : 0 none;
@@ -86,15 +78,11 @@ td.tr-td-vertical-align {
 }
 
 .domcontainer-console input {
-    color           : #666;
     height          : 24px;
     width           : 100%;
     padding         : 2px 2px 2px 20px;
-    background      : #fff url(../images/prompt.png) no-repeat 4px center;
-    font            : 14px "Consolas";
     background-size : 12px;
     line-height     : 19px;
-    border          : 1px solid #ccc;
-    box-shadow      : 0 1px 3px 0 rgba(150, 150, 150, 0.2) inset, 0 1px 0 rgba(255, 255, 255, 0.2);
+    border          : 1px solid;
 }
 

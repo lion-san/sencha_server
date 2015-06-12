@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -68,19 +68,9 @@ Ext.define("Sch.mixin.FilterableTreeView", {
     
     
     onFilterCleared : function () {
-        delete this.toggle;
-        
-        var el          = this.getEl();
-        
-        if (el) el.removeCls('sch-tree-filtered');
     },
     
     
     onFilterSet : function () {
-        this.toggle     = function () {};
-        
-        var el          = this.getEl();
-        
-        if (el) el.addCls('sch-tree-filtered');
     }
 });

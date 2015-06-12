@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -142,7 +142,7 @@ Class('Siesta.Test.ExtJS', {
                 }
     
                 var ignore          = function (name) {
-                    return name.match(/Ext\.data\.Store\.ImplicitModel|collectorThreadId/);
+                    return name.match(/Ext\.data\.Store\.ImplicitModel|collectorThreadId|Ext\.dom\.GarbageCollector\.lastTime/);
                 }
                 
                 var getObjectDifferences    = function (cleanObj, dirtyObj, ns) {

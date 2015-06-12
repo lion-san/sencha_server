@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -93,7 +93,6 @@ Class('Siesta.Harness.Browser.SenchaTouch', {
              * @cfg {Boolean} transparentEx
              */
             transparentEx       : true,
-            keepResults         : false,
             keepNLastResults    : 0,
             
             /**
@@ -109,7 +108,6 @@ Class('Siesta.Harness.Browser.SenchaTouch', {
             forcedRunCore       : 'sequential',
 
             isRunningOnMobile   : true,
-            useExtJSUI          : true,
             
             contentManagerClass : Siesta.Content.Manager.Browser.ExtJSCore
         },
@@ -139,29 +137,6 @@ Class('Siesta.Harness.Browser.SenchaTouch', {
                 }
                 
                 return config
-            },
-
-
-
-            createViewport: function (config) {
-                if (!this.isRunningOnMobile && this.useExtJSUI) return Ext.create("Siesta.Harness.Browser.UI.ExtViewport", config);
-                
-                var mainPanel = Ext.create('Siesta.Harness.Browser.UI_Mobile.MainPanel', config);
-                
-                Ext.Viewport.add(mainPanel);
-                
-                return mainPanel;
-            },
-
-            
-            showForcedIFrame : function (test) {
-                $.rebindWindowContext(window);
-                
-                var wrapper     = test.scopeProvider.wrapper
-
-                $(wrapper).css({
-                    'z-index'   : 100000
-                });
             }
         }
     }

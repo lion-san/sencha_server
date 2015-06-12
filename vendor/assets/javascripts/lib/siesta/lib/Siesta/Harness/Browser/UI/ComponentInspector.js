@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -212,16 +212,15 @@ Ext.define('Siesta.Harness.Browser.UI.ComponentInspector', {
             this.start();
         }
 
-        var el = Ext.get(this.resolveTarget(target));
-        var node = el.dom;
+        var node = this.resolveTarget(target);
         var boxStyle = this.boxIndicatorEl.dom.style;
         var offsets = this.getOffsets(node);
 
         // Regular getWidth/getHeight doesn't work if another iframe is on the page
-        boxStyle.left = (el.getX() - 1 + offsets[0]) + 'px';
-        boxStyle.top = (el.getY() - 1 + offsets[1]) + 'px';
-        boxStyle.width = ((el.getWidth() || (parseInt(node.style.width.substring(0, node.style.width.length - 2), 10))) + 2) + 'px';
-        boxStyle.height = ((el.getHeight() || (parseInt(node.style.height.substring(0, node.style.height.length - 2), 10))) + 2) + 'px';
+        boxStyle.left = (Ext.fly(node).getX() - 1 + offsets[0]) + 'px';
+        boxStyle.top = (Ext.fly(node).getY() - 1 + offsets[1]) + 'px';
+        boxStyle.width = ((Ext.fly(node).getWidth() || (parseInt(node.style.width.substring(0, node.style.width.length - 2), 10))) + 2) + 'px';
+        boxStyle.height = ((Ext.fly(node).getHeight() || (parseInt(node.style.height.substring(0, node.style.height.length - 2), 10))) + 2) + 'px';
 
         if (content) {
             this.updateHighlightContent(content);

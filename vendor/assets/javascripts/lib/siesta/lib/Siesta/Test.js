@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -45,6 +45,7 @@ Class('Siesta.Test', {
 
     does        : [
         Siesta.Util.Role.CanFormatStrings,
+        Siesta.Util.Role.CanGetType,
         Siesta.Test.More,
         Siesta.Test.Date,
         Siesta.Test.Function,
@@ -353,7 +354,9 @@ Class('Siesta.Test', {
          */
         diag : function (desc) {
             this.addResult(new Siesta.Result.Diagnostic({
-                description : desc
+                // protection from user passing some arbitrary JSON object instead of string
+                // (which can be circular and then test report will fail with "Converting circular structure to JSON"
+                description : String(desc || '')
             }))
         },
 
@@ -388,29 +391,21 @@ Class('Siesta.Test', {
 
             if (result) {
                 result.passed       = true
-                result.description  = desc || ''
+                result.description  = String(desc || '')
                 result.annotation   = annotation
             }
 
             this.addResult(result || new Siesta.Result.Assertion({
                 passed          : true,
 
-                annotation      : annotation,
-                description     : desc || '',
+                // protection from user passing some arbitrary JSON object instead of string
+                // (which can be circular and then test report will fail with "Converting circular structure to JSON"
+                annotation      : String(annotation || ''),
+                description     : String(desc || ''),
                 sourceLine      : (result && result.sourceLine) || (annotation && annotation.sourceLine) || this.sourceLineForAllAssertions && this.getSourceLine() || null
             }))
         },
 
-
-        /**
-         * This method returns a result of `Object.prototype.toString` applied to the passed argument. The `[object` and trailing `]` are trimmed.
-         *
-         * @param {Mixed} object
-         * @return {String} The name of the "type" for this object.
-         */
-        typeOf : function (object) {
-            return Object.prototype.toString.call(object).replace(/^\[object /, '').replace(/\]$/, '')
-        },
 
         /**
          * This method add the failed assertion to this test.
@@ -480,8 +475,10 @@ Class('Siesta.Test', {
                 passed      : false,
                 sourceLine  : sourceLine,
 
-                annotation  : annotation,
-                description : desc
+                // protection from user passing some arbitrary JSON object instead of string
+                // (which can be circular and then test report will fail with "Converting circular structure to JSON"
+                annotation  : String(annotation || ''),
+                description : String(desc || '')
             }))
 
             if (!this.isTodo) {
@@ -673,7 +670,7 @@ Class('Siesta.Test', {
          * when comparing Function, RegExp and Date instances, additional check that objects contains the same set of own properties ("hasOwnProperty")
          * will be performed.
          * @param {Boolean} onlyPrimitives When set to `true`, the function will not recurse into composite objects (like [] or {}) and will just report that
-         * objects are different. Use this mode when you are only interesetd in comparison of primitive values (numbers, strings, etc).
+         * objects are different. Use this mode when you are only interested in comparison of primitive values (numbers, strings, etc).
          * @param {Boolean} asObjects When set to `true`, the function will compare various special Object instances, like Functions, RegExp etc,
          * by comparison of their properties only and not taking the anything else into account.
          * @return {Boolean} `true` if the passed objects are equal
@@ -1143,7 +1140,8 @@ Class('Siesta.Test', {
          *
          * The number of nesting levels is not limited - ie sub-tests may have own sub-tests.
          *
-         * Note, that this method does not starts the sub test, but only instatiate it. To start the sub test, use {@link #launchSubTest} method.
+         * Note, that this method does not starts the sub test, but only instatiate it. To start the sub test, 
+         * use the {@link #launchSubTest} method or the {@link #subTest} helper method.
          *
          * @param {String} name The name of the test. Will be used in the UI, as the parent node name in the assertions tree
          * @param {Function} code A function with test code. Will receive a test instance as the 1st argument.
@@ -1347,13 +1345,14 @@ Class('Siesta.Test', {
             })
 
             this.launchSubTest(subTest, callback)
+            
+            return subTest
         },
         
         
         stringifyException : function (e, stackTrace) {
             var stringified             = e + ''
             var annotation              = (stackTrace || this.getStackTrace(e) || []).join('\n')
-            var R                       = Siesta.Resource('Siesta.Test');
 
             // prepend the exception message to the stack trace if its not already there
             if (annotation.indexOf(stringified) == -1) annotation = stringified + annotation
@@ -1779,7 +1778,7 @@ Class('Siesta.Test', {
 
                     // cleanup the closures just in case (probably useful for IE)
                     originalSetTimeout          = originalClearTimeout  = null
-                    global                      = run                   = null
+                    global                      = null
 
                     // this iterator will also process "this" test instance too
                     me.eachSubTest(function (subTest) {
@@ -1808,12 +1807,17 @@ Class('Siesta.Test', {
         },
 
 
+        // called before the iframe of the test is removed from DOM
         cleanup : function () {
             this.overrideForSetTimeout  = this.overrideForClearTimeout  = null
             this.originalSetTimeout     = this.originalClearTimeout     = null
             this.global                 = this.run                      = null
             this.exceptionCatcher       = this.testErrorClass           = null
             this.startTestAnchor                                        = null
+            
+            this.scopeProvider          = null
+            
+            this.purgeListeners()
         },
 
 
@@ -1890,6 +1894,8 @@ Class('Siesta.Test', {
                     description         : me.getSummaryMessage()
                 }))
                 
+                me.onTestFinalize()
+                
                 /**
                  * This event is fired when an individual test case ends (either because it has completed correctly or thrown an exception).
                  *
@@ -1906,6 +1912,9 @@ Class('Siesta.Test', {
                 me.fireEvent('testendbubbling', me);
     
                 me.callback && me.callback()
+                
+                // help garbage collector to cleanup all the context of this callback (huge impact)
+                me.callback     = null
             }
             
             // sub-tests don't do the "tearDown" process
@@ -1935,6 +1944,10 @@ Class('Siesta.Test', {
                 
                 if (!hasTimedOut) finalizationCode(error)
             })
+        },
+        
+        
+        onTestFinalize : function () {
         },
 
 
@@ -2177,6 +2190,12 @@ Class('Siesta.Test', {
 
         getJUnitClass : function () {
             return this.jUnitClass || this.meta.name || 'Siesta.Test'
+        },
+        
+        
+        // to give test scripts access to locales
+        resource : function () {
+            return Siesta.Resource.apply(Siesta.Resource, arguments)
         }
     }
     // eof methods

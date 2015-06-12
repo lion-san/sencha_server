@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -3363,7 +3363,7 @@ Scope.Provider.__ONLOAD__   = {}
 Scope.Provider.__ONERROR__  = {};
 Role('Scope.Provider.Role.WithDOM', {
     
-    requires    : [ 'getDocument', 'create', 'getPreload', 'isAlreadySetUp' ],
+    requires    : [ 'getDocument', 'create', 'getPreload', 'isAlreadySetUp', 'setViewportSize' ],
     
     has : {
         useStrictMode   : true,
@@ -3417,7 +3417,13 @@ Role('Scope.Provider.Role.WithDOM', {
     override : {
         
         cleanup : function () {
-            this.scope.onerror  = null
+            this.cachedOnError  = null
+            
+            // can throw exceptions for cross-domain case
+            try {
+                this.scope.onerror  = null
+            } catch (e) {
+            }
             
             this.SUPERARG(arguments)
             
@@ -3830,6 +3836,16 @@ Class('Scope.Provider.IFrame', {
         },
         
         
+        setViewportSize : function (width, height) {
+            var iframe              = this.iframe
+            
+            if (!iframe) return
+            
+            iframe.style.width      = width + 'px'
+            iframe.style.height     = height + 'px'
+        },
+        
+        
         create : function (onLoadCallback) {
             var me                  = this
             var doc                 = this.parentWindow.document
@@ -3929,6 +3945,7 @@ Class('Scope.Provider.IFrame', {
             setTimeout(function () {
                 
                 if (me.beforeCleanupCallback) me.beforeCleanupCallback()
+                me.beforeCleanupCallback    = null
                 
                 // chaging the page, triggering `onunload` and hopefully preventing browser from caching the content of iframe
                 iframe.src      = 'javascript:false'
@@ -3945,6 +3962,7 @@ Class('Scope.Provider.IFrame', {
                     me.cleanupHanlders()
                     
                     if (me.cleanupCallback) me.cleanupCallback()
+                    me.cleanupCallback  = null
                     
                 }, me.cleanupDelay)
             }, me.cleanupDelay)
@@ -4064,8 +4082,29 @@ Class('Scope.Provider.Window', {
 
     methods : {
         
+        setViewportSize : function (width, height) {
+            var popupWindow     = this.popupWindow
+            
+            if (!popupWindow) return
+            
+            // is not guaranteed to work
+            popupWindow.resizeTo(width, height)
+        },
+        
+        
         create : function (onLoadCallback) {
-            var popup   = this.scope = this.popupWindow = this.parentWindow.open(this.sourceURL || 'about:blank', '_blank', "width=800,height=600")
+            var minViewportSize     = this.minViewportSize
+            
+            var width       = minViewportSize && minViewportSize.width || 1024
+            var height      = minViewportSize && minViewportSize.height || 768
+            
+            var popup       = this.scope = this.popupWindow = this.parentWindow.open(
+                // left/top is set to > 0 value with intent to keep the mouse cursor outside of the popup
+                // its always recommened to set the mousecursor position to 0, 0 in the automation script
+                this.sourceURL || 'about:blank', 
+                '_blank', 
+                "left=10,top=10,width=" + width + ",height=" + height
+            )
             
             if (!popup) {
                 alert('Please enable popups for the host with this test suite running: ' + this.parentWindow.location.host)
@@ -4126,7 +4165,7 @@ Class('Scope.Provider.Window', {
                     
                     init('poll');
                 };
-            
+                
                 if (doc.readyState == 'complete') 
                     fn.call(win, 'lazy');
                 else {
@@ -4140,7 +4179,14 @@ Class('Scope.Provider.Window', {
                 }
             }
             
-            contentLoaded(popup, onLoadCallback || function () {})
+            if (this.sourceURL)
+                // seems the "doc.readyState" is set before the DOM is created on the page
+                // if one will start interact with page immediately he can overwrite the page content
+                setTimeout(function () {
+                    contentLoaded(popup, onLoadCallback || function () {})    
+                }, 10)
+            else
+                contentLoaded(popup, onLoadCallback || function () {})
         },
         
         
@@ -4151,6 +4197,7 @@ Class('Scope.Provider.Window', {
         
         cleanup : function () {
             if (this.beforeCleanupCallback) this.beforeCleanupCallback()
+            this.beforeCleanupCallback      = null
             
             this.popupWindow.close()
             
@@ -4159,6 +4206,7 @@ Class('Scope.Provider.Window', {
             this.cleanupHanlders()
             
             if (this.cleanupCallback) this.cleanupCallback()
+            this.cleanupCallback            = null
         }
     }
 })
@@ -4639,6 +4687,22 @@ Class('JooseX.Observable.Channel', {
         
     methods : {
         
+        destroy : function () {
+            Joose.O.each(this.channels, function (channel, name) {
+                channel.purgeListeners()
+            })
+            
+            this.channels   = null
+            
+            // cleanup paranoya
+            Joose.O.each(this.listeners, function (value, name) {
+                this.listeners[ name ]  = null
+            }, this)
+            
+            this.listeners  = null
+        },
+        
+        
         // (!) segments array will be destroyed in this method
         getListenersFor : function (segments, name, activators) {
             var listeners = this.listeners
@@ -4713,6 +4777,9 @@ Class('JooseX.Observable.Channel', {
         
         
         removeListener : function (listenerToRemove) {
+            // already purged
+            if (!this.listeners) return
+            
             var eventListeners      = this.listeners[ listenerToRemove.eventName ]
             
             eventListeners && Joose.A.each(eventListeners, function (listener, index) {
@@ -4909,6 +4976,8 @@ Role('JooseX.Observable', {
         
         
         purgeListeners  : function () {
+            this.rootChannel.destroy()
+            
             this.rootChannel = new JooseX.Observable.Channel()
         },
         
@@ -5803,9 +5872,15 @@ Class('Siesta.Util.Serializer', {
 ;
 Role('Siesta.Util.Role.CanFormatStrings', {
     
+    has     : {
+        serializeFormatingPlaceholders      : true
+    },
+    
     methods : {
         
         formatString: function (string, data) {
+            if (!data) return string
+            
             var match
             var variables           = []
             var isRaw               = []
@@ -5824,13 +5899,29 @@ Role('Siesta.Util.Role.CanFormatStrings', {
                 result              = result.replace(
                     new RegExp('\\{' + (varIsRaw ? '!' : '') + variable + '\\}', 'g'), 
                     data.hasOwnProperty(variable) ? 
-                        varIsRaw ? data[ variable ] + '' : Siesta.Util.Serializer.stringify(data[ variable ]) 
+                        varIsRaw || !this.serializeFormatingPlaceholders ? data[ variable ] + '' : Siesta.Util.Serializer.stringify(data[ variable ]) 
                     : 
                         ''
                 )
-            })
+            }, this)
             
             return result
+        }
+    }
+})
+;
+Role('Siesta.Util.Role.CanGetType', {
+    
+    methods : {
+        
+        /**
+         * This method returns a result of `Object.prototype.toString` applied to the passed argument. The `[object` and trailing `]` are trimmed.
+         *
+         * @param {Mixed} object
+         * @return {String} The name of the "type" for this object.
+         */
+        typeOf : function (object) {
+            return Object.prototype.toString.call(object).slice(8, -1)
         }
     }
 })
@@ -5864,7 +5955,9 @@ Class('Siesta.Util.Queue', {
         
         observeTest             : null,
 
-        currentDelayStepId      : null
+        currentDelayStepId      : null,
+        
+        isDestroyed             : false
     },
     
     
@@ -5917,6 +6010,8 @@ Class('Siesta.Util.Queue', {
         
         
         abort : function (ignoreCallback) {
+            if (this.isDestroyed) return
+            
             this.isAborted      = true
             
             var deferClearer    = this.deferClearer
@@ -5927,6 +6022,8 @@ Class('Siesta.Util.Queue', {
             deferClearer(this.currentTimeout)
             
             if (!ignoreCallback) this.callback.call(this.scope || this)
+            
+            this.destroy()
         },
         
         
@@ -5962,10 +6059,12 @@ Class('Siesta.Util.Queue', {
                 if (callback)
                     if (this.callbackDelay)
                         deferer(function () {
-                            if (!me.isAborted) callback.call(scope || this)
+                            if (!me.isAborted) { callback.call(scope || this); me.destroy() }
                         }, this.callbackDelay)
-                    else
+                    else {
                         callback.call(scope || this)
+                        me.destroy()
+                    }
             }
         },
         
@@ -6016,6 +6115,21 @@ Class('Siesta.Util.Queue', {
                 else
                     me.doSteps(steps, callback, scope)
             }
+        },
+        
+        
+        // help garbage collector to release the memory 
+        destroy : function () {
+            if (this.isDestroyed) return
+            
+            this.callback   = this.observeTest      = this.deferer = this.deferClearer = null
+            this.processor  = this.processorScope   = null
+            
+            // cleanup paranoya, this shouldn't matter in general, since "next" here is from the same context
+            for (var i = 0; i < this.steps.length; i++) this.steps[ i ].next = null
+            this.steps          = null
+            
+            this.isDestroyed    = true
         }
     }
 })
@@ -6495,7 +6609,7 @@ Class('Siesta.Content.Manager', {
 ;
 ;
 Class('Siesta', {
-    /*PKGVERSION*/VERSION : '2.1.2',
+    /*PKGVERSION*/VERSION : '3.0.2',
 
     // "my" should been named "static"
     my : {
@@ -6583,17 +6697,17 @@ Siesta.CurrentLocale = Siesta.CurrentLocale || {
     },
 
     "Siesta.Harness.Browser.UI.ResultPanel" : {
-        rerunText               : 'Re-run test',
+        rerunText               : 'Run test',
         toggleDomVisibleText    : 'Toggle DOM visible',
         viewSourceText          : 'View source',
         showFailedOnlyText      : 'Show failed only',
-        domInspectorText        : 'Toggle Ext Dom Inspector',
+        componentInspectorText  : 'Toggle Ext Component Inspector',
         eventRecorderText       : 'Event Recorder',
         closeText               : 'Close'
     },
 
     "Siesta.Harness.Browser.UI.TestGrid" : {
-        title                   : 'Double click a test to run it',
+        title                   : 'Test list',
         nameText                : 'Name',
         filterTestsText         : 'Filter tests',
         expandCollapseAllText   : 'Expand / Collapse all',
@@ -6610,21 +6724,20 @@ Siesta.CurrentLocale = Siesta.CurrentLocale || {
         transparentExText       : 'Transparent exceptions',
         cachePreloadsText       : 'Cache preloads',
         autoLaunchText          : 'Auto launch',
-        keepResultsText         : 'Keep results',
         speedRunText            : 'Speed run',
         breakOnFailText         : 'Break on fail',
         debuggerOnFailText      : 'Debugger on fail',
         aboutText               : 'About Siesta',
         documentationText       : 'Siesta Documentation',
         siestaDocsUrl           : 'http://bryntum.com/docs/siesta',
-        filterFieldTooltip      : 'Supported formats for tests filtering:\n1) term1 term2 - both "term1" and "term2" should present in the test url\n' +
-            '2) term1 term2 | term3 term4 | ... - both "term1" and "term2" should present in the test url, or both term3 and term4, can be ' +
+        filterFieldTooltip      : 'Supported formats for tests filtering:\n1) TERM1 TERM2 - both "TERM1" and "TERM2" should present in the test url\n' +
+            '2) TERM1 TERM2 | TERM3 TERM4 | ... - both "TERM1" and "TERM2" should present in the test url, OR both TERM3 and TERM4, etc, can be ' +
             'repeated indefinitely\n' +
-            '3) group > any term for tests filtering - filters only withing the specified `group`'
-            
+            '3) GROUP_TERM > TEST_TERM - filters only withing the specified `group`',
+        landscape               : 'Landscape'
     },
 
-    "Siesta.Harness.Browser.UI.VersionChecker" : {
+    "Siesta.Harness.Browser.UI.VersionUpdateButton" : {
 
         newUpdateText           : 'New Update Available...',
         updateWindowTitleText   : 'New version available for download! Current version: ',
@@ -6637,25 +6750,25 @@ Siesta.CurrentLocale = Siesta.CurrentLocale || {
     },
 
     "Siesta.Harness.Browser.UI.Viewport" : {
-
         apiLinkText       : 'API Documentation',
         apiLinkUrl        : 'http://bryntum.com/docs/siesta',
         uncheckOthersText : 'Uncheck others (and check this)',
         uncheckAllText    : 'Uncheck all',
         checkAllText      : 'Check all',
         runThisText       : 'Run this',
+        expandAll           : 'Expand all',
+        collapseAll         : 'Collapse all',
+        filterToCurrentGroup    : 'Filter to current group',
+        filterToFailed          : 'Filter to failed',
         httpWarningTitle  : 'You must use a web server',
         httpWarningDesc   : 'You must run Siesta in a web server context, and not using the file:/// protocol'
     },
 
-    "Siesta.Harness.Browser.UI_Mobile.MainPanel" : {
-        backText                : 'Back',
-        allTestsPassedText      : 'All tests passed.',
-        failedAssertionsForText : 'Failed assertions for: '
-    },
 
     "Siesta.Harness.Browser" : {
-        codeCoverageWarningText : "Can not enable code coverage - did you forget to include the `siesta-coverage-all.js` on the harness page?"
+        codeCoverageWarningText : "Can not enable code coverage - did you forget to include the `siesta-coverage-all.js` on the harness page?",
+        noJasmine               : "No `jasmine` object found on spec runner page",
+        noJasmineSiestaReporter : "Can't find SiestaReporter in Jasmine. \nDid you add the `siesta/bin/jasmine-siesta-reporter.js` file to your spec runner page?"
     },
 
     "Siesta.Result.Assertion" : {
@@ -6719,7 +6832,12 @@ Siesta.CurrentLocale = Siesta.CurrentLocale || {
         thresholdIsText             : 'Threshold is ',
         exactMatchText              : 'Exact match text',
         thrownExceptionText         : 'Thrown exception',
-        noExceptionThrownText       : 'No exception thrown'
+        noExceptionThrownText       : 'No exception thrown',
+        wrongSpy                    : 'Incorrect spy instance',
+        toHaveBeenCalledDescTpl     : 'Expect method {methodName} to have been called {need} times',
+        actualNbrOfCalls            : 'Actual number of calls',
+        expectedNbrOfCalls          : 'Expected number of calls',
+        toHaveBeenCalledWithDescTpl : 'Expect method {methodName} to have been called at least once with the specified arguments'
     },
 
     "Siesta.Test.ExtJS.Ajax"        : {
@@ -6789,9 +6907,14 @@ Siesta.CurrentLocale = Siesta.CurrentLocale || {
         codeBodyMissing              : 'Code body is not provided for',
         codeBodyOf                   : 'Code body of',
         missingFirstArg              : 'does not declare a test instance as 1st argument',
-        iitFound                     : 't.iit should only be used during debugging'
+        iitFound                     : 't.iit should only be used during debugging',
+        noObject                     : 'No object to spy on'
     },
 
+    "Siesta.Test.BDD.Spy"                : {
+        spyingNotOnFunction          : 'Trying to create a spy over a non-function property'
+    },
+    
     "Siesta.Test.Browser"            : {
         noDomElementFound            : 'No DOM element found for CSS selector',
         noActionTargetFound          : 'No action target found for',
@@ -7009,7 +7132,8 @@ Siesta.CurrentLocale = Siesta.CurrentLocale || {
         atLine                       : 'At line',
         chainStepEx                  : 'Chain step threw an exception',
         stepFn                       : 'Step function',
-        notUsingNext                 : 'does not use the provided "next" function anywhere'
+        notUsingNext                 : 'does not use the provided "next" function anywhere',
+        calledMoreThanOnce           : 'The `next` callback of {num} step (1-based) of `t.chain()` call at line {line} is called more than once.'
     },
 
 
@@ -7110,38 +7234,43 @@ Siesta.CurrentLocale = Siesta.CurrentLocale || {
 ;
 // Localization helper
 Siesta.Resource = (function () {
-
-    function get(dict, key) {
-        var text = dict[key];
-
-        if (text) return text;
-
-        if (window.console && console.error) {
-            window.top.console.error('TEXT_NOT_DEFINED: ' + key);
+    
+    var Resource    = Class({
+        does    : Siesta.Util.Role.CanFormatStrings,
+        
+        has     : {
+            dict        : null
+        },
+        
+        methods : {
+            'get' : function (key, data) {
+                var text = this.dict[ key ];
+        
+                if (text) return this.formatString(text, data);
+        
+                if (window.console && console.error) {
+                    window.top.console.error('TEXT_NOT_DEFINED: ' + key);
+                }
+        
+                return 'TEXT_NOT_DEFINED: ' + key;
+            }
         }
-
-        return 'TEXT_NOT_DEFINED: ' + key;
-    }
+    
+    })
+    
 
     return function (namespace, key) {
-
-        var dictionary = Siesta.CurrentLocale[namespace];
+        var dictionary  = Siesta.CurrentLocale[ namespace ];
 
         if (!dictionary) {
             throw 'Missing dictionary for namespace: ' + namespace;
         }
+        
+        var resource    = new Resource({ dict : dictionary, serializeFormatingPlaceholders : false })
 
-        if (key) {
-            return get(dictionary, key)
-        }
+        if (key) return resource.get(key)
 
-        return {
-            dict    : dictionary,
-
-            get     : function(key) {
-                return get(this.dict, key);
-            }
-        };
+        return resource
     }
 })();
 ;
@@ -7344,11 +7473,12 @@ Class('Siesta.Result.Assertion', {
             var info    = {
                 type            : this.meta.name,
                 passed          : this.passed,
-                description     : this.description || 'No description'
+                description     : String(this.description) || 'No description',
+                annotation      : String(this.annotation)
             }
             
             // copy if true
-            Joose.A.each([ 'isTodo', 'annotation', 'isWaitFor', 'isException', 'sourceLine', 'name' ], function (name) {
+            Joose.A.each([ 'isTodo', 'isWaitFor', 'isException', 'sourceLine', 'name' ], function (name) {
                 if (me[ name ]) info[ name ] = me[ name ]
             })
             
@@ -8784,8 +8914,8 @@ Role('Siesta.Test.More', {
         
         /**
          * This method accepts a variable number of steps, either as individual arguments or as a single array containing them. Steps and arrays
-         * of steps are handled just fine, and any step-arrays passed will be flattened. Each step should be either a function or configuration object for {@link Siesta.Test.Action test actions}.
-         * These functions / actions will be executed in order.
+         * of steps are handled just fine, and any step-arrays passed will be flattened. Each step should be either a function or configuration 
+         * object for {@link Siesta.Test.Action test actions}. These functions / actions will be executed in order.
          * 
          * 1) For a function step, it will receive a callback as the 1st argument, to call when the step is completed.
          * As the 2nd and further arguments, the step function will receive the arguments passed to the previous callback.
@@ -8916,6 +9046,8 @@ Role('Siesta.Test.More', {
         ...
     )
 
+         *
+         *  See also : {@link #chainForArray}.
          *  
          *  @param {Function/Object/Array} step1 The function to execute or action configuration, or an array of steps
          *  @param {Function/Object} step2 The function to execute or action configuration
@@ -8983,6 +9115,11 @@ Role('Siesta.Test.More', {
                         }
                         
                         var nextFunc    = function () {
+                            var self    = arguments.callee
+                            if (self.__CALLED__) me.fail(R.get('calledMoreThanOnce', { num : index + 1, line : sourceLine }))
+                            
+                            self.__CALLED__ = true
+                            
                             if (!isStepWithOwnAsyncFrame) me.endAsync(async)
                             
                             args    =  Array.prototype.slice.call(arguments);
@@ -9028,17 +9165,10 @@ Role('Siesta.Test.More', {
                             action.process()
                             
                         } else {
-                            if (!step.args) step.args   = args
-                            
-                            // Don't pass target to next step if it is a waitFor action, it does not make sense and messes up the arguments
-                            if (!isLast && (steps[ index + 1 ].waitFor || steps[ index + 1 ].action == 'wait')) {
-                                step.passTargetToNext = false;
-                            }
-
                             step.next       = nextFunc
                             step.test       = me
                             
-                            var action      = Siesta.Test.ActionRegistry().create(step, me)
+                            var action      = Siesta.Test.ActionRegistry().create(step, me, args)
                             
                             action.process()
                         }
@@ -9047,6 +9177,71 @@ Role('Siesta.Test.More', {
             })
             
             queue.run()
+        },
+        
+        
+        /**
+         * This is a wrapper around the {@link #chain} method, which allows you to run the chain over the steps, generated from the elements
+         * of some array. For example, if in some step of outer chain, we need to click the elements with ids, given as the array, we can do:
+         *
+
+    function (next) {
+        var ids     = [ 'button-1', 'button-2', 'button-3' ]
+        
+        t.chainForArray(ids, function (elId) {
+            return { click : '#' + elId }
+        }, next)
+    }
+         * 
+         * @param {Array} array An array with arbitrary elements
+         * @param {Function} generator A function, which will be called for every element of the `array`. It should return
+         * a chain step, generated from that element. This function can return an array of steps as well. If generator will return `null` or 
+         * `undefined` nothing will be added to the chain.
+         * @param {Function} generator.el An element of the `array`
+         * @param {Function} generator.index An index of the element
+         * @param {Function} [callback] A function to call, once the chain is completed.
+         */
+        chainForArray : function (array, generator, callback, reverse) {
+            var me          = this
+            var steps       = []
+            
+            Joose.A[ reverse ? 'eachR' : 'each' ](array, function (el, index) {
+                var res     = generator.call(me, el, index)
+                
+                if (me.typeOf(res) == 'Array') 
+                    steps.push.apply(steps, res)
+                else
+                    if (res) steps.push(res)
+            })
+            
+            if (callback) steps.push(function () {
+                me.processCallbackFromTest(callback)
+            })
+            
+            this.chain(steps)
+        },
+        
+        
+        verifyExpectedNumber : function (actual, expected) {
+            var operator        = '=='
+            
+            if (this.typeOf(expected) == 'String') {
+                var match       = /([<>=]=?)\s*(\d+)/.exec(expected)
+                var R               = Siesta.Resource('Siesta.Test.Browser');
+
+                if (!match) throw new Error(R.get('wrongFormat')  + ": " + expected)
+                
+                operator        = match[ 1 ]
+                expected        = Number(match[ 2 ])
+            }
+            
+            switch (operator) {
+                case '==' : return actual == expected
+                case '<=' : return actual <= expected
+                case '>=' : return actual >= expected
+                case '<' : return actual < expected
+                case '>' : return actual > expected
+            }
         }
     },
     
@@ -9071,6 +9266,289 @@ Role('Siesta.Test.Role.Placeholder', {
     requires    : [
         'equalsTo'
     ]
+})
+;
+/**
+@class Siesta.Test.BDD.Spy
+
+This class implements a "spy" - function wrapper which tracks the calls to itself. Spy can be installed
+instead of a method in some object or can be used standalone.
+
+Note, that spies "belongs" to a spec and once the spec is completed all spies that were installed during it
+will be removed. 
+
+*/
+Class('Siesta.Test.BDD.Spy', {
+    
+    does        : [
+        Siesta.Util.Role.CanGetType
+    ],
+
+    has         : {
+        name                    : null,
+        
+        processor               : {
+            lazy        : 'this.buildProcessor'
+        },
+        
+        hostObject              : null,
+        propertyName            : null,
+        
+        hasOwnOriginalValue     : false,
+        originalValue           : null,
+        
+        strategy                : 'returnValue',
+        
+        returnValueObj          : undefined,
+        fakeFunc                : null,
+        throwErrorObj           : null,
+        
+        // array of { object : scope, args : [], returnValue : }
+        callsLog                : Joose.I.Array,
+        
+        /**
+         * @property {Object} calls This is an object property with several helper methods, related to the calls 
+         * tracking information. It is assigned to the wrapper function of spy.
+         * 
+         * @property {Function} calls.any Returns `true` if spy was called at least once, `false` otherwise
+         * @property {Function} calls.count Returns the number of times this spy was called
+         * @property {Function} calls.argsFor Accepts an number of the call (0-based) and return an array of arguments 
+         * for that call. 
+         * @property {Function} calls.allArgs Returns an array with the arguments for every tracked function call. 
+         * Every element of the array is, in turn, an array of arguments. 
+         * @property {Function} calls.all Returns an array with the context for every tracked function call. 
+         * Every element of the array is an object of the following structure:
+
+    { object : this, args : [ 0, 1, 2 ], returnValue : undefined }
+
+         * @property {Function} calls.mostRecent Returns a context object of the most-recent tracked function call. 
+         * @property {Function} calls.first Returns a context object of the first tracked function call. 
+         * @property {Function} calls.reset Reset all tracking data.
+         *
+         * 
+         * Example:
+
+    t.spyOn(obj, 'someMethod').callThrough()
+    
+    obj.someMethod(0, 1)
+    obj.someMethod(1, 2)
+    
+    t.expect(obj.someMethod.calls.any()).toBe(true)
+    t.expect(obj.someMethod.calls.count()).toBe(2)
+    t.expect(obj.someMethod.calls.first()).toEqual({ object : obj, args : [ 0, 1 ], returnValue : undefined })
+
+         */
+        calls                   : null,
+        
+        t                       : null,
+        
+        /**
+         * @property {Siesta.Test.BDD.Spy} and This is just a reference to itself, to add some syntax sugar. 
+         * 
+         * This property is also assigned to the wrapper function of spy.
+         * 
+
+    t.spyOn(obj, 'someMethod').callThrough()
+
+    // same thing as above
+    t.spyOn(obj, 'someMethod').and.callThrough()
+    
+    // returns spy instance
+    obj.someMethod.and 
+
+         */
+        and                     : function () { return this }
+    },
+    
+    
+    methods     : {
+        
+        initialize : function () {
+            var me              = this
+            
+            this.calls          = {
+                any         : function () { return me.callsLog.length > 0 },
+                count       : function () { return me.callsLog.length },
+                argsFor     : function (i) { return me.callsLog[ i ].args },
+                
+                allArgs     : function (i) { return Joose.A.map(me.callsLog, function (call) { return call.args } ) },
+                all         : function () { return me.callsLog },
+                
+                mostRecent  : function () { return me.callsLog[ me.callsLog.length - 1 ] },
+                first       : function () { return me.callsLog[ 0 ] },
+                
+                reset       : function () { me.reset() }
+            }
+            
+            var R       = Siesta.Resource('Siesta.Test.BDD.Spy')
+            
+            var hostObject      = this.hostObject
+            var propertyName    = this.propertyName
+            
+            if (hostObject) {
+                if (this.typeOf(hostObject[ propertyName ]) != 'Function') throw R.get("spyingNotOnFunction")
+                
+                this.hasOwnOriginalValue    = hostObject.hasOwnProperty(propertyName)
+                this.originalValue          = hostObject[ propertyName ]
+                
+                if (this.originalValue.__SIESTA_SPY__) this.originalValue.__SIESTA_SPY__.remove()
+                
+                hostObject[ propertyName ]  = this.getProcessor()
+            }
+            
+            if (this.t) this.t.spies.push(this)
+        },
+        
+        
+        buildProcessor : function () {
+            var me          = this
+            
+            var processor   = function () {
+                var args        = Array.prototype.slice.call(arguments)
+                var log         = { object : this, args : args }
+                
+                me.callsLog.push(log)
+                
+                return log.returnValue = me[ me.strategy + 'Strategy' ](this, args) 
+            }
+            
+            processor.__SIESTA_SPY__    = processor.and = me
+            processor.calls             = me.calls
+            
+            return processor
+        },
+        
+        
+        returnValueStrategy : function (obj, args) {
+            return this.returnValueObj
+        },
+        
+        
+        callThroughStrategy : function (obj, args) {
+            return this.originalValue.apply(obj, args)
+        },
+        
+        
+        callFakeStrategy : function (obj, args) {
+            return this.fakeFunc.apply(obj, args)
+        },
+        
+        
+        throwErrorStrategy : function (obj, args) {
+            var error       = this.throwErrorObj
+            var ERROR       = this.t && this.t.global ? this.t.global.Error : Error
+            
+            if (!(error instanceof ERROR)) error = new ERROR(error)
+            
+            throw error
+        },
+        
+        
+        /**
+         * This method makes the spy to also execute the original function it has been installed over. The
+         * value returned from original function is returned from the spy.
+         * 
+         * @return {Siesta.Test.BDD.Spy} This spy instance
+         */
+        callThrough : function () {
+            if (!this.hostObject) throw "Need the host object to call through to original method"
+            
+            this.strategy       = 'callThrough'
+            
+            return this
+        },
+        
+        
+        /**
+         * This method makes the spy to just return the `undefined` and not execute the original function.
+         * 
+         * @return {Siesta.Test.BDD.Spy} This spy instance
+         */
+        stub : function () {
+            this.returnValue()
+            
+            return this
+        },
+        
+        
+        /**
+         * This method makes the spy to return the value provided and not execute the original function.
+         * 
+         * @param {Object} value The value that will be returned from the spy.
+         * 
+         * @return {Siesta.Test.BDD.Spy} This spy instance
+         */
+        returnValue : function (value) {
+            this.strategy       = 'returnValue'
+            
+            this.returnValueObj = value
+            
+            return this
+        },
+
+        
+        /**
+         * This method makes the spy to call the provided function and return the value from it, instead of the original function.
+         * 
+         * @param {Function} func The function to call instead of the original function
+         * 
+         * @return {Siesta.Test.BDD.Spy} This spy instance
+         */
+        callFake : function (func) {
+            this.strategy   = 'callFake'
+            
+            this.fakeFunc   = func
+            
+            return this
+        },
+        
+        
+        /**
+         * This method makes the spy to throw the specified `error` value (instead of calling the original function).
+         * 
+         * @param {Object} error The error value to throw. If it is not an `Error` instance, it will be passed to `Error` constructor first.
+         * 
+         * @return {Siesta.Test.BDD.Spy} This spy instance
+         */
+        throwError : function (error) {
+            this.strategy       = 'throwError'
+            
+            this.throwErrorObj  = error
+            
+            return this
+        },
+        
+        
+        remove : function () {
+            var hostObject      = this.hostObject
+            
+            if (hostObject) {
+                if (this.hasOwnOriginalValue) 
+                    hostObject[ this.propertyName ] = this.originalValue
+                else
+                    delete hostObject[ this.propertyName ]
+            }
+            
+            // cleanup paranoya
+            this.originalValue  = this.hostObject = hostObject = null
+            this.callsLog       = []
+            
+            this.returnValueObj = this.fakeFunc = this.throwErrorObj = null
+            
+            var processor       = this.getProcessor()
+            processor.and       = processor.calls   = processor.__SIESTA_SPY__ = null
+            
+            this.processor      = null
+        },
+        
+        
+        /**
+         * This method resets all calls tracking data. Spy will report as it has never been called yet. 
+         */
+        reset : function () {
+            this.callsLog      = []
+        }
+    }
 })
 ;
 Class('Siesta.Test.BDD.Placeholder', {
@@ -9232,6 +9710,10 @@ For example:
 
 */
 Class('Siesta.Test.BDD.Expectation', {
+    
+    does        : [
+        Siesta.Util.Role.CanGetType
+    ],
 
     has         : {
         value           : null,
@@ -9555,13 +10037,118 @@ Class('Siesta.Test.BDD.Expectation', {
         },
         
         
-        // TODO
-        toHaveBeenCalled : function () {
+        /**
+         * This assertion passes, if a spy, provided to the {@link Siesta.Test#expect expect} method have been 
+         * called expected number of times. The expected number of times can be provided as the 1st argument and by default
+         * is 1.
+         * 
+         * One can also provide the function, spied on, to the {@link Siesta.Test#expect expect} method.
+         * 
+         * Examples:
+         * 
+    var spy = t.spyOn(obj, 'process')
+    
+    // call the method 2 times
+    obj.process()
+    obj.process()
+
+    // following 2 calls are equivalent
+    t.expect(spy).toHaveBeenCalled();
+    t.expect(obj.process).toHaveBeenCalled();
+    
+    // one can also use exact number of calls or comparison operators
+    t.expect(obj.process).toHaveBeenCalled(2);
+    t.expect(obj.process).toHaveBeenCalled('>1');
+    t.expect(obj.process).toHaveBeenCalled('<3');
+
+         * 
+         * See also {@link #toHaveBeenCalledWith}
+         * 
+         * @param {Number/String} expectedNumber Expected number of calls. Can be either a number, specifying the exact
+         * number of calls, or a string. In the latter case one can include a comparison operator in front of the number.
+         * 
+         */
+        toHaveBeenCalled : function (expectedNumber) {
+            expectedNumber  = expectedNumber != null ? expectedNumber : '>=1'
+            
+            var spy         = this.value
+            var t           = this.t
+            var R           = Siesta.Resource('Siesta.Test.BDD.Expectation');
+
+            if (this.typeOf(spy) == 'Function') {
+                if (!spy.__SIESTA_SPY__) throw new Error(R.get('wrongSpy'))
+                
+                spy         = spy.__SIESTA_SPY__
+            }
+            
+            if (!(spy instanceof Siesta.Test.BDD.Spy)) throw new Error(R.get('wrongSpy'))
+            
+            this.process(t.verifyExpectedNumber(spy.callsLog.length, expectedNumber), {
+                descTpl             : R.get('toHaveBeenCalledDescTpl'),
+                assertionName       : 'expect(func).toHaveBeenCalled()',
+                methodName          : spy.propertyName,
+                got                 : spy.callsLog.length,
+                gotDesc             : R.get('actualNbrOfCalls'),
+                need                : expectedNumber,
+                needDesc            : R.get('expectedNbrOfCalls')
+            })
         },
         
         
-        // TODO
+        /**
+         * This assertion passes, if a spy, provided to the {@link Siesta.Test#expect expect} method have been 
+         * called at least once with the specified arguments. 
+         * 
+         * One can also provide the function, spied on, to the {@link Siesta.Test#expect expect} method.
+         * 
+         * One can use placeholders, generated with the {@link Siesta.Test.BDD#any any} method to verify the arguments.
+         * 
+         * Example:
+         * 
+
+    var spy = t.spyOn(obj, 'process')
+    
+    // call the method 2 times with different arguments
+    obj.build('development', '1.0.0')
+    obj.build('release', '1.0.1')
+
+    t.expect(spy).toHaveBeenCalledWith('development', '1.0.0');
+    // or
+    t.expect(obj.process).toHaveBeenCalledWith('development', t.any(String));
+
+         * 
+         * See also {@link #toHaveBeenCalled}
+         * 
+         * @param {Object} arg1 Argument to a call
+         * @param {Object} arg2 Argument to a call
+         * @param {Object} argN Argument to a call
+         */
         toHaveBeenCalledWith : function () {
+            var spy         = this.value
+            var t           = this.t
+            var R           = Siesta.Resource('Siesta.Test.BDD.Expectation');
+
+            if (this.typeOf(spy) == 'Function') {
+                if (!spy.__SIESTA_SPY__) throw new Error(R.get('wrongSpy'))
+                
+                spy         = spy.__SIESTA_SPY__
+            }
+            
+            if (!(spy instanceof Siesta.Test.BDD.Spy)) throw new Error(R.get('wrongSpy'))
+            
+            var args                        = Array.prototype.slice.call(arguments)
+            var foundCallWithMatchingArgs   = false
+            
+            Joose.A.each(spy.callsLog, function (call) {
+                if (t.compareObjects(call.args, args)) { foundCallWithMatchingArgs = true; return false }
+            })
+            
+            this.process(foundCallWithMatchingArgs, {
+                descTpl             : R.get('toHaveBeenCalledWithDescTpl'),
+                assertionName       : 'expect(func).toHaveBeenCalledWith()',
+                methodName          : spy.propertyName,
+                noGot               : true
+            })
         }
     }
 })
@@ -9582,6 +10169,9 @@ Role('Siesta.Test.BDD', {
     has         : {
         specType                : null, // `describe` or `it`
         
+        beforeEachHooks         : Joose.I.Array,
+        afterEachHooks          : Joose.I.Array,
+        
         sequentialSubTests      : Joose.I.Array,
         
         // flag, whether the "run" function of the test (containing actual test code) have been already run
@@ -9590,7 +10180,11 @@ Role('Siesta.Test.BDD', {
         launchTimeout           : null,
         
         // Siesta.Test.BDD.Expectation should already present on the page
-        expectationClass        : Siesta.Test.BDD.Expectation
+        expectationClass        : Siesta.Test.BDD.Expectation,
+        
+        failOnExclusiveSpecsWhenAutomated   : false,
+        
+        spies                   : Joose.I.Array
     },
     
     
@@ -9641,7 +10235,7 @@ Role('Siesta.Test.BDD', {
         })
     })
          *
-         * See also {@link #xdescribe}, {@link #ddescribe}
+         * See also {@link #beforeEach}, {@link #afterEach}, {@link #xdescribe}, {@link #ddescribe}
          * 
          * @param {String} name The name or description of the suite
          * @param {Function} code The code function for this suite. It will receive a test instance as the first argument which should be used for all assertion methods.
@@ -9677,8 +10271,7 @@ Role('Siesta.Test.BDD', {
          */
         iit : function (name, code, timeout) {
             if (this.harness.isAutomated) {
-                // Must be flag driven, off by default
-//                this.fail(Siesta.Resource('Siesta.Test.BDD', 'iitFound'));
+                if (this.failOnExclusiveSpecsWhenAutomated) this.fail(Siesta.Resource('Siesta.Test.BDD', 'iitFound'));
             }
             this.it(name, code, timeout, true)
         },
@@ -9708,7 +10301,7 @@ Role('Siesta.Test.BDD', {
         })
     })
          *
-         * See also {@link #xit}, {@link #iit}
+         * See also {@link #beforeEach}, {@link #afterEach}, {@link #xit}, {@link #iit}
          * 
          * @param {String} name The name or description of the spec
          * @param {Function} code The code function for this spec. It will receive a test instance as the first argument which should be used for all assertion methods.
@@ -9778,6 +10371,8 @@ Role('Siesta.Test.BDD', {
     
     t.is(NaN, t.any(), 'When class constructor is not provided `t.any()` should match anything')
 
+         * 
+         * See also {@link #anyNumberApprox}, {@link #anyStringLike}.
          * 
          * @param {Function} clsConstructor A class constructor instances of which are denoted with this placeholder. As a special case if this argument
          * is not provided, a placeholder will match any value. 
@@ -9857,6 +10452,45 @@ Role('Siesta.Test.BDD', {
         },
         
         
+        runBeforeSpecHooks : function (done) {
+            var me          = this
+            
+            var runOwnHooks = function (done) {
+                me.chainForArray(me.beforeEachHooks, function (hook) {
+                    return hook.isAsync ? hook.code : function (next) {
+                        hook.code()
+                        next()
+                    }
+                }, done)                    
+            }
+            
+            if (this.parent)
+                this.parent.runBeforeSpecHooks(function () {
+                    runOwnHooks(done)
+                })
+            else
+                runOwnHooks(done)
+        },
+                
+            
+        runAfterSpecHooks : function (done) {
+            var me      = this
+            
+            me.chainForArray(
+                this.afterEachHooks, function (hook) {
+                    return hook.isAsync ? hook.code : function (next) {
+                        hook.code()
+                        next()
+                    }
+                }, function () {
+                    me.parent ? me.parent.runAfterSpecHooks(done) : done()
+                },
+                // reverse
+                true
+            )
+        },
+        
+        
         launchSpecs : function () {
             var me                  = this
             var sequentialSubTests  = this.sequentialSubTests
@@ -9872,12 +10506,259 @@ Role('Siesta.Test.BDD', {
                 if (subTest.isExclusive) exclusiveSubTests.push(subTest)
             })
             
-            this.chain(exclusiveSubTests.length ? exclusiveSubTests : sequentialSubTests)
+            this.chainForArray(exclusiveSubTests.length ? exclusiveSubTests : sequentialSubTests, function (subTest) {
+                return [
+                    subTest.specType == 'it' ? function (next) { me.runBeforeSpecHooks(next) } : null,
+                    subTest,
+                    subTest.specType == 'it' ? function (next) { me.runAfterSpecHooks(next) } : null
+                ]
+            })
+        },
+        
+        
+        /**
+         * This method allows you to execute some "setup" code before every spec ("it" block) of the current test. 
+         * This methos is **not** executed for the "describe" blocks.
+         * Note, that specs can be nested and all `beforeEach` methods are executed in order, starting from the most-nested one.
+         * 
+         * By default the setup code is supposed to be synchronous, but you can change it with the `isAsync` argument. 
+         * This method can be called several times, providing several "setup" functions. Note, that `beforeEach` code is not
+         * executed for the sub-tests generated with the {@link Siesta.Test#getSubTest getSubTest} method.
+         * 
+         * For example:
+
+    StartTest(function (t) {
+        var baz     = 0
+        
+        t.beforeEach(function () {
+            baz     = 0
+        })
+        
+        t.it("This feature should work", function (t) {
+            t.expect(myFunction(baz++)).toEqual('someResult')
+        })
+    })
+
+         * 
+         * @param {Function} code A function to execute before every spec
+         * @param {Function} code.next A callback to call when the `beforeEach` method completes. This argument is only provided
+         * when the `isAsync` argument is passed as `true`
+         * @param {Boolean} isAsync When passed as `true` this argument makes the `beforeEach` method asynchronous. In this case,
+         * the `code` function will receive a callback argument, which should be called once the method has completed it's work. 
+         * Note, that `beforeEach` method should complete within {@link Siesta.Test#defaultTimeout defaultTimeout} time, otherwise
+         * failing assertion will be added to the test. 
+         * 
+         * Example:
+
+    StartTest(function (t) {
+        var baz     = 0
+    
+        // asynchronous setup code
+        t.beforeEach(function (next) {
+            
+            // `beforeEach` will complete in 100ms 
+            setTimeout(function () {
+                baz     = 0
+                next()
+            }, 100)
+        }, true)
+        
+        t.describe("This feature should work", function (t) {
+            t.expect(myFunction(baz++)).toEqual('someResult')
+        })
+    })
+
+         */
+        beforeEach : function (code, isAsync) {
+            this.beforeEachHooks.push({ code : code, isAsync : isAsync })
+        },
+        
+        
+        /**
+         * This method allows you to execute some "tear down" code after every spec ("it" block) of the current test. 
+         * This methos is **not** executed for the "describe" blocks.
+         * Note, that specs can be nested and all `afterEach` methods are executed in order, starting from the most-nested one.
+         * 
+         * By default the tear down code is supposed to be synchronous, but you can change it with the `isAsync` argument. 
+         * This method can be called several times, providing several "tear down" functions. Note, that `afterEach` code is not
+         * executed for the sub-tests generated with the {@link Siesta.Test#getSubTest getSubTest} method.
+         * 
+         * For example:
+
+    StartTest(function (t) {
+        var baz     = 0
+        
+        t.afterEach(function () {
+            baz     = 0
+        })
+        
+        t.it("This feature should work", function (t) {
+            t.expect(myFunction(baz++)).toEqual('someResult')
+        })
+    })
+
+         * 
+         * @param {Function} code A function to execute after every spec
+         * @param {Function} code.next A callback to call when the `afterEach` method completes. This argument is only provided
+         * when the `isAsync` argument is passed as `true`
+         * @param {Boolean} isAsync When passed as `true` this argument makes the `afterEach` method asynchronous. In this case,
+         * the `code` function will receive a callback argument, which should be called once the method has completed it's work. 
+         * Note, that `afterEach` method should complete within {@link Siesta.Test#defaultTimeout defaultTimeout} time, otherwise
+         * failing assertion will be added to the test. 
+         * 
+         * Example:
+
+    StartTest(function (t) {
+        var baz     = 0
+    
+        // asynchronous setup code
+        t.afterEach(function (next) {
+            
+            // `afterEach` will complete in 100ms 
+            setTimeout(function () {
+                baz     = 0
+                next()
+            }, 100)
+        }, true)
+        
+        t.describe("This feature should work", function (t) {
+            t.expect(myFunction(baz++)).toEqual('someResult')
+        })
+    })
+
+         */
+        afterEach : function (code, isAsync) {
+            this.afterEachHooks.push({ code : code, isAsync : isAsync })
+        },
+        
+
+        /**
+         * This method installs a "spy" instead of normal function in some object. The "spy" is basically another function,
+         * which tracks the calls to itself. With spies, one can verify that some function was called and that
+         * it was called with certain arguments.
+         * 
+         * Note, that by default, spy will not call the original method. To enable that, use {@link Siesta.Test.BDD.Spy#callThrough} method.
+         * 
+
+    var spy = t.spyOn(obj, 'process')
+    // or, if you need to call the original 'process' method
+    var spy = t.spyOn(obj, 'process').and.callThrough()
+    
+    // call the method
+    obj.process('fast', 1)
+
+    t.expect(spy).toHaveBeenCalled();
+    t.expect(spy).toHaveBeenCalledWith('fast', 1);
+
+         *
+         * See also {@link #createSpy}, {@link #createSpyObj}, {@link Siesta.Test.BDD.Expectation#toHaveBeenCalled toHaveBeenCalled}, 
+         * {@link Siesta.Test.BDD.Expectation#toHaveBeenCalledWith toHaveBeenCalledWith}
+         * 
+         * See also the {@link Siesta.Test.BDD.Spy} class for additional details.
+         * 
+         * @param {Object} object An object which property is being spied
+         * @param {String} propertyName A name of the property over which to install the spy. 
+         * 
+         * @return {Siesta.Test.BDD.Spy} spy Created spy instance
+         */
+        spyOn : function (object, propertyName) {
+            var R       = Siesta.Resource('Siesta.Test.BDD')
+            
+            if (!object) { this.warn(R.get('noObject')); return; }
+            
+            return new Siesta.Test.BDD.Spy({
+                name            : propertyName,
+                
+                t               : this,
+                hostObject      : object,
+                propertyName    : propertyName
+            })
+        },
+        
+        /**
+         * This method create a standalone spy function, which tracks all calls to it. Tracking is done using the associated 
+         * spy instance, which is available as `and` property. One can use the {@link Siesta.Test.BDD.Spy} class API to
+         * verify the calls to the spy function.
+         * 
+         * Example:
+
+    var spyFunc     = t.createSpy('onadd listener')
+    
+    myObservable.addEventListener('add', spyFunc)
+    
+    // do something that triggers the `add` event on the `myObservable`
+
+    t.expect(spyFunc).toHaveBeenCalled()
+    
+    t.expect(spyFunc.calls.argsFor(1)).toEqual([ 'Arg1', 'Arg2' ])
+    
+         * 
+         * See also: {@link #spyOn}
+         * 
+         * @param {String} [spyName='James Bond'] A name of the spy for debugging purposes
+         * 
+         * @return {Function} Created function. The associated spy instance is assigned to it as the `and` property 
+         */
+        createSpy : function (spyName) {
+            return (new Siesta.Test.BDD.Spy({
+                name            : spyName || 'James Bond',
+                t               : this
+            })).getProcessor()
+        },
+        
+        
+        /**
+         * This method creates an object, which properties are spy functions. Such object can later be used as a mockup.
+         * 
+         * This method can be called with one argument only, which should be an array of properties.
+         * 
+         * Example:
+
+    var mockup      = t.createSpyObj('encoder-mockup', [ 'encode', 'decode' ])
+    // or just
+    var mockup      = t.createSpyObj([ 'encode', 'decode' ])
+    
+    mockup.encode('string')
+    mockup.decode('string')
+    
+    t.expect(mockup.encode).toHaveBeenCalled()
+    
+
+         * 
+         * See also: {@link #createSpy}
+         * 
+         * @param {String} spyName A name of the spy object. Can be omitted.
+         * @param {Array[String]} properties An array of the property names. For each property name a spy function will be created.
+         * 
+         * @return {Object} A mockup object
+         */
+        createSpyObj : function (spyName, properties) {
+            if (arguments.length == 1) { properties = spyName; spyName = null }
+            
+            spyName     = spyName || 'spyObject'
+            
+            var me      = this
+            var obj     = {}
+            
+            Joose.A.each(properties, function (propertyName) {
+                obj[ propertyName ] = me.createSpy(spyName) 
+            })
+            
+            return obj
         }
     },
     
     
     override : {
+        onTestFinalize : function () {
+            Joose.A.each(this.spies, function (spy) { spy.remove() })
+            
+            this.spies  = null
+            
+            this.SUPER()
+        },
+        
+        
         afterLaunch : function () {
             this.codeProcessed      = true
             
@@ -9962,6 +10843,7 @@ Class('Siesta.Test', {
 
     does        : [
         Siesta.Util.Role.CanFormatStrings,
+        Siesta.Util.Role.CanGetType,
         Siesta.Test.More,
         Siesta.Test.Date,
         Siesta.Test.Function,
@@ -10270,7 +11152,9 @@ Class('Siesta.Test', {
          */
         diag : function (desc) {
             this.addResult(new Siesta.Result.Diagnostic({
-                description : desc
+                // protection from user passing some arbitrary JSON object instead of string
+                // (which can be circular and then test report will fail with "Converting circular structure to JSON"
+                description : String(desc || '')
             }))
         },
 
@@ -10305,29 +11189,21 @@ Class('Siesta.Test', {
 
             if (result) {
                 result.passed       = true
-                result.description  = desc || ''
+                result.description  = String(desc || '')
                 result.annotation   = annotation
             }
 
             this.addResult(result || new Siesta.Result.Assertion({
                 passed          : true,
 
-                annotation      : annotation,
-                description     : desc || '',
+                // protection from user passing some arbitrary JSON object instead of string
+                // (which can be circular and then test report will fail with "Converting circular structure to JSON"
+                annotation      : String(annotation || ''),
+                description     : String(desc || ''),
                 sourceLine      : (result && result.sourceLine) || (annotation && annotation.sourceLine) || this.sourceLineForAllAssertions && this.getSourceLine() || null
             }))
         },
 
-
-        /**
-         * This method returns a result of `Object.prototype.toString` applied to the passed argument. The `[object` and trailing `]` are trimmed.
-         *
-         * @param {Mixed} object
-         * @return {String} The name of the "type" for this object.
-         */
-        typeOf : function (object) {
-            return Object.prototype.toString.call(object).replace(/^\[object /, '').replace(/\]$/, '')
-        },
 
         /**
          * This method add the failed assertion to this test.
@@ -10397,8 +11273,10 @@ Class('Siesta.Test', {
                 passed      : false,
                 sourceLine  : sourceLine,
 
-                annotation  : annotation,
-                description : desc
+                // protection from user passing some arbitrary JSON object instead of string
+                // (which can be circular and then test report will fail with "Converting circular structure to JSON"
+                annotation  : String(annotation || ''),
+                description : String(desc || '')
             }))
 
             if (!this.isTodo) {
@@ -10590,7 +11468,7 @@ Class('Siesta.Test', {
          * when comparing Function, RegExp and Date instances, additional check that objects contains the same set of own properties ("hasOwnProperty")
          * will be performed.
          * @param {Boolean} onlyPrimitives When set to `true`, the function will not recurse into composite objects (like [] or {}) and will just report that
-         * objects are different. Use this mode when you are only interesetd in comparison of primitive values (numbers, strings, etc).
+         * objects are different. Use this mode when you are only interested in comparison of primitive values (numbers, strings, etc).
          * @param {Boolean} asObjects When set to `true`, the function will compare various special Object instances, like Functions, RegExp etc,
          * by comparison of their properties only and not taking the anything else into account.
          * @return {Boolean} `true` if the passed objects are equal
@@ -11060,7 +11938,8 @@ Class('Siesta.Test', {
          *
          * The number of nesting levels is not limited - ie sub-tests may have own sub-tests.
          *
-         * Note, that this method does not starts the sub test, but only instatiate it. To start the sub test, use {@link #launchSubTest} method.
+         * Note, that this method does not starts the sub test, but only instatiate it. To start the sub test, 
+         * use the {@link #launchSubTest} method or the {@link #subTest} helper method.
          *
          * @param {String} name The name of the test. Will be used in the UI, as the parent node name in the assertions tree
          * @param {Function} code A function with test code. Will receive a test instance as the 1st argument.
@@ -11264,13 +12143,14 @@ Class('Siesta.Test', {
             })
 
             this.launchSubTest(subTest, callback)
+            
+            return subTest
         },
         
         
         stringifyException : function (e, stackTrace) {
             var stringified             = e + ''
             var annotation              = (stackTrace || this.getStackTrace(e) || []).join('\n')
-            var R                       = Siesta.Resource('Siesta.Test');
 
             // prepend the exception message to the stack trace if its not already there
             if (annotation.indexOf(stringified) == -1) annotation = stringified + annotation
@@ -11696,7 +12576,7 @@ Class('Siesta.Test', {
 
                     // cleanup the closures just in case (probably useful for IE)
                     originalSetTimeout          = originalClearTimeout  = null
-                    global                      = run                   = null
+                    global                      = null
 
                     // this iterator will also process "this" test instance too
                     me.eachSubTest(function (subTest) {
@@ -11725,12 +12605,17 @@ Class('Siesta.Test', {
         },
 
 
+        // called before the iframe of the test is removed from DOM
         cleanup : function () {
             this.overrideForSetTimeout  = this.overrideForClearTimeout  = null
             this.originalSetTimeout     = this.originalClearTimeout     = null
             this.global                 = this.run                      = null
             this.exceptionCatcher       = this.testErrorClass           = null
             this.startTestAnchor                                        = null
+            
+            this.scopeProvider          = null
+            
+            this.purgeListeners()
         },
 
 
@@ -11807,6 +12692,8 @@ Class('Siesta.Test', {
                     description         : me.getSummaryMessage()
                 }))
                 
+                me.onTestFinalize()
+                
                 /**
                  * This event is fired when an individual test case ends (either because it has completed correctly or thrown an exception).
                  *
@@ -11823,6 +12710,9 @@ Class('Siesta.Test', {
                 me.fireEvent('testendbubbling', me);
     
                 me.callback && me.callback()
+                
+                // help garbage collector to cleanup all the context of this callback (huge impact)
+                me.callback     = null
             }
             
             // sub-tests don't do the "tearDown" process
@@ -11852,6 +12742,10 @@ Class('Siesta.Test', {
                 
                 if (!hasTimedOut) finalizationCode(error)
             })
+        },
+        
+        
+        onTestFinalize : function () {
         },
 
 
@@ -12094,6 +12988,12 @@ Class('Siesta.Test', {
 
         getJUnitClass : function () {
             return this.jUnitClass || this.meta.name || 'Siesta.Test'
+        },
+        
+        
+        // to give test scripts access to locales
+        resource : function () {
+            return Siesta.Resource.apply(Siesta.Resource, arguments)
         }
     }
     // eof methods
@@ -12119,7 +13019,7 @@ Singleton('Siesta.Test.ActionRegistry', {
         },
         
         
-        create : function (obj, test) {
+        create : function (obj, test, defaultArgs) {
             if (obj !== Object(obj)) throw "Action configuration should be an Object instance"
             
             if (!obj.action) {
@@ -12154,11 +13054,11 @@ Singleton('Siesta.Test.ActionRegistry', {
                         if (shortcut.match(/^waitFor/i)) {
                             obj.action      = 'wait'
                             obj.waitFor     = methods[ shortcut ]
-                            obj.args        = value
+                            obj.args        = value || []
                         } else {
                             obj.action      = 'methodCall'
                             obj.methodName  = methods[ shortcut ]
-                            obj.args        = value
+                            obj.args        = value || []
                         }
                         
                         return false
@@ -12167,6 +13067,12 @@ Singleton('Siesta.Test.ActionRegistry', {
             }
             
             if (!obj.action) throw "Need to include `action` property or shortcut property in the step config"
+            
+            // Don't get the arguments from the previous step if it is a waitFor action, 
+            // it does not make sense and messes up the arguments
+            if (obj.action != 'wait' && obj.action != 'waitfor' && obj.action != 'delay' && obj.action != 'methodCall') {
+                if (!obj.args && defaultArgs) obj.args = defaultArgs
+            }
             
             var actionClass = this.getActionClass(obj.action)
 
@@ -12357,7 +13263,7 @@ Class('Siesta.Test.Action.Wait', {
     }
          *  
          */
-        args            : null,
+        args            : Joose.I.Array,
 
         /**
          * @cfg {String} waitFor
@@ -12697,7 +13603,6 @@ Siesta.Test.ActionRegistry().registerAction('methodCall', Siesta.Test.Action.Met
 /**
 
 @class Siesta.Harness
-@mixin Siesta.Role.CanStyleOutput
 
 `Siesta.Harness` is an abstract base harness class in Siesta hierarchy. This class provides no UI, 
 you should use one of it subclasses, for example {@link Siesta.Harness.Browser}
@@ -12775,7 +13680,8 @@ Synopsys
 Class('Siesta.Harness', {
     
     does        : [
-        JooseX.Observable
+        JooseX.Observable,
+        Siesta.Util.Role.CanGetType
     ],
     
     has : {
@@ -13033,15 +13939,9 @@ Class('Siesta.Harness', {
         verbosity               : 0,
         
         /**
-         * @cfg {Boolean} keepResults When set to `true`, harness will not cleanup the context of the test immediately. Instead it will do so, only when
-         * the test will run again. This will allow you for example to examine the DOM of tests. Default value is `true` 
-         */
-        keepResults             : true,
-        
-        /**
          * @cfg {Number} keepNLastResults
          * 
-         * Only meaningful when {@link #keepResults} is set to `false`. Indicates the number of the test results which still should be kept, for user examination.
+         * Indicates the number of the test results which still should be kept, for user examination.
          * Results are cleared when their total number exceed this value, based on FIFO order.
          */
         keepNLastResults        : 2,
@@ -13109,6 +14009,18 @@ Class('Siesta.Harness', {
          * @cfg {Number} pauseBetweenTests Default timeout between tests (in milliseconds). Increase this settings for big test suites, to give browser time for memory cleanup.
          */
         pauseBetweenTests       : 300,
+        
+        
+        /**
+         * @cfg {Boolean} failOnExclusiveSpecsWhenAutomated When this option is enabled and Siesta is running in automation mode
+         * (using WebDriver or PhantomJS launcher) any exclusive BDD specs found (like {@link Siesta.Test#iit t.iit} or {@link Siesta.Test#ddescribe t.ddescribe}
+         * will cause a failing assertion. The idea behind this setting is that such "exclusive" specs should only be used during debugging
+         * and are often mistakenly committed in the codebase, leaving other specs not executed. 
+         * 
+         * This option can be also specified in the test file descriptor.
+         */
+        failOnExclusiveSpecsWhenAutomated   : false,
+        
         
         setupDone               : false,
         
@@ -13864,7 +14776,7 @@ Class('Siesta.Harness', {
                     test.nbrExceptions++;
                     test.failWithException(error || (msg + ' ' + url + ' ' + lineNumber))
                 } else {
-                    preloadErrors.push(msg + ' ' + url + ' ' + lineNumber)
+                    preloadErrors.push(error && error.stack ? error.stack + '' : msg + ' ' + url + ' ' + lineNumber)
                 }
             }
             
@@ -13964,6 +14876,7 @@ Class('Siesta.Harness', {
             var startTestAnchor = options.startTestAnchor
             var args            = startTestAnchor && startTestAnchor.args
             var global          = scopeProvider.scope
+            var noCleanup       = options.noCleanup
             
             // additional setup of the test instance, setting up the properties, which are known only after scope
             // is loaded
@@ -13986,10 +14899,8 @@ Class('Siesta.Harness', {
                 
                 // "main" test callback, called once test is completed
                 callback : function () {
-                    if (!me.keepResults && !options.noCleanup) {
-                        if (!me.isKeepingResultForURL(url)) me.cleanupScopeForURL(url)
-                    }
-            
+                    if (!noCleanup && !me.isKeepingResultForURL(url)) me.cleanupScopeForURL(url)
+                    
                     callback && callback()
                 }
             })
@@ -14005,13 +14916,22 @@ Class('Siesta.Harness', {
                 // this happens if user re-launch the test during these 10ms - test will be 
                 // finalized forcefully in the "deleteTestByUrl" method
                 if (!test.isFinished()) test.start(options.preloadErrors[ 0 ])
+                
+                options         = null
+                test            = null
             }
             
             if (options.reusingSandbox)
                 doLaunch()
-            else
-                // start the test after slight delay - to run it already *after* onload (in browsers)
-                global.setTimeout(doLaunch, 10);
+            else {
+                if (scopeProvider instanceof Scope.Provider.IFrame) 
+                    // start the test after slight delay - to run it already *after* onload (in browsers)
+                    global.setTimeout(doLaunch, 10)
+                else
+                    // for Window provider, `global.setTimeout` seems to not execute passed function _sometimes_
+                    // also increase the "onload" delay
+                    setTimeout(doLaunch, 50)
+            }
         },
         
         
@@ -14057,7 +14977,9 @@ Class('Siesta.Harness', {
                 
                 sandboxCleanup              : this.getDescriptorConfig(desc, 'sandboxCleanup'),
                 
-                config                      : this.getDescriptorConfig(desc, 'config')
+                config                      : this.getDescriptorConfig(desc, 'config'),
+                
+                failOnExclusiveSpecsWhenAutomated   : this.getDescriptorConfig(desc, 'failOnExclusiveSpecsWhenAutomated')
             }
             
             // potentially not safe
@@ -14086,7 +15008,12 @@ Class('Siesta.Harness', {
             var test    = this.testsByURL[ url ]
             
             if (test) {
-                test.finalize(true)
+                // exceptions can arise if test page has switched to different context for example (click on the link)
+                // and siesta is trying to clear the timeouts with "clearTimeout"
+                try {
+                    test.finalize(true)
+                } catch (e) {
+                }
                 this.cleanupScopeForURL(url)
             }
             
@@ -14125,11 +15052,6 @@ Class('Siesta.Harness', {
             if (!this[ methodName ]) throw "Can't generate report - missing the `" + methodName + "` method"
             
             return this[ methodName ](options)
-        },
-        
-        
-        typeOf : function (object) {
-            return Object.prototype.toString.call(object).replace(/^\[object /, '').replace(/\]$/, '')
         }
     }
     // eof methods

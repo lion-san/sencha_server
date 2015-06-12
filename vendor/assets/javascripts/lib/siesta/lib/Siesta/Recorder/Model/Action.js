@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -23,8 +23,8 @@ Ext.define('Siesta.Recorder.Model.Action', {
 
         // surprisingly the change in "data" variable will be reflected in "arguments"
         this.callParent(arguments)
-        
-        this.$action    = this.data = this.raw
+
+        this.$action = this.data = data; //TODO = this.raw
     }
 //    ,
     
@@ -57,14 +57,14 @@ Ext.define('Siesta.Recorder.Model.Action', {
     
 }, function () {
     var prototype   = this.prototype
-    var fields      = prototype.fields
 
     var attributeNames  = [];
     Siesta.Recorder.Action.meta.getAttributes().each(function(attr){ attributeNames.push(attr.name)});
 
-    if (Siesta.Recorder.Model.Action.addFields) {
-        Siesta.Recorder.Model.Action.addFields(attributeNames);
+    if (this.addFields) {
+        this.addFields(attributeNames);
     } else {
+        var fields      = prototype.fields
         fields.addAll(attributeNames);
     }
 
@@ -84,9 +84,10 @@ Ext.define('Siesta.Recorder.Model.Action', {
     }, function (fields, methodName) {
         prototype[ methodName ] = function () {
             var res     = this.$action[ methodName ].apply(this.$action, arguments)
-            
-            this.afterEdit(fields)
-            
+
+            // TODO not needed since we do refreshNode
+            //this.afterEdit(fields)
+
             return res
         }
     })

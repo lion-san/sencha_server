@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -94,7 +94,7 @@ Class('Siesta.Harness.Browser.ExtJS', {
              * 
              * This option can be also specified in the test file descriptor. 
              */
-            testClass           : Siesta.Test.ExtJS,
+            testClass               : Siesta.Test.ExtJS,
             
             /**
              * @cfg {Boolean} waitForExtReady
@@ -103,7 +103,7 @@ Class('Siesta.Harness.Browser.ExtJS', {
              * 
              * This option can be also specified in the test file descriptor. 
              */
-            waitForExtReady     : true,
+            waitForExtReady         : true,
             
             /**
              * @cfg {Boolean} waitForAppReady
@@ -113,17 +113,10 @@ Class('Siesta.Harness.Browser.ExtJS', {
              *   
              * This option can (and probably should) be also specified in the test file descriptor. 
              */
-            waitForAppReady     : false,
+            waitForAppReady         : false,
             
 
             extVersion              : null,
-
-            /**
-             * @cfg {Boolean} allowExtVersionChange
-             * 
-             * True to show a version picker to swiftly change which Ext JS version is used in the test suite.
-             */
-            allowExtVersionChange   : false,
 
             /**
              * @cfg {Boolean} failOnMultipleComponentMatches
@@ -140,9 +133,6 @@ Class('Siesta.Harness.Browser.ExtJS', {
         
         
         methods : {
-            createViewport       : function(config) {
-               return Ext.create("Siesta.Harness.Browser.UI.ExtViewport", config);
-            },
             
             setup : function (callback) {
                 var me      = this
@@ -164,8 +154,6 @@ Class('Siesta.Harness.Browser.ExtJS', {
                 Function.prototype.$extIsFunction = true;
                 
                 this.SUPER(function () {
-                    if (me.allowExtVersionChange) me.extVersion = me.findExtVersion()
-                    
                     callback()
                 })
             },
@@ -178,34 +166,6 @@ Class('Siesta.Harness.Browser.ExtJS', {
                 config.waitForAppReady  = this.getDescriptorConfig(desc, 'waitForAppReady')
                 
                 return config
-            },
-            
-            
-            setExtVersion : function (newVersion) {
-                if (!this.allowExtVersionChange || newVersion == this.extVersion) return
-                
-                this.extVersion         = newVersion
-                
-                var me                  = this
-                var allDescriptors      = this.flattenDescriptors(this.descriptors)
-                var mainPreset          = this.mainPreset
-                
-                this.setExtVersionForPreset(mainPreset, newVersion)
-                
-                Joose.A.each(allDescriptors, function (desc) {
-                    if (desc.preset != mainPreset) me.setExtVersionForPreset(desc.preset, newVersion)
-                })
-            },
-            
-            
-            setExtVersionForPreset : function (preset, newVersion) {
-                var me      = this
-                
-                preset.eachResource(function (resource) {
-                    var url     = resource.url
-                    
-                    if (url && url.match(me.extVersionRegExp)) resource.url = url.replace(me.extVersionRegExp, 'ext-' + newVersion + '/')
-                })
             },
             
             

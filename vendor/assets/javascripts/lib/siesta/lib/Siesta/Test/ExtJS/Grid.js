@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -44,7 +44,7 @@ Role('Siesta.Test.ExtJS.Grid', {
             } else {
                 var checkerFn;
 
-                // Handle case of locking grid (Ext JS 4 only)
+                // Handle case of locking grid (Ext JS 4+ only)
                 if(cmp.normalGrid) {
                     var selector = cmp.normalGrid.getView().itemSelector;
                     checkerFn = function() {
@@ -78,8 +78,16 @@ Role('Siesta.Test.ExtJS.Grid', {
 
                 return this.waitFor({
                     method          : checkerFn, 
-                    callback        : callback,
-                    scope           : scope,
+                    callback        : function() {
+                        // Grid might be refreshing itself multiple times during initialization which can
+                        // break tests easily
+                        var as = me.beginAsync();
+
+                        me.global.setTimeout(function(){
+                            me.endAsync(as);
+                            callback.call(scope || me);
+                        }, 100);
+                    },
                     timeout         : timeout,
                     assertionName   : 'waitForRowsVisible',
                     description     : ' ' + Siesta.Resource('Siesta.Test.ExtJS.Grid').get('waitForRowsVisible') + ' "' + cmp.id + '"'

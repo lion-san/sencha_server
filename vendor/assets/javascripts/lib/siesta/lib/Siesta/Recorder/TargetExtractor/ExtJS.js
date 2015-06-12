@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -49,8 +49,8 @@ Class('Siesta.Recorder.TargetExtractor.ExtJS', {
         allowNodeNamesForTargetNodes : false,
         
         ignoreIdRegExp          : function () {
-            // Ext 4 vs  Ext 3
-            return /^ext-gen\d+|^ext-comp-\d+/
+            //         Ext 5       Ext 4          Ext 3
+            return /^ext-element-|^ext-gen\d+|^ext-comp-\d+/
         },
 
         // ?? probably meant to be used for DOM ids only.. Ext 4 vs  Ext 3
@@ -109,7 +109,10 @@ Class('Siesta.Recorder.TargetExtractor.ExtJS', {
                 'x-tree-icon',
                 'x-trigger-index-',
                 'x-unselectable',
-                
+                'x-grid-with-row-lines',
+                '^x-autocontainer-',
+                '^x-btn-inner',
+
                 // Ext3 panel body classes
                 'x-panel-bwrap',
 
@@ -554,9 +557,11 @@ Class('Siesta.Recorder.TargetExtractor.ExtJS', {
         },
         
         
-        getNthPosition : function (node, cls) {
+        // gets `node` itself (if it matches selector) or the neareset such parent  and returns the 
+        // index of that node in it's parent child nodes list
+        getNthPosition : function (node, selector) {
             // find item that has the given `cls` class, starting from given `node` and up in the dom tree
-            var itemInList  = node.className.match(new RegExp('\b' + this.regExpEscape(cls) + '\b')) ? node : this.jquery(node).closest('.' + cls)[ 0 ];
+            var itemInList  = this.jquery(node).is(selector) ? node : this.jquery(node).closest(selector)[ 0 ];
 
             // then find out, what index it has in it's parent node
             var array       = Array.prototype.slice.apply(itemInList.parentNode.childNodes);

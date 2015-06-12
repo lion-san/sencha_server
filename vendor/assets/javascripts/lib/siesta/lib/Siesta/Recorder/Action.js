@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -197,16 +197,17 @@ Class('Siesta.Recorder.Action', {
             var hasTarget       = this.hasTarget()
 
             if (hasTarget) {
-                if (!target) throw 'No target for action: ' + actionName
-
-                if (target.type == 'cq') {
+                if (!target) {
+                    // If target is required but not filled in, just leave it blank
+                    step.target = '';
+                } else if (target.type == 'cq') {
                     var splitPos = target.target.indexOf('->');
                     step.target     = splitPos > 0 ? target.target.split('->').splice(1, 0, '>>').join() : '>>' + target.target
                 } else {
                     step.target     = target.target
                 }
 
-                if (target.offset) 
+                if (target && target.offset)
                     step.offset = target.offset.slice()
             }
     

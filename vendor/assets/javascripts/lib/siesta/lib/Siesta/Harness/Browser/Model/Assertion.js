@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -78,7 +78,7 @@ http://bryntum.com/products/siesta/license
             triggerUIUpdate: function(){
                 // This isn't ideal, however none of the underlying fields have changed
                 // but we still need to update the UI
-                this.afterEdit([]);    
+                this.callJoined('afterEdit', []);
             },
 
             
@@ -138,20 +138,6 @@ http://bryntum.com/products/siesta/license
                 return 'yellow'
             }
             
-        }, isSenchaTouch ? { config : config } : config),
-        
-        function () {
-            if (!isSenchaTouch) {
-                Ext.data.NodeInterface.decorate(this);
-    
-                this.override({
-                    expand : function () {
-                        Ext.suspendLayouts();
-                        this.callParent(arguments);
-                        Ext.resumeLayouts();
-                    }
-                });
-            }
-        }
+        }, isSenchaTouch ? { config : config } : config)
     );
 })();

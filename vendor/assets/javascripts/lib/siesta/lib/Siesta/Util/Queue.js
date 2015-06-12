@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -35,7 +35,9 @@ Class('Siesta.Util.Queue', {
         
         observeTest             : null,
 
-        currentDelayStepId      : null
+        currentDelayStepId      : null,
+        
+        isDestroyed             : false
     },
     
     
@@ -88,6 +90,8 @@ Class('Siesta.Util.Queue', {
         
         
         abort : function (ignoreCallback) {
+            if (this.isDestroyed) return
+            
             this.isAborted      = true
             
             var deferClearer    = this.deferClearer
@@ -98,6 +102,8 @@ Class('Siesta.Util.Queue', {
             deferClearer(this.currentTimeout)
             
             if (!ignoreCallback) this.callback.call(this.scope || this)
+            
+            this.destroy()
         },
         
         
@@ -133,10 +139,12 @@ Class('Siesta.Util.Queue', {
                 if (callback)
                     if (this.callbackDelay)
                         deferer(function () {
-                            if (!me.isAborted) callback.call(scope || this)
+                            if (!me.isAborted) { callback.call(scope || this); me.destroy() }
                         }, this.callbackDelay)
-                    else
+                    else {
                         callback.call(scope || this)
+                        me.destroy()
+                    }
             }
         },
         
@@ -187,6 +195,21 @@ Class('Siesta.Util.Queue', {
                 else
                     me.doSteps(steps, callback, scope)
             }
+        },
+        
+        
+        // help garbage collector to release the memory 
+        destroy : function () {
+            if (this.isDestroyed) return
+            
+            this.callback   = this.observeTest      = this.deferer = this.deferClearer = null
+            this.processor  = this.processorScope   = null
+            
+            // cleanup paranoya, this shouldn't matter in general, since "next" here is from the same context
+            for (var i = 0; i < this.steps.length; i++) this.steps[ i ].next = null
+            this.steps          = null
+            
+            this.isDestroyed    = true
         }
     }
 })

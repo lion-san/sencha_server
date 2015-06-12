@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -61,11 +61,12 @@ Class('Siesta.Result.Assertion', {
             var info    = {
                 type            : this.meta.name,
                 passed          : this.passed,
-                description     : this.description || 'No description'
+                description     : String(this.description) || 'No description',
+                annotation      : String(this.annotation)
             }
             
             // copy if true
-            Joose.A.each([ 'isTodo', 'annotation', 'isWaitFor', 'isException', 'sourceLine', 'name' ], function (name) {
+            Joose.A.each([ 'isTodo', 'isWaitFor', 'isException', 'sourceLine', 'name' ], function (name) {
                 if (me[ name ]) info[ name ] = me[ name ]
             })
             

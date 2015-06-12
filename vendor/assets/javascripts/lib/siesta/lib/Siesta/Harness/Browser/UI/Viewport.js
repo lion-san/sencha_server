@@ -1,219 +1,178 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
 
 */
+// workaround for: http://www.sencha.com/forum/showthread.php?299660-5.1.0.107-Exception-thrown-when-opening-any-example-in-Chrome-touch-simulation-mode&p=1094459#post1094459
+
+// this condition seems to point that Chrome is opened in device simulation mode, w/o touch events enabled from command line
+// seems "TouchEvents" + "!Touch" confuses Ext and exception is thrown
+if (Ext.supports && Ext.supports.TouchEvents && !Ext.supports.Touch) {
+    // w/o these, UI throws exceptions
+    Ext.supports.Touch          = false
+    Ext.supports.touchScroll    = false
+}
+// eof workaround
+
+
 Ext.define('Siesta.Harness.Browser.UI.Viewport', {
 
-    extend          : 'Ext.container.Viewport',
-    
-    mixins          : [
+    extend : 'Ext.container.Viewport',
+
+    mixins     : [
         'Siesta.Harness.Browser.UI.CanFillAssertionsStore'
     ],
+    controller : 'viewport',
 
-//    requires        : [
-//        'Ext.state.LocalStorageProvider',
-//        'Ext.state.CookieProvider',
-//
-//        'ExtX.Reference.Slot',
-//
-//        'Siesta.Harness.Browser.Model.TestTreeStore',
-//        'Siesta.Harness.Browser.UI.TestGrid',
-//        'Siesta.Harness.Browser.UI.ResultPanel',
-//        'Siesta.Harness.Browser.UI.MouseVisualizer',
-//        'Siesta.Harness.Browser.UI.Header'
-//    ],
+    requires        : [
+        'Ext.state.LocalStorageProvider',
+        'Ext.state.CookieProvider',
 
-    title           : null,
+        'ExtX.Reference.Slot',
 
-    harness         : null,
+        'Siesta.Harness.Browser.UI.TestGrid',
+        'Siesta.Harness.Browser.UI.ResultPanel',
+        'Siesta.Harness.Browser.UI.MouseVisualizer',
+        'Siesta.Harness.Browser.UI.Header'
+    ],
+
+    title : null,
+
+    harness      : null,
 
     // need to set stateful properties before `initComponent`
-    stateful        : false,
+    stateful     : false,
+    layout       : 'border',
 
     // stateful
-    selection       : null,
-    selectedURL     : null,
-    filter          : null,
-    filterGroups    : false,
+    selection    : null,
+    selectedURL  : null,
+    filter       : null,
+    filterGroups : false,
     // eof stateful
 
-    testsStore      : null,
+    testsStore : null,
 
-    contextMenu     : null,
-    mouseVisualizer : null,
+    contextMenu        : null,
+    mouseVisualizer    : null,
+    enableVersionCheck : true,
 
-    collapsedNodes  : null,
+    collapsedNodes : null,
+
+    headerXType : 'siesta-header',
+
+    showSizeControls : false,
+
+    viewportSizes : [
+        [640, 480],
+        [800, 600],
+        [1024, 768],
+        [1920, 1080],
+        [2048, 1536]
+    ],
 
     initComponent : function () {
+        var harness = this.harness;
+
         Ext.getBody().addCls('siesta')
-        
+
         Ext.getBody().on('keydown', this.onBodyKeyDown, this)
-        
+        Ext.setGlyphFontFamily('icomoon');
+
         Ext.state.Manager.setProvider(Ext.supports.LocalStorage ? new Ext.state.LocalStorageProvider() : new Ext.state.CookieProvider())
 
-        this.selection      = {}
+        this.selection = {}
 
-        if (this.harness.stateful) this.applyState(this.loadState())
+        if (harness.stateful) this.applyState(this.loadState())
 
-        var testsStore      = this.testsStore = new Siesta.Harness.Browser.Model.FilterableTreeStore({
-            model           : 'Siesta.Harness.Browser.Model.TestFile',
-        
-            sortOnLoad      : false,
-        
-            root            : { expanded : true, loaded : true },
-        
-            proxy           : {
-                type        : 'memory',
-            
-                data        : this.buildTreeData({
-                    id          : 'root',
-                    group       : 'test suite' + this.title,
-                    items       : this.harness.descriptors
-                }).children,
-            
-                reader      : {
-                    type    : 'json'
-                }
+        var data = this.buildTreeData({
+            id    : 'root',
+            group : 'test suite' + this.title,
+            items : harness.descriptors
+        }).children;
+
+        var testsStore = this.testsStore = new Siesta.Harness.Browser.Model.FilterableTreeStore({
+            model : 'Siesta.Harness.Browser.Model.TestFile',
+
+            sortOnLoad : false,
+
+            root : {
+                expanded : true,
+
+                children : data
             },
-            
-            listeners       : {
-                collapse    : this.saveState,
-                expand      : this.saveState,
-                
-                scope       : this
+
+            proxy : 'memory',
+
+            listeners : {
+                nodecollapse : this.saveState,
+                nodeexpand   : this.saveState,
+
+                scope : this
             }
         })
-    
-        testsStore.load()
 
         Ext.apply(this, {
-            mouseVisualizer : Ext.isIE ? undefined : new Siesta.Harness.Browser.UI.MouseVisualizer({ harness : this.harness }),
+            mouseVisualizer : Ext.isIE ? undefined : new Siesta.Harness.Browser.UI.MouseVisualizer({ harness : harness }),
             slots           : true,
-            plugins         : new Siesta.Harness.Browser.UI.VersionChecker({ renderTo : 'update-ct'}),
-            layout          : 'border',
 
-            items           : [
+            items : [
                 {
-                    region      : 'west',
+                    region           : 'west',
+                    xtype            : 'testgrid',
+                    store            : testsStore,
+                    slot             : 'filesTree',
+                    id               : harness.id.replace(/\W/g, '_') + '-testTree',
+                    showSizeControls : this.showSizeControls,
+                    viewportSizes    : this.viewportSizes,
+                    stateConfig      : this.getState(),
 
-                    xtype       : 'testgrid',
-                    slot        : 'filesTree',
-                    id          : this.harness.id + '-testTree',
-
-                    iconCls     : 'tr-status-neutral-small',
-
-                    stateConfig : this.getState(),
-
-                    animate     : !Ext.isIE,
-                    split       : true,
-
-                    filter          : this.filter,
-                    filterGroups    : this.filterGroups,
-
-                    listeners   : {
-                        selectionchange     : this.onSelectionChange,
-                        checkchange         : this.onCheckChange,
-
-                        itemcontextmenu     : this.onFilesContextMenu,
-                        itemdblclick        : this.onTestFileDoubleClick,
-                        showcoverageinfo    : this.showCoverageReport,
-
-                        resize              : function () {
-                            // preserve min width of the assertion grid
-                            this.slots.resultPanel.ensureLayout()
-                        },
-
-                        scope               : this
+                    animate : !Ext.isIE,
+                    split   : {
+                        size : 7
                     },
 
-                    store       : testsStore
+                    filter       : this.filter,
+                    filterGroups : this.filterGroups
                 },
                 {
-                    xtype           : 'container',
-                    slot            : 'center',
-                    region          : 'center',
-                    cls             : 'center-ct',
-                    layout          : {
-                        type            : 'card',
-                        deferredRender  : true
-                    },
-                    items           : [
-                        {
-                            xtype           : 'resultpanel',
-                            region          : 'center',
-                            slot            : 'resultPanel',
-                            cls             : 'resultPanel-panel',
-                            viewDOM         : this.getOption('viewDOM'),
-                            id              : this.harness.id + '-resultpanel',
-                            harness         : this.harness,
-                            recorderConfig  : this.harness.recorderConfig,
+                    xtype          : 'resultpanel',
+                    region         : 'center',
+                    slot           : 'resultPanel',
+                    cls            : 'resultPanel-panel',
+                    viewDOM        : this.getOption('viewDOM'),
+                    id             : harness.id.replace(/\W/g, '_') + '-resultpanel',
+                    harness        : harness,
+                    recorderConfig : harness.recorderConfig,
 
-                            maintainViewportSize    : this.harness.maintainViewportSize,
-
-                            listeners       : {
-                                viewdomchange       : function(g, value) {
-                                    this.setOption('viewDOM', value);
-                                    this.saveState();
-                                },
-
-                                rerun               : this.rerunTest,
-
-                                scope               : this
-                            }
-                        },
-                        {
-                            xtype               : Ext.ClassManager.getByAlias('widget.coveragereport') ? 'coveragereport' : 'container',
-                            slot                : 'coverageReport',
-                            listeners           : {
-                                backtomainui    : this.showMainUI,
-                                scope           : this
-                            }
-                        }
-                    ]
+                    maintainViewportSize : harness.maintainViewportSize
                 }
             ]
             // eof main content area
         })
-    
+
         this.callParent()
-        
+
         // for some reason doesn't work, when specified as the "listeners" config in the "viewConfig" option above
         this.slots.filesTree.getView().on('viewready', this.onViewReady, this, { single : true })
 
-        this.slots.filesTree.on({
-            optionchange            : this.onOptionChange,
-            beforesettingsmenushow  : this.onSettingsMenuBeforeShow,
-            buttonclick             : this.onMainButtonClick,
-
-            collapse                : function() {
-                Ext.getBody().down('.logo-link').hide();
-            },
-
-            expand                  : function() {
-                Ext.getBody().down('.logo-link').show();
-            },
-
-            scope                   : this
-        });
-
         // delay is required to avoid recursive loop
         this.on('afterlayout', this.onAfterLayout, this, { single : true, delay : 1 })
-        
+
         this.slots.filesTree.store.on({
-            'filter-set'        : this.saveState,
-            'filter-clear'      : this.saveState,
-            
-            scope               : this
+            'filter-set'   : this.saveState,
+            'filter-clear' : this.saveState,
+
+            scope : this
         })
-        
-        this.harness.on('testendbubbling', this.onEveryTestEnd, this)
-        this.harness.on('hassomecoverageinfo', this.onHasSomeCoverageInfo, this)
-        this.harness.on('nocoverageinfo', this.onNoCoverageInfo, this)
-        this.harness.on('testsuitelaunch', this.onTestSuiteLaunch, this)
+
+        harness.on('testendbubbling', this.onEveryTestEnd, this)
+        harness.on('hassomecoverageinfo', this.onHasSomeCoverageInfo, this)
+        harness.on('nocoverageinfo', this.onNoCoverageInfo, this)
+        harness.on('testsuitelaunch', this.onTestSuiteLaunch, this)
 
         if (window.location.href.match('^file:///')) {
             var R = Siesta.Resource('Siesta.Harness.Browser.UI.Viewport');
@@ -222,72 +181,75 @@ Ext.define('Siesta.Harness.Browser.UI.Viewport', {
         }
     },
 
-    
+
     buildTreeData : function (descriptor) {
-        var data    = {
-            id          : descriptor.id,
-            title       : descriptor.group || descriptor.title || descriptor.name || descriptor.url.replace(/(?:.*\/)?([^/]+)$/, '$1'),
-            descriptor  : descriptor
+        var data = {
+            id         : descriptor.id,
+            title      : descriptor.group || descriptor.title || descriptor.name || descriptor.url.replace(/(?:.*\/)?([^/]+)$/, '$1'),
+            descriptor : descriptor,
+
+            // HACK, bypass Ext JS cloning
+            nodeType   : 1,
+            cloneNode  : function () {
+                return this;
+            }
         }
-    
-        var me              = this
-        var prevId          = data.id
-        var collapsedNodes  = this.collapsedNodes || {}
-    
+
+
+        var me = this
+        var prevId = data.id
+        var collapsedNodes = this.collapsedNodes || {}
+
         if (descriptor.group) {
-        
-            var children    = []
-        
+
+            var children = []
+
             Ext.each(descriptor.items, function (desc) {
                 children.push(me.buildTreeData(desc))
             })
-        
+
             Ext.apply(data, {
-                expanded        : (collapsedNodes[ prevId ] != null || descriptor.expanded === false) ? false : true,
+                expanded : (collapsedNodes[prevId] != null || descriptor.expanded === false) ? false : true,
                 // || false is required for TreeView - it checks that "checked" field contains Boolean
-                checked         : me.selection.hasOwnProperty(prevId) || false,
-            
-                folderStatus    : 'yellow',
-            
-                children        : children,
-                leaf            : false
+                checked  : me.selection.hasOwnProperty(prevId) || false,
+
+                folderStatus : 'yellow',
+
+                children : children,
+                leaf     : false
             })
-        
+
         } else {
             Ext.apply(data, {
-                url             : descriptor.url,
-            
-                leaf            : true,
+                url : descriptor.url,
+
+                leaf    : true,
                 // || false is required for TreeView - it checks that "checked" field contains Boolean
-                checked         : me.selection.hasOwnProperty(prevId) || false,
-            
-                passCount       : 0,
-                failCount       : 0,
-            
-                time            : 0,
-            
+                checked : me.selection.hasOwnProperty(prevId) || false,
+
+                passCount : 0,
+                failCount : 0,
+
+                time : 0,
+
                 assertionsStore : new Siesta.Harness.Browser.Model.AssertionTreeStore({
                     //autoDestroy : true,
-                    model       : 'Siesta.Harness.Browser.Model.Assertion',
-                    
-                    proxy       : {
-                        type        : 'memory',
-                        reader      : { type : 'json' }
-                    },
-                    
-                    root        : {
-                        id              : '__ROOT__',
-                        expanded        : true,
-                        loaded          : true
+                    model : 'Siesta.Harness.Browser.Model.Assertion',
+
+                    proxy : 'memory',
+
+                    root : {
+                        id       : '__ROOT__',
+                        expanded : true
                     }
                 })
             })
         }
-    
+
         return data
     },
-    
-    
+
+
     onBodyKeyDown : function (e) {
         if (e.getKey() == Ext.EventObject.E && e.ctrlKey) {
             this.rerunTest()
@@ -297,8 +259,8 @@ Ext.define('Siesta.Harness.Browser.UI.Viewport', {
 
     onAfterLayout : function () {
         if (this.getOption('autoRun')) {
-            var checked     = this.getChecked()
-        
+            var checked = this.getChecked()
+
             // either launch the suite for checked tests or for all
             this.harness.launch(checked.length && checked || this.harness.descriptors)
         }
@@ -307,81 +269,49 @@ Ext.define('Siesta.Harness.Browser.UI.Viewport', {
 
     onViewReady : function () {
         if (this.selectedURL) {
-            var testFile    = this.testsStore.getNodeById(this.selectedURL)
-        
+            var testFile = this.testsStore.getNodeById(this.selectedURL)
+
             if (testFile) this.slots.filesTree.getSelectionModel().select(testFile)
         }
     },
 
 
-    onSelectionChange : function (selModel, selectedRecords) {
-    
-        if (selectedRecords.length) {
-            var testFile        = selectedRecords[ 0 ]
-            var test            = testFile.get('test')
-        
-            if (test) this.slots.resultPanel.showTest(test, testFile.get('assertionsStore'))
-        
-            this.selectedURL = testFile.getId()
-        
-            this.saveState()
-        }
-    },
-
-
-    onCheckChange : function (testFile, checked) {
-        this.setNodeChecked(testFile, checked)
-    },
-
-
     setNodeChecked : function (testFile, checked, doNotCascade, skipSave) {
-        var me      = this
-        var id      = testFile.getId()
-    
-        if (checked)
-            this.selection[ id ] = 1
-        else
-            delete this.selection[ id ]
+        var me = this
+        var id = testFile.getId()
 
-        
+        if (checked)
+            this.selection[id] = 1
+        else
+            delete this.selection[id]
+
+
         testFile.set('checked', checked)
-        
-        // when unchecking the node - uncheck the parent node (folder) as well 
+
+        // when unchecking the node - uncheck the parent node (folder) as well
         if (!checked && testFile.parentNode) me.setNodeChecked(testFile.parentNode, false, true, true)
-    
+
         // only cascade for folders and when `doNotCascade` is false
         if (!testFile.isLeaf() && !doNotCascade) Ext.each(testFile.childNodes, function (childNode) {
             me.setNodeChecked(childNode, checked, false, true)
         })
-    
+
         if (!skipSave) this.saveState()
     },
 
 
-    // returns the NodeStore of the TreeStore - flattened presentation of the tree (it's potentially filtered)
-    getNodeStore : function () {
-        return this.slots.filesTree.getView().store
-    },
-    
-    
     forEachTestFile : function (func, scope) {
-        var nodeStore   = this.getNodeStore()
-        
-        if (this.testsStore.isTreeFiltered())
-            nodeStore.each(func, scope)
-        else
-            Ext.Array.each(this.testsStore.tree.flatten(), func, scope)
+        this.testsStore.each(func, scope)
     },
 
 
     getChecked : function () {
-        var descriptors     = []
-    
+        var descriptors = []
+
         this.forEachTestFile(function (testFileRecord) {
-        
             if (testFileRecord.get('checked') && testFileRecord.isLeaf()) descriptors.push(testFileRecord.get('descriptor'))
         })
-    
+
         return descriptors
     },
 
@@ -395,11 +325,10 @@ Ext.define('Siesta.Harness.Browser.UI.Viewport', {
 
 
     runFailed : function () {
-        var descriptors     = []
+        var descriptors = []
 
         this.forEachTestFile(function (testFileRecord) {
-
-            var test    = testFileRecord.get('test')
+            var test = testFileRecord.get('test')
 
             if (test && test.isFailed()) descriptors.push(testFileRecord.get('descriptor'))
         })
@@ -411,7 +340,7 @@ Ext.define('Siesta.Harness.Browser.UI.Viewport', {
 
 
     runAll : function () {
-        var allDesc     = []
+        var allDesc = []
 
         this.forEachTestFile(function (testFile) {
             if (testFile.isLeaf()) allDesc.push(testFile.get('descriptor'))
@@ -426,18 +355,18 @@ Ext.define('Siesta.Harness.Browser.UI.Viewport', {
     stopSuite : function (button) {
         this.performStop();
         button.disable()
-    
+
         setTimeout(function () {
-        
+
             button.enable()
-        
+
         }, 1000)
     },
 
-    performStop : function() {
+    performStop          : function () {
         this.harness.needToStop = true;
-    
-        Ext.each(this.testsStore.tree.flatten(), function (testFileRecord) {
+
+        this.testsStore.forEach(function (testFileRecord) {
             if (testFileRecord.get('isStarting') && !testFileRecord.get('isStarted')) {
                 testFileRecord.set('isStarting', false);
             }
@@ -447,8 +376,8 @@ Ext.define('Siesta.Harness.Browser.UI.Viewport', {
 
     // looks less nice than setting it only after preload for some reason
     onBeforeScopePreload : function (scopeProvider, url) {
-        var testRecord          = this.testsStore.getNodeById(url)
-    
+        var testRecord = this.testsStore.getNodeById(url)
+
         // to avoid disturbing grid
         testRecord.data.isStarted = true
     },
@@ -457,32 +386,32 @@ Ext.define('Siesta.Harness.Browser.UI.Viewport', {
     isTestRunningVisible : function (test) {
         // return false for test's running in popups (not iframes), since we can't show any visual accompaniment for them
         if (!(test.scopeProvider instanceof Scope.Provider.IFrame)) return false;
-    
+
         // if there is a "forced to be on top" test then we only need to compare the tests instances
         if (this.harness.testOfForcedIFrame) {
             return this.harness.testOfForcedIFrame.isFromTheSameGeneration(test)
         }
-    
+
         // otherwise the only possibly visible test is the one of the current assertion grid
         var resultPanel = this.slots.resultPanel;
-    
+
         // if resultPanel has no testRecord it hasn't yet been assigned a test record
         if (!resultPanel.test || !resultPanel.test.isFromTheSameGeneration(test)) {
             return false;
         }
-    
+
         // now we know that visible assertion grid is from our test and there is no "forced on top" test
-        // we only need to check visibility (collapsed / expanded of the right panel 
+        // we only need to check visibility (collapsed / expanded of the right panel
         return resultPanel.isFrameVisible()
     },
-    
-    
-    resetDescriptors : function(descriptors) {
-        var testsStore          = this.testsStore;
 
-        Joose.A.each(this.harness.flattenDescriptors(descriptors), function(descriptor){
+
+    resetDescriptors  : function (descriptors) {
+        var testsStore = this.testsStore;
+
+        Joose.A.each(this.harness.flattenDescriptors(descriptors), function (descriptor) {
             var testRecord = testsStore.getNodeById(descriptor.id);
-        
+
             testRecord.get('assertionsStore').removeAll(true)
             testRecord.reject();
             // || false is required for TreeView - it checks that "checked" field contains Boolean
@@ -493,19 +422,17 @@ Ext.define('Siesta.Harness.Browser.UI.Viewport', {
 
     // method is called when test suite (any several tests) starts - before caching the script contents
     // at this point we don't know yet about missing test files
-    onTestSuiteStart : function (descriptors) {
+    onTestSuiteStart  : function (descriptors) {
         Ext.getBody().addCls('testsuite-running');
 
-        var harness             = this.harness
-        var filesTree           = this.slots.filesTree
-        var selModel            = filesTree.getSelectionModel()
-        var prevSelection       = selModel.getLastSelected()
-        var testsStore          = this.testsStore
-    
-        Ext.suspendLayouts();
-        
+        var harness = this.harness
+        var filesTree = this.slots.filesTree
+        var selModel = filesTree.getSelectionModel()
+        var prevSelection = selModel.getLastSelected()
+        var testsStore = this.testsStore
+
         this.resetDescriptors(descriptors);
-    
+
         // restore the selection after data reload
         if (prevSelection) selModel.select(testsStore.getNodeById(prevSelection.getId()))
     },
@@ -515,87 +442,81 @@ Ext.define('Siesta.Harness.Browser.UI.Viewport', {
     // has completed and 1st test is about to start
     // at this point we know about missing files and `desc.isMissing` property is set
     onTestSuiteLaunch : function (event, descriptors) {
-        var testsStore          = this.testsStore
-    
-        var updated             = {}
-    
+        var testsStore = this.testsStore
+
+        var updated = {}
+
         Joose.A.each(this.harness.flattenDescriptors(descriptors), function (descriptor) {
-            var testRecord  = testsStore.getNodeById(descriptor.id)
-        
+            var testRecord = testsStore.getNodeById(descriptor.id)
+
             testRecord.set({
-                isMissing   : descriptor.isMissing,
-                isStarting  : true
+                isMissing  : descriptor.isMissing,
+                isStarting : true
             })
-            
-            var groupNode   = testRecord.parentNode
-            
-            if (groupNode && !updated[ groupNode.getId() ]) {
+
+            var groupNode = testRecord.parentNode
+
+            if (groupNode && !updated[groupNode.getId()]) {
                 // trying hard to prevent extra updates
-                for (var node = groupNode; node; node = node.parentNode) updated[ node.getId() ] = true
-                
+                for (var node = groupNode; node; node = node.parentNode) updated[node.getId()] = true
+
                 groupNode.updateFolderStatus()
             }
         })
-
-        Ext.resumeLayouts();
     },
-    
-    
+
+
     onTestSuiteEnd : function (descriptors) {
         Ext.getBody().removeCls('testsuite-running');
-        
+
         this.updateStatusIndicator();
-
-        if (this.slots.center.getLayout().getActiveItem() === this.slots.coverageReport) {
-            // Load new data into coverage report
-            this.slots.coverageReport.loadHtmlReport(this.harness.generateCoverageHtmlReport(false));
-        }
     },
-    
 
-    onTestStart : function (test) {
-        var testRecord          = this.testsStore.getNodeById(test.url)
-        
+
+    onTestStart        : function (test) {
+        var testRecord = this.testsStore.getNodeById(test.url)
+
         testRecord.beginEdit()
-    
+
         // will trigger an update in grid
         testRecord.set({
-            test        : test,
-            isRunning   : true
+            test      : test,
+            isRunning : true
         })
-        
+
         testRecord.endEdit()
-        
-        var currentSelection    = this.slots.filesTree.getSelectionModel().getLastSelected()
-    
+
+        var currentSelection = this.slots.filesTree.getSelectionModel().getLastSelected()
+
         // activate the assertions grid for currently selected row, or, if the main area is empty
         if (currentSelection && currentSelection.getId() == test.url) {
-            var resultPanel         = this.slots.resultPanel
-            
+            var resultPanel = this.slots.resultPanel
+
             resultPanel.showTest(test, testRecord.get('assertionsStore'))
+            resultPanel.setInitializing(false);
         }
     },
-    
-    
+
+
     // this method checks that test update, coming from given `test` is actual
     // update may be not actual, if user has re-launched the test, so new test already presents
     isTestUpdateActual : function (test, testRecord) {
-        testRecord          = testRecord || this.testsStore.getNodeById(test.url)
-        
-        var currentTest     = testRecord.get('test')
-        
+        testRecord = testRecord || this.testsStore.getNodeById(test.url)
+
+        var currentTest = testRecord.get('test')
+
         return currentTest && currentTest.isFromTheSameGeneration(test)
     },
 
 
-    onTestUpdate : function (test, result, parentResult) {
-        var testRecord      = this.testsStore.getNodeById(test.url)
-        
+    onTestUpdate   : function (test, result, parentResult) {
+        var testRecord = this.testsStore.getNodeById(test.url)
+
         // need to check that test record contains the same test instance as the test in arguments (or its sub-test)
         // test instance may change if user has restarted a test for example
         if (this.isTestUpdateActual(test, testRecord)) {
             this.processNewResult(testRecord.get('assertionsStore'), test, result, parentResult)
-            
+
             if (this.getOption('breakOnFail') && test.getFailCount() > 0) {
                 this.performStop();
                 this.slots.filesTree.getSelectionModel().select(testRecord);
@@ -604,81 +525,91 @@ Ext.define('Siesta.Harness.Browser.UI.Viewport', {
     },
 
 
-
     // only triggered for "root" tests
-    onTestEnd : function (test) {
-        var testRecord          = this.testsStore.getNodeById(test.url)
-        
+    onTestEnd      : function (test) {
+        var testRecord = this.testsStore.getNodeById(test.url)
+
         // need to check that test record contains the same test instance as the test in arguments (or its sub-test)
         // test instance may change if user has restarted a test for example
         if (this.isTestUpdateActual(test, testRecord)) {
             testRecord.beginEdit()
-    
+
             testRecord.set({
-                'passCount'         : test.getPassCount(),
-                'failCount'         : test.getFailCount(),
-                'todoPassCount'     : test.getTodoPassCount(),
-                'todoFailCount'     : test.getTodoFailCount(),
-                'time'              : test.getDuration() + 'ms'
+                'passCount'     : test.getPassCount(),
+                'failCount'     : test.getFailCount(),
+                'todoPassCount' : test.getTodoPassCount(),
+                'todoFailCount' : test.getTodoFailCount()
+                // Not relevant for
+                //,
+                //'time'          : test.getDuration() + 'ms'
             });
-      
+
             testRecord.endEdit()
-        
+
             testRecord.parentNode && testRecord.parentNode.updateFolderStatus()
         }
-        
+
         this.updateStatusIndicator()
     },
-    
-    
-    // is bubbling and thus triggered for all tests (including sub-tests) 
+
+
+    // is bubbling and thus triggered for all tests (including sub-tests)
     onEveryTestEnd : function (event, test) {
-        var testRecord          = this.testsStore.getNodeById(test.url)
-        
+        var testRecord = this.testsStore.getNodeById(test.url)
+
         // need to check that test record contains the same test instance as the test in arguments (or its sub-test)
         // test instance may change if user has restarted a test for example
         if (this.isTestUpdateActual(test, testRecord)) {
             this.processEveryTestEnd(testRecord.get('assertionsStore'), test)
         }
     },
-    
-    
+
+
     onTestFail : function (test, exception, stack) {
-        var testRecord  = this.testsStore.getNodeById(test.url)
-        
+        var testRecord = this.testsStore.getNodeById(test.url)
+
         // need to check that test record contains the same test instance as the test in arguments
         // test instance may change if user has restarted a test for example
         if (this.isTestUpdateActual(test, testRecord) && !test.isTodo) {
             testRecord.set('isFailed', true)
-        
+
             testRecord.parentNode && testRecord.parentNode.updateFolderStatus()
         }
     },
-    
-    
+
+
     getOption : function (name) {
         switch (name) {
-            case 'selection'    : return this.selection
-            
-            case 'selectedURL'  : return this.selectedURL
-            
-            default             : return this.harness[ name ]
+            case 'selection'    :
+                return this.selection
+
+            case 'selectedURL'  :
+                return this.selectedURL
+
+            default             :
+                return this.harness[name]
         }
     },
-    
-    
+
+
     setOption : function (name, value) {
         switch (name) {
-            case 'selection'    : return this.selection         = value || {}
-            
-            case 'selectedURL'  : return this.selectedURL       = value
-            
-            case 'collapsedNodes': return this.collapsedNodes   = value
-            
-            case 'filter'       : return this.filter            = value
-            case 'filterGroups' : return this.filterGroups      = value
-            
-            default             : return this.harness[ name ]   = value
+            case 'selection'    :
+                return this.selection = value || {}
+
+            case 'selectedURL'  :
+                return this.selectedURL = value
+
+            case 'collapsedNodes':
+                return this.collapsedNodes = value
+
+            case 'filter'       :
+                return this.filter = value
+            case 'filterGroups' :
+                return this.filterGroups = value
+
+            default             :
+                return this.harness[name] = value
         }
     },
 
@@ -686,52 +617,51 @@ Ext.define('Siesta.Harness.Browser.UI.Viewport', {
     getState : function () {
         return {
             // harness configs
-            autoRun         : this.getOption('autoRun'),
-            speedRun        : this.getOption('speedRun'),
-            viewDOM         : this.getOption('viewDOM'),
-            keepResults     : this.getOption('keepResults'),
-            cachePreload    : this.getOption('cachePreload'),
-            transparentEx   : this.getOption('transparentEx'),
-            breakOnFail     : this.getOption('breakOnFail'),
-            debuggerOnFail  : this.getOption('debuggerOnFail'),
-        
+            autoRun        : this.getOption('autoRun'),
+            speedRun       : this.getOption('speedRun'),
+            viewDOM        : this.getOption('viewDOM'),
+            cachePreload   : this.getOption('cachePreload'),
+            transparentEx  : this.getOption('transparentEx'),
+            breakOnFail    : this.getOption('breakOnFail'),
+            debuggerOnFail : this.getOption('debuggerOnFail'),
+
             // UI configs
-            selectedURL     : this.selectedURL,
-            
-            selection       : this.getCheckedNodes(),
-            collapsedNodes  : this.getCollapsedFolders(),
-            
-            filter          : this.slots ? this.slots.filesTree.getFilterValue() : this.filter,
-            filterGroups    : this.slots ? this.slots.filesTree.getFilterGroups() : this.filterGroups
+            selectedURL    : this.selectedURL,
+
+            selection      : this.getCheckedNodes(),
+            collapsedNodes : this.getCollapsedFolders(),
+
+            filter       : this.slots ? this.slots.filesTree.getFilterValue() : this.filter,
+            filterGroups : this.slots ? this.slots.filesTree.getFilterGroups() : this.filterGroups
         }
     },
-    
-    
+
+
     getCheckedNodes : function () {
-        var checked        = {}
-        
-        Joose.A.each(this.testsStore.tree.flatten(), function (treeNode) {
-            if (treeNode.get('checked')) checked[ treeNode.getId() ] = 1
+        var checked = {}
+
+        this.testsStore.forEach(function (treeNode) {
+            if (treeNode.get('checked')) checked[treeNode.getId()] = 1
         })
-        
+
         return checked
     },
-    
-    
+
+
     getCollapsedFolders : function () {
-        var collapsed        = {}
-        
-        Joose.A.each(this.testsStore.tree.flatten(), function (treeNode) {
-            if (!treeNode.isLeaf() && !treeNode.isExpanded()) collapsed[ treeNode.getId() ] = 1
+        var collapsed = {}
+
+        this.testsStore.forEach(function (treeNode) {
+            if (!treeNode.isLeaf() && !treeNode.isExpanded()) collapsed[treeNode.getId()] = 1
         })
-        
+
         return collapsed
     },
-    
-    
+
+
     applyState : function (state) {
-        var me  = this
-        
+        var me = this
+
         if (state) Joose.O.each(state, function (value, name) {
             me.setOption(name, value)
         })
@@ -742,306 +672,105 @@ Ext.define('Siesta.Harness.Browser.UI.Viewport', {
         return 'test-run-' + this.title
     },
 
-
-    onOptionChange : function (component, optionName, optionValue) {
-        this.setOption(optionName, optionValue)
-    
-        if (optionName == 'viewDOM') {
-            var resultPanel = this.slots.resultPanel;
-            
-            resultPanel.setViewDOM(optionValue);
-        }
-
-        this.saveState()
-    },
-    
-    
     loadState : function () {
-        var stateId     = this.getStateId()
-        var state       = Ext.state.Manager.get(stateId)
-        
+        var stateId = this.getStateId()
+        var state = Ext.state.Manager.get(stateId)
+
         if (!state) return
-        
-        if (!state.collapsedNodes)  state.collapsedNodes    = Ext.state.Manager.get(stateId + '-collapsed')
-        if (!state.selection)       state.selection         = Ext.state.Manager.get(stateId + '-selection')
-        
+
+        if (!state.collapsedNodes)  state.collapsedNodes = Ext.state.Manager.get(stateId + '-collapsed')
+        if (!state.selection)       state.selection = Ext.state.Manager.get(stateId + '-selection')
+
         return state
     },
 
-
     saveState : function () {
-        var stateId     = this.getStateId()
-        var state       = this.getState()
-        
+        var stateId = this.getStateId()
+        var state = this.getState()
+
         Ext.state.Manager.set(stateId + '-collapsed', state.collapsedNodes)
         Ext.state.Manager.set(stateId + '-selection', state.selection)
-        
+
         delete state.collapsedNodes
         delete state.selection
-        
+
         Ext.state.Manager.set(stateId, state)
     },
 
 
     uncheckAllExcept : function (testFile) {
-        var me      = this
-    
-        Ext.each(this.testsStore.tree.flatten(), function (node) {
-        
+        var me = this
+
+        this.testsStore.forEach(function (node) {
+
             if (node != testFile) me.setNodeChecked(node, false, true)
         })
     },
-    
-    buildContextMenu : function () {
-        var R = Siesta.Resource('Siesta.Harness.Browser.UI.Viewport');
 
-        return new Ext.menu.Menu({
-        
-            renderTo    : Ext.getBody(),
-        
-            defaults    : {
-                scope   : this
-            },
-        
-            items       : [
-                {
-                    text        : R.get('uncheckOthersText'),
-                    handler     : this.uncheckOthersHandler
-                },
-                {
-                    text        : R.get('uncheckAllText'),
-                    handler     : this.uncheckAllHandler
-                },
-                {
-                    text        : R.get('checkAllText'),
-                    handler     : this.checkAllHandler
-                },
-                {
-                    text        : R.get('runThisText'),
-                    handler     : this.runThisFileHandler
-                }
-            ]
-        })
-    },
-
-
-    uncheckOthersHandler : function () {
-        var currentFile     = this.currentFile
-    
-        this.uncheckAllExcept(currentFile)
-    
-        this.setNodeChecked(currentFile, true)
-    },
-
-
-    runThisFileHandler : function () {
-        this.harness.launch([ this.currentFile.get('descriptor') ])
-    },
-
-
-    uncheckAllHandler : function () {
-        this.uncheckAllExcept()
-    },
-
-
-    checkAllHandler : function () {
-        var me      = this
-    
-        Ext.each(this.testsStore.tree.flatten(), function (node) {
-        
-            me.setNodeChecked(node, true, true)
-        })
-    },
-
-
-    onFilesContextMenu : function (view, testFile, el, index, event) {
-        this.currentFile    = testFile
-
-        if (!this.contextMenu) {
-            this.contextMenu = this.buildContextMenu();
-        }
-
-        this.contextMenu.setPagePosition(event.getX(), event.getY())
-    
-        this.contextMenu.show();
-    
-        event.preventDefault();
-    },
-
-
-    onTestFileDoubleClick : function (view, testFile) {
-        if (this.testsStore.isTreeFiltered() && !testFile.isLeaf()) {
-            var childDesc       = []
-            var nodeStore       = this.testsStore.nodeStore
-            
-            for (var i = nodeStore.indexOf(testFile) + 1; i < nodeStore.getCount(); i++) {
-                var currentNode     = nodeStore.getAt(i)
-                
-                if (!currentNode.isAncestor(testFile)) break 
-                
-                if (currentNode.isLeaf()) childDesc.push(currentNode.get('descriptor'))
-            }
-            
-            this.harness.launch(childDesc);
-        } else 
-            this.launchTest(testFile);
-    },
-
-    
     launchTest : function (testFile) {
-        var resultPanel     = this.slots.resultPanel
+        var resultPanel = this.slots.resultPanel
 
         // clear the content of the result panel when launching a single test
         if (testFile.data.leaf) {
             // assertions of the tests being launched will be cleared in the `onTestSuiteStart` method
-            resultPanel.clear();
+            resultPanel.setInitializing(true);
         }
-        
-        this.harness.launch([ testFile.get('descriptor') ])
+
+        this.harness.launch([testFile.get('descriptor')])
     },
 
-    
+
     updateStatusIndicator : function () {
         // can remain neutral if all files are missing for example
 //        var isNeutral       = true
 //        var allGreen        = true
 //        var hasFailures     = false
-    
-        var totalPassed     = 0
-        var totalFailed     = 0
-    
-        Joose.O.each(this.testsStore.tree.nodeHash, function (testFileRecord) {
-            var test        = testFileRecord.get('test')
-        
+
+        var totalPassed = 0
+        var totalFailed = 0
+
+        this.testsStore.forEach(function (testFileRecord) {
+            var test = testFileRecord.get('test')
+
             // if there's at least one test - state is not neutral
             if (test && test.isFinished()) {
 //                isNeutral       = false
-            
+
 //                allGreen        = allGreen      && test.isPassed()
 //                hasFailures     = hasFailures   || test.isFailed()
-            
-                totalPassed     += test.getPassCount()
-                totalFailed     += test.getFailCount()
+
+                totalPassed += test.getPassCount()
+                totalFailed += test.getFailCount()
             }
         })
 
         this.slots.filesTree.updateStatus(totalPassed, totalFailed);
     },
 
-    onSettingsMenuBeforeShow : function(hdr, menu) {
-        menu.down('[option=viewDOM]').setChecked(this.getOption('viewDOM'));
-    },
-
-    onMainButtonClick : function(hdr, button, action) {
-        switch(action) {
-            case 'run-checked':
-                this.runChecked();
-            break;
-            case 'run-failed':
-                this.runFailed();
-            break;
-            case 'run-all':
-                this.runAll();
-            break;
-            case 'stop':
-                this.stopSuite(button);
-            break;
-        }
-    },
-    
     rerunTest : function () {
-        var toRun = this.slots.filesTree.getSelectionModel().getSelection()[ 0 ];
-        
+        var toRun = this.slots.filesTree.getSelectionModel().getSelection()[0];
+
         if (toRun) {
             this.launchTest(toRun);
         }
     },
 
-    afterRender : function() {
-        var R = Siesta.Resource('Siesta.Harness.Browser.UI.Viewport');
-
+    afterRender : function () {
         this.callParent(arguments);
 
-        Ext.getBody().createChild([
-            {
-                tag     : 'a',
-                cls     : "logo-link",
-                href    : "#",
-                cn      : [
-                {
-                    tag  : 'span',
-                    html : (Siesta.meta.VERSION || "1.0.0"),
-                    cls  : 'tr-version-indicator'
-                },
-                {
-                    tag  : 'div',
-                    cls  : 'tr-progress-indicator'
-                }]
-            },
-            {
-                tag     : 'ul',
-                cls     : "right-top-area",
-                cn      : [
-                    {
-                        tag     : 'li',
-                        html    : '<a id="bryntum-logo" href="http://bryntum.com/" target="_blank" class="bryntum-logo"></a>'
-                    },
-                    {
-                        tag     : 'li',
-                        style   : 'margin-top:3px',
-                        html    : '<a href="' + R.get('apiLinkUrl') + '" target="_blank">' + R.get('apiLinkText') + '</a>'
-                    }
-                ]
-            },
-
-            {
-                tag     : 'div',
-                id      : 'update-ct'
-            }
-        ]);
-
-        Ext.getBody().on({
-            keyup : function(e,t) {
-                if (e.getKey() === e.ENTER && e.ctrlKey) {
-                    // TODO
-                }
-            }
-        });
-    },
-    
-    onHasSomeCoverageInfo : function () {
-        this.slots.filesTree.enableCoverageButton();
-    },
-    
-    onNoCoverageInfo : function () {
-        this.slots.filesTree.disableCoverageButton()
-    },
-
-    showCoverageReport : function () {
-        var resultPanel                 = this.slots.resultPanel
-        var coverageReport              = this.slots.coverageReport
-        
-        coverageReport.loadHtmlReport(this.harness.generateCoverageHtmlReport(false));
-
-        if (this.slots.center.getLayout().getActiveItem() === this.slots.resultPanel) {
-            this.slots.resultPanel.hideIFrame()
-
-            this.slots.center.getLayout().setActiveItem(1)
-        } else {
-            this.showMainUI();
+        if (this.enableVersionCheck && Siesta.Harness.Browser.UI.VersionUpdateButton) {
+            setTimeout(function () {
+                new Siesta.Harness.Browser.UI.VersionUpdateButton();
+            }, 3000);
         }
     },
 
-    showMainUI: function () {
-        this.slots.center.getLayout().setActiveItem(0)
-        
-        this.slots.resultPanel.alignIFrame()
+    onHasSomeCoverageInfo : function () {
+        this.slots.filesTree.enableCoverageButton();
+    },
+
+    onNoCoverageInfo : function () {
+        this.slots.filesTree.disableCoverageButton()
     }
 })
 //eof Siesta.Harness.Browser.UI.Viewport
-
-// Temp hack for Ext 4.2 with IE11
-if (window.Ext && navigator.userAgent.match(/trident/i) && navigator.userAgent.match(/rv.\d\d/)) {
-    Ext.isIE        = true;
-    Ext.ieVersion   = 11;
-}

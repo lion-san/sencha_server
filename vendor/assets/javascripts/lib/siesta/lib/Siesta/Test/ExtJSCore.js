@@ -1,13 +1,13 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
 
 */
 /**
- * 
+
 @class Siesta.Test.ExtJSCore
 
 A base mixin for testing ExtJS and SenchaTouch applications. 
@@ -53,7 +53,8 @@ Role('Siesta.Test.ExtJSCore', {
                 
                 if (!Ext || !Ext.dom || !Ext.dom.Element || !Ext.dom.Element.prototype.eventMap) return null
                 
-                return Ext.dom.Element.prototype.eventMap
+                // need to create copy! to not store the value from another context on a test instance
+                return Joose.O.copy(Ext.dom.Element.prototype.eventMap)
             }
         },
         
@@ -684,7 +685,7 @@ Role('Siesta.Test.ExtJSCore', {
 
             var components;
 
-            if (mainParts[ 0 ].match(/\./)) {
+            if (mainParts[ 0 ].match(/\.\w+\(/)) {
                 // complex case
                 var cqParts = this.trimString(mainParts[ 0 ]).split(' ');
 

@@ -1,22 +1,22 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
 
 */
 /**
- @class Siesta.Test.Simulate.KeyCodes
- @singleton
+@class Siesta.Test.Simulate.KeyCodes
+@singleton
 
- This is a singleton class, containing the mnemonical names for various advanced key codes. You can use this names in the {@link Siesta.Test.Browser#type} method, like this:
+This is a singleton class, containing the mnemonical names for various advanced key codes. You can use this names in the {@link Siesta.Test.Browser#type} method, like this:
 
- t.type(el, 'Foo bar[ENTER]', function () {
-            ...
-        })
+    t.type(el, 'Foo bar[ENTER]', function () {
+        ...
+    })
 
- Below is the full list:
+Below is the full list:
 
  - `BACKSPACE`
 

@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -1108,8 +1108,8 @@ Role('Siesta.Test.More', {
         
         /**
          * This method accepts a variable number of steps, either as individual arguments or as a single array containing them. Steps and arrays
-         * of steps are handled just fine, and any step-arrays passed will be flattened. Each step should be either a function or configuration object for {@link Siesta.Test.Action test actions}.
-         * These functions / actions will be executed in order.
+         * of steps are handled just fine, and any step-arrays passed will be flattened. Each step should be either a function or configuration 
+         * object for {@link Siesta.Test.Action test actions}. These functions / actions will be executed in order.
          * 
          * 1) For a function step, it will receive a callback as the 1st argument, to call when the step is completed.
          * As the 2nd and further arguments, the step function will receive the arguments passed to the previous callback.
@@ -1240,6 +1240,8 @@ Role('Siesta.Test.More', {
         ...
     )
 
+         *
+         *  See also : {@link #chainForArray}.
          *  
          *  @param {Function/Object/Array} step1 The function to execute or action configuration, or an array of steps
          *  @param {Function/Object} step2 The function to execute or action configuration
@@ -1307,6 +1309,11 @@ Role('Siesta.Test.More', {
                         }
                         
                         var nextFunc    = function () {
+                            var self    = arguments.callee
+                            if (self.__CALLED__) me.fail(R.get('calledMoreThanOnce', { num : index + 1, line : sourceLine }))
+                            
+                            self.__CALLED__ = true
+                            
                             if (!isStepWithOwnAsyncFrame) me.endAsync(async)
                             
                             args    =  Array.prototype.slice.call(arguments);
@@ -1352,17 +1359,10 @@ Role('Siesta.Test.More', {
                             action.process()
                             
                         } else {
-                            if (!step.args) step.args   = args
-                            
-                            // Don't pass target to next step if it is a waitFor action, it does not make sense and messes up the arguments
-                            if (!isLast && (steps[ index + 1 ].waitFor || steps[ index + 1 ].action == 'wait')) {
-                                step.passTargetToNext = false;
-                            }
-
                             step.next       = nextFunc
                             step.test       = me
                             
-                            var action      = Siesta.Test.ActionRegistry().create(step, me)
+                            var action      = Siesta.Test.ActionRegistry().create(step, me, args)
                             
                             action.process()
                         }
@@ -1371,6 +1371,71 @@ Role('Siesta.Test.More', {
             })
             
             queue.run()
+        },
+        
+        
+        /**
+         * This is a wrapper around the {@link #chain} method, which allows you to run the chain over the steps, generated from the elements
+         * of some array. For example, if in some step of outer chain, we need to click the elements with ids, given as the array, we can do:
+         *
+
+    function (next) {
+        var ids     = [ 'button-1', 'button-2', 'button-3' ]
+        
+        t.chainForArray(ids, function (elId) {
+            return { click : '#' + elId }
+        }, next)
+    }
+         * 
+         * @param {Array} array An array with arbitrary elements
+         * @param {Function} generator A function, which will be called for every element of the `array`. It should return
+         * a chain step, generated from that element. This function can return an array of steps as well. If generator will return `null` or 
+         * `undefined` nothing will be added to the chain.
+         * @param {Function} generator.el An element of the `array`
+         * @param {Function} generator.index An index of the element
+         * @param {Function} [callback] A function to call, once the chain is completed.
+         */
+        chainForArray : function (array, generator, callback, reverse) {
+            var me          = this
+            var steps       = []
+            
+            Joose.A[ reverse ? 'eachR' : 'each' ](array, function (el, index) {
+                var res     = generator.call(me, el, index)
+                
+                if (me.typeOf(res) == 'Array') 
+                    steps.push.apply(steps, res)
+                else
+                    if (res) steps.push(res)
+            })
+            
+            if (callback) steps.push(function () {
+                me.processCallbackFromTest(callback)
+            })
+            
+            this.chain(steps)
+        },
+        
+        
+        verifyExpectedNumber : function (actual, expected) {
+            var operator        = '=='
+            
+            if (this.typeOf(expected) == 'String') {
+                var match       = /([<>=]=?)\s*(\d+)/.exec(expected)
+                var R               = Siesta.Resource('Siesta.Test.Browser');
+
+                if (!match) throw new Error(R.get('wrongFormat')  + ": " + expected)
+                
+                operator        = match[ 1 ]
+                expected        = Number(match[ 2 ])
+            }
+            
+            switch (operator) {
+                case '==' : return actual == expected
+                case '<=' : return actual <= expected
+                case '>=' : return actual >= expected
+                case '<' : return actual < expected
+                case '>' : return actual > expected
+            }
         }
     },
     

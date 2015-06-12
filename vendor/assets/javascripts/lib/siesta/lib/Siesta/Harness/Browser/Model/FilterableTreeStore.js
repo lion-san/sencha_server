@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -17,6 +17,9 @@ Ext.define('Siesta.Harness.Browser.Model.FilterableTreeStore', {
         this.callParent(arguments)
         
         this.initTreeFiltering()
-    }
+    },
 
+    forEach : function(fn, scope) {
+        this.getRootNode().cascadeBy(fn, scope);
+    }
 })

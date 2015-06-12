@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -55,17 +55,17 @@ Siesta.CurrentLocale = Siesta.CurrentLocale || {
     },
 
     "Siesta.Harness.Browser.UI.ResultPanel" : {
-        rerunText               : 'Re-run test',
+        rerunText               : 'Run test',
         toggleDomVisibleText    : 'Toggle DOM visible',
         viewSourceText          : 'View source',
         showFailedOnlyText      : 'Show failed only',
-        domInspectorText        : 'Toggle Ext Dom Inspector',
+        componentInspectorText  : 'Toggle Ext Component Inspector',
         eventRecorderText       : 'Event Recorder',
         closeText               : 'Close'
     },
 
     "Siesta.Harness.Browser.UI.TestGrid" : {
-        title                   : 'Double click a test to run it',
+        title                   : 'Test list',
         nameText                : 'Name',
         filterTestsText         : 'Filter tests',
         expandCollapseAllText   : 'Expand / Collapse all',
@@ -82,21 +82,20 @@ Siesta.CurrentLocale = Siesta.CurrentLocale || {
         transparentExText       : 'Transparent exceptions',
         cachePreloadsText       : 'Cache preloads',
         autoLaunchText          : 'Auto launch',
-        keepResultsText         : 'Keep results',
         speedRunText            : 'Speed run',
         breakOnFailText         : 'Break on fail',
         debuggerOnFailText      : 'Debugger on fail',
         aboutText               : 'About Siesta',
         documentationText       : 'Siesta Documentation',
         siestaDocsUrl           : 'http://bryntum.com/docs/siesta',
-        filterFieldTooltip      : 'Supported formats for tests filtering:\n1) term1 term2 - both "term1" and "term2" should present in the test url\n' +
-            '2) term1 term2 | term3 term4 | ... - both "term1" and "term2" should present in the test url, or both term3 and term4, can be ' +
+        filterFieldTooltip      : 'Supported formats for tests filtering:\n1) TERM1 TERM2 - both "TERM1" and "TERM2" should present in the test url\n' +
+            '2) TERM1 TERM2 | TERM3 TERM4 | ... - both "TERM1" and "TERM2" should present in the test url, OR both TERM3 and TERM4, etc, can be ' +
             'repeated indefinitely\n' +
-            '3) group > any term for tests filtering - filters only withing the specified `group`'
-            
+            '3) GROUP_TERM > TEST_TERM - filters only withing the specified `group`',
+        landscape               : 'Landscape'
     },
 
-    "Siesta.Harness.Browser.UI.VersionChecker" : {
+    "Siesta.Harness.Browser.UI.VersionUpdateButton" : {
 
         newUpdateText           : 'New Update Available...',
         updateWindowTitleText   : 'New version available for download! Current version: ',
@@ -109,25 +108,25 @@ Siesta.CurrentLocale = Siesta.CurrentLocale || {
     },
 
     "Siesta.Harness.Browser.UI.Viewport" : {
-
         apiLinkText       : 'API Documentation',
         apiLinkUrl        : 'http://bryntum.com/docs/siesta',
         uncheckOthersText : 'Uncheck others (and check this)',
         uncheckAllText    : 'Uncheck all',
         checkAllText      : 'Check all',
         runThisText       : 'Run this',
+        expandAll           : 'Expand all',
+        collapseAll         : 'Collapse all',
+        filterToCurrentGroup    : 'Filter to current group',
+        filterToFailed          : 'Filter to failed',
         httpWarningTitle  : 'You must use a web server',
         httpWarningDesc   : 'You must run Siesta in a web server context, and not using the file:/// protocol'
     },
 
-    "Siesta.Harness.Browser.UI_Mobile.MainPanel" : {
-        backText                : 'Back',
-        allTestsPassedText      : 'All tests passed.',
-        failedAssertionsForText : 'Failed assertions for: '
-    },
 
     "Siesta.Harness.Browser" : {
-        codeCoverageWarningText : "Can not enable code coverage - did you forget to include the `siesta-coverage-all.js` on the harness page?"
+        codeCoverageWarningText : "Can not enable code coverage - did you forget to include the `siesta-coverage-all.js` on the harness page?",
+        noJasmine               : "No `jasmine` object found on spec runner page",
+        noJasmineSiestaReporter : "Can't find SiestaReporter in Jasmine. \nDid you add the `siesta/bin/jasmine-siesta-reporter.js` file to your spec runner page?"
     },
 
     "Siesta.Result.Assertion" : {
@@ -191,7 +190,12 @@ Siesta.CurrentLocale = Siesta.CurrentLocale || {
         thresholdIsText             : 'Threshold is ',
         exactMatchText              : 'Exact match text',
         thrownExceptionText         : 'Thrown exception',
-        noExceptionThrownText       : 'No exception thrown'
+        noExceptionThrownText       : 'No exception thrown',
+        wrongSpy                    : 'Incorrect spy instance',
+        toHaveBeenCalledDescTpl     : 'Expect method {methodName} to have been called {need} times',
+        actualNbrOfCalls            : 'Actual number of calls',
+        expectedNbrOfCalls          : 'Expected number of calls',
+        toHaveBeenCalledWithDescTpl : 'Expect method {methodName} to have been called at least once with the specified arguments'
     },
 
     "Siesta.Test.ExtJS.Ajax"        : {
@@ -261,9 +265,14 @@ Siesta.CurrentLocale = Siesta.CurrentLocale || {
         codeBodyMissing              : 'Code body is not provided for',
         codeBodyOf                   : 'Code body of',
         missingFirstArg              : 'does not declare a test instance as 1st argument',
-        iitFound                     : 't.iit should only be used during debugging'
+        iitFound                     : 't.iit should only be used during debugging',
+        noObject                     : 'No object to spy on'
     },
 
+    "Siesta.Test.BDD.Spy"                : {
+        spyingNotOnFunction          : 'Trying to create a spy over a non-function property'
+    },
+    
     "Siesta.Test.Browser"            : {
         noDomElementFound            : 'No DOM element found for CSS selector',
         noActionTargetFound          : 'No action target found for',
@@ -481,7 +490,8 @@ Siesta.CurrentLocale = Siesta.CurrentLocale || {
         atLine                       : 'At line',
         chainStepEx                  : 'Chain step threw an exception',
         stepFn                       : 'Step function',
-        notUsingNext                 : 'does not use the provided "next" function anywhere'
+        notUsingNext                 : 'does not use the provided "next" function anywhere',
+        calledMoreThanOnce           : 'The `next` callback of {num} step (1-based) of `t.chain()` call at line {line} is called more than once.'
     },
 
 

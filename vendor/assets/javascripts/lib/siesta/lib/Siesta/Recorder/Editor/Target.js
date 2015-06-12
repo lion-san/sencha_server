@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -72,6 +72,7 @@ Ext.define('Siesta.Recorder.Editor.Target', {
     
     
     applyChanges : function (actionRecord) {
+
         var value       = this.getValue()
         var match
         
@@ -89,8 +90,9 @@ Ext.define('Siesta.Recorder.Editor.Target', {
             else {
                 target.setUserTarget(value)
             }
-            
-            actionRecord.afterEdit(this.targetProperty)
+
+            // TODO
+            //actionRecord.afterEdit(this.targetProperty)
         }
     },
 

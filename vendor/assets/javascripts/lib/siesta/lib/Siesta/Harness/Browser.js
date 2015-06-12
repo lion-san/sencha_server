@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -171,6 +171,19 @@ Class('Siesta.Harness.Browser', {
              */
             forceDOMVisible     : $.browser.msie,
             
+            /**
+             * @cfg {Boolean} runInPopup Experimental. When set to `true` the tests will be executed in the popup, instead of iframe.
+             * You will need to enable popups the host you are testing from.
+             * 
+             * Popups provides almost exactly the same environment as standalone page - notably the `window.top` property
+             * reference the popup itself, making it easier to test hash-based navigation.
+             * 
+             * Note, that mouse cursor visualization does not work for tests in popups.
+             * 
+             * This option can be also specified in the test file descriptor.
+             */
+            runInPopup          : false,
+            
             
             /**
              * @cfg {String} hostPageUrl The url of the HTML page which will be the target for the test(s) (the URL must be on the same domain the harness HTML page). This option is used for application level testing, Siesta will visit this URL and then launch
@@ -304,7 +317,20 @@ Class('Siesta.Harness.Browser', {
             /**
              * @cfg {String} runCore Either `parallel` or `sequential`. Indicates how the individual tests should be run - several at once or one-by-one.
              * 
-             * Default value is "parallel", except for IE 6, 7, 8 where it's set to `sequential`. You should not need to change this option.
+             * Default value is "parallel", except for IE 6, 7, 8 where it's set to `sequential`.
+             * 
+             * Set this option to `sequential` for tests, that uses some exclusive resources (like for example focus of the
+             * text fields).
+             * 
+
+    Harness.start(
+        'some_test.t.js',
+        {
+            url         : 'test_that_relies_on_focus.t.js',
+            runCore     : 'sequential'
+        }
+    )
+
              * 
              * This option can be also specified in the test file descriptor. 
              */
@@ -389,6 +415,46 @@ Class('Siesta.Harness.Browser', {
              * @cfg {Object} recorderConfig A custom config object used to configure the {@link Siesta.Recorder.Recorder} instance
              */
             recorderConfig              : null,
+            
+            /**
+             * @cfg {Boolean} jasmine This option can only be specified in the {@link Siesta.Harness#start test files descriptor}.
+             * If its set to `true`, the `url` property of the descriptor should point to the Jasmine spec runner html page.
+             * Siesta then will automatically import the results from the Jasmine suite.
+             * 
+             * Additionally, one need to add a special reporter to the spec runner page, which is available 
+             * as `SIESTA_FOLDER/bin/jasmine-siesta-reporter.js`.
+             * 
+             * Currently Siesta can import the results from Jasmine 2.0 and above.
+             * 
+             * Typical setup will look like (see also `SIESTA_FOLDER/examples/110-jasmine-suite` example):
+
+    <head>
+        ...
+        <script src="lib/jasmine-2.2.0/jasmine.js"></script>
+        <script src="lib/jasmine-2.2.0/jasmine-html.js"></script>
+        <script src="lib/jasmine-2.2.0/boot.js"></script>
+        
+        <!-- Add Siesta reporter to your Jamsine spec runner (adjust the path) -->
+        <script src="../../../bin/jasmine-siesta-reporter.js"></script>
+        ....
+    </head>
+             * &nbsp;
+ 
+    Harness.start(
+        // regular Siesta test
+        '010_regular_test.t.js',
+        
+        // a Jasmine test suite 
+        {
+            jasmine         : true,
+            expectedGlobals : [ 'Player', 'Song' ],
+            // url should point to the specs runner html page in this case 
+            url             : 'jasmine_suite/SpecRunner.html'
+        }
+    )
+
+             */
+            
 
             needUI                      : true,
             
@@ -533,10 +599,6 @@ Class('Siesta.Harness.Browser', {
                 
                 if (this.needUI && !this.viewport) {
                     var cb = function () {
-//                        if (Ext.QuickTips) {
-//                            Ext.QuickTips.init();
-//                        }
-//
                         me.viewport = me.createViewport({
                             title           : me.title,
                             harness         : me
@@ -574,21 +636,34 @@ Class('Siesta.Harness.Browser', {
             },
             
             
+            onUnload : function () {
+                Joose.O.each(this.scopesByURL, function (scopeProvider, url) {
+                    // to close opened popups when harness page unloads
+                    if (scopeProvider instanceof Scope.Provider.Window) scopeProvider.cleanup()
+                })
+            },
+            
+            
             setup : function (callback) {
                 var me      = this
                 var sup     = this.SUPER
+                
+                window.onunload     = function () { me.onUnload() }
+                
+                // required to bring the window to front in FF
+                window.focus()
 
                 // delay the super setup until dom ready
                 if (!this.isAutomated) {
                     Ext.onReady(function () {
-                        // init the singletone
+                        // init the singleton
                         Siesta.Harness.Browser.FeatureSupport();
                     
                         sup.call(me, callback);
                     });
                 } else {
                     $(function () {
-                        // init the singletone
+                        // init the singleton
                         Siesta.Harness.Browser.FeatureSupport();
                     
                         sup.call(me, callback);
@@ -631,6 +706,13 @@ Class('Siesta.Harness.Browser', {
                     return undefined
                 else
                     return this.preload
+            },
+            
+            
+            normalizeScopeProvider : function (desc) {
+                this.SUPERARG(arguments)
+                
+                if (this.getDescriptorConfig(desc, 'runInPopup')) desc.scopeProvider = 'Scope.Provider.Window'
             },
             
             
@@ -869,6 +951,21 @@ Class('Siesta.Harness.Browser', {
             },
             
             
+            normalizeDescriptor : function (desc, parent, index, level) {
+                var desc        = this.SUPERARG(arguments)
+                
+                if (!desc.group && desc.jasmine) {
+                    desc.hostPageUrl        = desc.url
+                    desc.testCode           = this.getJasmineTestCode()
+                    // preloads will not be inherited anyway because "hostPageUrl" option presents
+                    // but we explicitly remove them one more time
+                    desc.preload            = []
+                }
+                
+                return desc
+            },
+
+        
             resolveURL : function (url, scopeProvider, desc) {
                 // if the `scopeProvider` is provided and it has a sourceURL - then absolutize the preloads relative to that url
                 if (scopeProvider && scopeProvider.sourceURL) url = this.absolutizeURL(url)
@@ -888,7 +985,8 @@ Class('Siesta.Harness.Browser', {
             
             absolutizeURL : function (url, baseUrl) {
                 // if the url is already absolute - just return it (perhaps with some normalization - 2nd case)
-                if (/^(https?|file):\/\//.test(url))  return url
+                // the url starting with // is also valid absolute url
+                if (/^((https?|file):)?\/\//.test(url))  return url
                 if (/^\//.test(url))    return this.baseProtocol + '//' + this.baseHost + url
                 
                 baseUrl             = baseUrl || this.baseUrl
@@ -1012,6 +1110,46 @@ Class('Siesta.Harness.Browser', {
                 if (!match) return null
             
                 return match[ 1 ]
+            },
+            
+            
+            getJasmineTestCode : function () {
+                return ';(' + (function () {
+                    
+                    StartTest(function (t) {
+                        t.expectGlobals(
+                            'getJasmineRequireObj', 'jasmineRequire', 'jasmine', 'xdescribe', 'describe', 'xdescribe', 'fdescribe',
+                            'it', 'xit', 'fit', 'spyOn', 'fail', 'jsApiReporter', 'beforeEach', 'afterEach', 'beforeAll', 'afterAll',
+                            'expect', 'pending'
+                        )
+                        
+                        if (!window.jasmine) {
+                            t.fail(t.resource('Siesta.Harness.Browser', 'noJasmine'))
+                            
+                            return
+                        }
+                        
+                        if (!jasmine.SiestaReporter) {
+                            t.fail(t.resource('Siesta.Harness.Browser', 'noJasmineSiestaReporter'))
+                            
+                            return
+                        }
+                        
+                        jasmine.SiestaReporter.importResults(t)
+                    })
+                    
+                }).toString() + ')();'
+            },
+            
+            
+            /**
+             * This methos returns `true` if this harness is being run on the 
+             * [Standard package](http://www.bryntum.com/products/siesta/) of Siesta, `false` otherwise.
+             * 
+             * @return {Boolean}
+             */
+            isStandardPackage : function () {
+                return Boolean(Siesta.Harness.Browser.Automation)
             }
         }
         

@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -51,10 +51,11 @@ http://bryntum.com/products/siesta/license
         Ext.apply({
             extend      : 'Ext.data.Model',
             
-            init        : function () {
-                this.internalId = this.getId() || this.internalId
-            },
-    
+            //init        : function () {
+                //this.internalId = this.getId() || this.internalId
+                //debugger;
+            //},
+
             computeFolderStatus : function () {
                 if (!this.childNodes.length) return 'yellow'
     
@@ -117,21 +118,21 @@ http://bryntum.com/products/siesta/license
     
                 if (parentNode && !parentNode.isRoot()) parentNode.updateFolderStatus()
             }
-        }, isSenchaTouch ? { config : config } : config),
+        }, isSenchaTouch ? { config : config } : config)//,
         // eof Ext.apply
         
-        function () {
-            if (!isSenchaTouch) {
-                Ext.data.NodeInterface.decorate(this);
-    
-                this.override({
-                    expand : function () {
-                        Ext.suspendLayouts();
-                        this.callParent(arguments);
-                        Ext.resumeLayouts();
-                    }
-                });
-            }
-        }
+        //function () {
+        //    if (!isSenchaTouch) {
+        //        Ext.data.NodeInterface.decorate(this);
+        //
+        //        this.override({
+        //            expand : function () {
+        //                Ext.suspendLayouts();
+        //                this.callParent(arguments);
+        //                Ext.resumeLayouts();
+        //            }
+        //        });
+        //    }
+        //}
     )
 })();

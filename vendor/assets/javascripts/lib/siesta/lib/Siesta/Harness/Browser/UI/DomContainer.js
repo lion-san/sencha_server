@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -10,18 +10,18 @@ Ext.define('Siesta.Harness.Browser.UI.DomContainer', {
     extend : 'Ext.Panel',
     alias  : 'widget.domcontainer',
 
-    cls : 'siesta-domcontainer',
-
-    test          : null,
-    testListeners : null,
-
-    maintainViewportSize : true,
-
-    canManageDOM            : true,
-    suspendAfterLayoutAlign : false,
+    cls                     : 'siesta-domcontainer',
+    header                  : false,
+    collapsible             : true,
+    animCollapse            : false,
     padding                 : 10,
 
-    inspector : null,
+    test                    : null,
+    testListeners           : null,
+    maintainViewportSize    : true,
+    canManageDOM            : true,
+    suspendAfterLayoutAlign : false,
+    inspector               : null,
 
     initComponent : function () {
         var me = this;
@@ -30,17 +30,14 @@ Ext.define('Siesta.Harness.Browser.UI.DomContainer', {
 
         this.title = Siesta.Resource('Siesta.Harness.Browser.UI.DomContainer', 'title');
 
-        this.addEvents(
-            'inspectionstart',
-            'inspectionstop',
-            'targethover',
-            'targetselected'
-        )
+        //this.addEvents(
+        //    'inspectionstart',
+        //    'inspectionstop',
+        //    'targethover',
+        //    'targetselected'
+        //)
 
         Ext.apply(this, {
-            header       : false,
-            collapsible  : true,
-            animCollapse : false,
 
             dockedItems : this.consoleCt = {
                 xtype     : 'component',
@@ -96,6 +93,7 @@ Ext.define('Siesta.Harness.Browser.UI.DomContainer', {
 
                 if (e.getKey() === e.ENTER && val) {
                     var frame = this.getIFrame();
+
                     try {
                         var retVal = frame.contentWindow.eval(val);
                         if (window.console) {
@@ -177,7 +175,10 @@ Ext.define('Siesta.Harness.Browser.UI.DomContainer', {
     hideIFrame : function () {
         var iframe = this.getIFrameWrapper()
 
-        iframe && Ext.fly(iframe).setLeftTop(-10000, -10000)
+        iframe && Ext.fly(iframe).setStyle({
+            left : '-10000px',
+            top  : '-10000px'
+        })
 
         var test = this.test
 
@@ -223,8 +224,8 @@ Ext.define('Siesta.Harness.Browser.UI.DomContainer', {
         // this prevents harness from hiding the iframe, because "test.hasForcedIframe()" will return null
         // we've moved the iframe to the correct position, and it can never be "forced" again anyway
         if (this.isFrameVisible()) {
-            test.forceDOMVisible    = false
-            test.isDOMForced        = false
+            test.forceDOMVisible = false
+            test.isDOMForced = false
         }
     },
 
@@ -296,7 +297,7 @@ Ext.define('Siesta.Harness.Browser.UI.DomContainer', {
         }
     },
 
-    onInspectionStart : function() {
+    onInspectionStart : function () {
         var wrap = Ext.get(this.getIFrameWrapper());
 
         if (wrap) {
@@ -304,7 +305,7 @@ Ext.define('Siesta.Harness.Browser.UI.DomContainer', {
         }
     },
 
-    onInspectionStop : function() {
+    onInspectionStop : function () {
         var wrap = Ext.get(this.getIFrameWrapper());
 
         if (wrap) {

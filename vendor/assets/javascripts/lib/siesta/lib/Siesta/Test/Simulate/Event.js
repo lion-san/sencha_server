@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -62,7 +62,7 @@ Role('Siesta.Test.Simulate.Event', {
             var global      = this.global;
             options         = options || {};
 
-            if (this.valueIsArray(el)) {
+            if (this.typeOf(el) == 'Array') {
                 if (!('clientX' in options)) {
                     options.clientX = el[0];
                 }
@@ -112,15 +112,11 @@ Role('Siesta.Test.Simulate.Event', {
                 event   = this.createMouseEvent(type, options, el);
             } else if (/^key(up|down|press)$/.test(type)) {
                 event   = this.createKeyboardEvent(type, options, el);
-            } else
+            } /*else if (/^touch/.test(type)) {
+                return this.createTouchEvent(type, options, el);
+            }*/ else
                 event   = this.createHtmlEvent(type, options, el);
 
-//            XXX should be implemented in the Mobile (SenchaTouch) test class
-//            if (/^touch/.test(type)) {
-//                return this.createTouchEvent(type, options, el);
-//            }
-            // use W3C standard when available and allowed by "simulateEventsWith" option
-            
             // IE>=10 somehow reports that "defaultPrevented" property of the event object is `false`
             // even that "preventDefault()" has been called on the object
             // more over, immediately after call to "preventDefault()" the property is updated
@@ -140,7 +136,6 @@ Role('Siesta.Test.Simulate.Event', {
 
 
         createHtmlEvent : function(type, options, el) {
-
             var doc = el.ownerDocument;
 
             if (doc.createEvent && this.getSimulateEventsWith() == 'dispatchEvent') {

@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -8,7 +8,7 @@ http://bryntum.com/products/siesta/license
 */
 Ext.define('Siesta.Recorder.Editor.Code', {
     extend      : 'Ext.ux.form.field.CodeMirror',
-    
+    xtype       : 'codeeditor',
     height      : 100,
     cls         : 'siesta-recorder-codeeditor',
 

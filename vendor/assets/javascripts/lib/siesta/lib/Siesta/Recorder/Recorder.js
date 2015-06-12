@@ -1,16 +1,17 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
 
 */
 /**
+ @class Siesta.Recorder.Recorder
 
 Low level class which records the events of the window it's attached to. It records basic mouse and key events,
 but does not record scroll events and other browser type events. Since it's JS based, we cannot record
-native dialog interactions, such as alert, print, confirm etc.
+native dialog interactions, such as alert, print or confirm etc.
 
 It tries to coalesce certain event patterns into higher order events (click, drag etc).
 
@@ -430,8 +431,8 @@ Class('Siesta.Recorder.Recorder', {
 
                     // Verify previous tail
                     tailPrev.type == 'mousedown' &&
-                    event.target == tail.target &&
-                    event.target == tailPrev.target &&
+                    (event.target == tail.target || $.contains(event.target, tail.target) || $.contains(tail.target, event.target)) &&
+                    (event.target == tailPrev.target || $.contains(event.target, tailPrev.target) || $.contains(tailPrev.target, event.target)) &&
                     this.isSamePoint(event, tailPrev)
                 ) {
                     this.removeActionByEvent(tail)

@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -25,6 +25,10 @@ For example:
 
 */
 Class('Siesta.Test.BDD.Expectation', {
+    
+    does        : [
+        Siesta.Util.Role.CanGetType
+    ],
 
     has         : {
         value           : null,
@@ -348,13 +352,118 @@ Class('Siesta.Test.BDD.Expectation', {
         },
         
         
-        // TODO
-        toHaveBeenCalled : function () {
+        /**
+         * This assertion passes, if a spy, provided to the {@link Siesta.Test#expect expect} method have been 
+         * called expected number of times. The expected number of times can be provided as the 1st argument and by default
+         * is 1.
+         * 
+         * One can also provide the function, spied on, to the {@link Siesta.Test#expect expect} method.
+         * 
+         * Examples:
+         * 
+    var spy = t.spyOn(obj, 'process')
+    
+    // call the method 2 times
+    obj.process()
+    obj.process()
+
+    // following 2 calls are equivalent
+    t.expect(spy).toHaveBeenCalled();
+    t.expect(obj.process).toHaveBeenCalled();
+    
+    // one can also use exact number of calls or comparison operators
+    t.expect(obj.process).toHaveBeenCalled(2);
+    t.expect(obj.process).toHaveBeenCalled('>1');
+    t.expect(obj.process).toHaveBeenCalled('<3');
+
+         * 
+         * See also {@link #toHaveBeenCalledWith}
+         * 
+         * @param {Number/String} expectedNumber Expected number of calls. Can be either a number, specifying the exact
+         * number of calls, or a string. In the latter case one can include a comparison operator in front of the number.
+         * 
+         */
+        toHaveBeenCalled : function (expectedNumber) {
+            expectedNumber  = expectedNumber != null ? expectedNumber : '>=1'
+            
+            var spy         = this.value
+            var t           = this.t
+            var R           = Siesta.Resource('Siesta.Test.BDD.Expectation');
+
+            if (this.typeOf(spy) == 'Function') {
+                if (!spy.__SIESTA_SPY__) throw new Error(R.get('wrongSpy'))
+                
+                spy         = spy.__SIESTA_SPY__
+            }
+            
+            if (!(spy instanceof Siesta.Test.BDD.Spy)) throw new Error(R.get('wrongSpy'))
+            
+            this.process(t.verifyExpectedNumber(spy.callsLog.length, expectedNumber), {
+                descTpl             : R.get('toHaveBeenCalledDescTpl'),
+                assertionName       : 'expect(func).toHaveBeenCalled()',
+                methodName          : spy.propertyName,
+                got                 : spy.callsLog.length,
+                gotDesc             : R.get('actualNbrOfCalls'),
+                need                : expectedNumber,
+                needDesc            : R.get('expectedNbrOfCalls')
+            })
         },
         
         
-        // TODO
+        /**
+         * This assertion passes, if a spy, provided to the {@link Siesta.Test#expect expect} method have been 
+         * called at least once with the specified arguments. 
+         * 
+         * One can also provide the function, spied on, to the {@link Siesta.Test#expect expect} method.
+         * 
+         * One can use placeholders, generated with the {@link Siesta.Test.BDD#any any} method to verify the arguments.
+         * 
+         * Example:
+         * 
+
+    var spy = t.spyOn(obj, 'process')
+    
+    // call the method 2 times with different arguments
+    obj.build('development', '1.0.0')
+    obj.build('release', '1.0.1')
+
+    t.expect(spy).toHaveBeenCalledWith('development', '1.0.0');
+    // or
+    t.expect(obj.process).toHaveBeenCalledWith('development', t.any(String));
+
+         * 
+         * See also {@link #toHaveBeenCalled}
+         * 
+         * @param {Object} arg1 Argument to a call
+         * @param {Object} arg2 Argument to a call
+         * @param {Object} argN Argument to a call
+         */
         toHaveBeenCalledWith : function () {
+            var spy         = this.value
+            var t           = this.t
+            var R           = Siesta.Resource('Siesta.Test.BDD.Expectation');
+
+            if (this.typeOf(spy) == 'Function') {
+                if (!spy.__SIESTA_SPY__) throw new Error(R.get('wrongSpy'))
+                
+                spy         = spy.__SIESTA_SPY__
+            }
+            
+            if (!(spy instanceof Siesta.Test.BDD.Spy)) throw new Error(R.get('wrongSpy'))
+            
+            var args                        = Array.prototype.slice.call(arguments)
+            var foundCallWithMatchingArgs   = false
+            
+            Joose.A.each(spy.callsLog, function (call) {
+                if (t.compareObjects(call.args, args)) { foundCallWithMatchingArgs = true; return false }
+            })
+            
+            this.process(foundCallWithMatchingArgs, {
+                descTpl             : R.get('toHaveBeenCalledWithDescTpl'),
+                assertionName       : 'expect(func).toHaveBeenCalledWith()',
+                methodName          : spy.propertyName,
+                noGot               : true
+            })
         }
     }
 })

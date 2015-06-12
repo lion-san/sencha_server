@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -38,61 +38,17 @@ Ext.define('Siesta.Recorder.UI.EventView', {
                 
                 var editor
 
-                if (column.dataIndex === "target") {
+                if (column.xtype === "targetcolumn") {
                     record      = typeof record === 'number' ? me.store.getAt(record) : record;
-                    
-                    editor      = this.getEditor(record, column)
 
-                    if (column.bindEditor(editor, record) === false) {
+                    if (column.setTargetEditor(record) === false) {
                         return;
                     }
                 }
                 
-                if (editor && editor.field.getEditorValue) {
-                    var override    = function (dataIndex) {
-                        delete record.get
-                        
-                        var res     = editor.field.getEditorValue(record)
-                        
-                        record.get  = override
-                        
-                        return res
-                    }
-                    
-                    record.get      = override
-                }
-                
                 var res     = Ext.grid.plugin.CellEditing.prototype.startEdit.apply(this, arguments);
 
-                if (editor && editor.field.getEditorValue) delete record.get
-                
                 return res
-            },
-            
-            onEditComplete : function (ed, value, startValue) {
-                var me = this, record, restore;
-        
-                // if field instance contains applyChanges() method
-                // then we delegate saving to it
-                if (ed.field.applyChanges) {
-                    record      = me.context.record;
-                    restore     = true;
-                    // overwrite original set() method to use applyChanges() instead
-                    record.set  = function() {
-                        // restore original method
-                        delete record.set;
-                        restore = false;
-        
-                        ed.field.applyChanges(record);
-                    };
-                }
-        
-                Ext.grid.plugin.CellEditing.prototype.onEditComplete.apply(this, arguments);
-        
-                // restore original set() method
-                if (restore) {
-                    delete record.set;
-                }
             }
         });
 
@@ -112,7 +68,7 @@ Ext.define('Siesta.Recorder.UI.EventView', {
             scope      : me
         });
 
-        this.relayEvents(me.editing, [ 'beforeedit', 'afteredit' ])
+        this.relayEvents(me.editing, [ 'beforeedit', 'afteredit', 'validateedit' ])
 
         me.plugins.push(me.editing);
 
@@ -123,9 +79,7 @@ Ext.define('Siesta.Recorder.UI.EventView', {
                 markDirty  : false,
                 stripeRows : false,
                 allowCopy  : true,
-                plugins    : {
-                    ptype : 'gridviewdragdrop'
-                }
+                plugins    : 'gridviewdragdrop'
             },
 
             columns : [
@@ -151,8 +105,10 @@ Ext.define('Siesta.Recorder.UI.EventView', {
                     tdCls           : 'eventview-offsetcolumn',
                     renderer        : function (value, meta, record) {
                         var target      = record.getTarget()
-                        
-                        if (target && target.offset) return '<div class="eventview-clearoffset"></div>' + target.offset
+
+                        if (target && target.offset) {
+                            return target.offset + '<div class="eventview-clearoffset"></div>'
+                        }
                     },
                     editor          : {}
                 },
@@ -195,11 +151,12 @@ Ext.define('Siesta.Recorder.UI.EventView', {
     
 
     afterEdit : function (plug, e) {
+
         if (e.field === 'action') {
             var store = e.column.field.store;
             store.clearFilter();
 
-            if (store.getById(e.value).get('action') !== store.getById(e.originalValue).get('action')) {
+            if (store.getById(e.value).get('type') !== store.getById(e.originalValue).get('type')) {
                 e.record.resetValues();
             }
         }
@@ -209,12 +166,28 @@ Ext.define('Siesta.Recorder.UI.EventView', {
     onValidateEdit : function (plug, e) {
         var value       = e.value;
 
-        if (value && e.field === '__offset__') {
+        if (e.field === '__offset__') {
             e.cancel    = true;
 
-            var parsed  = e.record.parseOffset(value);
+            if (value) {
+                var parsed  = e.record.parseOffset(value);
 
-            if (parsed) e.record.setTargetOffset(parsed);
+                if (parsed) {
+                    e.record.setTargetOffset(parsed);
+                }
+            } else {
+                e.record.clearTargetOffset();
+            }
+        } else if (e.column.getEditor().applyChanges) {
+            e.cancel    = true;
+
+            e.column.getEditor().applyChanges(e.record);
+        }
+
+        // Trigger manual refresh of node when 'set' operation is more complex
+        if (e.cancel) {
+            this.afterEdit(plug, e);
+            this.getView().refreshNode(e.record);
         }
     },
     
@@ -227,9 +200,10 @@ Ext.define('Siesta.Recorder.UI.EventView', {
         view.el.on({
             mousedown : function (e, t) {
                 var record = view.getRecord(view.findItemByChild(t));
-                
+
                 record.clearTargetOffset()
-                
+                this.getView().refreshNode(record);
+
                 e.stopEvent();
             },
             scope     : this,

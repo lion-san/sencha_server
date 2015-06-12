@@ -1,56 +1,150 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
 
 */
 Ext.define('Siesta.Harness.Browser.UI.ResultPanel', {
-    extend      : 'Ext.Panel',
-    alias       : 'widget.resultpanel',
+    extend : 'Ext.Panel',
+    alias  : 'widget.resultpanel',
 
-//    requires        : [
-//        'Siesta.Harness.Browser.UI.AssertionGrid',
-//        'Siesta.Harness.Browser.UI.DomContainer'
-//    ],
+    requires        : [
+        'Siesta.Harness.Browser.UI.AssertionGrid',
+        'Siesta.Harness.Browser.UI.DomContainer'
+    ],
 
-    slots                   : true,
+    slots : true,
 
-    test                    : null,
-    testListeners           : null,
+    test          : null,
+    testListeners : null,
 
-    maintainViewportSize    : true,
+    maintainViewportSize : true,
 
-    viewDOM                 : false,
-    canManageDOM            : true,
-    
-    harness                 : null,
+    viewDOM      : false,
+    border       : false,
+    canManageDOM : true,
 
-    isStandalone            : false,
-    showToolbar             : true,
-    
-    title                   : '&nbsp;',
-    style                   : 'background:transparent',
-    bodyStyle               : 'background:transparent',
-    minWidth                : 100,
-    layout                  : 'border',
+    harness : null,
 
-    sourceButton            : null,
-    filterButton            : null,
-    inspectionButton        : null,
-    recorderPanel           : null,
-    recorderConfig          : null,
+    isStandalone : false,
+    showToolbar  : true,
+
+    minWidth : 100,
+    layout   : 'border',
+
+    sourceButton     : null,
+    filterButton     : null,
+    inspectionButton : null,
+    recorderPanel    : null,
+    recorderConfig   : null,
 
     initComponent : function () {
         var me = this;
         var R = Siesta.Resource('Siesta.Harness.Browser.UI.ResultPanel');
 
-        this.addEvents('viewdomchange');
-
         Ext.apply(this, {
-            cls : 'tr-container',
+            cls   : 'tr-container',
+            tbar  : {
+                cls      : 'resultpanel-toolbar',
+                defaults : {
+                    tooltipType : 'title',
+                    scope       : this
+                },
+                items    : !this.showToolbar ? null : [
+                    {
+                        text    : R.get('rerunText'),
+                        padding : '0 10',
+                        cls     : 'rerun-button',
+                        glyph   : 0xE60f,
+                        scale   : 'medium',
+                        handler : this.onRerun
+                    },
+                    {
+                        xtype  : 'label',
+                        cls    : 'resultpanel-testtitle',
+                        itemId : 'resultpanel-testtitle',
+                        margin : '0 0 0 10',
+                        text   : ' ',
+                        flex   : 1
+                    },
 
+                    this.viewDomButton = new Ext.Button({
+                        tooltip      : R.get('toggleDomVisibleText'),
+                        cls          : 'testaction-button',
+                        action       : 'view-dom',
+                        scale        : 'medium',
+                        glyph        : 0xE619,
+                        enableToggle : true,
+                        scope        : this,
+                        pressed      : this.viewDOM,
+                        handler      : function (btn) {
+                            this.setViewDOM(!this.viewDOM);
+                        }
+                    }),
+                    this.sourceButton = new Ext.Button({
+                        tooltip      : R.get('viewSourceText'),
+                        action       : 'view-source',
+                        cls          : 'testaction-button',
+                        glyph        : 0xE600,
+                        scale        : 'medium',
+                        tooltipType  : 'title',
+                        disabled     : true,
+                        enableToggle : true,
+                        scope        : this,
+
+                        handler      : function (btn) {
+                            if (btn.pressed) {
+                                this.showSource();
+                            } else {
+                                this.hideSource()
+                            }
+                        }
+                    }),
+                    this.filterButton = new Ext.Button({
+                        tooltip     : R.get('showFailedOnlyText'),
+                        action       : 'show-failed-only',
+                        cls         : 'testaction-button',
+                        scale       : 'medium',
+                        glyph       : 0xE622,
+                        tooltipType : 'title',
+                        scope        : this,
+                        enableToggle : true,
+                        handler      : this.onAssertionFilterClick
+                    }),
+                    this.inspectionButton = new Ext.Button({
+                        glyph        : 0xE613,
+                        cls          : 'testaction-button cmp-inspector',
+                        action       : 'toggle-cmp-inspector',
+                        scale        : 'medium',
+                        tooltip      : R.get('componentInspectorText'),
+                        tooltipType  : 'title',
+                        handler      : this.toggleComponentInspectionMode,
+                        scope        : this,
+                        enableToggle : true
+                    }),
+                    this.recorderButton = new Ext.Button({
+                        glyph        : 0xE614,
+                        action       : 'toggle-recorder',
+                        cls          : 'testaction-button',
+                        scale        : 'medium',
+                        disabled     : !Siesta.Recorder || Ext.isIE9m,
+                        tooltip      : R.get('eventRecorderText'),
+                        handler      : this.onRecorderClick,
+                        margin       : '0 30 0 0',
+                        scope        : this,
+                        enableToggle : true
+                    }),
+                    {
+                        xtype : 'versionupdatebutton'
+                    },
+                    {
+                        xtype : 'component',
+                        id    : 'siesta-logo'
+                    }
+                ]
+            },
             items : [
                 // a card container
                 {
@@ -74,114 +168,42 @@ Ext.define('Siesta.Harness.Browser.UI.ResultPanel', {
                             listeners    : {
                                 itemdblclick : this.onAssertionDoubleClick,
                                 scope        : this
-                            },
-
-                            tbar : {
-                                cls      : 'resultpanel-toolbar',
-                                padding  : '10 0',
-                                defaults : {
-                                    cls         : 'light-button',
-                                    tooltipType : 'title',
-                                    scope       : this,
-                                    margin      : '0 5'
-                                },
-                                items    : !this.showToolbar ? null : [
-                                    {
-                                        text    : R.get('rerunText'),
-                                        height  : 28,
-                                        margin  : '0 5 0 10',
-                                        cls     : 'green-button',
-                                        handler : this.onRerun,
-                                        style   : 'font-size:1.2em'
-                                    },
-                                    '->',
-
-                                    {
-                                        tooltip : R.get('toggleDomVisibleText'),
-                                        iconCls : 'icon-screen',
-                                        handler : function (btn) {
-                                            this.setViewDOM(!this.viewDOM);
-                                        }
-                                    },
-                                    this.sourceButton = new Ext.Button({
-                                        tooltip      : R.get('viewSourceText'),
-                                        action       : 'view-source',
-                                        iconCls      : 'icon-file',
-                                        tooltipType  : 'title',
-                                        enableToggle : true,
-                                        pressed      : false,
-                                        disabled     : true,
-                                        handler      : function (btn) {
-                                            if (btn.pressed) {
-                                                this.showSource();
-                                            }
-                                        }
-                                    }),
-                                    this.filterButton = new Ext.Button({
-                                        tooltip     : R.get('showFailedOnlyText'),
-                                        iconCls     : 'icon-bug',
-                                        tooltipType : 'title',
-
-                                        enableToggle : true,
-                                        handler      : this.onAssertionFilterClick
-                                    }),
-                                    this.inspectionButton = new Ext.Button({
-                                        iconCls      : 'icon-search',
-                                        tooltip      : R.get('domInspectorText'),
-                                        tooltipType  : 'title',
-                                        handler      : this.toggleInspectionMode,
-                                        enableToggle : true
-                                    }),
-
-                                    {
-                                        iconCls  : 'icon-camera',
-                                        action   : 'show-recorder',
-                                        disabled : !Siesta.Recorder || Ext.isIE9m,
-                                        tooltip  : R.get('eventRecorderText'),
-                                        handler  : this.onRecorderClick
-                                    }
-                                ]
                             }
+
                         },
                         // eof grid with assertion
                         {
-                            xtype      : 'panel',
-                            slot       : 'source',
-                            autoScroll : true,
-                            cls        : 'test-source-ct',
-                            __filled__ : false,
-                            layout     : 'absolute',
-                            listeners  : {
-                                render : function() {
-                                    var button = new Ext.Button({
-                                        renderTo        : this.el,
-                                        floating        : true,
-                                        width           : 80,
-                                        style           : 'z-index:2;left:auto !important;right:20px !important;top:5px !important;',
-                                        text            : Siesta.Resource('Siesta.Harness.Browser.UI.ResultPanel', 'closeText'),
-                                        handler         : function (btn) {
-                                            me.hideSource();
-                                        }
-                                    })
-                                    
-                                    // w/o this button is centered in FF
-                                    if (Ext.isGecko) setTimeout(function () {
-                                        if (!button.destroyed) button.el.setStyle({
-                                            left        : 'auto',
-                                            right       : '20px',
-                                            top         : '5px'
-                                        })
-                                    }, 0)
-                                }
+                            xtype : 'sourcepanel',
+                            slot  : 'source',
+                            tbar  : {
+                                cls     : 'siesta-toolbar',
+                                padding : '6 10',
+                                items   : [
+                                    {
+                                        text    : Siesta.Resource('Siesta.Harness.Browser.UI.ResultPanel', 'closeText'),
+                                        scope   : this,
+                                        scale   : 'medium',
+                                        handler : this.hideSource
+                                    }
+                                ]
                             }
                         }
-                    ]
+                    ].concat(
+                        Ext.ClassManager.getByAlias('widget.coveragereport') ?
+                        {
+                            xtype   : 'coveragereport',
+                            slot    : 'coverageReport',
+                            harness : this.harness
+                        } : []
+                    )
                 },
                 {
-                    xtype  : 'domcontainer',
-                    region : 'east',
-
-                    split : true,
+                    xtype       : 'domcontainer',
+                    region      : 'east',
+                    collapsible : true,
+                    split       : {
+                        size : 7
+                    },
 
                     bodyStyle : 'text-align : center',
 
@@ -206,7 +228,7 @@ Ext.define('Siesta.Harness.Browser.UI.ResultPanel', {
             inspectionstart : function () {
                 this.inspectionButton.toggle(true);
             },
-            inspectionstop : function () {
+            inspectionstop  : function () {
                 this.inspectionButton.toggle(false);
             },
 
@@ -233,45 +255,32 @@ Ext.define('Siesta.Harness.Browser.UI.ResultPanel', {
 
 
     showSource : function (lineNbr) {
+        var test = this.test
+
+        if (!this.test) return;
+
+        var sourceLines = [];
         var slots = this.slots
         var cardContainer = slots.cardContainer
-        var sourceCt = slots.source
-        var test = this.test
+        var sourceCt = slots.source;
 
         // Do this first since rendering is deferred
         cardContainer.layout.setActiveItem(sourceCt);
 
-        var sourceCtEl = sourceCt.el
-
-        this.sourceButton && this.sourceButton.toggle(true);
-
-        if (test && !sourceCt.__filled__) {
-            sourceCt.__filled__ = true;
-
-            sourceCt.update(
-                Ext.String.format('<pre class="brush: javascript;">{0}</pre>', test.getSource())
-            );
-
-            SyntaxHighlighter.highlight(sourceCtEl);
-        }
-
-        sourceCtEl.select('.highlighted').removeCls('highlighted');
-
         if (arguments.length === 0) {
             // Highlight all failed rows
             Ext.each(test.getFailedAssertions(), function (assertion) {
-                if (assertion.sourceLine != null) sourceCtEl.select('.line.number' + assertion.sourceLine).addCls('highlighted');
+                if (assertion.sourceLine != null) {
+                    sourceLines.push(assertion.sourceLine)
+                }
             });
         }
         else {
             // Highlight just a single row (user double clicked a failed row)
-            sourceCtEl.select('.line.number' + parseInt(lineNbr, 10)).addCls('highlighted');
+            sourceLines = [lineNbr];
         }
 
-        if (arguments.length && lineNbr != null) {
-            var el = sourceCtEl.down('.highlighted');
-            el && el.scrollIntoView(sourceCtEl);
-        }
+        sourceCt.setSource(test.getSource(), sourceLines);
     },
 
 
@@ -282,7 +291,6 @@ Ext.define('Siesta.Harness.Browser.UI.ResultPanel', {
 
         if (cardContainer.layout.getActiveItem() === slots.source) {
             cardContainer.layout.setActiveItem(slots.grid);
-            this.sourceButton && this.sourceButton.toggle(false);
         }
     },
 
@@ -299,12 +307,14 @@ Ext.define('Siesta.Harness.Browser.UI.ResultPanel', {
 
     onDomContainerCollapse : function () {
         this.viewDOM = false;
+        this.viewDomButton.toggle(false);
         this.fireEvent('viewdomchange', this, false);
     },
 
 
     onDomContainerExpand : function () {
         this.viewDOM = true;
+        this.viewDomButton.toggle(true);
         this.fireEvent('viewdomchange', this, true);
     },
 
@@ -317,7 +327,7 @@ Ext.define('Siesta.Harness.Browser.UI.ResultPanel', {
     showTest : function (test, assertionsStore) {
         var recorder = this.slots.recorderPanel;
 
-        this.slots.source.__filled__ = false;
+        this.slots.source.clear();
 
         this.filterButton && this.filterButton.toggle(false)
         this.hideSource();
@@ -340,23 +350,27 @@ Ext.define('Siesta.Harness.Browser.UI.ResultPanel', {
             }
         }
 
-        // This triggers an unnecessary layout recalc
-        this.setTitle(url);
+        this.setTestTitle(url);
 
         Ext.resumeLayouts();
 
         this.test = test;
     },
 
+    setTestTitle : function (url) {
+        this.testTitle.setText(url);
+    },
 
     onAssertionFilterClick : function (btn) {
-        var assertionsStore = this.slots.grid.store;
+        var grid = this.slots.grid;
+        var assertionsStore = grid.store;
 
         // need this check for cases when users clicks on the button
         // before running any test - in this case assertion grid will have an empty Ext.data.TreeStore instance
         if (!assertionsStore.filterTreeBy) return
 
         if (btn.pressed) {
+            grid.addCls('assertiongrid-filtered');
             assertionsStore.filterTreeBy(function (resultRecord) {
                 var result = resultRecord.getResult()
 
@@ -364,6 +378,7 @@ Ext.define('Siesta.Harness.Browser.UI.ResultPanel', {
                 return result.passed === false && !result.isTodo
             })
         } else {
+            grid.removeCls('assertiongrid-filtered');
             assertionsStore.clearTreeFilter()
         }
     },
@@ -379,8 +394,8 @@ Ext.define('Siesta.Harness.Browser.UI.ResultPanel', {
     },
 
 
-    clear : function () {
-        this.slots.grid.clear()
+    setInitializing : function (initializing) {
+        this.slots.grid.setInitializing(initializing)
     },
 
 
@@ -392,30 +407,36 @@ Ext.define('Siesta.Harness.Browser.UI.ResultPanel', {
         }
     },
 
-    
-    toggleInspectionMode : function (btn) {
+
+    toggleComponentInspectionMode : function (btn) {
         this.slots.domContainer.toggleInspectionMode(btn.pressed);
     },
-    
+
 
     onRecorderClick : function () {
         var cardContainer = this.slots.cardContainer
 
         if (!this.recorderPanel) {
             this.recorderPanel = new Siesta.Recorder.UI.RecorderPanel({
-                slot            : 'recorderPanel',
-                harness         : this.harness,
-                domContainer    : this.slots.domContainer,
-                recorderConfig  : this.recorderConfig,
-                closeButton     : {
+                slot           : 'recorderPanel',
+                harness        : this.harness,
+                domContainer   : this.slots.domContainer,
+                recorderConfig : this.recorderConfig,
+                closeButton    : {
                     text    : Siesta.Resource('Siesta.Harness.Browser.UI.ResultPanel', 'closeText'),
                     handler : function () {
                         cardContainer.layout.setActiveItem(0);
                     }
                 },
-                listeners       : {
+                listeners      : {
                     startrecord : function (pnl) {
                         this.fireEvent('startrecord', pnl);
+                    },
+                    show        : function() {
+                        this.recorderButton.toggle(true);
+                    },
+                    hide        : function() {
+                        this.recorderButton.toggle(false);
                     },
                     scope       : this
                 }
@@ -427,11 +448,19 @@ Ext.define('Siesta.Harness.Browser.UI.ResultPanel', {
             }
         }
 
-        cardContainer.layout.setActiveItem(2);
-    }
-});
+        if (cardContainer.layout.getActiveItem() === this.recorderPanel) {
+            cardContainer.layout.setActiveItem(this.slots.grid);
+        } else{
+            cardContainer.layout.setActiveItem(this.recorderPanel);
+        }
+    },
 
-// To avoid the DOM container splitter getting stuck
-Ext.dd.DragTracker.override({
-    tolerance : 0
+    afterRender : function () {
+        this.callParent(arguments);
+
+        this.testTitle = this.down('#resultpanel-testtitle');
+
+        // To avoid the DOM container splitter getting stuck
+        this.child('bordersplitter').tracker.tolerance = 0;
+    }
 });

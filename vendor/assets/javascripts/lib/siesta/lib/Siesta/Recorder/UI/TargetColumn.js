@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -52,14 +52,12 @@ Ext.define('Siesta.Recorder.UI.TargetColumn', {
         } else {
             value           = record.get('value')
         }
-        
+
         return value;
     },
 
     // HACK, some dirt since Ext JS doesn't allow to re-bind a new editor to a column
-    bindEditor : function (editor, actionRecord) {
-        editor.alignment = 'tl-c?';
-
+    setTargetEditor : function (actionRecord) {
         var newField = this.getTargetEditor(actionRecord);
 
         // Not all actions have target editors
@@ -67,36 +65,7 @@ Ext.define('Siesta.Recorder.UI.TargetColumn', {
             return false;
         }
 
-        var oldField = editor.field;
-
         this.setEditor(newField);
-
-        editor.removeAll(true);
-        editor.add(newField);
-        editor.field = newField;
-
-        Ext.apply(newField, {
-            inEditor  : true,
-            msgTarget : newField.msgTarget == 'title' ? 'title' : 'qtip'
-        });
-
-        editor.mun(oldField, {
-            scope      : editor,
-            blur       : editor.onFieldBlur,
-            specialkey : editor.onSpecialKey
-        });
-
-        editor.mon(newField, {
-            scope      : editor,
-            blur       : editor.onFieldBlur,
-            specialkey : editor.onSpecialKey
-        });
-
-        editor.mun(oldField, 'autosize', editor.onFieldAutosize, editor, { delay : 1 });
-
-        if (newField.grow) {
-            editor.mon(newField, 'autosize', editor.onFieldAutosize, editor, { delay : 1 });
-        }
     },
     
 
@@ -107,31 +76,19 @@ Ext.define('Siesta.Recorder.UI.TargetColumn', {
         if (action.match(/^waitFor/)) {
             if (action === 'waitForAnimations') return null;
             if (action === 'waitForFn') return new Siesta.Recorder.Editor.Code();
-            
+
+            this.dataIndex = 'value';
+
             if (action === 'waitForMs') 
-                return new Ext.form.field.Number({
-                    
-                    getEditorValue : function (record) {
-                        return record.get('value')
-                    },
-                    
-                    applyChanges : function (actionRecord) {
-                        actionRecord.set('value', this.getValue())
-                    }
-                })
+                return new Ext.form.field.Number()
 
             // Default waitFor editor will just be a text field
-            return new Ext.form.field.Text({
-                getEditorValue : function (record) {
-                    return record.get('value')
-                },
-                applyChanges : function (actionRecord) {
-                    actionRecord.set('value', this.getValue())
-                }
-            });
+            return new Ext.form.field.Text();
         }
 
         if (action === 'drag') {
+            this.dataIndex = 'target';
+
             return new Siesta.Recorder.Editor.DragTarget({
                 onTargetChange : function () {
                     me.onTargetChange.apply(me, arguments);
@@ -140,6 +97,8 @@ Ext.define('Siesta.Recorder.UI.TargetColumn', {
         }
 
         if (action === 'moveCursor') {
+            this.dataIndex = 'target';
+
             return new Siesta.Recorder.Editor.MoveCursorTarget({
                 onTargetChange : function () {
                     me.onTargetChange.apply(me, arguments);
@@ -148,20 +107,18 @@ Ext.define('Siesta.Recorder.UI.TargetColumn', {
         }
         
         if (action === 'fn') {
+            this.dataIndex = 'value';
+
             return new Siesta.Recorder.Editor.Code();
         }
 
         if (action === 'type') {
-            return new Ext.form.field.Text({
-                getEditorValue : function (record) {
-                    return record.get('value')
-                },
+            this.dataIndex = 'value';
 
-                applyChanges : function (actionRecord) {
-                    actionRecord.set('value', this.getValue())
-                }
-            });
+            return new Ext.form.field.Text();
         }
+
+        this.dataIndex = 'target';
 
         // Assume it's a target action
         var editor = new Siesta.Recorder.Editor.Target({

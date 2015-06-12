@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -250,10 +250,54 @@ Role('Siesta.Test.Simulate.Mouse', {
         },
 
         // private
-        moveMouse : function(xy, xy2, callback, scope, precision, async, options) {
+        moveMouse : function (xy, xy2, callback, scope, precision, async, options) {
+            var me          = this
+            
+            this.movePointerTemplate({
+                xy              : xy,
+                xy2             : xy2,
+                callback        : callback,
+                scope           : scope,
+                options         : options || {},
+                
+                overEls         : this.overEls,
+                interval        : async !== false ? this.dragDelay : 0,
+                callbackDelay   : async !== false ? 50 : 0,
+                precision       : precision || me.dragPrecision,
+                
+                onVoidOverEls   : function () {
+                    return me.overEls  = []
+                },
+                
+                onPointerEnter  : function (el, options, suppressLog) {
+                    me.simulateEvent(el, "mouseenter", options, suppressLog)
+                },
+                
+                onPointerLeave  : function (el, options, suppressLog) {
+                    me.simulateEvent(el, "mouseleave", options, suppressLog)
+                },
+                
+                onPointerOver   : function (el, options, suppressLog) {
+                    me.simulateEvent(el, "mouseover", options, suppressLog)
+                },
+                
+                onPointerOut    : function (el, options, suppressLog) {
+                    me.simulateEvent(el, "mouseout", options, suppressLog)
+                },
+                
+                onPointerMove   : function (el, options, suppressLog) {
+                    me.simulateEvent(el, "mousemove", options, suppressLog)
+                }
+            })
+        },
+        
+        
+        // xy, xy2, overEls, callback, scope, precision, interval, callbackDelay, options,
+        // onPointerEnter, onPointerLeave, onPointerOver, onPointerOut, onPointerMove
+        movePointerTemplate: function (args) {
             var document    = this.global.document,
                 me          = this,
-                overEls     = this.overEls,
+                overEls     = args.overEls,
                 // Remember last visited element, since a previous action may have changed the DOM
                 // which possibly should trigger a mouseout event
                 lastOverEl  = overEls[ overEls.length - 1 ];
@@ -264,13 +308,14 @@ Role('Siesta.Test.Simulate.Mouse', {
                 // exception here probably means the "lastOverEl" is from freed context (unloaded page)
                 // access to such elements throws exceptions in IE
                 lastOverEl      = null
-                this.overEls    = overEls = []
+                
+                overEls         = args.onVoidOverEls()
             }
             
-            precision       = precision || me.dragPrecision;
-            options         = options || {};
+            var precision   = args.precision
+            var options     = args.options || {}
 
-            var path        = this.getPathBetweenPoints(xy, xy2);
+            var path        = this.getPathBetweenPoints(args.xy, args.xy2);
 
             var supports    = Siesta.Harness.Browser.FeatureSupport().supports
 
@@ -278,18 +323,18 @@ Role('Siesta.Test.Simulate.Mouse', {
                 deferer         : this.originalSetTimeout,
                 deferClearer    : this.originalClearTimeout,
                 
-                interval        : async !== false ? this.dragDelay : 0,
-                callbackDelay   : async !== false ? 50 : 0,
+                interval        : args.interval,
+                callbackDelay   : args.callbackDelay,
                 
                 observeTest     : this,
                 
                 processor       : function (data, index) {
-                    var fromIndex = data.sourceIndex,
-                        toIndex = data.targetIndex;
+                    var fromIndex   = data.sourceIndex,
+                        toIndex     = data.targetIndex;
 
                     for (var j = fromIndex; j <= toIndex; j++) {
-                        var point       = path[j].slice();
-                        var targetEl    = me.elementFromPoint(point[0], point[1]);
+                        var point       = path[ j ];
+                        var targetEl    = me.elementFromPoint(point[ 0 ], point[ 1 ]);
 
                         // Might get null here if moving over a non-initialized frame (seen in Chrome)
                         if (targetEl) {
@@ -299,24 +344,24 @@ Role('Siesta.Test.Simulate.Mouse', {
 
                                 var offsetsToTopWindow = me.$(win.frameElement).offset();
 
-                                point[0]    -= offsetsToTopWindow.left;
-                                point[1]    -= offsetsToTopWindow.top;
+                                point[ 0 ]  -= offsetsToTopWindow.left;
+                                point[ 1 ]  -= offsetsToTopWindow.top;
                             }
 
                             if (targetEl !== lastOverEl) {
                                 for (var i = overEls.length - 1; i >= 0; i--) {
-                                    var el = overEls[i];
+                                    var el = overEls[ i ];
 
                                     if (el !== targetEl && me.$(el).has(targetEl).length === 0) {
                                         if (supports.mouseEnterLeave) {
-                                            me.simulateEvent(el, "mouseleave", $.extend({ clientX: point[0], clientY: point[1], relatedTarget : targetEl}, options));
+                                            args.onPointerLeave(el, $.extend({ clientX: point[ 0 ], clientY: point[ 1 ], relatedTarget : targetEl}, options))
                                         }
                                         overEls.splice(i, 1);
                                     }
                                 }
 
                                 if (lastOverEl) {
-                                    me.simulateEvent(lastOverEl, "mouseout", $.extend({ clientX: point[0], clientY: point[1], relatedTarget : targetEl}, options));
+                                    args.onPointerOut(lastOverEl, $.extend({ clientX: point[ 0 ], clientY: point[ 1 ], relatedTarget : targetEl}, options))
                                 }
                                 
                                 if (supports.mouseEnterLeave && jQuery.inArray(targetEl, overEls) == -1) { 
@@ -334,18 +379,19 @@ Role('Siesta.Test.Simulate.Mouse', {
                                     
                                     for (var i = 0; i < els.length; i++) {
                                         if (jQuery.inArray(els[ i ], overEls) == -1) {
-                                            me.simulateEvent(els[ i ], "mouseenter", $.extend({ clientX: point[0], clientY: point[1], relatedTarget : lastOverEl}, options));
+                                            args.onPointerEnter(els[ i ], $.extend({ clientX: point[ 0 ], clientY: point[ 1 ], relatedTarget : lastOverEl}, options))
                                             
                                             overEls.push(els[ i ]);
                                         }
                                     }
                                 }
+                                
+                                args.onPointerOver(targetEl, $.extend({ clientX: point[ 0 ], clientY: point[ 1 ], relatedTarget : lastOverEl}, options))
 
-                                me.simulateEvent(targetEl, "mouseover", $.extend({ clientX: point[0], clientY: point[1], relatedTarget : lastOverEl}, options));
                                 lastOverEl = targetEl;
                             }
 
-                            me.simulateEvent(targetEl, "mousemove", $.extend({ clientX: point[0], clientY: point[1]}, options), j < toIndex);
+                            args.onPointerMove(targetEl, $.extend({ clientX: point[ 0 ], clientY: point[ 1 ] }, options), j < toIndex)
                         }
                     }
                 }
@@ -363,7 +409,7 @@ Role('Siesta.Test.Simulate.Mouse', {
             queue.run(function () {
                 me.endAsync(async2);
                 
-                me.processCallbackFromTest(callback, null, scope || me)
+                me.processCallbackFromTest(args.callback, null, args.scope || me)
             })
         },
         
@@ -422,11 +468,11 @@ Role('Siesta.Test.Simulate.Mouse', {
 
             el              = el || this.currentPosition
             
-            var targetIsPoint = this.valueIsArray(el)
+            var targetIsPoint = this.typeOf(el) == 'Array'
 
             var normalized  = this.normalizeElement(el, true);
 
-            if (!normalized) {
+            if (!normalized || !this.isElementVisible(normalized)) {
                 this.waitForTarget(el, function() {
                     this.genericMouseClick(el, callback, scope, options, method, offset);
                 }, this, null, offset);

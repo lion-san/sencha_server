@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -18,10 +18,10 @@ Role('Siesta.Test.TextSelection', {
     methods : {
         /**
          * Utility method which returns the selected text in the passed element or in the document
-         * @param {Siesta.Test.ActionTarget} The element
+         * @param {Siesta.Test.ActionTarget} el The element
          * @return {String} The selected text
          */
-        getSelectedText : function (el){
+        getSelectedText : function (el) {
             el = this.normalizeElement(el);
             
             if ('selectionStart' in el) {
@@ -46,31 +46,35 @@ Role('Siesta.Test.TextSelection', {
         },
 
         /**
-         * Utility method which selects text in the passed element (should be an input element).
-         * @param {Siesta.Test.ActionTarget} The element
+         * Utility method which selects text in the passed element (should be an &lt;input&gt; element).
+         * @param {Siesta.Test.ActionTarget} el The element
          * @param {Int} start (optional) The selection start index
          * @param {Int} end (optional) The selection end index
          */
-        selectText : function(el, start, end){
-            el = this.normalizeElement(el);
+        selectText : function(el, start, end) {
+            el              = this.normalizeElement(el);
 
-            var v = el.value || el.innerHTML,
-                doFocus = true;
+            var v           = el.value || el.innerHTML,
+                doFocus     = true;
 
             if (v.length > 0) {
-                start = start === undefined ? 0 : start;
-                end = end === undefined ? v.length : end;
+                start       = start === undefined ? 0 : start;
+                end         = end === undefined ? v.length : end;
+                
                 if (el.setSelectionRange) {
                     el.setSelectionRange(start, end);
-                }
-                else if(el.createTextRange) {
+                } else if (el.createTextRange) {
                     var R = el.createTextRange();
+                    
                     R.moveStart('character', start);
                     R.moveEnd('character', end - v.length);
+                    
                     R.select();
                 }
-                doFocus = $.browser.mozilla || $.browser.opera;
+                
+                doFocus     = $.browser.mozilla || $.browser.opera;
             }
+            
             if (doFocus) {
                 this.focus(el);
             }

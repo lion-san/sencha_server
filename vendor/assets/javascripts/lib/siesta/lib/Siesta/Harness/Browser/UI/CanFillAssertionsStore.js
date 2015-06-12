@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -19,14 +19,14 @@ Ext.define('Siesta.Harness.Browser.UI.CanFillAssertionsStore', {
             expanded            : (result instanceof Siesta.Result.SubTest) && result.test.specType != 'it'
         };
         
-        var alreadyInTheStore   = assertionStore.getById(result.id)
+        var alreadyInTheStore   = assertionStore.getNodeById(result.id)
         
         if (alreadyInTheStore) {
             alreadyInTheStore.triggerUIUpdate()
         } else {
             Ext.suspendLayouts()
             
-            alreadyInTheStore   = (assertionStore.getById(parentResult.id) || assertionStore.getRootNode()).appendChild(data);
+            alreadyInTheStore   = (assertionStore.getNodeById(parentResult.id) || assertionStore.getRootNode()).appendChild(data);
             
             Ext.resumeLayouts()
         }
@@ -39,7 +39,7 @@ Ext.define('Siesta.Harness.Browser.UI.CanFillAssertionsStore', {
 
     // is bubbling and thus triggered for all tests (including sub-tests) 
     processEveryTestEnd : function (assertionStore, test) {
-        var testResultNode  = assertionStore.getById(test.getResults().id)
+        var testResultNode  = assertionStore.getNodeById(test.getResults().id)
         
         // can be missing for "root" tests
         testResultNode && testResultNode.updateFolderStatus()

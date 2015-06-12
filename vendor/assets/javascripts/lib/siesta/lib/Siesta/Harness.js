@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -9,7 +9,6 @@ http://bryntum.com/products/siesta/license
 /**
 
 @class Siesta.Harness
-@mixin Siesta.Role.CanStyleOutput
 
 `Siesta.Harness` is an abstract base harness class in Siesta hierarchy. This class provides no UI, 
 you should use one of it subclasses, for example {@link Siesta.Harness.Browser}
@@ -87,7 +86,8 @@ Synopsys
 Class('Siesta.Harness', {
     
     does        : [
-        JooseX.Observable
+        JooseX.Observable,
+        Siesta.Util.Role.CanGetType
     ],
     
     has : {
@@ -345,15 +345,9 @@ Class('Siesta.Harness', {
         verbosity               : 0,
         
         /**
-         * @cfg {Boolean} keepResults When set to `true`, harness will not cleanup the context of the test immediately. Instead it will do so, only when
-         * the test will run again. This will allow you for example to examine the DOM of tests. Default value is `true` 
-         */
-        keepResults             : true,
-        
-        /**
          * @cfg {Number} keepNLastResults
          * 
-         * Only meaningful when {@link #keepResults} is set to `false`. Indicates the number of the test results which still should be kept, for user examination.
+         * Indicates the number of the test results which still should be kept, for user examination.
          * Results are cleared when their total number exceed this value, based on FIFO order.
          */
         keepNLastResults        : 2,
@@ -421,6 +415,18 @@ Class('Siesta.Harness', {
          * @cfg {Number} pauseBetweenTests Default timeout between tests (in milliseconds). Increase this settings for big test suites, to give browser time for memory cleanup.
          */
         pauseBetweenTests       : 300,
+        
+        
+        /**
+         * @cfg {Boolean} failOnExclusiveSpecsWhenAutomated When this option is enabled and Siesta is running in automation mode
+         * (using WebDriver or PhantomJS launcher) any exclusive BDD specs found (like {@link Siesta.Test#iit t.iit} or {@link Siesta.Test#ddescribe t.ddescribe}
+         * will cause a failing assertion. The idea behind this setting is that such "exclusive" specs should only be used during debugging
+         * and are often mistakenly committed in the codebase, leaving other specs not executed. 
+         * 
+         * This option can be also specified in the test file descriptor.
+         */
+        failOnExclusiveSpecsWhenAutomated   : false,
+        
         
         setupDone               : false,
         
@@ -1176,7 +1182,7 @@ Class('Siesta.Harness', {
                     test.nbrExceptions++;
                     test.failWithException(error || (msg + ' ' + url + ' ' + lineNumber))
                 } else {
-                    preloadErrors.push(msg + ' ' + url + ' ' + lineNumber)
+                    preloadErrors.push(error && error.stack ? error.stack + '' : msg + ' ' + url + ' ' + lineNumber)
                 }
             }
             
@@ -1276,6 +1282,7 @@ Class('Siesta.Harness', {
             var startTestAnchor = options.startTestAnchor
             var args            = startTestAnchor && startTestAnchor.args
             var global          = scopeProvider.scope
+            var noCleanup       = options.noCleanup
             
             // additional setup of the test instance, setting up the properties, which are known only after scope
             // is loaded
@@ -1298,10 +1305,8 @@ Class('Siesta.Harness', {
                 
                 // "main" test callback, called once test is completed
                 callback : function () {
-                    if (!me.keepResults && !options.noCleanup) {
-                        if (!me.isKeepingResultForURL(url)) me.cleanupScopeForURL(url)
-                    }
-            
+                    if (!noCleanup && !me.isKeepingResultForURL(url)) me.cleanupScopeForURL(url)
+                    
                     callback && callback()
                 }
             })
@@ -1317,13 +1322,22 @@ Class('Siesta.Harness', {
                 // this happens if user re-launch the test during these 10ms - test will be 
                 // finalized forcefully in the "deleteTestByUrl" method
                 if (!test.isFinished()) test.start(options.preloadErrors[ 0 ])
+                
+                options         = null
+                test            = null
             }
             
             if (options.reusingSandbox)
                 doLaunch()
-            else
-                // start the test after slight delay - to run it already *after* onload (in browsers)
-                global.setTimeout(doLaunch, 10);
+            else {
+                if (scopeProvider instanceof Scope.Provider.IFrame) 
+                    // start the test after slight delay - to run it already *after* onload (in browsers)
+                    global.setTimeout(doLaunch, 10)
+                else
+                    // for Window provider, `global.setTimeout` seems to not execute passed function _sometimes_
+                    // also increase the "onload" delay
+                    setTimeout(doLaunch, 50)
+            }
         },
         
         
@@ -1369,7 +1383,9 @@ Class('Siesta.Harness', {
                 
                 sandboxCleanup              : this.getDescriptorConfig(desc, 'sandboxCleanup'),
                 
-                config                      : this.getDescriptorConfig(desc, 'config')
+                config                      : this.getDescriptorConfig(desc, 'config'),
+                
+                failOnExclusiveSpecsWhenAutomated   : this.getDescriptorConfig(desc, 'failOnExclusiveSpecsWhenAutomated')
             }
             
             // potentially not safe
@@ -1398,7 +1414,12 @@ Class('Siesta.Harness', {
             var test    = this.testsByURL[ url ]
             
             if (test) {
-                test.finalize(true)
+                // exceptions can arise if test page has switched to different context for example (click on the link)
+                // and siesta is trying to clear the timeouts with "clearTimeout"
+                try {
+                    test.finalize(true)
+                } catch (e) {
+                }
                 this.cleanupScopeForURL(url)
             }
             
@@ -1437,11 +1458,6 @@ Class('Siesta.Harness', {
             if (!this[ methodName ]) throw "Can't generate report - missing the `" + methodName + "` method"
             
             return this[ methodName ](options)
-        },
-        
-        
-        typeOf : function (object) {
-            return Object.prototype.toString.call(object).replace(/^\[object /, '').replace(/\]$/, '')
         }
     }
     // eof methods

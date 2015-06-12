@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -34,10 +34,10 @@ Ext.define('Siesta.Harness.Browser.UI.MouseVisualizer', {
         config      = config || {}
         
         Ext.apply(this, config)
-        this.supportsTransitions = (Ext.supports && Ext.supports.Transitions) || (Ext.feature && Ext.feature.has.CssTransitions);
+        this.supportsTransitions = Ext.feature && Ext.feature.has.CssAnimations;
 
         delete this.harness
-        
+
         this.setHarness(config.harness)
     },
     
@@ -48,7 +48,7 @@ Ext.define('Siesta.Harness.Browser.UI.MouseVisualizer', {
         var currentContainer    = this.currentContainer
         
         if (!currentContainer) throw "Need container for cursor"
-        
+
         return this.cursorEl = Ext.fly(currentContainer).down('.ghost-cursor') || Ext.fly(currentContainer).createChild({
             tag     : 'div',
             cls     : 'ghost-cursor'
@@ -151,17 +151,11 @@ Ext.define('Siesta.Harness.Browser.UI.MouseVisualizer', {
         // if test was using cursor at all
         if (cursorEl) {
             var me              = this;
-            
+
+            cursorEl.addCls('ghost-cursor-hidden');
+
             setTimeout(function () {
-                // ExtJS branch
-                if (cursorEl.fadeOut) {
-                    cursorEl.fadeOut({ duration : 2000, callback : function () {
-                        me.cleanupCursor(cursorEl, currentContainer)
-                    } });
-                } else {
-                    // ST branch
-                    me.cleanupCursor(cursorEl, currentContainer)
-                }
+                me.cleanupCursor(cursorEl, currentContainer);
             }, 2000);
         }
     },

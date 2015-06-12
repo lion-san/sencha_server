@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -25,7 +25,7 @@ Singleton('Siesta.Test.ActionRegistry', {
         },
         
         
-        create : function (obj, test) {
+        create : function (obj, test, defaultArgs) {
             if (obj !== Object(obj)) throw "Action configuration should be an Object instance"
             
             if (!obj.action) {
@@ -60,11 +60,11 @@ Singleton('Siesta.Test.ActionRegistry', {
                         if (shortcut.match(/^waitFor/i)) {
                             obj.action      = 'wait'
                             obj.waitFor     = methods[ shortcut ]
-                            obj.args        = value
+                            obj.args        = value || []
                         } else {
                             obj.action      = 'methodCall'
                             obj.methodName  = methods[ shortcut ]
-                            obj.args        = value
+                            obj.args        = value || []
                         }
                         
                         return false
@@ -73,6 +73,12 @@ Singleton('Siesta.Test.ActionRegistry', {
             }
             
             if (!obj.action) throw "Need to include `action` property or shortcut property in the step config"
+            
+            // Don't get the arguments from the previous step if it is a waitFor action, 
+            // it does not make sense and messes up the arguments
+            if (obj.action != 'wait' && obj.action != 'waitfor' && obj.action != 'delay' && obj.action != 'methodCall') {
+                if (!obj.args && defaultArgs) obj.args = defaultArgs
+            }
             
             var actionClass = this.getActionClass(obj.action)
 

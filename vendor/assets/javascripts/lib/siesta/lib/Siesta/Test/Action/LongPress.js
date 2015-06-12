@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -35,14 +35,14 @@ Class('Siesta.Test.Action.LongPress', {
     does        : Siesta.Test.Action.Role.HasTarget,
         
     has : {
-        requiredTestMethod  : 'longpress'
+        requiredTestMethod  : 'longPress'
     },
 
     
     methods : {
         
         process : function () {
-            this.test.longpress(this.getTarget(), this.next, null, this.offset)
+            this.test.longpress(this.getTarget(), this.next, null, this.options, this.offset)
         }
     }
 });

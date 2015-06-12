@@ -1,6 +1,6 @@
 /*
 
-Siesta 2.1.2
+Siesta 3.0.2
 Copyright(c) 2009-2015 Bryntum AB
 http://bryntum.com/contact
 http://bryntum.com/products/siesta/license
@@ -25,6 +25,7 @@ Class('Siesta.Test.Browser', {
     does        : [ 
         Siesta.Test.Simulate.Event,
         Siesta.Test.Simulate.Mouse,
+        Siesta.Test.Simulate.Touch,
         Siesta.Test.Simulate.Keyboard,
         Siesta.Test.Element,
         Siesta.Test.TextSelection
@@ -47,6 +48,12 @@ Class('Siesta.Test.Browser', {
             lazy    : function () {
                 return this.parseBrowser(window.navigator.userAgent)
             }
+        }
+    },
+    
+    after : {
+        cleanup : function () {
+            this._global    = null
         }
     },
 
@@ -224,7 +231,7 @@ Class('Siesta.Test.Browser', {
                 }
             }
             
-            if (this.valueIsArray(el)) el = this.elementFromPoint(el[ 0 ], el[ 1 ]);
+            if (this.typeOf(el) == 'Array') el = this.elementFromPoint(el[ 0 ], el[ 1 ]);
             
             return detailed ? { el : el, matchingMultiple : matchingMultiple } : el;
         },
@@ -296,7 +303,9 @@ Class('Siesta.Test.Browser', {
             var last = stops[stops.length-1];
 
             if (stops.length > 0 && (last[0] !== to[0] || last[1] !== to[1])) {
-                stops.push(to);
+                // the points of the path can be modified in the move mouse method - thus pushing a copy
+                // of the original target
+                stops.push(to.slice());
             }
             return stops;
         },
@@ -306,9 +315,9 @@ Class('Siesta.Test.Browser', {
         },
 
         
-        // private
+        // private, deprecated
         valueIsArray : function(a) {
-            return a && (a instanceof Array || a instanceof this.global.Array);
+            return this.typeOf(a) == 'Array'
         },
         
         
@@ -443,29 +452,6 @@ Class('Siesta.Test.Browser', {
         },
         
         
-        verifyExpectedNumberOfFiredEvents : function (actual, expected) {
-            var operator        = '=='
-            
-            if (this.typeOf(expected) == 'String') {
-                var match       = /([<>=]=?)\s*(\d+)/.exec(expected)
-                var R               = Siesta.Resource('Siesta.Test.Browser');
-
-                if (!match) throw new Error(R.get('wrongFormat')  + ": " + expected)
-                
-                operator        = match[ 1 ]
-                expected        = Number(match[ 2 ])
-            }
-            
-            switch (operator) {
-                case '==' : return actual == expected
-                case '<=' : return actual <= expected
-                case '>=' : return actual >= expected
-                case '<' : return actual < expected
-                case '>' : return actual > expected
-            }
-        },
-        
-
         /**
          * This assertion verifies the number of certain events fired by provided observable instance during provided period.
          * 
@@ -599,7 +585,7 @@ Class('Siesta.Test.Browser', {
                     
                     var actualNumber    = counters[ eventName ]
     
-                    if (me.verifyExpectedNumberOfFiredEvents(actualNumber, expected))
+                    if (me.verifyExpectedNumber(actualNumber, expected))
                         me.pass(desc, {
                             descTpl         : R.get('observableFired') + ' ' + actualNumber + ' `' + eventName + '` ' + R.get('events')
                         });
@@ -793,7 +779,7 @@ Class('Siesta.Test.Browser', {
 
             actionTarget    = actionTarget || this.currentPosition;
             
-            var targetIsPoint   = this.valueIsArray(actionTarget)
+            var targetIsPoint   = this.typeOf(actionTarget) == 'Array'
 
             // First lets get a normal DOM element to work with
             if (targetIsPoint) {
@@ -938,10 +924,7 @@ Class('Siesta.Test.Browser', {
          * @param {Int} height The new height
          */
         setWindowSize : function(width, height) {
-            this.$(this.scopeProvider.iframe).css({
-                width  : width + 'px',
-                height : height + 'px'
-            });
+            this.scopeProvider.setViewportSize(width, height)
         },
         
         
@@ -1014,7 +997,17 @@ Class('Siesta.Test.Browser', {
         },
 
         resetScope : function() {
-            this.global = this._global || this.global;
+            this.global     = this._global || this.global;
+            
+            this._global    = null
+        },
+        
+        
+        // a stub method for the Lite package
+        screenshot : function (fileName, callback) {
+            this.diag("Command: `screenshot` skipped - not running in Standard Package")
+            
+            callback && callback(false)
         }
         
     }
