@@ -82,6 +82,14 @@ class ProjectsController < ApplicationController
 
     if @project.nil? then
       @project = Project.new( user_id: "test", pjname: project["project"] )
+    else
+      #Delete events
+      @project.events.each do |e|
+        e.delete
+      end
+      logger.debug("============= delete =================")
+      logger.debug(@project.events.count)
+      logger.debug("============= delete =================")
     end
 
 
