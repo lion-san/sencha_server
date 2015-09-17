@@ -90,7 +90,7 @@
             "update": "delta"
         },
         {
-            "path": "resources/css/bb10.css",
+            "path": "resources/css/bb103.css",
             "platform": ["blackberry"],
             "theme": "Blackberry",
             "update": "delta"

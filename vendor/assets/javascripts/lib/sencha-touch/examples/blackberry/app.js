@@ -40,7 +40,7 @@ Ext.application({
         var applicationMenu = Ext.create('Ext.ux.ApplicationMenu', {
             items: [{
                 text: 'Settings',
-                iconCls: 'settings'
+                iconCls: 'settings-light'
             }]
         });
 
@@ -50,12 +50,11 @@ Ext.application({
 
         // Tab menu button
         var tabMenuButton = Ext.create('Ext.ux.TabMenuButton', {
-            text: 'All',
             docked: 'left',
-            iconCls: 'view_grid',
+            iconCls: 'overflow_tab',
             menuItems: [{
                 text: 'All',
-                iconCls: 'view_grid',
+                iconCls: 'view_grid-light',
                 scope: this,
                 handler: function() {
                     this.container.setActiveItem(0);
@@ -63,7 +62,7 @@ Ext.application({
                 }
             }, {
                 text: 'Favorites',
-                iconCls: 'done',
+                iconCls: 'done-light',
                 scope: this,
                 handler: function() {
                     Ext.getCmp('searchBar').hide();
@@ -73,7 +72,7 @@ Ext.application({
                 }
             }, {
                 text: 'BBM',
-                iconCls: 'bbm',
+                iconCls: 'bbm-light',
                 scope: this,
                 handler: function() {
                     Ext.getCmp('searchBar').hide();
@@ -88,7 +87,7 @@ Ext.application({
 		    docked: 'right',
 		    menuItems: [{
 		        text: 'All',
-		        iconCls: 'view_grid',
+		        iconCls: 'view_grid-light',
 		        scope: this,
 		        handler: function() {
                     Ext.Viewport.hideMenu('right');
@@ -97,7 +96,7 @@ Ext.application({
 		        }
 		    }, {
 		        text: 'Favorites',
-		        iconCls: 'done',
+		        iconCls: 'done-light',
 		        scope: this,
 		        handler: function() {
                     Ext.Viewport.hideMenu('right');
@@ -108,7 +107,7 @@ Ext.application({
 		        }
 		    }, {
 		        text: 'BBM',
-		        iconCls: 'bbm',
+		        iconCls: 'bbm-light',
 		        scope: this,
 		        handler: function() {
                     Ext.Viewport.hideMenu('right');
@@ -129,16 +128,16 @@ Ext.application({
             // no text 'text' values
             items: [
             {
-                iconCls: 'add_favorite',
+                iconCls: 'favorite-light',
                 scope: this,
                 handler: contextMenuHandler
             }, {
-                iconCls: 'copy',
+                iconCls: 'copy-light',
                 scope: this,
                 handler: contextMenuHandler
             }, {
                 xtype: 'button',
-                iconCls: 'select_more',
+                iconCls: 'select_more-light',
                 scope: this,
                 handler: contextMenuHandler
             }]
@@ -169,6 +168,7 @@ Ext.application({
                         {
                             text: 'Search',
                             iconCls: 'search',
+                            cls: 'bb-default',
                             handler: function() {
                                 Ext.getCmp('searchBar').show();
                             }

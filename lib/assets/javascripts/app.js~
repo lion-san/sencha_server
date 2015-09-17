@@ -217,6 +217,7 @@ var createActionFloatPanel = function(){
                 { iconCls: 'user', id: 'camera'},
                 { iconCls: 'time', id: 'wait'},
                 { iconCls: 'locate', id: 'application' },
+                { iconCls: 'arrow_right', id: 'media' }
            ] 
         },//--------------------------
        {//Cancel button
@@ -287,10 +288,10 @@ var createActionPlusBtn = function() {
  */
 var makeList = function(){
   var json = [             {text: events.say, value: 'say'},
+                           {text: events.time, value: 'time'},
                            {text: events.saw, value: 'saw'},
                            {text: events.pan, value: 'pan'},
-                           {text: events.move, value: 'move'},
-                           {text: '', value: 'null'}];
+                           {text: events.move, value: 'move'}];
   return json;
 }
 
@@ -298,6 +299,7 @@ var makeList = function(){
 //Valueとイベントのマップ
 var events = { 
   "say": "音声を検知",
+  "time": "時間がきたら",
   "saw": "誰かを見たら",
   "pan": "手をたたく",
   "move": "動作を検知"
@@ -328,6 +330,10 @@ var eventAddBtnTapped = function( value ){
   switch (value.action){
     case "say":
       eventSaid(eventId, events.say, "say");
+      break;
+
+    case "time":
+      eventTime(eventId, events.time, "time");
       break;
 
     case "saw":
@@ -390,6 +396,52 @@ var eventSaid = function(eventId, btnName, eventType){
   naviView.push( panel );
 }
 
+
+//Sub Function
+var eventTime = function(eventId, btnName, eventType){
+
+  //Refresh
+  if( refresh ){
+    createEventBtn(eventId, btnName, eventForRefresh.operator, eventForRefresh.param, eventType );
+    return;
+  }
+
+  var panel = Ext.create('Ext.Panel', {
+    title: 'What time work?',
+    items: [
+      {xtype: 'label', html: '起時間(時)入力してね'},
+      {xtype: 'textfield', id:'hh24'},
+      {xtype: 'label', html: '起時間(分)入力してね'},
+      {xtype: 'textfield', id:'mi'},
+
+      {xtype: 'button', text: 'ENTER', ui: 'action',
+        handler: function() {//登録ボタンを押したら
+          //入力値の取得
+          var objs  = Ext.ComponentQuery.query('textfield');
+          var obj = getObjectById(objs, 'hh24');
+          var input1 = obj.getValue();
+
+          objs  = Ext.ComponentQuery.query('textfield');
+          obj = getObjectById(objs, 'mi');
+          var input2 = obj.getValue();
+        
+
+          if(nullCheck(input1, "条件を入力してね") && hhCheck(input1, "時間を入力してね")){
+            if(nullCheck(input2, "条件を入力してね") && miCheck(input2, "時間を入力してね")){
+              //選択したボタンの描画
+              createEventBtn(eventId, btnName, "==", fillZero(input1) + fillZero(input2), eventType);
+              naviView.pop();
+            }
+          }
+        }
+      }
+    ]
+  });
+
+  naviView.push( panel );
+}
+
+
 //Sub Function
 var eventSaw = function(eventId, btnName, eventType){
 
@@ -412,7 +464,11 @@ var createEventBtn = function(eventId, btnName, input1, input2, eventType){
   var out;
   var json;
 
-  if(input1 == "=="){
+  if(eventType == "time"){
+    out = input1;
+    json = {"event": eventType, "type" : "==", "param": input1 + "" + input2};
+  }
+  else if(input1 == "=="){
     out = "完全";
 
     //JSONのPush
@@ -519,6 +575,10 @@ var actionBtnTapped = function(obj, json){
       actionFloatPanel.hide();
       break;
 
+    case "media":
+      programingMedia( json );
+      actionFloatPanel.hide();
+      break;
 
     default:
       Ext.Msg.alert(obj.id + "は、今使えません。");
@@ -808,6 +868,92 @@ var addActionBtnApplication = function( input ){
   currentActionPanel.add( btn );
 }
 
+
+
+//sub function
+var programingMedia = function( json ){
+
+  if( refresh ){
+    //ボタンの生成
+    addActionBtnMedia( json.param );
+    return;
+  }
+
+  //修正の場合
+  if( json != null){
+    //Navi画面の生成
+  var panel = Ext.create('Ext.Panel', {
+    title: 'I can lunch applications. ',
+    items: [
+      {xtype: 'label', html: 'メディアURLを入力してください'},
+      {xtype: 'textfield', id:'mediaUrl', value: json.param },
+      {xtype: 'button', text: 'ENTER', ui: 'action',
+        handler: function() {//登録ボタンを押したら
+          //入力値の取得
+          var objs  = Ext.ComponentQuery.query('textfield');
+          var obj = getObjectById(objs, 'mediaUrl');
+          var input = obj.getValue();
+
+          objs  = Ext.ComponentQuery.query('button');
+          obj = getObjectById(objs, json.id);
+          
+          //ボタンを生成して、戻る
+          if(nullCheck(input, "URLを入力してね")){
+
+            obj.setText("[" + input + "] をロード");
+            
+            //Jsonを更新
+            json.param = input;
+
+            //戻る
+            naviView.pop();
+          }
+        }
+      }
+    ]
+  });
+  naviView.push( panel );
+  return;
+  }
+
+  var panel = Ext.create('Ext.Panel', {
+    title: 'I can lunch applications. ',
+    items: [
+      {xtype: 'label', html: 'Media URLを入力してください'},
+      {xtype: 'textfield', id:'mediaUrl'},
+      {xtype: 'button', text: 'ENTER', ui: 'action',
+        handler: function() {//登録ボタンを押したら
+          //入力値の取得
+          var objs  = Ext.ComponentQuery.query('textfield');
+          var obj = getObjectById(objs, 'mediaUrl');
+          var input = obj.getValue();
+
+          //ボタンを生成して、戻る
+          if(nullCheck(input, "URLを入力してね")){
+              addActionBtnMedia( input );
+              naviView.pop();
+          }
+        }
+      }
+    ]
+  });
+  naviView.push( panel );
+  return;
+}
+
+var addActionBtnMedia = function( input ){
+  var btn  = addActionBtn("[" + input + "] をロード");
+  //
+  //Jsonに出力
+  addActionJson(btn.id, "media", input, true);
+
+  //ボタンを生成して、戻る
+  currentActionPanel.add( btn );
+}
+
+//============================================================
+
+
 //============================================================
 
 /**
@@ -1002,14 +1148,15 @@ var saveProject = function(){
 
   //Send JSON
   $.ajax({
-    type : 'get',
-    url : "https://peaceful-tundra-2847.herokuapp.com/channels/20150425.json",
-    //data : JSON.stringify(json),
+    type : 'post',
+    url : "/projects",
+    data : JSON.stringify(json),
     contentType: 'application/JSON',
     dataType : 'JSON',
     scriptCharset: 'utf-8',
     success : function(data) {
-
+      waitingAnimation("", false);
+      Ext.Msg.alert("保存しました！");
     },
     error : function(data) {
       alert("error:" + data);
@@ -1337,6 +1484,41 @@ var numberCheck = function( input, msg ){
   else
     return true;
   
+}
+
+var hhCheck = function( input, msg ){
+  if ( input.match(/[^0-9]+/)){
+    Ext.Msg.alert( msg );
+    return false;
+  }
+  else if( input > 23 ){
+    Ext.Msg.alert( "0-23で入力してね" );
+    return false;
+  }
+  else
+    return true;
+}
+
+var miCheck = function( input, msg ){
+  if ( input.match(/[^0-9]+/)){
+    Ext.Msg.alert( msg );
+    return false;
+  }
+  else if( input > 59 ){
+    Ext.Msg.alert( "0-59で入力してね" );
+    return false;
+  }
+  else
+    return true;
+}
+
+var fillZero = function ( input ){
+
+  if(input.length == 1){
+    return "0" + input;
+  }
+  
+  return input;
 }
 
 var toHankaku = function ( input ){

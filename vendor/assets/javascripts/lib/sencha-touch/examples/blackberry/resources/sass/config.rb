@@ -11,5 +11,5 @@ fonts_path = File.join(dir, '../../../../resources/themes/fonts/')
 
 # Require any additional compass plugins here.
 images_dir = File.join(dir, "..", "images")
-output_style = :compressed
-environment = :production
+output_style = :expanded
+environment = :development

@@ -73,7 +73,8 @@
     "css": [
         {
             "path": "resources/css/app.css",
-            "theme": "Blackberry",
+            "theme": "Blackberry103",
+            "platform":["blackberry"],
             "update": "delta"
         }
     ],

@@ -1,10 +1,10 @@
 $include-pictos-font: false;
 
-@import "sencha-touch/bb10";
-@import "sencha-touch/bb10/all";
+@import "sencha-touch/bb103";
+@import "sencha-touch/bb103/all";
 
 @include bb-icon('overflow_tab');
-@include bb-icon('add_favorite');
+@include bb-icon('favorite');
 @include bb-icon('copy');
 @include bb-icon('select_more');
 @include bb-icon('view_grid');
@@ -13,3 +13,4 @@ $include-pictos-font: false;
 @include bb-icon('search');
 @include bb-icon('bbm');
 @include bb-icon('settings');
+@include bb-icon('save');

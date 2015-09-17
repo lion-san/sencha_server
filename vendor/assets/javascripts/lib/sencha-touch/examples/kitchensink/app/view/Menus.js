@@ -82,7 +82,7 @@ Ext.define('Kitchensink.view.Menus', {
         var items = [
             {
                 text: 'Settings',
-                iconCls: 'settings',
+                iconCls: 'settings' + ((Ext.theme.name == "Blackberry") ? '-light' : ''),
                 scope: this,
                 handler: function() {
                     Ext.Viewport.hideMenu(side);
@@ -90,7 +90,7 @@ Ext.define('Kitchensink.view.Menus', {
             },
             {
                 text: 'New Item',
-                iconCls: 'compose',
+                iconCls: 'compose' + ((Ext.theme.name == "Blackberry") ? '-light' : ''),
                 scope: this,
                 handler: function() {
                     Ext.Viewport.hideMenu(side);
@@ -99,7 +99,7 @@ Ext.define('Kitchensink.view.Menus', {
             {
                 xtype: 'button',
                 text: 'Star',
-                iconCls: 'star',
+                iconCls: ((Ext.theme.name == "Blackberry") ? 'favorite-light' : 'star'),
                 scope: this,
                 handler: function() {
                     Ext.Viewport.hideMenu(side);

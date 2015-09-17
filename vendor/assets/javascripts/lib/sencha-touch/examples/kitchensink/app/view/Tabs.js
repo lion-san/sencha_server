@@ -21,19 +21,19 @@ Ext.define('Kitchensink.view.Tabs', {
                 title: 'Tab 1',
                 html : 'By default, tabs are aligned to the top of a view.',
                 cls: 'card dark',
-                iconCls: Ext.theme.is.Blackberry || Ext.theme.is.CupertinoClassic || Ext.theme.is.Tizen ? 'home' : null
+                iconCls: Ext.theme.is.Blackberry || Ext.theme.is.Blackberry103 || Ext.theme.is.CupertinoClassic || Ext.theme.is.Tizen ? 'home' : null
             },
             {
                 title: 'Tab 2',
                 html : 'A TabPanel can use different animations by setting <code>layout.animation.</code>',
                 cls  : 'card',
-                iconCls: Ext.theme.is.Blackberry || Ext.theme.is.CupertinoClassic|| Ext.theme.is.Tizen ? 'organize' : null
+                iconCls: Ext.theme.is.Blackberry || Ext.theme.is.Blackberry103 || Ext.theme.is.CupertinoClassic|| Ext.theme.is.Tizen ? 'organize' : null
             },
             {
                 title: 'Tab 3',
                 html : '<span class="action">User tapped Tab 3</span>',
                 cls  : 'card dark',
-                iconCls: Ext.theme.is.Blackberry || Ext.theme.is.CupertinoClassic || Ext.theme.is.Tizen ? 'favorites' : null
+                iconCls: Ext.theme.is.Blackberry || Ext.theme.is.Blackberry103 || Ext.theme.is.CupertinoClassic || Ext.theme.is.Tizen ? 'favorites' : null
             }
         ]
     }
