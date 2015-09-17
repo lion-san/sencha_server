@@ -43,12 +43,13 @@ class ProjectsController < ApplicationController
       end
     end
 
-    before_project = Project.find_by( user_id: @project.user_id,
-                                     pjname: @project.pjname )
-    if !before_project.nil?
-      before_project.destroy
-      logger.debug("=============destory=================");
-    end
+    #before_project = Project.find_by( user_id: @project.user_id,
+    #                                 pjname: @project.pjname )
+    
+    #if !before_project.nil?
+    #  before_project.destroy
+    #  logger.debug("=============destory=================");
+    #end
 
     logger.debug("=============piyo=================");
 
@@ -74,7 +75,17 @@ class ProjectsController < ApplicationController
     logger.debug( project["events"] )
     events = project["events"]
 
-    @project = Project.new( user_id: "test", pjname: project["project"] )
+    #@project = Project.new( user_id: "test", pjname: project["project"] )
+
+    @project = Project.find_by( user_id: "test",
+                                     pjname: project["project"] )
+
+    if @project.nil? then
+      @project = Project.new( user_id: "test", pjname: project["project"] )
+    end
+
+
+
     @events = Array.new
 
     events.each do | e |

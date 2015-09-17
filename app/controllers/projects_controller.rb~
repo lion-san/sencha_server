@@ -56,7 +56,8 @@ class ProjectsController < ApplicationController
 
     #flash[:success] = "Project saved."
 
-    redirect_to @project
+    #redirect_to @project
+    redirect_to projects_url
 
   end
   
@@ -73,7 +74,17 @@ class ProjectsController < ApplicationController
     logger.debug( project["events"] )
     events = project["events"]
 
-    @project = Project.new( user_id: "test", pjname: project["project"] )
+    #@project = Project.new( user_id: "test", pjname: project["project"] )
+
+    @project = Project.find_by( user_id: "test",
+                                     pjname: project["project"] )
+
+    if @project.nil? then
+      @project = Project.new( user_id: "test", pjname: project["project"] )
+    end
+
+
+
     @events = Array.new
 
     events.each do | e |
