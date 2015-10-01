@@ -464,11 +464,7 @@ var createEventBtn = function(eventId, btnName, input1, input2, eventType){
   var out;
   var json;
 
-  if(eventType == "time"){
-    out = input1;
-    json = {"event": eventType, "type" : "==", "param": input1 + "" + input2};
-  }
-  else if(input1 == "=="){
+  if(input1 == "=="){
     out = "完全";
 
     //JSONのPush
@@ -1012,6 +1008,26 @@ var deleteConfirm = function( btn, btnType ){
             case "event":
               //Delete event
               deleteEvent( btn );
+
+            default:
+            break;
+          }
+
+          //Hide actionSheet
+          actionSheet.hide();
+          actionSheet.destroy();
+        }
+      },
+       text: 'Modify', ui: 'normal',
+        handler: function(){
+          switch ( btnType ){
+            case "action":
+              //Modify function
+              deleteAction( btn );
+            break;
+
+            case "event":
+              //Modify event
 
             default:
             break;
