@@ -24,7 +24,7 @@ def make_projects
 
   hour = 0
   event_count =1 
-  for hour in 0..23 do
+  for hour in 9..10 do
 
     min = 0
     del = 1
