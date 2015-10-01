@@ -21,10 +21,20 @@ def make_projects
   params.push('ねえ、知ってる？　山賊焼きは、大きな鳥のモモ肉やムネ肉をにんにく醤油タレに漬け込み、片栗粉をまぶして揚げる料理だよ。塩尻市内にある「山賊」というお店屋さんが調理方法を完成させたんだよ。')
   params.push('ねえ、知ってる？　キムタクごはんは、塩尻市内の小、中学校で大人気の塩尻オリジナルの給食メニューだよ。材料は、ごはん、ベーコン、キムチ、たくあんなどだよ。キムチに含まれるカプサイシンは新陳代謝を高め、身体の脂肪を減らす働きがあるんだよ。肉類にはビタミンビーツーなどが豊富に含まれ体内でお米をしっかりとエネルギーに換える手助けをしているよ。なんとレシピが塩尻市のホームページで公開されているんだよ。')
 
+  urls =Array.new
+  urls.push('http://image.rakuten.co.jp/hidanosake/cabinet/img55328919.gif')
+  urls.push('http://www.tokimeguri.jp/reporter/s-a%E6%9C%AC%E5%B1%B1%E5%AE%BF1.jpg')
+  urls.push('http://www.geocities.jp/yz1108/IMG_9739.jpg')
+  urls.push('http://www.ja-shiojirishi.iijan.or.jp/activity/img/vegetables_mainimage.jpg')
+  urls.push('https://www.kiso.or.jp/shop/upload/save_image/03081911_4f5885b495362.jpg')
+  urls.push('http://keichan-us.sakura.ne.jp/wp/wp-content/uploads/2013/12/DSC_6473.jpg')
+  urls.push('http://blogimg.goo.ne.jp/user_image/1a/fe/08bdc8e0e9aa2335aeeeefc839511a72.jpg')
+
+
 
   hour = 0
   event_count =1 
-  for hour in 9..10 do
+  for hour in 10..14 do
 
     min = 0
     del = 1
@@ -39,11 +49,17 @@ def make_projects
         operator: '==',
         param: format("%02d", hour) + format("%02d", min)
       )
+      act0 = Action.new(
+        event_id: event_count,
+        action: 'media',
+        param:  urls[(count % urls.length).floor]
+      )
       act1 = Action.new(
         event_id: event_count,
         action: 'talk',
         param:  params[(count % params.length).floor]
       )
+      ev1.actions << act0
       ev1.actions << act1
       @events.push( ev1 )
       min = min + del
